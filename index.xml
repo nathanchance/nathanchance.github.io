@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nathan Chancellor</title>
+    <link>https://nathanchance.github.io/</link>
+    <description>Recent content on Nathan Chancellor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 03 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://nathanchance.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My projects</title>
+      <link>https://nathanchance.github.io/projects/</link>
+      <pubDate>Fri, 03 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nathanchance.github.io/projects/</guid>
+      <description>All of my personal projects can be found on GitHub, here are a few key repositories that I am proud of:
+ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld. I have contributed warning fixes to the mainline Linux kernel, improved the continuous integration setup, and developed a set of toolchain build scripts for myself and others to use for consistent testing/configuration.</description>
+    </item>
+    
+  </channel>
+</rss>

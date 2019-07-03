@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title> My projects &middot; Nathan Chancellor </title>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://nathanchance.github.io/css/nix.css">
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Inconsolata%7COpen+Sans%7CConcert+One" rel="stylesheet">
+
+
+
+
+    </head>
+
+    <body>
+        <header>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse font-header">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" id="green-terminal" href=https://nathanchance.github.io/>nathan@archlinux-i9 ~ $</a>
+		</div>
+
+		
+		<div class="collapse navbar-collapse" id="navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="https://nathanchance.github.io/">/home/nathan</a>
+				</li>
+				
+				
+				<li class="dropdown">
+                    
+            		<a href="/projects">~/projects</a>
+            		
+        		</li>
+        		
+				
+				<li class="dropdown">
+                    
+            		<a href="/nathan_chancellor_resume.pdf">~/resume</a>
+            		
+        		</li>
+        		
+				
+				<li class="dropdown">
+                    
+            		<a href="/downloads">~/downloads</a>
+            		
+        		</li>
+        		
+
+			</ul>
+		</div>
+	</div>
+</nav>
+</header>
+
+        <div class="container wrapper">
+            <h1><a href="https://nathanchance.github.io/projects/">My projects</a></h1>
+            <span class="post-date">May 3, 2019 </span>
+            <div class="post-content">
+                
+
+<p>All of my personal projects can be found on <a href="https://github.com/nathanchance">GitHub</a>, here are a few key repositories that I am proud of:</p>
+
+<h1 id="clangbuiltlinux">ClangBuiltLinux</h1>
+
+<p>ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld. I have contributed warning fixes to <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/?qt=author&amp;q=Nathan+Chancellor">the mainline Linux kernel</a>, <a href="https://github.com/ClangBuiltLinux/continuous-integration/commits/master?author=nathanchance">improved the continuous integration setup</a>, and <a href="https://github.com/ClangBuiltLinux/tc-build">developed a set of toolchain build scripts</a> for myself and others to use for consistent testing/configuration.</p>
+
+<h1 id="flash-kernel">Flash Kernel</h1>
+
+<p>I supported the <a href="https://github.com/nathanchance/wahoo">Pixel 2 (XL) [walleye/taimen]</a>, <a href="https://github.com/nathanchance/marlin">Pixel (XL) [sailfish/marlin]</a>, <a href="https://github.com/nathanchance/op6">OnePlus 6 (enchilada)</a>, <a href="https://github.com/nathanchance/op5">OnePlus 5/T (cheeseburger/dumpling)</a>, and <a href="https://github.com/nathanchance/angler">Nexus 6P (angler)</a>.</p>
+
+<p>All of my kernels focused on stability/security by merging in the stable updates from <a href="https://www.kernel.org">kernel.org</a>, any relevant updates from Qualcomm, and building with newer compilers to fix warnings during compilation. Below are the highlights for each kernel.</p>
+
+<ul>
+<li><p>Pixel 2 (XL): First to merge in linux-stable and build with up to date versions of Clang. Added EAS 1.5 from kernel/common.</p></li>
+
+<li><p>Pixel (XL): First standalone custom kernel to be compiled properly with Clang, fixing the vast majority of warnings.</p></li>
+
+<li><p>OnePlus 6: I recieved this device as part of <a href="https://www.xda-developers.com/oneplus-6-developer-application/">OnePlus&rsquo;s developer program</a>. I was the first to merge in linux-stable and the updates from Code Aurora Forum, build with Clang, and port over the 32-bit vDSO for arm64 from the Pixel 2 kernels (initially created on a 4.4 base).</p></li>
+</ul>
+
+<h1 id="other-interesting-personal-repos">Other interesting personal repos</h1>
+
+<ul>
+<li><p><a href="https://github.com/nathanchance/scripts">My scripts</a> and <a href="https://github.com/nathanchance/dotfiles">dotfiles</a>: The scripts I use for my workflow and personal configuration files, focusing on increasing productivity by decreasing manual intervention needed to doing repetitive tasks.</p></li>
+
+<li><p><a href="https://github.com/nathanchance/android-kernel-clang">android-kernel-clang</a>: Collected the core Clang patchset for Android kernels from the Pixel 2 and Chromium kernel repositories, supplementing them with fixes for warnings from out of tree code.</p></li>
+
+<li><p><a href="https://github.com/nathanchance/build-tools-gcc">build-tools-gcc</a>: A script to build a GCC cross compiler for arm/arm64.</p></li>
+</ul>
+
+<h1 id="open-source-organizations-i-belong-to">Open source organizations I belong to</h1>
+
+<ul>
+<li><p><a href="https://github.com/android-linux-stable">android-linux-stable</a>: Several Android kernel trees with the latest stable tags from <a href="https://www.kernel.org">kernel.org</a> merged into them, along with conflict resolution notes and a how-to process for other developers and information for users to understand the process. Testing includes merging into my own Flash Kernel repositories linked above and building with all of the relevant defconfigs/compilers. I report results back to the stable tree maintainers, receiving praise for my efforts on a couple occasions (<a href="https://lore.kernel.org/lkml/20171117083016.GA20306@kroah.com/">1</a> and <a href="https://lore.kernel.org/lkml/20180805140301.GA17056@kroah.com/">2</a>). Recently, I streamlined the maintenance of these repos into <a href="https://github.com/nathanchance/scripts/blob/master/server/als">a script</a>.</p></li>
+
+<li><p><a href="https://github.com/substratum">Substratum</a>: An app to compile theming overlays for Sony&rsquo;s Overlay Manager Service (OMS). I am responsible for <a href="https://substratum.review]">our code review</a> and <a href="https://github.com/substratum/documentation">our documentation</a>.</p></li>
+
+<li><p><a href="https://github.com/DirtyUnicorns">Dirty Unicorns</a>: An aftermarket Android ROM. I am responsible for helping with testing and picking in features, along with fixing issues.</p></li>
+</ul>
+
+<h1 id="other-open-source-contributions">Other open source contributions</h1>
+
+<ul>
+<li><p><a href="https://android-review.googlesource.com/q/project:kernel/common+author:natechancellor%2540gmail.com">kernel/common</a>: Google&rsquo;s common Android kernel.</p></li>
+
+<li><p><a href="https://github.com/sonyxperiadev/kernel/pulls?q=author%3Anathanchance">sonyxperiadev/kernel</a>: The Linux kernel used for <a href="https://developer.sony.com/develop/open-devices/">Sony&rsquo;s Open Devices program</a>.</p></li>
+
+<li><p><a href="https://github.com/osm0sis/AnyKernel2/commits/master?author=nathanchance">AnyKernel2</a>: A kernel flashing utility for TWRP, responsible for unpacking the boot image, applying any requested ramdisk changes, repacking the files, and flashing them to the boot image partition.</p></li>
+</ul>
+
+            </div>
+            
+            <div class="post-comments">
+                
+            </div>
+            
+            <div class="push"></div>
+        </div>
+        <footer class="footer text-center">
+<p>Copyright &copy; 2019 Nathan Chancellor -
+<span class="credit">
+	Powered by
+	<a target="_blank" href="https://gohugo.io">Hugo</a>
+	and
+	<a target="_blank" href="https://github.com/LordMathis/hugo-theme-nix/">Nix</a> theme.
+</span>
+</p>
+</footer>
+
+    </body>
