@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Nathan Chancellor</title>
-    <link>https://nathanchance.github.io/tags/</link>
+    <link>https://nathanchance.dev/tags/</link>
     <description>Recent content in Tags on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="https://nathanchance.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanchance.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
