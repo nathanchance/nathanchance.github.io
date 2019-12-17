@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nathan Chancellor</title>
@@ -6,10 +6,19 @@
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 26 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Dec 2019 13:53:23 -0700</lastBuildDate>
     
 	<atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building the WSL 2 kernel with Clang</title>
+      <link>https://nathanchance.dev/posts/wsl2-kernel-clang/</link>
+      <pubDate>Tue, 17 Dec 2019 13:53:23 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/wsl2-kernel-clang/</guid>
+      <description>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward.</description>
+    </item>
     
     <item>
       <title>My projects</title>
@@ -29,7 +38,7 @@ ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several 
       <guid>https://nathanchance.dev/downloads/</guid>
       <description>I used to host files on this website but I have offloaded them to other services.
 Flash Kernel downloads can be found in their individual repos:
- Nexus 6P OnePlus 5 OnePlus 6 Pixel (XL) Pixel 2 (XL)  Note, these are all unmaintained right now so I wouldn&amp;rsquo;t recommend running them in their current form but it&amp;rsquo;s your device.
+ Nexus 6P OnePlus 5 OnePlus 6 Pixel (XL) Pixel 2 (XL)  Note, these are all unmaintained right now so I wouldn&#39;t recommend running them in their current form but it&#39;s your device.
 TWRP downloads can be found in the threads that referenced them:</description>
     </item>
     

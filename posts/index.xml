@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Nathan Chancellor</title>
+    <link>https://nathanchance.dev/posts/</link>
+    <description>Recent content in Posts on Nathan Chancellor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 17 Dec 2019 13:53:23 -0700</lastBuildDate>
+    
+	<atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building the WSL 2 kernel with Clang</title>
+      <link>https://nathanchance.dev/posts/wsl2-kernel-clang/</link>
+      <pubDate>Tue, 17 Dec 2019 13:53:23 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/wsl2-kernel-clang/</guid>
+      <description>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward.</description>
+    </item>
+    
+  </channel>
+</rss>
