@@ -44,7 +44,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" id="green-terminal" href=https://nathanchance.dev/>nathan@archlinux-threadripper ~ $</a>
+			<a class="navbar-brand" id="green-terminal" href=https://nathanchance.dev/>nathan@mesa-az ~ $</a>
 		</div>
 
 		
@@ -96,9 +96,7 @@
                 <p>Recently, I built a computer for school that I installed Windows 10 Pro on (<a href="https://pcpartpicker.com/list/ZcFqHB">link to the current specs</a> if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward. I also learned that it is possible to replace the Linux kernel that Microsoft ships with your own. This is a mini guide for what I uncovered because there is not a ton of information around for how to do this.</p>
 <h2 id="building-the-kernel">Building the kernel</h2>
 <p>You can either build the kernel on another machine and download it locally or you can build it within WSL 2 itself. This is a guide for how to do the latter because it is simpler. I am giving the instructions for Debian but these should work for Ubuntu (I just do not want to tear down my current working environment to test&hellip;). I am also going to assume that you are familiar with Linux in general so I am not going to explain every single command.</p>
-<ol>
-<li>Download and install the needed tools.</li>
-</ol>
+<h3 id="1-download-and-install-the-needed-tools">1. Download and install the needed tools.</h3>
 <p>First, we are going to grab the utilities needed to build the kernel, along with some other tools to use for installing clang-10 and lld-10 from apt.llvm.org.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt update
 $ sudo apt upgrade
@@ -119,35 +117,30 @@ $ sudo apt install -y --no-install-recommends <span style="color:#ae81ff">\
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget https://apt.llvm.org/llvm.sh
 $ chmod +x llvm.sh
 $ sudo ./llvm.sh <span style="color:#ae81ff">10</span>
-</code></pre></div><ol start="2">
-<li>Download the WSL 2 source code.</li>
-</ol>
-<pre><code>$ cd ~
+</code></pre></div><h3 id="2-download-the-wsl-2-source-code">2. Download the WSL 2 source code.</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd
 $ git clone https://github.com/microsoft/WSL2-Linux-Kernel
 $ cd WSL2-Linux-Kernel
-</code></pre><ol start="3">
-<li>Build the kernel.</li>
-</ol>
+</code></pre></div><h3 id="3-build-the-kernel">3. Build the kernel.</h3>
 <p>I chose to use an out folder for easy clean up.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> -s CC<span style="color:#f92672">=</span>clang-10 KCONFIG_CONFIG<span style="color:#f92672">=</span>../Microsoft/config-wsl LD<span style="color:#f92672">=</span>ld.lld-10 O<span style="color:#f92672">=</span>out.x86_64 distclean olddefconfig all
+</code></pre></div><p>If you want to just build it in tree:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> -s CC<span style="color:#f92672">=</span>clang-10 KCONFIG_CONFIG<span style="color:#f92672">=</span>Microsoft/config-wsl LD<span style="color:#f92672">=</span>ld.lld-10 distclean olddefconfig all
 </code></pre></div><p>You do not have to use <code>clang</code> and <code>ld.lld</code>, you can omit the <code>CC=clang-10</code> and <code>LD=ld.lld-10</code> to use <code>gcc</code> and <code>ld</code> respectively but I think that using <code>clang</code> is neat since I work on <a href="https://github.com/ClangBuiltLinux">ClangBuiltLinux</a>.</p>
 <h2 id="using-the-kernel">Using the kernel</h2>
 <p>To boot from the kernel we just compiled, we need to move it out of WSL 2 and add a <code>.wslconfig</code> to say that we want to boot from it.</p>
-<ol>
-<li>Move the kernel to the Windows file system.</li>
-</ol>
+<h3 id="1-move-the-kernel-to-the-windows-file-system">1. Move the kernel to the Windows file system.</h3>
 <p>I have a separate folder for my kernels within my user folder (e.g., <code>C:\Users\natec\Linux</code>). It does not have to be there. Assuming that you used the out folder like I did above, the command will look something like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cp out.x86_64/arch/x86/boot/bzImage /mnt/c/Users/natec/Linux/kernel-4.19-clang
-</code></pre></div><ol start="2">
-<li>Tell WSL 2 to use that kernel when booting up.</li>
-</ol>
+</code></pre></div><h3 id="2-tell-wsl-2-to-use-that-kernel-when-booting-up">2. Tell WSL 2 to use that kernel when booting up.</h3>
 <p>This was the tricky part that I had to do some reading about, as their documentation is not the best. This <code>.wslconfig</code> file has to be in your user folder's root (e.g., <code>C:\Users\natec\.wslconfig</code>). This is mine:</p>
-<pre><code>[wsl2]
-kernel = C:\\Users\\natec\\Linux\\kernel-4.19-clang
-</code></pre><p>Basically, you pass it the full path to your kernel binary with the <code>\</code>s escaped. After that, you need to shutdown your WSL 2 VM in Powershell or <code>cmd</code> and just reopen it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /mnt/c/Users/natec/.wslconfig
+<span style="color:#f92672">[</span>wsl2<span style="color:#f92672">]</span>
+kernel <span style="color:#f92672">=</span> C:<span style="color:#ae81ff">\\</span>Users<span style="color:#ae81ff">\\</span>natec<span style="color:#ae81ff">\\</span>Linux<span style="color:#ae81ff">\\</span>kernel-4.19-clang
+</code></pre></div><p>Basically, you pass it the full path to your kernel binary with the <code>\</code>s escaped. After that, you need to shutdown your WSL 2 VM in Powershell or <code>cmd</code> and just reopen it.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wsl --shutdown
 </code></pre></div><p>I have noticed that the VM gets stuck starting with a custom kernel at times; if that happens, run <code>wsl --shutdown</code> and try reopening one of the distributions again, it will usually work after a couple of times.</p>
-<p>Feel free to reach out to me with issues on Twitter or <a href="https://github.com/nathanchance/WSL2-Linux-Kernel">my WSL 2 kernel source on Github</a>.</p>
+<p>Feel free to reach out to me with issues or questions on <a href="https://twitter.com/nathanchance">Twitter</a> or <a href="https://github.com/nathanchance/WSL2-Linux-Kernel">my WSL 2 kernel source on Github</a>.</p>
 
             </div>
             
