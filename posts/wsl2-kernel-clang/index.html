@@ -118,7 +118,8 @@ $ sudo apt install -y --no-install-recommends <span style="color:#ae81ff">\
 $ wget https://apt.llvm.org/llvm.sh
 $ chmod +x llvm.sh
 $ sudo ./llvm.sh <span style="color:#ae81ff">10</span>
-</code></pre></div><h3 id="2-download-the-wsl-2-source-code">2. Download the WSL 2 source code.</h3>
+</code></pre></div><p>If you are not on an Ubuntu or Debian based operating system, you can build <code>clang</code> and <code>ld.lld</code> from source easily with my <a href="https://github.com/ClangBuiltLinux/tc-build"><code>tc-build</code> script</a>. Read the information in that README for how to use it and file issues at that repo if you run into any, I want to fix them!</p>
+<h3 id="2-download-the-wsl-2-source-code">2. Download the WSL 2 source code.</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/microsoft/WSL2-Linux-Kernel
 $ cd WSL2-Linux-Kernel
 </code></pre></div><h3 id="3-build-the-kernel">3. Build the kernel.</h3>
