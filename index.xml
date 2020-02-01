@@ -6,10 +6,19 @@
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Dec 2019 13:53:23 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 31 Jan 2020 18:52:00 -0700</lastBuildDate>
     
 	<atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Building and Using Cuttlefish</title>
+      <link>https://nathanchance.dev/posts/building-using-cuttlefish/</link>
+      <pubDate>Fri, 31 Jan 2020 18:52:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/building-using-cuttlefish/</guid>
+      <description>Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell.</description>
+    </item>
     
     <item>
       <title>Building the WSL 2 kernel with Clang</title>
@@ -38,7 +47,7 @@ ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several 
       <guid>https://nathanchance.dev/downloads/</guid>
       <description>I used to host files on this website but I have offloaded them to other services.
 Flash Kernel downloads can be found in their individual repos:
- Nexus 6P OnePlus 5 OnePlus 6 Pixel (XL) Pixel 2 (XL)  Note, these are all unmaintained right now so I wouldn&#39;t recommend running them in their current form but it&#39;s your device.
+ Nexus 6P OnePlus 5 OnePlus 6 Pixel (XL) Pixel 2 (XL)  Note, these are all unmaintained right now so I wouldn&amp;rsquo;t recommend running them in their current form but it&amp;rsquo;s your device.
 TWRP downloads can be found in the threads that referenced them:</description>
     </item>
     

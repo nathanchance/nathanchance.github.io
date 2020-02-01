@@ -6,7 +6,7 @@
 
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-<meta name="generator" content="Hugo 0.61.0" />
+<meta name="generator" content="Hugo 0.63.2" />
 
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
@@ -134,7 +134,7 @@ $ cd WSL2-Linux-Kernel
 <p>I have a separate folder for my kernels within my user folder (e.g., <code>C:\Users\natec\Linux</code>). It does not have to be there. Assuming that you used the out folder like I did above, the command will look something like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cp out.x86_64/arch/x86/boot/bzImage /mnt/c/Users/natec/Linux/kernel-4.19-clang
 </code></pre></div><h3 id="2-tell-wsl-2-to-use-that-kernel-when-booting-up">2. Tell WSL 2 to use that kernel when booting up.</h3>
-<p>This was the tricky part that I had to do some reading about, as their documentation is not the best. This <code>.wslconfig</code> file has to be in your user folder's root (e.g., <code>C:\Users\natec\.wslconfig</code>). This is mine:</p>
+<p>This was the tricky part that I had to do some reading about, as their documentation is not the best. This <code>.wslconfig</code> file has to be in your user folder&rsquo;s root (e.g., <code>C:\Users\natec\.wslconfig</code>). This is mine:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /mnt/c/Users/natec/.wslconfig
 <span style="color:#f92672">[</span>wsl2<span style="color:#f92672">]</span>
 kernel <span style="color:#f92672">=</span> C:<span style="color:#ae81ff">\\</span>Users<span style="color:#ae81ff">\\</span>natec<span style="color:#ae81ff">\\</span>Linux<span style="color:#ae81ff">\\</span>kernel-4.19-clang
@@ -159,7 +159,7 @@ Linux version 4.19.84-microsoft-standard+ <span style="color:#f92672">(</span>na
             <div class="push"></div>
         </div>
         <footer class="footer text-center">
-<p>Copyright &copy; 2019 Nathan Chancellor -
+<p>Copyright &copy; 2020 Nathan Chancellor -
 <span class="credit">
 	Powered by
 	<a target="_blank" href="https://gohugo.io">Hugo</a>
