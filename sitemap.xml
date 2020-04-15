@@ -3,12 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://nathanchance.dev/posts/building-using-cuttlefish/</loc>
-    <lastmod>2020-01-31T18:52:00-07:00</lastmod>
+    <loc>https://nathanchance.dev/about/</loc>
+    <lastmod>2020-04-14T19:09:55-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://nathanchance.dev/</loc>
+    <lastmod>2020-04-14T19:09:55-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://nathanchance.dev/posts/building-using-cuttlefish/</loc>
     <lastmod>2020-01-31T18:52:00-07:00</lastmod>
   </url>
   
@@ -20,11 +25,6 @@
   <url>
     <loc>https://nathanchance.dev/posts/wsl2-kernel-clang/</loc>
     <lastmod>2019-12-17T13:53:23-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanchance.dev/projects/</loc>
-    <lastmod>2019-07-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>

@@ -6,10 +6,23 @@
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Jan 2020 18:52:00 -0700</lastBuildDate>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Tue, 14 Apr 2020 19:09:55 -0700</lastBuildDate>
     
 	<atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>https://nathanchance.dev/about/</link>
+      <pubDate>Tue, 14 Apr 2020 19:09:55 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/about/</guid>
+      <description>I am a 25 year old university student at Grand Canyon University, majoring in Information Technology and an amateur Linux kernel and LLVM hacker.
+I am interested in performance analysis, compilers, security, and operating systems.
+Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.
+ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld.</description>
+    </item>
     
     <item>
       <title>Building and Using Cuttlefish</title>
@@ -27,16 +40,6 @@
       
       <guid>https://nathanchance.dev/posts/wsl2-kernel-clang/</guid>
       <description>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward.</description>
-    </item>
-    
-    <item>
-      <title>My projects</title>
-      <link>https://nathanchance.dev/projects/</link>
-      <pubDate>Fri, 26 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nathanchance.dev/projects/</guid>
-      <description>All of my personal projects can be found on GitHub, here are a few key repositories that I am proud of:
-ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld. I have contributed various fixes to the mainline Linux kernel, helped triage and debug issues on the issue tracker, improved the continuous integration setup through a set of scripts and Docker images, and developed a set of toolchain build scripts for myself and others to use for consistent testing/developing.</description>
     </item>
     
     <item>
