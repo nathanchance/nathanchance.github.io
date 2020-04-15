@@ -6,11 +6,94 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Fri, 31 Jan 2020 18:52:00 -0700</lastBuildDate>
+        <lastBuildDate>Wed, 15 Apr 2020 15:11:58 -0700</lastBuildDate>
         <atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
-            <title>Building and Using Cuttlefish</title>
+            <title>Art of git revert</title>
+            <link>https://nathanchance.dev/posts/art-of-git-revert/</link>
+            <pubDate>Wed, 15 Apr 2020 15:11:58 -0700</pubDate>
+            
+            <guid>https://nathanchance.dev/posts/art-of-git-revert/</guid>
+            <description>I have always loved reading good commit messages and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&amp;rsquo;t have a denvercoder9 situation) and it allows other people to get familiar with your project by fully understanding the why behind a change.</description>
+            <content type="html"><![CDATA[<p>I have always loved reading <a href="https://chris.beams.io/posts/git-commit/">good commit messages</a> and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&rsquo;t have a <a href="https://xkcd.com/979/">denvercoder9 situation</a>) and it allows other people to get familiar with your project by fully understanding the why behind a change. I learned a lot about the Linux kernel purely through reading the commit messages in certain subsystems.</p>
+<p>I see some projects (like amateur Android ROMs and kernels) write really good commmit messages for &ldquo;normal&rdquo; commits but leave the default &ldquo;This reverts commit&hellip;&rdquo; message for reverts, with no additional comments. One of the first points I want to make with this post are <strong>revert commits are still commits</strong>. Just because <code>git</code> fills in the commit message does not mean that it should not be supplemented.</p>
+<p>Some things worth considering when writing a commit message for a revert:</p>
+<ul>
+<li>
+<p><strong>Why is the revert actually being done?</strong> Is it just not necessary? Did it break something? Leaving out the why of the revert defeats the purpose. Presumably, if the commit was applied in the first place, it had good reason for being there. If it did not, that should be in the commit message of the revert.</p>
+</li>
+<li>
+<p><strong>If it is broken, how would one notice?</strong> Forks of a common upstream like AOSP or the Linux kernel will often have overlapping commits. If someone finds an issue with one, the visible effects of that issue should be noted so that others have a chance to do their own investigation. For example, if a commit introduces a crash, the output of the stacktrace would be relevant for the commit message so that other people have the opportunity to analyze it.</p>
+</li>
+<li>
+<p><strong>How can issues be avoided in the future?</strong> Any time that a revert happens, it is a learning opportunity. Where did the breakdown happen in the original commit&rsquo;s process? Was it not reviewed properly (or at all)? Was it tested? If so, how? Are there tests that can expose an issue in the future? If not, is it worth writing one?</p>
+</li>
+</ul>
+<p>Some people are very liberal with reverts or removing commits through rebasing and force pushing. Reverts are an opportunity to look at your software development process and improve it so that they do not happen as much in the future. I did this a lot with my custom Android kernels. Initially, I would rebase and force push my repos when I found issues. Over time, I learned that it is best to fully review and test a commit or series of commits before pushing into a release so that reverting/rebasing was not necessary. It made for a much more stable and painless experience for me and as well as my users.</p>
+<p>In future posts, I will explore some ways to justify a change initially so that reverting it does not happen so stay tuned. If you have any questions or comments, feel free to reach out to me on <a href="https://twitter.com/nathanchance">Twitter</a>.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Creating WSL 2 distributions from LXC images</title>
+            <link>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</link>
+            <pubDate>Wed, 15 Apr 2020 12:40:20 -0700</pubDate>
+            
+            <guid>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</guid>
+            <description>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it.</description>
+            <content type="html"><![CDATA[<p>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize <a href="https://github.com/nathanchance/WSL2-Linux-Kernel">here</a>) and all of <a href="https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distros">the various distributions</a> that you can run are basically containers on top of it.</p>
+<p>There is a little known option within <code>wsl.exe</code> named <code>--import</code> that allows you to create a WSL distribution from any Linux distribution&rsquo;s rootfs. I use the images available on the <a href="https://jenkins.linuxcontainers.org/">LXC Jenkins instance</a>. Here is a basic how-to (assuming you already have <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-install">WSL 2 installed</a>):</p>
+<h3 id="1-download-and-extract-lxc-image">1. Download and extract LXC image</h3>
+<p>Go to the <a href="https://jenkins.linuxcontainers.org/view/Images/">LXC images page</a> and select a distribution that you want. I will use Alpine Linux because it is really small and nice for doing quick tasks/tests.</p>
+<p>Click on the image link then find the &ldquo;amd64&rdquo; version of the image (assuming you have an Intel or AMD processor) with the particular version that you want (it will probably have a green dot). I am using <a href="https://jenkins.linuxcontainers.org/view/Images/job/image-alpine/architecture=amd64,release=edge,variant=default/">Alpine&rsquo;s edge version</a>. You should see a link for a <code>rootfs.tar.xz</code>; click on it to download it.</p>
+<p>Once it is downloaded, extract it using something like <a href="https://www.7-zip.org/">7-Zip</a> (I use the &ldquo;Extract Here&rdquo; option). Once you have the raw <code>rootfs.tar</code> file, we are good to go.</p>
+<h3 id="2-import-the-rootfs">2. Import the rootfs</h3>
+<p>Open up a PowerShell instance (I use Windows Terminal). The format of <code>wsl.exe --import</code> is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe --import &lt;distro_name&gt; &lt;distro_folder&gt; &lt;rootfs&gt;
+</code></pre></div><p>I have a <code>Linux</code> folder in my user account where I house all of my Linux files so that is where I am going to install it. By default, PowerShell spawns me in my user folder so I am going to use relative paths.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe --import alpine .\Linux\alpine .\Downloads\rootfs.tar
+</code></pre></div><h3 id="3-run-the-distro-and-start-setting-it-up">3. Run the distro and start setting it up</h3>
+<p>Once you have imported the rootfs, the distribution is now available to spawn into with <code>wsl.exe</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe -d alpine
+<span style="color:#75715e"># uname</span>
+Linux
+</code></pre></div><p>I recommend getting the distribution up to date right out of the gate (Google instructions for the specific distribution you chose):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># apk update</span>
+fetch http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+v20200319-2352-g9a801feaea <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/main<span style="color:#f92672">]</span>
+v20200319-2346-g9aab507aee <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/community<span style="color:#f92672">]</span>
+OK: <span style="color:#ae81ff">12421</span> distinct packages available
+<span style="color:#75715e"># apk upgrade</span>
+OK: <span style="color:#ae81ff">39</span> MiB in <span style="color:#ae81ff">25</span> packages
+</code></pre></div><p>After this, I recommend setting up a user account like an official WSL distribution would:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># adduser nathan</span>
+Changing password <span style="color:#66d9ef">for</span> nathan
+New password:
+Retype password:
+passwd: password <span style="color:#66d9ef">for</span> nathan changed by root
+</code></pre></div><p>After this, you should give yourself the ability to use <code>sudo</code> to avoid logging into the <code>root</code> account constantly. It is recommended that you use <code>visudo</code> and insert yourself after the <code>root    ALL=(ALL) ALL</code> line. There are plenty of resources on Google for how to give yourself <code>sudo</code> access, follow those instead of me :)</p>
+<p>Once you have created your user account, you can tell WSL to use it by default when you run <code>wsl.exe -d &lt;name&gt;</code> through <code>/etc/wsl.conf</code> (obviously replace my name with the one you chose with <code>adduser</code> above):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># cat &lt;&lt;EOF &gt; /etc/wsl.conf</span>
+<span style="color:#f92672">[</span>user<span style="color:#f92672">]</span>
+default <span style="color:#f92672">=</span> nathan
+EOF
+</code></pre></div><p>To have these changes get reflected in the distro, restart it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; wsl.exe -d alpine
+<span style="color:#75715e"># whoami</span>
+root
+<span style="color:#75715e"># exit</span>
+&gt; wsl.exe --terminate alpine
+&gt; wsl.exe -d alpine
+$ whoami
+nathan
+</code></pre></div><p>Hopefully this was somewhat informative. This process might work with Docker images as well since they are usually created from a raw rootfs as well (see <a href="https://github.com/debuerreotype/docker-debian-artifacts/tree/c7d149fa1214588199f3f0b8c30851b9cea47c6b/stable">Debian&rsquo;s</a> for example), feel free to give it a try. I have been uncovering more and more things with WSL 2 lately that I hope to continue to share here. If you have any questions or comments, feel free to reach out to me on <a href="https://twitter.com/nathanchance">Twitter</a>.</p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Building and using Cuttlefish</title>
             <link>https://nathanchance.dev/posts/building-using-cuttlefish/</link>
             <pubDate>Fri, 31 Jan 2020 18:52:00 -0700</pubDate>
             

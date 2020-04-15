@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Nathan Chancellor</title>
+    <link>https://nathanchance.dev/tags/git/</link>
+    <description>Recent content in git on Nathan Chancellor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 15 Apr 2020 15:11:58 -0700</lastBuildDate>
+    
+	<atom:link href="https://nathanchance.dev/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Art of git revert</title>
+      <link>https://nathanchance.dev/posts/art-of-git-revert/</link>
+      <pubDate>Wed, 15 Apr 2020 15:11:58 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/art-of-git-revert/</guid>
+      <description>I have always loved reading good commit messages and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&amp;rsquo;t have a denvercoder9 situation) and it allows other people to get familiar with your project by fully understanding the why behind a change.</description>
+    </item>
+    
+  </channel>
+</rss>

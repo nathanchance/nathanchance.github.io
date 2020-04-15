@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Nathan Chancellor ">
+<meta name="description" content="I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it." />
+<meta name="keywords" content=", linux, wsl2" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/" />
+
+
+    <title>
+        
+            Creating WSL 2 distributions from LXC images :: Nathan Chancellor 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.84ed5579024525d4b50458514d1a43e40dd5272df45c7cd6da85b225af457154.css">
+
+
+
+
+<meta itemprop="name" content="Creating WSL 2 distributions from LXC images">
+<meta itemprop="description" content="I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it.">
+<meta itemprop="datePublished" content="2020-04-15T12:40:20-07:00" />
+<meta itemprop="dateModified" content="2020-04-15T12:40:20-07:00" />
+<meta itemprop="wordCount" content="628">
+<meta itemprop="image" content="https://nathanchance.dev/"/>
+
+
+
+<meta itemprop="keywords" content="linux,wsl2," /><meta property="og:title" content="Creating WSL 2 distributions from LXC images" />
+<meta property="og:description" content="I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/" />
+<meta property="og:image" content="https://nathanchance.dev/"/>
+<meta property="article:published_time" content="2020-04-15T12:40:20-07:00" />
+<meta property="article:modified_time" content="2020-04-15T12:40:20-07:00" /><meta property="og:site_name" content="Nathan Chancellor" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://nathanchance.dev/"/>
+
+<meta name="twitter:title" content="Creating WSL 2 distributions from LXC images"/>
+<meta name="twitter:description" content="I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it."/>
+
+
+
+
+
+    <meta property="article:published_time" content="2020-04-15 12:40:20 -0700 MST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">nathanchance.dev</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://nathanchance.dev/about">About</a></li><li><a href="https://nathanchance.dev/posts">Blog</a></li><li><a href="https://nathanchance.dev/nc_resume.pdf">Resume</a></li><li><a href="https://nathanchance.dev/downloads">Downloads</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>3 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title">
+                <a href="https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/">Creating WSL 2 distributions from LXC images</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <p>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize <a href="https://github.com/nathanchance/WSL2-Linux-Kernel">here</a>) and all of <a href="https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distros">the various distributions</a> that you can run are basically containers on top of it.</p>
+<p>There is a little known option within <code>wsl.exe</code> named <code>--import</code> that allows you to create a WSL distribution from any Linux distribution&rsquo;s rootfs. I use the images available on the <a href="https://jenkins.linuxcontainers.org/">LXC Jenkins instance</a>. Here is a basic how-to (assuming you already have <a href="https://docs.microsoft.com/en-us/windows/wsl/wsl2-install">WSL 2 installed</a>):</p>
+<h3 id="1-download-and-extract-lxc-image">1. Download and extract LXC image</h3>
+<p>Go to the <a href="https://jenkins.linuxcontainers.org/view/Images/">LXC images page</a> and select a distribution that you want. I will use Alpine Linux because it is really small and nice for doing quick tasks/tests.</p>
+<p>Click on the image link then find the &ldquo;amd64&rdquo; version of the image (assuming you have an Intel or AMD processor) with the particular version that you want (it will probably have a green dot). I am using <a href="https://jenkins.linuxcontainers.org/view/Images/job/image-alpine/architecture=amd64,release=edge,variant=default/">Alpine&rsquo;s edge version</a>. You should see a link for a <code>rootfs.tar.xz</code>; click on it to download it.</p>
+<p>Once it is downloaded, extract it using something like <a href="https://www.7-zip.org/">7-Zip</a> (I use the &ldquo;Extract Here&rdquo; option). Once you have the raw <code>rootfs.tar</code> file, we are good to go.</p>
+<h3 id="2-import-the-rootfs">2. Import the rootfs</h3>
+<p>Open up a PowerShell instance (I use Windows Terminal). The format of <code>wsl.exe --import</code> is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe --import &lt;distro_name&gt; &lt;distro_folder&gt; &lt;rootfs&gt;
+</code></pre></div><p>I have a <code>Linux</code> folder in my user account where I house all of my Linux files so that is where I am going to install it. By default, PowerShell spawns me in my user folder so I am going to use relative paths.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe --import alpine .\Linux\alpine .\Downloads\rootfs.tar
+</code></pre></div><h3 id="3-run-the-distro-and-start-setting-it-up">3. Run the distro and start setting it up</h3>
+<p>Once you have imported the rootfs, the distribution is now available to spawn into with <code>wsl.exe</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe -d alpine
+<span style="color:#75715e"># uname</span>
+Linux
+</code></pre></div><p>I recommend getting the distribution up to date right out of the gate (Google instructions for the specific distribution you chose):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># apk update</span>
+fetch http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+v20200319-2352-g9a801feaea <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/main<span style="color:#f92672">]</span>
+v20200319-2346-g9aab507aee <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/community<span style="color:#f92672">]</span>
+OK: <span style="color:#ae81ff">12421</span> distinct packages available
+<span style="color:#75715e"># apk upgrade</span>
+OK: <span style="color:#ae81ff">39</span> MiB in <span style="color:#ae81ff">25</span> packages
+</code></pre></div><p>After this, I recommend setting up a user account like an official WSL distribution would:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># adduser nathan</span>
+Changing password <span style="color:#66d9ef">for</span> nathan
+New password:
+Retype password:
+passwd: password <span style="color:#66d9ef">for</span> nathan changed by root
+</code></pre></div><p>After this, you should give yourself the ability to use <code>sudo</code> to avoid logging into the <code>root</code> account constantly. It is recommended that you use <code>visudo</code> and insert yourself after the <code>root    ALL=(ALL) ALL</code> line. There are plenty of resources on Google for how to give yourself <code>sudo</code> access, follow those instead of me :)</p>
+<p>Once you have created your user account, you can tell WSL to use it by default when you run <code>wsl.exe -d &lt;name&gt;</code> through <code>/etc/wsl.conf</code> (obviously replace my name with the one you chose with <code>adduser</code> above):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># cat &lt;&lt;EOF &gt; /etc/wsl.conf</span>
+<span style="color:#f92672">[</span>user<span style="color:#f92672">]</span>
+default <span style="color:#f92672">=</span> nathan
+EOF
+</code></pre></div><p>To have these changes get reflected in the distro, restart it:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; wsl.exe -d alpine
+<span style="color:#75715e"># whoami</span>
+root
+<span style="color:#75715e"># exit</span>
+&gt; wsl.exe --terminate alpine
+&gt; wsl.exe -d alpine
+$ whoami
+nathan
+</code></pre></div><p>Hopefully this was somewhat informative. This process might work with Docker images as well since they are usually created from a raw rootfs as well (see <a href="https://github.com/debuerreotype/docker-debian-artifacts/tree/c7d149fa1214588199f3f0b8c30851b9cea47c6b/stable">Debian&rsquo;s</a> for example), feel free to give it a try. I have been uncovering more and more things with WSL 2 lately that I hope to continue to share here. If you have any questions or comments, feel free to reach out to me on <a href="https://twitter.com/nathanchance">Twitter</a>.</p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanchance.dev/tags/linux">linux</a></span><span class="tag"><a href="https://nathanchance.dev/tags/wsl2">wsl2</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>628 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-04-15 12:40 -0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Read other posts</span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://nathanchance.dev/posts/art-of-git-revert/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Art of git revert</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://nathanchance.dev/posts/building-using-cuttlefish/">
+                                <span class="button__text">Building and using Cuttlefish</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+            
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
+            <span> <a href="https://nathanchance.dev/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.2d5469329143160ae2456a69c3c76dc2d0a3b212b46afe291a51bd68650ed6f8697e001dab54f1c272c77ce08092a8c55e5bb4314e0ee334aab4b927ec896638.js" integrity="sha512-LVRpMpFDFgriRWppw8dtwtCjshK0av4pGlG9aGUO1vhpfgAdq1TxwnLHfOCAkqjFXlu0MU4O4zSqtLkn7IlmOA=="></script>
+
+
+
+    </body>
+</html>

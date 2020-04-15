@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Nathan Chancellor</title>
-    <link>https://nathanchance.dev/</link>
-    <description>Recent content on Nathan Chancellor</description>
+    <title>linux on Nathan Chancellor</title>
+    <link>https://nathanchance.dev/tags/linux/</link>
+    <description>Recent content in linux on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 14 Apr 2020 19:09:55 -0700</lastBuildDate>
+    <lastBuildDate>Wed, 15 Apr 2020 12:40:20 -0700</lastBuildDate>
     
-	<atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Art of git revert</title>
-      <link>https://nathanchance.dev/posts/art-of-git-revert/</link>
-      <pubDate>Wed, 15 Apr 2020 15:11:58 -0700</pubDate>
-      
-      <guid>https://nathanchance.dev/posts/art-of-git-revert/</guid>
-      <description>I have always loved reading good commit messages and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&amp;rsquo;t have a denvercoder9 situation) and it allows other people to get familiar with your project by fully understanding the why behind a change.</description>
-    </item>
     
     <item>
       <title>Creating WSL 2 distributions from LXC images</title>
@@ -28,18 +19,6 @@
       
       <guid>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</guid>
       <description>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://nathanchance.dev/about/</link>
-      <pubDate>Tue, 14 Apr 2020 19:09:55 -0700</pubDate>
-      
-      <guid>https://nathanchance.dev/about/</guid>
-      <description>I am a 25 year old university student at Grand Canyon University, majoring in Information Technology and an amateur Linux kernel and LLVM hacker.
-I am interested in performance analysis, compilers, security, and operating systems.
-Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.
-ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld.</description>
     </item>
     
     <item>
@@ -58,18 +37,6 @@ ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several 
       
       <guid>https://nathanchance.dev/posts/wsl2-kernel-clang/</guid>
       <description>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward.</description>
-    </item>
-    
-    <item>
-      <title>Downloads</title>
-      <link>https://nathanchance.dev/downloads/</link>
-      <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://nathanchance.dev/downloads/</guid>
-      <description>I used to host files on this website but I have offloaded them to other services.
-Flash Kernel downloads can be found in their individual repos:
- Nexus 6P OnePlus 5 OnePlus 6 Pixel (XL) Pixel 2 (XL)  Note, these are all unmaintained right now so I wouldn&amp;rsquo;t recommend running them in their current form but it&amp;rsquo;s your device.
-TWRP downloads can be found in the threads that referenced them:</description>
     </item>
     
   </channel>
