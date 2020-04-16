@@ -24,7 +24,7 @@
 <p><strong>Why is the revert actually being done?</strong> Is it just not necessary? Did it break something? Leaving out the why of the revert defeats the purpose. Presumably, if the commit was applied in the first place, it had good reason for being there. If it did not, that should be in the commit message of the revert.</p>
 </li>
 <li>
-<p><strong>If it is broken, how would one notice?</strong> Forks of a common upstream like AOSP or the Linux kernel will often have overlapping commits. If someone finds an issue with one, the visible effects of that issue should be noted so that others have a chance to do their own investigation. For example, if a commit introduces a crash, the output of the stacktrace would be relevant for the commit message so that other people have the opportunity to analyze it.</p>
+<p><strong>If it is broken, how would one notice?</strong> Forks of a common upstream like AOSP or the Linux kernel will often have overlapping commits. If someone finds an issue with one, the visible effects of that issue should be noted so that others have a chance to do their own investigation. For example, if a commit introduces a crash, the output of the stacktrace would be relevant for the commit message so that other people have the opportunity to analyze it. This allows people to help out without asking for further information. There are times where someone might have figured out a different solution from a revert and a description of the issue can allow them to point them to that out to the person committing the revert.</p>
 </li>
 <li>
 <p><strong>How can issues be avoided in the future?</strong> Any time that a revert happens, it is a learning opportunity. Where did the breakdown happen in the original commit&rsquo;s process? Was it not reviewed properly (or at all)? Was it tested? If so, how? Are there tests that can expose an issue in the future? If not, is it worth writing one?</p>
@@ -290,7 +290,7 @@ $ adb shell
 vsoc_x86:/ $ cat /proc/version
 Linux version 5.5.0-mainline-03266-g1dad8acc36fc-dirty <span style="color:#f92672">(</span>nathan@g2-large-x86<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>ClangBuiltLinux clang version 11.0.0 <span style="color:#f92672">(</span>git://github.com/llvm/llvm-project 64cb77b9469207799e570483dadc720dbf12c794<span style="color:#f92672">))</span> <span style="color:#75715e">#1 repo:common-android-mainline SMP PREEMPT Fri Jan 31 23:47:57</span>
 </code></pre></div><h1 id="conclusion">Conclusion</h1>
-<p>Hopefully this was information for you! Some further things to potentially explore are things like <a href="https://github.com/joelagnel/adeb">adeb</a>, which allow you to use tracing tools and other Linux utilities on Android to poke around its internals and try and improve or break things or looking into some of the new cool things they are doing like Apex. If you have any questions or problems, feel free to reach out to me on Twitter or GitHub, both of which are linked on my homepage.</p>
+<p>Hopefully this was informative for you! Some further things to potentially explore are things like <a href="https://github.com/joelagnel/adeb">adeb</a>, which allow you to use tracing tools and other Linux utilities on Android to poke around its internals and try and improve or break things or looking into some of the new cool things they are doing like Apex. If you have any questions or problems, feel free to reach out to me on Twitter or GitHub, both of which are linked on my homepage.</p>
 ]]></content>
         </item>
         
