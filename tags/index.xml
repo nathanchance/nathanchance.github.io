@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 15 Apr 2020 15:11:58 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2020 15:23:45 -0700</lastBuildDate>
     
 	<atom:link href="https://nathanchance.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,18 @@
     <item>
       <title>git</title>
       <link>https://nathanchance.dev/tags/git/</link>
-      <pubDate>Wed, 15 Apr 2020 15:11:58 -0700</pubDate>
+      <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
       
       <guid>https://nathanchance.dev/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>llvm</title>
+      <link>https://nathanchance.dev/tags/llvm/</link>
+      <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/tags/llvm/</guid>
       <description></description>
     </item>
     

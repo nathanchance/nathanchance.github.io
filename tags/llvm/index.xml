@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git on Nathan Chancellor</title>
-    <link>https://nathanchance.dev/tags/git/</link>
-    <description>Recent content in git on Nathan Chancellor</description>
+    <title>llvm on Nathan Chancellor</title>
+    <link>https://nathanchance.dev/tags/llvm/</link>
+    <description>Recent content in llvm on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Fri, 17 Apr 2020 15:23:45 -0700</lastBuildDate>
     
-	<atom:link href="https://nathanchance.dev/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://nathanchance.dev/tags/llvm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,15 +20,6 @@
       <guid>https://nathanchance.dev/posts/working-with-git-bisect/</guid>
       <description>Before Google+ shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
 One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information.</description>
-    </item>
-    
-    <item>
-      <title>The art of git revert</title>
-      <link>https://nathanchance.dev/posts/art-of-git-revert/</link>
-      <pubDate>Wed, 15 Apr 2020 15:11:58 -0700</pubDate>
-      
-      <guid>https://nathanchance.dev/posts/art-of-git-revert/</guid>
-      <description>I have always loved reading good commit messages and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&amp;rsquo;t have a denvercoder9 situation) and it allows other people to get familiar with your project by fully understanding the why behind a change.</description>
     </item>
     
   </channel>
