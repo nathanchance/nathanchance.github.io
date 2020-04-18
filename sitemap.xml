@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>https://nathanchance.dev/tags/linux/</loc>
+    <lastmod>2020-04-17T15:23:45-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://nathanchance.dev/tags/llvm/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
   </url>
@@ -34,11 +39,6 @@
   
   <url>
     <loc>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</loc>
-    <lastmod>2020-04-15T12:40:20-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://nathanchance.dev/tags/linux/</loc>
     <lastmod>2020-04-15T12:40:20-07:00</lastmod>
   </url>
   

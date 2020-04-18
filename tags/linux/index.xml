@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Wed, 15 Apr 2020 12:40:20 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2020 15:23:45 -0700</lastBuildDate>
     
 	<atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Working with git bisect</title>
+      <link>https://nathanchance.dev/posts/working-with-git-bisect/</link>
+      <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/working-with-git-bisect/</guid>
+      <description>Before Google+ shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
+One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information.</description>
+    </item>
     
     <item>
       <title>Creating WSL 2 distributions from LXC images</title>
