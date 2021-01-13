@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 14 Apr 2020 19:09:55 -0700</lastBuildDate>
-    
-	<atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 17 Apr 2020 15:23:45 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Working with git bisect</title>
       <link>https://nathanchance.dev/posts/working-with-git-bisect/</link>
@@ -46,10 +42,9 @@ One caveat before I start: there is great official documentation for git bisect,
       <pubDate>Tue, 14 Apr 2020 19:09:55 -0700</pubDate>
       
       <guid>https://nathanchance.dev/about/</guid>
-      <description>I am a 25 year old university student at Grand Canyon University, majoring in Information Technology and an amateur Linux kernel and LLVM hacker.
+      <description>I am a 25 year old university student at Grand Canyon University, majoring in Information Technology and a Linux kernel and LLVM hacker, currently employed as an independent contractor through the Linux Foundation to maintain ClangBuiltLinux.
 I am interested in performance analysis, compilers, security, and operating systems.
-Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.
-ClangBuiltLinux ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld.</description>
+Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.</description>
     </item>
     
     <item>
