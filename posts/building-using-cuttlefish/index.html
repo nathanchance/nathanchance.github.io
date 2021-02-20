@@ -20,12 +20,12 @@
 
 
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
     type="text/css">
 
 
 
-<link rel="stylesheet" href="/main.min.753fac8f03736f0edc9be411eb20cee875dd7bb8e73c8155fbf6a629c863f4ca.css">
+<link rel="stylesheet" href="/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
 
 
 
@@ -33,21 +33,16 @@
 
 
 <meta itemprop="name" content="Building and using Cuttlefish">
-<meta itemprop="description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell.">
-<meta itemprop="datePublished" content="2020-01-31T18:52:00-07:00" />
+<meta itemprop="description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell."><meta itemprop="datePublished" content="2020-01-31T18:52:00-07:00" />
 <meta itemprop="dateModified" content="2020-01-31T18:52:00-07:00" />
-<meta itemprop="wordCount" content="2672">
-<meta itemprop="image" content="https://nathanchance.dev/"/>
-
-
-
+<meta itemprop="wordCount" content="2672"><meta itemprop="image" content="https://nathanchance.dev/"/>
 <meta itemprop="keywords" content="android,clang,linux," />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://nathanchance.dev/"/>
 
 <meta name="twitter:title" content="Building and using Cuttlefish"/>
 <meta name="twitter:description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell."/>
+
 
 
 
@@ -66,7 +61,10 @@
 
     </head>
 
-    <body class="dark-theme">
+    
+        <body>
+    
+    
         <div class="container">
             <header class="header">
     <span class="header__inner">
@@ -88,7 +86,7 @@
         <span class="header__right">
             
                 <nav class="menu">
-    <ul class="menu__inner"><li><a href="https://nathanchance.dev/about">About</a></li><li><a href="https://nathanchance.dev/posts">Blog</a></li><li><a href="https://nathanchance.dev/nc_resume.pdf">Resume</a></li><li><a href="https://nathanchance.dev/downloads">Downloads</a></li>
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/nc_resume.pdf">Resume</a></li><li><a href="/downloads">Downloads</a></li>
     </ul>
 </nav>
 
@@ -99,13 +97,6 @@
                     </svg>
                 </span>
             
-
-            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
-  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
-  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
-</svg>
-</span>
         </span>
     </span>
 </header>
@@ -113,25 +104,31 @@
 
             <div class="content">
                 
-    <main class="post">
+  <main class="post">
 
-        <div class="post-info">
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>13 minutes
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        13 minutes
 
-            
+        
+      </p>
+    </div>
 
-            </p>
-        </div>
+    <article>
+      <h1 class="post-title">
+        <a href="https://nathanchance.dev/posts/building-using-cuttlefish/">Building and using Cuttlefish</a>
+      </h1>
 
-        <article>
-            <h1 class="post-title">
-                <a href="https://nathanchance.dev/posts/building-using-cuttlefish/">Building and using Cuttlefish</a>
-            </h1>
+      
 
-            
+      
 
-            <div class="post-content">
-                <p>Recently, I stumbled upon <a href="https://youtu.be/xMtDDEj-02c?t=9502">a talk</a> that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from <code>adb shell</code>. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even <a href="https://android.googlesource.com/device/google/cuttlefish/#so-you-want-to-see-cuttlefish">view it</a> with TightVNC.</p>
+      <div class="post-content">
+        <p>Recently, I stumbled upon <a href="https://youtu.be/xMtDDEj-02c?t=9502">a talk</a> that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from <code>adb shell</code>. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even <a href="https://android.googlesource.com/device/google/cuttlefish/#so-you-want-to-see-cuttlefish">view it</a> with TightVNC.</p>
 <p>A brief demo:</p>
 <p><a href="https://asciinema.org/a/tfDhVZKCL0URqP58lnxuRsKZd"><img src="https://asciinema.org/a/tfDhVZKCL0URqP58lnxuRsKZd.svg" alt="asciicast"></a></p>
 <p>A few things to note:</p>
@@ -324,50 +321,87 @@ Linux version 5.5.0-mainline-03266-g1dad8acc36fc-dirty <span style="color:#f9267
 </code></pre></div><h1 id="conclusion">Conclusion</h1>
 <p>Hopefully this was informative for you! Some further things to potentially explore are things like <a href="https://github.com/joelagnel/adeb">adeb</a>, which allow you to use tracing tools and other Linux utilities on Android to poke around its internals and try and improve or break things or looking into some of the new cool things they are doing like Apex. If you have any questions or problems, feel free to reach out to me on Twitter or GitHub, both of which are linked on my homepage.</p>
 
-            </div>
-        </article>
+      </div>
+    </article>
 
-        <hr />
+    <hr />
 
-        <div class="post-info">
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://nathanchance.dev/tags/android">android</a></span><span class="tag"><a href="https://nathanchance.dev/tags/clang">clang</a></span><span class="tag"><a href="https://nathanchance.dev/tags/linux">linux</a></span>
-                </p>
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2672 Words</p>
+        <span class="tag"><a href="https://nathanchance.dev/tags/android/">android</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/clang/">clang</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/linux/">linux</a></span>
+        
+    </p>
 
-            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-01-31 18:52 -0700</p>
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        2672 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2020-01-31 18:52 -0700
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
         </div>
 
-        
-            <div class="pagination">
-                <div class="pagination__title">
-                    <span class="pagination__title-h">Read other posts</span>
-                    <hr />
-                </div>
+        <div class="pagination__buttons">
+          
+            <span class="button previous">
+              <a href="https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/">
+                <span class="button__icon">←</span>
+                <span class="button__text">Creating WSL 2 distributions from LXC images</span>
+              </a>
+            </span>
+          
 
-                <div class="pagination__buttons">
-                    
-                        <span class="button previous">
-                            <a href="https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/">
-                                <span class="button__icon">←</span>
-                                <span class="button__text">Creating WSL 2 distributions from LXC images</span>
-                            </a>
-                        </span>
-                    
+          
+            <span class="button next">
+              <a href="https://nathanchance.dev/posts/wsl2-kernel-clang/">
+                <span class="button__text">Building the WSL 2 kernel with Clang</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+    
 
-                    
-                        <span class="button next">
-                            <a href="https://nathanchance.dev/posts/wsl2-kernel-clang/">
-                                <span class="button__text">Building the WSL 2 kernel with Clang</span>
-                                <span class="button__icon">→</span>
-                            </a>
-                        </span>
-                    
-                </div>
-            </div>
-        
-    </main>
+
+    
+
+    
+
+  </main>
 
             </div>
 
@@ -376,18 +410,15 @@ Linux version 5.5.0-mainline-03266-g1dad8acc36fc-dirty <span style="color:#f9267
     <div class="footer__inner">
         <div class="footer__content">
             <span>&copy; 2021</span>
-            
-                <span><a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
-            
-            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span>
-            <span> <a href="https://nathanchance.dev/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+            <span><a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="https://nathanchance.dev/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
         </div>
     </div>
     <div class="footer__inner">
         <div class="footer__content">
             <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
             <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
-        </div>
+          </div>
     </div>
 </footer>
 
@@ -398,8 +429,7 @@ Linux version 5.5.0-mainline-03266-g1dad8acc36fc-dirty <span style="color:#f9267
 
 
 
-
-<script type="text/javascript" src="/bundle.min.4a69500057d68129e88f497d354afe68422eb56de6d15e45dbe2190858ea5a76bfcb096406f992984b241db45f47388ac57ab0376e3b32125bef7a8a6d0f06c4.js" integrity="sha512-SmlQAFfWgSnoj0l9NUr&#43;aEIutW3m0V5F2&#43;IZCFjqWna/ywlkBvmSmEskHbRfRziKxXqwN247MhJb73qKbQ8GxA=="></script>
+<script type="text/javascript" src="/bundle.min.2ce64ea6ea44a72b13dd812fc2eb5cca3efe878cce258a47c137c17edf46e0602a05e422b618a5b80b5939c731b7a293351c2f2222a21f6ee27e54a8448dd20e.js" integrity="sha512-LOZOpupEpysT3YEvwutcyj7&#43;h4zOJYpHwTfBft9G4GAqBeQithiluAtZOccxt6KTNRwvIiKiH27iflSoRI3SDg=="></script>
 
 
 

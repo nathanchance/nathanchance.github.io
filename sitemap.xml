@@ -1,89 +1,55 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://nathanchance.dev/tags/git/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/tags/linux/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/tags/llvm/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/posts/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/tags/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/posts/working-with-git-bisect/</loc>
     <lastmod>2020-04-17T15:23:45-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/posts/art-of-git-revert/</loc>
     <lastmod>2020-04-15T15:11:58-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</loc>
     <lastmod>2020-04-15T12:40:20-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/tags/wsl2/</loc>
     <lastmod>2020-04-15T12:40:20-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/about/</loc>
     <lastmod>2020-04-14T19:09:55-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/tags/android/</loc>
     <lastmod>2020-01-31T18:52:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/posts/building-using-cuttlefish/</loc>
     <lastmod>2020-01-31T18:52:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/tags/clang/</loc>
     <lastmod>2020-01-31T18:52:00-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/posts/wsl2-kernel-clang/</loc>
     <lastmod>2019-12-17T13:53:23-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/downloads/</loc>
     <lastmod>2019-07-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://nathanchance.dev/categories/</loc>
   </url>
-  
 </urlset>
