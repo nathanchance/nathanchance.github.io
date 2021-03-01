@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linuxfoundation on Nathan Chancellor</title>
+    <link>https://nathanchance.dev/tags/linuxfoundation/</link>
+    <description>Recent content in linuxfoundation on Nathan Chancellor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sun, 28 Feb 2021 00:01:20 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>February 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/february-2021-cbl-work/</link>
+      <pubDate>Sun, 28 Feb 2021 00:01:20 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/february-2021-cbl-work/</guid>
+      <description>As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
+Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome.</description>
+    </item>
+    
+  </channel>
+</rss>

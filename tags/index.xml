@@ -7,22 +7,49 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 17 Apr 2020 15:23:45 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 00:01:20 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>git</title>
-      <link>https://nathanchance.dev/tags/git/</link>
-      <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
+      <title>clangbuiltlinux</title>
+      <link>https://nathanchance.dev/tags/clangbuiltlinux/</link>
+      <pubDate>Sun, 28 Feb 2021 00:01:20 -0700</pubDate>
       
-      <guid>https://nathanchance.dev/tags/git/</guid>
+      <guid>https://nathanchance.dev/tags/clangbuiltlinux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>linux</title>
       <link>https://nathanchance.dev/tags/linux/</link>
-      <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
+      <pubDate>Sun, 28 Feb 2021 00:01:20 -0700</pubDate>
       
       <guid>https://nathanchance.dev/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linuxfoundation</title>
+      <link>https://nathanchance.dev/tags/linuxfoundation/</link>
+      <pubDate>Sun, 28 Feb 2021 00:01:20 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/tags/linuxfoundation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>maintainer</title>
+      <link>https://nathanchance.dev/tags/maintainer/</link>
+      <pubDate>Sun, 28 Feb 2021 00:01:20 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/tags/maintainer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://nathanchance.dev/tags/git/</link>
+      <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/tags/git/</guid>
       <description></description>
     </item>
     

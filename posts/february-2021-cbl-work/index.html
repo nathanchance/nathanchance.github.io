@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Nathan Chancellor ">
+<meta name="description" content="As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
+Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome." />
+<meta name="keywords" content=", clangbuiltlinux, linux, linuxfoundation, maintainer" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://nathanchance.dev/posts/february-2021-cbl-work/" />
+
+
+    <title>
+        
+            February 2021 ClangBuiltLinux Work :: Nathan Chancellor 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+
+
+<meta itemprop="name" content="February 2021 ClangBuiltLinux Work">
+<meta itemprop="description" content="As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
+Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome."><meta itemprop="datePublished" content="2021-02-28T00:01:20-07:00" />
+<meta itemprop="dateModified" content="2021-02-28T00:01:20-07:00" />
+<meta itemprop="wordCount" content="1515"><meta itemprop="image" content="https://nathanchance.dev/"/>
+<meta itemprop="keywords" content="clangbuiltlinux,linux,linuxfoundation,maintainer," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://nathanchance.dev/"/>
+
+<meta name="twitter:title" content="February 2021 ClangBuiltLinux Work"/>
+<meta name="twitter:description" content="As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
+Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome."/>
+
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-02-28 00:01:20 -0700 MST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">nathanchance.dev</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/nc_resume.pdf">Resume</a></li><li><a href="/downloads">Downloads</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        8 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://nathanchance.dev/posts/february-2021-cbl-work/">February 2021 ClangBuiltLinux Work</a>
+      </h1>
+
+      
+
+      
+
+      <div class="post-content">
+        <p>As some of you may or may not know by now, I am <a href="https://www.linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">now employed</a> by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for <a href="https://clangbuiltlinux.github.io/">ClangBuiltLinux</a>, of which I am an <a href="https://git.kernel.org/linus/b9644289657748314dbfe6502c316b3f09e251ed">official maintainer</a>.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<p>First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with <code>git send-email</code> and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome.</p>
+<p>Some of the patches that I send in February are as follows:</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210209005719.803608-1-nathan@kernel.org/"><code>arm64: Make CPU_BIG_ENDIAN depend on ld.bfd or ld.lld 13.0.0+</code></a>: I did not do a whole ton of heavy lifting on this, it is mostly thanks to Fangrui Song that this is possible. Getting proper big endian support for AArch64 is not the biggest deal because it is not super common except in networking but more support is more support. One less configuration option that has to be toggled :)</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210211194258.4137998-1-nathan@kernel.org/"><code>qemu_fw_cfg: Make fw_cfg_rev_attr a proper kobj_attribute</code></a>: This one is particularly nasty. Indirect function calls through function pointers can be a major security threat in C, where they can be used in ROP chains. Clang&rsquo;s <a href="https://clang.llvm.org/docs/ControlFlowIntegrity.html">Control Flow Integrity</a> is a way to guard this, where indirect function calls have their parameters checked to attempt to make sure that the function call has not been hijacked. This support is currently <a href="https://github.com/samitolvanen/linux/commits/clang-cfi">out of tree</a> but patches like this are critical for getting it pushed upstream. This patch fixes a CFI failure in the <code>qemu_fw_cfg</code> driver, where attempting to read the firmware revision will cause the kernel to panic when it is read.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210216213312.30462-1-nathan@kernel.org/"><code>Makefile: Remove # characters from compiler string</code></a>: <a href="https://github.com/ClangBuiltLinux/linux/issues/1298">A report</a> came in that AMD&rsquo;s Optimzing C/C++ Compiler (AOCC, based on LLVM/Clang) could not build the kernel as it would error out due to the <code>#</code> symbol in the version string (which starts a comment in Make and is required to be escaped). Kconfig does not support escaping <code>#</code> yet so the easiest fix is to just remove that symbol if it is present. AOCC may come in handy later if it has certain optimizations that the kernel can take advantage of</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210216212953.24458-1-nathan@kernel.org/"><code>drm/i915: Enable -Wuninitialized</code></a>: <code>-Wuninitialized</code> has become a very important warning over the past year of so because GCC&rsquo;s version (<code>-Wmaybe-uninitialized</code>) was <a href="https://git.kernel.org/linus/78a5255ffb6a1af189a83e493d916ba1c54d8c75">disabled</a> by Linus in 5.7. i915 maintains a separate set of CFLAGS from the rest of the kernel and this was disabled before <code>-Wuninitialized</code> became smarter in newer LLVM versions so this commit re-enables it. I had this patch locally for a while with another workaround but Arnd Bergmann pointed out that other workaround is no longer necessary so this can be enabled for everyone!</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210218224849.5591-1-nathan@kernel.org/"><code>drm/amd/pm/swsmu: Avoid using structure_size uninitialized in smu_cmn_init_soft_gpu_metrics</code></a>: Speaking of <code>-Wuninitialized</code>&hellip; here is an instance where it proves useful. Using uninitialized stack memory is never a good idea and can even be a security issue depending on the context. Linux himself <a href="https://lore.kernel.org/r/CAHk-=wgiPxXzRNnfaXk7ozSWSu7fFU--kTmVjkDaTB05wwUk_g@mail.gmail.com/">pointed</a> this out and accurately explaining that while the <code>default:</code> case never happens, it still should not do this.</p>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>In open source development, patch review is a currency to barter with. In order to have your own patches reviewed quickly, it is in your best interest to review patches quickly yourself. Below are some of the patches that I provided review on, which helps ensure the kernel&rsquo;s quality. Some of these reviews span multiple messages, which can be viewed at the bottom of the page.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210201004820.GA26230@localhost/"><code>ext4: Enable code path when DX_DEBUG is set</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210201013324.GA2423231@localhost/"><code>scripts: switch some more scripts explicitly to Python 3</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210203173835.GA765175@localhost/"><code>kbuild: fix duplicated flags in DEBUG_CFLAGS</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210203184840.GA1711681@localhost/"><code>mm/mremap: fix BUILD_BUG_ON() error in get_extent</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210204212250.GA385551@localhost/"><code>crypto: octeontx2 - fix -Wpointer-bool-conversion warning</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210205185622.GA461042@localhost/"><code>x86/efi: Remove EFI PGD build time checks</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210208195439.GA1097868@ubuntu-m3-large-x86/"><code>clang_tools:gen_compile_commands: Change the default source directory</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210211171908.GA3820685@ubuntu-m3-large-x86/"><code>gen_compile_commands: prune some directories</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210216185742.GA64801@24bbad8f3778/"><code>kbuild: remove ld-version macro</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210216190743.GA18370@24bbad8f3778/"><code>kbuild: check the minimum linker version in Kconfig</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210216185447.GA64303@24bbad8f3778/"><code>vmlinux.lds.h: catch more UBSAN symbols into .data</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210212055508.GA3822196@ubuntu-m3-large-x86/"><code>ARM: Implement Clang's SLS mitigation (v1)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210219203053.GA53507@24bbad8f3778/"><code>ARM: Implement Clang's SLS mitigation (v3)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210211174307.GA2804604@ubuntu-m3-large-x86/"><code>ARM: kprobes: rewrite test-arm.c in UAL</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210228064936.zixrhxlthyy6fmid@24bbad8f3778/"><code>x86: remove toolchain check for X32 ABI capability</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210225192941.GA2026@MSI.localdomain/"><code>linux/compiler-clang.h: define HAVE_BUILTIN_BSWAP*</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210224171740.GA7180@24bbad8f3778/"><code>Makefile: reuse CC_VERSION_TEXT</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210205190834.GC461042@localhost/"><code>firmware_loader: Align .builtin_fw to 8</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210226210640.GA21320@MSI.localdomain/"><code>iwlwifi: mvm: add terminate entry for dmi_system_id tables</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>As a maintainer, it is important to address issues that are reported to you as well as report issues to other people when you do not have the expertise to deal with them yourself. ClangBuiltLinux is at the intersection of three major projects: the Linux kernel, the LLVM compiler collection, and QEMU (as we use it for boot testing the kernels we build in our CI). We work with a few major continuous integration systems such as KernelCI,
+Continuous Kernel Integration (CKI), and the Oday team from Intel, which results in reports that need to be looked at.</p>
+<p>I will not go into too many details but here are some of the issues that I responded to or reported during February.</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1289"><code>clang-12: error: unsupported option '--64</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1292"><code>-Wframe-larger-than in= in arch/powerpc/kvm/book3s_hv_nested.c</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1293"><code>__field_overflow in drivers/net/ipa/ipa_main.c with clang-10</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1295"><code>Assertion in mm/memcontrol.c when building x86_64 allyesconfig with -O3</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1297"><code>FAILED unresolved symbol vfs_truncate</code></a> (<a href="https://lore.kernel.org/r/20210209034416.GA1669105@ubuntu-m3-large-x86/">corresponding LKML thread</a>)</p>
+</li>
+<li>
+<p><a href="https://groups.google.com/g/clang-built-linux/c/roX6-wUVhKQ/m/BcUNw3sKBQAJ"><code>FAIL: Test report for kernel 5.11.0-rc7 (mainline.kernel.org-clang)</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1298"><code>invalid syntax in conditional- Kernel 5.10.14 on OpenSUSE 15.2 with AOCC</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210218223158.GA52356@24bbad8f3778/"><code>drm/amd/display: Add Freesync HDMI support to DM</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1303"><code>gcc invoked even with passing CC=clang to make</code></a></p>
+</li>
+<li>
+<p><a href="https://groups.google.com/g/clang-built-linux/c/m8KE8TcOBKw/m/iBHtAqpNCwAJ"><code>x86 ThinLTO: BUG: unable to handle page fault</code></a></p>
+</li>
+<li>
+<p><a href="https://groups.google.com/g/clang-built-linux/c/aAfupPOatvY/m/MRjBRzOYBQAJ"><code>FAIL: Test report for kernel 5.11.0 (mainline.kernel.org-clang)</code></a></p>
+</li>
+<li>
+<p><a href="https://groups.google.com/g/clang-built-linux/c/de_mNh23FOc/m/SKdJcUlKBgAJ"><code>PANICKED: Test report for kernel 5.11.0-rc6 (mainline.kernel.org-clang)</code></a></p>
+</li>
+<li>
+<p><a href="http://llvm.org/PR49239#c5"><code>Assertion 'ContinueAfterFailure &amp;&amp; &quot;Shouldn't have kept evaluating on failure.&quot;' failed.</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-patches">Tooling patches</h2>
+<p>ClangBuiltLinux has a few different repos that we maintain to ease our workload. The first of which is the <a href="https://github.com/ClangBuiltLinux/boot-utils">boot-utils repo</a>, which houses a few scripts to make booting the Linux kernels that we build in QEMU easier. QEMU is a rather unwieldy program, as it has a LOT of flags and it is not immediately obvious which ones should and should not be used for testing. We use this locally on our workstations as well as in our continuous integration (more on that in a second). This month I contributed:</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/33"><code>boot-utils: Add RISC-V to use '--use-cbl-qemu'</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/34"><code>Update to latest stable buildroot and add arm64 big endian</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/35"><code>boot-utils: Add support for booting Debian images</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/36"><code>boot-utils: Only allow '--use-cbl-qemu' with s390</code></a></p>
+</li>
+</ul>
+<p>To help us easily track regressions in the kernel, we have started relying very heavily on <a href="https://tuxsuite.com/">TuxSuite</a> and GitHub Actions for our <a href="https://github.com/ClangBuiltLinux/continuous-integration2">continuous integration</a>. This month I spent a lot of time trying to get us more coverage of various trees and configurations that have proved problematic in the past. In its current state, ClangBuiltLinux is in the &ldquo;turning on the lights&rdquo; phase (starting up), this is a major step in the &ldquo;keeping them running&rdquo; phase (stabilizing), and once that is stable, we can focus on adding features and polish as people request them (new development).</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/67"><code>Re-enable boot on 4.14 for x86_64</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/68"><code>Add support for testing CONFIG_THUMB2_KERNEL</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/70"><code>ci2: Rework YAML generation</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/73"><code>Enable booting MIPS and PowerPC kernels </code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/74"><code>ci2: Regenerate android-4.14 TuxSuite and workflow file</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/75"><code>ci2: Add all*config builds</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/77"><code>Add &quot;all&quot; target to generate.sh</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/78"><code>Enable some more -next builds</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/79"><code>llvm_tot is now 13</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/80"><code>Disable pseries_defconfig on LLVM 13</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/81"><code>Add support for LLVM 12</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/82"><code>Enable more some more configs on 5.10 and next</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/83"><code>Disable certain PowerPC builds with LLVM 11</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/84"><code>Add Sami's LTO/CFI tree</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/85"><code>Add support for arm64 big endian</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/86"><code>Enable ld.lld for mips big endian</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/88"><code>Add support for testing -tip</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/89"><code>Move back to Ubuntu's qemu-system-riscv64</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/90"><code>Disable x86_64 all{mod,yes}config for clang-10 on mainline</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/94"><code>Enable LTO testing on mainline and -next</code></a></p>
+</li>
+</ul>
+<p>I maintain <a href="https://github.com/ClangBuiltLinux/tc-build">a set of Python build scripts for LLVM and binutils</a> so that people can easily test with the latest versions of these tools in a contained environment (by default, the script does not touch anything outside of the repository). A small set of updates to these this month for improved testing and verification:</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/139"><code>Linux 5.10.14 and binutils 2.36.1</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/140"><code>ci.sh: Use release/12.x for build testing</code></a>/</p>
+</li>
+</ul>
+<p>Lastly, we have had to ship a couple of <a href="https://github.com/ClangBuiltLinux/qemu-binaries">QEMU binaries</a> to get access to features that we need for testing or to work around issues with distribution versions of QEMU. The work in this area this month was concerned with the latter. Ubuntu shipped a broken <code>qemu-system-riscv64</code> binary, which I actually fixed upstream in the 5.0.1 stable series, but Ubuntu misses that fix in a set of security backports to 4.2. I shipped a fixed binary in this repo for our CI, <a href="https://bugs.launchpad.net/bugs/1914883">reported the issue to Ubuntu upstream</a>, then reverted it in our repo when it was available.</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/qemu-binaries/pull/2"><code>Add qemu-system-riscv64</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/qemu-binaries/pull/3"><code>qemu-binaries: Remove copy of qemu-system-riscv64</code></a></p>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>I hope this has been interesting to follow along with. I am very excited that I get paid to do this full time now. Going foward, I am going to try <a href="https://twitch.tv/nathanchance">streaming on Twitch</a> once a week to try and get people involved with Linux kernel development, so that they can see that it is a rewarding path and that it is possible to succeed in it. If you have any questions, feel free to reach out to me using any of the information on my home page!</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://nathanchance.dev/tags/clangbuiltlinux/">clangbuiltlinux</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/linux/">linux</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/linuxfoundation/">linuxfoundation</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/maintainer/">maintainer</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1515 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2021-02-28 00:01 -0700
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+      <div class="pagination">
+        <div class="pagination__title">
+          <span class="pagination__title-h">Read other posts</span>
+          <hr />
+        </div>
+
+        <div class="pagination__buttons">
+          
+
+          
+            <span class="button next">
+              <a href="https://nathanchance.dev/posts/working-with-git-bisect/">
+                <span class="button__text">Working with git bisect</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          
+        </div>
+      </div>
+    
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            <span><a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="https://nathanchance.dev/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+          </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.2ce64ea6ea44a72b13dd812fc2eb5cca3efe878cce258a47c137c17edf46e0602a05e422b618a5b80b5939c731b7a293351c2f2222a21f6ee27e54a8448dd20e.js" integrity="sha512-LOZOpupEpysT3YEvwutcyj7&#43;h4zOJYpHwTfBft9G4GAqBeQithiluAtZOccxt6KTNRwvIiKiH27iflSoRI3SDg=="></script>
+
+
+
+    </body>
+</html>
