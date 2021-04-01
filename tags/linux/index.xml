@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 28 Feb 2021 00:01:20 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Apr 2021 10:25:53 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>March 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/march-2021-cbl-work/</link>
+      <pubDate>Thu, 01 Apr 2021 10:25:53 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/march-2021-cbl-work/</guid>
+      <description>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
+Linux kernel patches   powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations.</description>
+    </item>
+    
     <item>
       <title>February 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/february-2021-cbl-work/</link>

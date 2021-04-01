@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Nathan Chancellor ">
+<meta name="description" content="Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
+Linux kernel patches   powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations." />
+<meta name="keywords" content=", clangbuiltlinux, linux, linuxfoundation, maintainer" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://nathanchance.dev/posts/march-2021-cbl-work/" />
+
+
+    <title>
+        
+            March 2021 ClangBuiltLinux Work :: Nathan Chancellor 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.d7bdd8ee18bfbf4c605488a7e5b1b92cd980dfeed2bdaeab4dd5e931a7a78bc0.css">
+
+
+
+
+
+
+<meta itemprop="name" content="March 2021 ClangBuiltLinux Work">
+<meta itemprop="description" content="Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
+Linux kernel patches   powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations."><meta itemprop="datePublished" content="2021-04-01T10:25:53-07:00" />
+<meta itemprop="dateModified" content="2021-04-01T10:25:53-07:00" />
+<meta itemprop="wordCount" content="1233"><meta itemprop="image" content="https://nathanchance.dev/"/>
+<meta itemprop="keywords" content="clangbuiltlinux,linux,linuxfoundation,maintainer," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://nathanchance.dev/"/>
+
+<meta name="twitter:title" content="March 2021 ClangBuiltLinux Work"/>
+<meta name="twitter:description" content="Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
+Linux kernel patches   powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations."/>
+
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-04-01 10:25:53 -0700 MST" />
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">nathanchance.dev</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/nc_resume.pdf">Resume</a></li><li><a href="/downloads">Downloads</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        6 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://nathanchance.dev/posts/march-2021-cbl-work/">March 2021 ClangBuiltLinux Work</a>
+      </h1>
+
+      
+
+      
+
+      <div class="post-content">
+        <p>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210302195013.2626335-1-nathan@kernel.org/"><code>powerpc/fadump: Mark fadump_calculate_reserve_size as __init</code></a>: LLVM 13 switched over to the <a href="https://blog.llvm.org/posts/2021-03-26-the-new-pass-manager/">New Pass Manager (NPM)</a>, which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, <code>identical_pvr_fixup()</code> was not marked as <code>__init</code> and it was not getting inlined so the calls to <code>identify_cpu()</code> and <code>of_get_flat_dt_prop()</code> resulting in the modpost warnings. In practice, this is not an issue because <code>identical_pvr_fixup()</code> is only called from <code>__init</code> context but it is important to get these things right so that real warnings can easily be caught.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210302200829.2680663-1-nathan@kernel.org/"><code>powerpc/prom: Mark identical_pvr_fixup as __init</code></a>: Same situation as above :)</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210309205915.2340265-1-nathan@kernel.org/"><code>Makefile: Remove '--gcc-toolchain' flag</code></a> and <a href="https://lore.kernel.org/r/20210309205915.2340265-2-nathan@kernel.org/"><code>Makefile: Only specify '--prefix=' when building with clang + GNU as</code></a>: These two patches clean up our clang specific compiler flags. I noticed that we specify <code>--prefix=</code> with a full path after commit <a href="https://git.kernel.org/linus/ca9b31f6bb9c6aa9b4e5f0792f39a97bbffb8c51">ca9b31f6bb9c</a> (&ldquo;Makefile: Fix GCC_TOOLCHAIN_DIR prefix for Clang cross compilation&rdquo;), meaning that <code>--gcc-toolchain=</code> is unnecessary because the kernel uses nothing within the sysroot usually provided by GCC. As a follow up, specifying <code>--prefix=</code> is only necessary when we are using the GNU assembler.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210311005418.2207250-1-nathan@kernel.org/"><code>ARM: Make UNWINDER_ARM depend on ld.bfd or ld.lld 11.0.0+</code></a>: A workaround for a bug in all LLD versions prior to 11.0.0. The kernel&rsquo;s minimum supported version of LLVM is 10.0.1, meaning that if something is broken with LLVM 10.0.1+, it must be fixed or worked around. KernelCI has run into this as their testing plan is now the minimum supported version of LLVM and the latest stable version.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210325223807.2423265-1-nathan@kernel.org/"><code>riscv: Fix CONFIG_FUNCTION_TRACER with clang</code></a>: This series fixes build errors on RISC-V when <code>CONFIG_FUNCTION_TRACER</code> is set. This was a rather fun series to develop but at the same time, incredibly frustrating because of how it evolved. Unfortunately, it requires a kind of ugly workaround due to an LLVM bug (more on that below). I am hoping that it will be picked up before Linux 5.12 is released but it is not like it cannot be backported to stable.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210325215156.1986901-1-nathan@kernel.org/"><code>riscv: Use $(LD) instead of $(CC) to link vDSO</code></a>: In traditional projects, the linker is never directly invoked; instead, the compiler is called and it calls the linker implicitly. For the kernel, it is the other way around: the compiler is only used to build <code>.o</code> files and the linker is directly invoked on them, except in certain vDSO Makefiles. We have been working on getting rid of this and making the behavior consistent over the kernel so that <code>ld.lld</code> can be used in more places, as <code>clang</code> by default defauls to calling <code>ld.bfd</code>.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210326000435.4785-1-nathan@kernel.org/"><code>Fix cross compiling x86 with clang</code></a>: Back in December, someone reported that x86 was not cross compilable due to a lack of the <code>--target=</code> flag. This is not a very common task as x86 is the dominant architecture but arm64 is starting to become more common, especially with Apple&rsquo;s M1 chip. This series adds the <code>--target=</code> flag to specific subdirectories that have hand rolled <code>KBUILD_CFLAGS</code> (which is an antipattern that should really be avoided but simple fix for now).</p>
+</li>
+</ul>
+<h2 id="llvm-patches">LLVM patches</h2>
+<p>I contributed a few small patches to LLVM this month:</p>
+<ul>
+<li>
+<p><a href="https://reviews.llvm.org/D98613"><code>debuginfo-tests: Fix check-gdb-mlir-support build after MLIR API change in a4bb667d831c</code></a>: A MILR API change that was not reflected back in the MILR debuginfo-tests.</p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D98881"><code>[RISCV] Fix mcount name</code></a>: This is the LLVM side of the RISC-V function tracing series above. Somehow, LLVM used a different name for the mcount symbol than GCC did, which needed to be fixed. Thankfully, LLVM already had the plumbing inside of it for this, I just had to hook into it for RISC-V and add some tests.</p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D99636"><code>libc: Default LIBC_INSTALL_PREFIX to ${CMAKE_INSTALL_PREFIX}</code></a>: While working on the full toolchain tc-build series below, I ran into this issue while running <code>ninja install</code>.</p>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>I feel like I gave more input/review this month than I have before, which is never a bad thing :) Being a quick reviewer for others incentivizes them to give you a quick review in return. For some of the links below, I linked the top message/patch; my full input can be seen at the bottom by clicking on my name.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210302221211.1620858-1-bero@lindev.ch/"><code>[PATCH] Fix ld-version.sh script if LLD was built with LLD_VENDOR</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210303183333.46543-1-masahiroy@kernel.org/"><code>[PATCH 1/4] kbuild: remove LLVM=1 test from HAS_LTO_CLANG</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/1614820544-10686-1-git-send-email-yangtiezhu@loongson.cn/"><code>[PATCH] MIPS: Add comment about CONFIG_MIPS32_O32 in loongson3_defconfig when build with Clang</code></a> and <a href="https://lore.kernel.org/r/20210304064552.xzjqbhltghmd5vfa@archlinux-ax161/"><code>Re: [PATCH v2] MIPS: Make MIPS32_O32 depends on !CC_IS_CLANG</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210307043545.pyxy22z3rktgof4m@archlinux-ax161/"><code>Re: [PATCH] KVM: arm64: Don't use cbz/adr with external symbols</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210309173745.lbinnmjrmamld2rs@archlinux-ax161/"><code>Re: [PATCH] kbuild: dummy-tools: adjust to scripts/cc-version.sh</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210312192139.2503087-1-ndesaulniers@google.com/"><code>[PATCH] gcov: fix clang-11+ support</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210312194956.vsikqyaya676qvcu@archlinux-ax161/"><code>Re: [PATCH] kbuild: fix ld-version.sh to not be affected by locale</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/101"><code>Thumb2 ias</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/107"><code>Gcov</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/114"><code>spin down LTO builds of Sami's LTO tree</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/115"><code>Add Android ARCH=arm LLVM_IAS=1 5.4+ coverage</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/116"><code>Arm android cleanup</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/37"><code>debian: build.sh: add missing quotes to MODULES_FOLDER</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/39"><code>fix -g</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>Healthy dose of LLVM regressions and Linux kernel build failures due to new functionality.</p>
+<ul>
+<li>
+<p><a href="https://reviews.llvm.org/D97431#2598012"><code>[mlir] Simplify various pieces of code now that Identifier has access to the Context/Dialect</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D97804#2625161"><code>[mlir][IR] Refactor the internal implementation of Value</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D93164#2630203"><code>[AST] Add generator for source location introspection</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D99142#2651729"><code>[RISCV] Add basic cost modelling for fixed vector gather/scatter.</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/105"><code>(continuous-integration2) incomplete logs?</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/117"><code>Build failures with LLVM 13.0.0-++20210330111113+6d2fb3cefba6-1~exp1~20210330091825.3874</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1268"><code>clang-12: error: unsupported option '-fpatchable-function-entry=8' for target 'riscv64-unknown-linux-gnu'</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1317"><code>Issue around hyp_panic while building aarch64 allmodconfig with ThinLTO</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1323"><code>Faild to build qcacld-3.0 on msm-5.4 kernel</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1327"><code>-Walign-mismatch in include/linux/efi.h</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1330"><code>a0e2bf7cb7006b5a58ee81f4da4fe575875f2781 in -next breaks compiling with CFI</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1331"><code>mcount problem on RISC-V</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1336"><code>ld.lld: error in arch/arm64/kernel/vmlinux.lds</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210303181121.ii7ofii65lh337ln@archlinux-ax161/"><code>Re: [PATCH 3/4] certs: Add ability to preload revocation certs</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210310182307.zzcbi5w5jrmveld4@archlinux-ax161/"><code>-Walign-mismatch in block/blk-mq.c</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210315170855.tguqrsl7wsbjojib@archlinux-ax161/"><code>Re: [PATCH 2/2] zonefs: Fix O_APPEND async write handling</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210319170154.oe5sa6ohjbyucbws@archlinux-ax161/"><code>Re: Clang: powerpc: kvm/book3s_hv_nested.c:264:6: error: stack frame size of 2480 bytes in function 'kvmhv_enter_nested_guest'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210325202616.xgjkdg7zev6apofe@archlinux-ax161/"><code>Re: [PATCH v8 09/13] phy: tegra: xusb: Add wake/sleepwalk for Tegra210</code></a></p>
+</li>
+<li>
+<p><a href="https://llvm.org/pr49610"><code>8ec7ea3ddce7379e13e8dfb4a5260a6d2004aa1c causes more stack usage on PowerPC</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-patches">Tooling patches</h2>
+<p>I focused on streamlining our boot utilities, increasing the build coverage, and improving the toolchain build scripts.</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/38"><code>buildroot: Speed up build times</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/40"><code>boot-qemu.sh: Add support for earlycon</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/94"><code>Enable LTO testing on mainline and -next</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/97"><code>Drop CONFIG_UBSAN_UNSIGNED_OVERFLOW from all*configs</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/99"><code>github: Add check-clang.sh workflow</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/100"><code>generate_workflow.py: Drop usedForSecurity in hashlib call</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/102"><code>Change MIPS base config</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/103"><code>utils.py: Fix get_cbl_name() for mipsel</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/106"><code>Move Android back to ThinLTO for now</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/108"><code>Add support for arm64 trees</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/109"><code>Test allmodconfig with LTO and defconfig with full LTO</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/110"><code>Enable i386 builds on older trees</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/111"><code>Disable pseries_defconfig on LLVM 12</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/112"><code>boot-utils: Update</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/114"><code>Completely spin down LTO builds on Sami's tree</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/141"><code>Support for Clear Linux</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/142"><code>Update to Linux 5.11.3 and bump the known good revision</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/143"><code>Simplify the flags in build-binutils.py</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/144"><code>build-binutils.py: Remove '--with-sysroot' configuration flag</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/145"><code>Make script more friendly to being used system-wide/LLVM development and add more kernel PGO options</code></a></p>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>When dealing with various issues all at once, it is hard to see any progress being made so doing these status reports is a great way to help keep myself grounded and realize that progress is indeed being made. There are some cool things in development such as Sami Tolvanen&rsquo;s <a href="https://lore.kernel.org/r/20210331212722.2746212-1-samitolvanen@google.com/">Control Flow Integrity series</a>, which is high priority for testing on arm64. Stay tuned for more on that!</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://nathanchance.dev/tags/clangbuiltlinux/">clangbuiltlinux</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/linux/">linux</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/linuxfoundation/">linuxfoundation</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/maintainer/">maintainer</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1233 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2021-04-01 10:25 -0700
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+        </div>
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://nathanchance.dev/posts/february-2021-cbl-work/">
+                    <span class="button__text">February 2021 ClangBuiltLinux Work</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2021</span>
+            <span><a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+            <span><a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></span><span><a href="https://nathanchance.dev/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">Djordje Atlialp</a></span>
+          </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.2ce64ea6ea44a72b13dd812fc2eb5cca3efe878cce258a47c137c17edf46e0602a05e422b618a5b80b5939c731b7a293351c2f2222a21f6ee27e54a8448dd20e.js" integrity="sha512-LOZOpupEpysT3YEvwutcyj7&#43;h4zOJYpHwTfBft9G4GAqBeQithiluAtZOccxt6KTNRwvIiKiH27iflSoRI3SDg=="></script>
+
+
+
+    </body>
+</html>
