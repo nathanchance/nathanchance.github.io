@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 01 Apr 2021 10:25:53 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Apr 2021 21:14:13 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>April 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/april-2021-cbl-work/</link>
+      <pubDate>Fri, 30 Apr 2021 21:14:13 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/april-2021-cbl-work/</guid>
+      <description>Another month down! Feels like I just wrote the March 2021 post&amp;hellip; but I suppose that is what happens when your project moves super quickly :)
+Linux kernel patches   [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&amp;rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing.</description>
+    </item>
+    
     <item>
       <title>March 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/march-2021-cbl-work/</link>

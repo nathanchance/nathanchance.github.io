@@ -6,8 +6,223 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Thu, 01 Apr 2021 10:25:53 -0700</lastBuildDate>
+        <lastBuildDate>Fri, 30 Apr 2021 21:14:13 -0700</lastBuildDate>
         <atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>April 2021 ClangBuiltLinux Work</title>
+            <link>https://nathanchance.dev/posts/april-2021-cbl-work/</link>
+            <pubDate>Fri, 30 Apr 2021 21:14:13 -0700</pubDate>
+            
+            <guid>https://nathanchance.dev/posts/april-2021-cbl-work/</guid>
+            <description>Another month down! Feels like I just wrote the March 2021 post&amp;hellip; but I suppose that is what happens when your project moves super quickly :)
+Linux kernel patches   [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&amp;rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing.</description>
+            <content type="html"><![CDATA[<p>Another month down! Feels like I just wrote the March 2021 post&hellip; but I suppose that is what happens when your project moves super quickly :)</p>
+<h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210407213048.940498-1-nathan@kernel.org/"><code>[PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute</code></a>: I discovered this issue as part of my testing of Sami Tolvanen&rsquo;s Control Flow Integrity series (more on that below). There are probably <a href="https://lore.kernel.org/r/202006112217.2E6CE093@keescook/">many more of these lurking</a> because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210408194458.501617-1-nathan@kernel.org/"><code>[PATCH] block: Disable -Walign-mismatch for blk-mq.c</code></a>: A new warning in clang pointed this out. Unfortunately, the alignment mismatch is expected so I initially sent this patch silencing the warning but it seems like there might be a <a href="https://lore.kernel.org/r/20210429150940.3256656-1-arnd@kernel.org/">better solution</a>.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210409192128.3998606-1-nathan@kernel.org/"><code>[PATCH] MIPS: generic: Update node names to avoid unit addresses</code></a>: The latest version of U-Boot caused all generic MIPS configurations to stop building, which disrupted my local testing. To get back to a working state, I send this patch.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210409221155.1113205-1-nathan@kernel.org/"><code>[PATCH] crypto: arm/curve25519 - Move '.fpu' after '.arch'</code></a>: Debian&rsquo;s clang, which we use for testing in our continuous-integration, includes an out of tree patch that turns off NEON in armv7 by default, causing a build error when trying to build ARCH=arm allmodconfig. Moving the <code>.fpu</code> after <code>.arch</code> fixes the issue because <code>.arch</code> overrides the previous <code>.fpu</code> directive.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210414000803.662534-1-nathan@kernel.org/"><code>[PATCH] arm64: alternatives: Move length validation in alternative_{insn,endif}</code></a>: More integrated assembler fixes. This is similar to another fix that went into the tree last year, this should make it so we never see this issue again, hopefully&hellip;</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210415001112.3024673-1-nathan@kernel.org/"><code>[PATCH 1/2] x86/events/amd/iommu: Fix sysfs type mismatch</code></a> and <a href="https://lore.kernel.org/r/20210415001112.3024673-2-nathan@kernel.org/"><code>[PATCH 2/2] perf/amd/uncore: Fix sysfs type mismatch</code></a>: More type mismatches from CFI testing. These should have been found and fixed during commit <a href="https://git.kernel.org/linus/ebd19fc372e3"><code>ebd19fc372e3</code></a> but it does not look like anyone has tested CFI on a more recent AMD CPU.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210415152913.1363964-1-nathan@kernel.org/"><code>[PATCH] drm/tegra: Fix shift overflow in tegra_shared_plane_atomic_update</code></a>: Just a small clang warning patch.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210422201914.3682494-1-nathan@kernel.org/"><code>[PATCH] kbuild: Add $(KBUILD_HOSTLDFLAGS) to 'has_libelf' test</code></a>: During a regular kernel build, compiling and linking happen in two separate phases, using the variables <code>$(CC)</code> and <code>$(LD)</code>, so it is easy to ensure that you are using only the tools that you want. An ultimate goal of ClangBuiltLinux is to be able to build the kernel in an environment free of GCC and binutils and these two variables make it easy to ensure that happens. However, during the host tools building, compiling and linking happens through only the compiler, like a more standard userspace project, and that means that the compiler&rsquo;s default linker is used, unless <code>-fuse-ld=</code> is provided via the command line. This patch allows the user to pass <code>KBUILD_HOSTLDFLAGS=-fuse-ld=lld</code> and have it work in a hermetic environment.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210426203518.981550-1-nathan@kernel.org/"><code>[PATCH] powerpc: Avoid clang uninitialized warning in __get_user_size_allowed</code></a>: Clang&rsquo;s static analysis pointed out a false positive, which was fixed in one place but not another, causing a build failure in our CI due to <code>-Werror</code> in <code>arch/powerpc</code>.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210429012350.600951-1-nathan@kernel.org/"><code>[PATCH] Makefile: Move -Wno-unused-but-set-variable out of GCC only block</code></a>: Clang&rsquo;s implementation of this warning is coming down the pipeline so this disables it like GCC in a default build. Ideally, we want to enable rather than disable warnings but this is a special case because it is also disabled for GCC by default.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210429232611.3966964-1-nathan@kernel.org/"><code>[PATCH] x86: Enable clang LTO for 32-bit as well</code></a>: LTO was merged in 5.12 for arm64 and x86_64. In my testing, I noticed that 32-bit x86 works fine and there is <a href="https://github.com/ClangBuiltLinux/linux/issues/1163">some interest</a> in this.</p>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>When possible, I link directly to my response but sometimes, the link is to the main post and my response can be seen inline.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210402195823.huphtlhluqjgrw26@archlinux-ax161/"><code>Re: [PATCH v5 00/18] Add support for Clang CFI</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/41#issuecomment-812055354"><code>overlay: Exit rcS script so it only runs once</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210402211552.dzcxxs5scz7ddxtt@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH 3/3] kbuild: fix false-positive modpost warning when all symbols are trimmed</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210407185456.41943-1-ndesaulniers@google.com/"><code>[PATCH 0/2] gcov: re-fix clang-11 support</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210407!213337.5zzpfs5epzdp75sj@archlinux-ax161/"><code>Re: [PATCH v4 12/12] exec: Fix overlap of PAGE_ANON and PAGE_TARGET_1</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210407214747.kaemm45tut3jw5in@archlinux-ax161/"><code>Re: [PATCH v9] pgo: add clang's Profile Guided Optimization infrastructure</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YHYlQnFRMNdn%2FCDp@archlinux-ax161/"><code>Re: [PATCH] arm64: vdso32: drop -no-integrated-as flag</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YHeGJzhIhSFJLprr@archlinux-ax161/"><code>Re: [PATCH v2] arm64: vdso32: drop -no-integrated-as flag</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D100412#2690236"><code>[Aarch64] handle &quot;o&quot; inline asm memory constraints</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YIBcd+5NKJFnkTC1@archlinux-ax161/"><code>Re: [PATCH] KVM: x86: Fix implicit enum conversion goof in scattered reverse CPUID code</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YIIVlahVlJAsaE9W@archlinux-ax161/"><code>Re: [PATCH] x86/boot/compressed: enable -Wundef</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YIIcoz4fHjVjWHTI@archlinux-ax161/"><code>Re: [PATCH] stack: replace &quot;o&quot; output with &quot;r&quot; input constraint</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/125"><code>Hexagon CI coverage</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D101657"><code>[PowerPC] Handle inline assembly clobber of link regsiter</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1363"><code>Assertion </code>MI-&gt;getOperand(0).isReg()' failed`</a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>A lot more issues in upstream LLVM this month and I ran into two regressions with external tools. Thankfully, those were quick to be resolved so testing could get back on track. As with previous months, the link is usually to the main post/issue and my input can be seen throughout.</p>
+<ul>
+<li>
+<p><a href="https://bugs.launchpad.net/qemu/+bug/1922617"><code>qemu-aarch64-static &quot;Illegal instruction&quot; with debootstrap</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210402195241.gahc5w25gezluw7p@archlinux-ax161/"><code>CFI violation in drivers/infiniband/core/sysfs.c</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210408182253.6m3j6lhmh3iflquz@archlinux-ax161/"><code>mkimage regression when building ARCH=mips defconfig Linux kernel</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1341"><code>inconsistent ORC unwind table entries in file: vmlinux in /scripts/sorttable vmlinux</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1344"><code>-Wframe-larger-than= in sound/core/control_led.c</code></a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/Linaro/tuxmake/-/issues/133"><code>perl spam when running tuxmake without a runtime</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/118"><code>clang-nightly arm toolchain outdated?</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1346"><code>undefined symbol: __compiletime_assert_177 in firmware/stratix10-rsu.o</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1345"><code>ppc44x_defconfig has stopped booting on next</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1347"><code>&quot;error: expected assembly-time absolute expression&quot; in arch/arm64/kernel/entry.S</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210413200057.ankb4e26ytgal7ev@archlinux-ax161/"><code>arch/arm64/kvm/perf.c:58:36: error: implicit declaration of function 'perf_num_counters'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YHhK4twu3feLG3AR@archlinux-ax161/"><code>Re: [PATCH 2/3] habanalabs: support legacy and new pll indexes</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1356"><code>s390: Issue around the ALTERNATIVE macro with integrated-as</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1358"><code>error: couldn't allocate output register for constraint 'x'</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1359"><code>-Wsometimes-uninitialized in arch/powerpc/include/asm/uaccess.h</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YIcLcujmoK6Yet9d@archlinux-ax161/"><code>Re: [PATCH v7] powerpc/irq: Inline call_do_irq() and call_do_softirq()</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D94355#2717531"><code>[Passes] Add relative lookup table converter pass</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D91722#2724321"><code>[DebugInfo] Use variadic debug values to salvage BinOps and GEP instrs with non-const operands</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1361"><code>&quot;Not a NOP&quot; warning when booting i386_defconfig</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D100884#2724725"><code>Generalize getInvertibleOperand recurrence handling slightly</code></a></p>
+</li>
+<li>
+<p><a href=""><code>chkobjdump.awk: no default action when using llvm-objdump</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1364"><code>Formatting of llvm-objdump trips up x86 insn_decoder_test</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YItU3YrFi8REwkRA@archlinux-ax161/"><code>Re: Very slow clang kernel config ..</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1365"><code>5.12 boot failure when ThinLTO is enabled</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1366"><code>-Wconstant-conversion in drivers/platform/surface/surface_aggregator_registry.c</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements</h2>
+<p>A little all over the place this month, no major work now that the continuous integration setup is stable and the other tools are working well.</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/146"><code>build-llvm.py: Build compiler-rt builtins</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/42"><code>buildroot: Check init.d action to avoid double version print out</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/43"><code>debian/build.sh: qemu-debootstrap -&gt; debootstrap</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/123"><code>Make it green as of 4-26-2021</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/44"><code>boot-qemu.sh: Do not set earlycon for arm32_v6</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/126"><code>Enable LLVM_IAS=1 for arm32 allmodconfig on android-mainline</code></a></p>
+</li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes</h2>
+<p>Three things that were more behind the scenes this month:</p>
+<ul>
+<li>
+<p>ClangBuiltLinux did a bug scrub on two days, where we sat down in Google Meet and worked on a shared Google Doc to try and see if we could reproduce old issues. I think we ended up touching somewhere around 100 issues, closing several issues that are no longer relevant. This will allow us</p>
+</li>
+<li>
+<p>I did a lot of testing of the Control Flow Integrity series on both arm64 (which I mention above) and x86_64. Unfortunately, the x86_64 testing became moot when the x86 maintainers basically <a href="https://lore.kernel.org/r/CALCETrV6WYx7dt56aCuUYsrrFya==zYR+p-YZnaATptnaO7w2A@mail.gmail.com/">NAK&rsquo;d</a> the series in its current form. I will continue testing in May, hoping to tease out any failures so that those are all resolved by the time the series is ready for a new revision.</p>
+</li>
+<li>
+<p>I received a <a href="https://beagleboard.org/beaglev">BeagleV board</a> as part of their beta program for the sake of testing clang built kernels on it. I messed around with it a little bit already, I will continue this in May.</p>
+</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:</h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>!</li>
+</ul>
+]]></content>
+        </item>
         
         <item>
             <title>March 2021 ClangBuiltLinux Work</title>
