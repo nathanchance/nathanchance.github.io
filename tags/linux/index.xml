@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Fri, 30 Apr 2021 21:14:13 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 08:29:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>May 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/may-2021-cbl-work/</link>
+      <pubDate>Tue, 01 Jun 2021 08:29:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/may-2021-cbl-work/</guid>
+      <description>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let&amp;rsquo;s dive in, shall we?
+Linux kernel patches / backports   [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting &amp;ldquo;struct &amp;rdquo; with an attribute, in this case &amp;ldquo;__maybe_unused&amp;rdquo;, which clang warns about while GCC does not.</description>
+    </item>
+    
     <item>
       <title>April 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/april-2021-cbl-work/</link>

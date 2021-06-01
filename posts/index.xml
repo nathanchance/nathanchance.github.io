@@ -6,8 +6,279 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Fri, 30 Apr 2021 21:14:13 -0700</lastBuildDate>
+        <lastBuildDate>Tue, 01 Jun 2021 08:29:00 -0700</lastBuildDate>
         <atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>May 2021 ClangBuiltLinux Work</title>
+            <link>https://nathanchance.dev/posts/may-2021-cbl-work/</link>
+            <pubDate>Tue, 01 Jun 2021 08:29:00 -0700</pubDate>
+            
+            <guid>https://nathanchance.dev/posts/may-2021-cbl-work/</guid>
+            <description>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let&amp;rsquo;s dive in, shall we?
+Linux kernel patches / backports   [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting &amp;ldquo;struct &amp;rdquo; with an attribute, in this case &amp;ldquo;__maybe_unused&amp;rdquo;, which clang warns about while GCC does not.</description>
+            <content type="html"><![CDATA[<p>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let&rsquo;s dive in, shall we?</p>
+<h2 id="linux-kernel-patches--backports">Linux kernel patches / backports</h2>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210505182808.3855516-1-nathan@kernel.org/"><code>[PATCH] fbmem: Correct position of '__maybe_unused' in proc_fb_seq_ops</code></a>: A common mistake people make is splitting &ldquo;struct <!-- raw HTML omitted -->&rdquo; with an attribute, in this case &ldquo;__maybe_unused&rdquo;, which clang warns about while GCC does not. This causes a warning in all of our builds. Unfortunately, this patch did not actually make it into mainline because <a href="https://git.kernel.org/linus/6dae40aed484ef2f1a3934dcdcd17b7055173e56">Linus fixed it himself</a>.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210506001410.1026691-1-nathan@kernel.org/"><code>[PATCH] vmlinux.lds.h: Handle decrypted data section with !SMP</code></a>: Kees Cook enabled orphan section warnings in 5.10, which means the linker will warn when a section is not handled by a linker script. Intel&rsquo;s 0day bot turned up a randconfig that triggers a warning that will probably never be seen otherwise so I sent a patch to get that cleared up.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJmneuxxFWIrqyWN@archlinux-ax161/"><code>Backport of 1139aeb1c521 for all supported stable branches</code></a>: This was a series of backports to the stable kernels for a warning about intentional misalignment, which impacted ChromeOS and will impact Android when they upgrade their version of clang.</p>
+</li>
+<li>
+<p><a href="https://android-review.googlesource.com/c/kernel/common/+/1702245"><code>UPSTREAM: crypto: arm/curve25519 - Move '.fpu' after '.arch'</code></a>: Our continuous integration tests Android trees since they are one of the biggest downstream consumers of our work (go figure, Google started this&hellip;) and this upstream patch is needed to build <code>ARCH=arm allmodconfig</code>.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210511190306.2418917-1-nathan@kernel.org/"><code>[PATCH] Revert &quot;ASoC: q6dsp: q6afe: remove unneeded dead-store initialization&quot;</code></a>: Two patches that fixed the same Clang static analyzer warning were merged, which actually ended up introducing use of an uninitialized variable, which Intel&rsquo;s 0day build robot thankfully pointed out to us.</p>
+</li>
+<li>
+<p><a href="https://android-review.googlesource.com/c/kernel/common/+/1706245"><code>Revert &quot;UPSTREAM: usb: gadget: f_uac2: validate input parameters&quot;</code></a>: A mismerge in the Android trees broke our continuous integration so I sent this in to get it working again.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210518190106.60935-1-nathan@kernel.org/"><code>[PATCH] x86: Fix location of '-plugin-opt=' flags</code></a>: Someone reported a panic in the AMDGPU driver, which I helped track down to the fact that the stack alignment was not being passed along to the linker for LTO due to a Makefile variable clobber. This patch fixes it up and ensures we do not have something like this happen again. This will eventually be added to LLVM&rsquo;s IR so that this flag is not necessary.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210521011239.1332345-1-nathan@kernel.org/"><code>[PATCH 0/3] hexagon: Fix build error with CONFIG_STACKDEPOT and select CONFIG_ARCH_WANT_LD_ORPHAN_WARN</code></a>: The Hexagon architecture is special because it is the only architecture in the kernel that cannot be built with GCC; it can only be built with LLVM. Qualcomm got it working upstream in v5.13-rc1 then within a couple of weeks, it was broken again because of some unnoticed bitrot. This patch series fixes it up and helps make sure it should not happen again.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210528182752.1852002-1-nathan@kernel.org/"><code>[PATCH] powerpc/barrier: Avoid collision with clang's __lwsync macro</code></a>: An upstream LLVM change broke all of our PowerPC builds back to 4.14 due to a builtin macro defintion coliding with an already existing defintion in <code>arch/powerpc</code>. This patch fixes it up by undefining the macro because the kernel does not want the builtin version.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210531205405.67993-1-nathan@kernel.org/"><code>[PATCH] MAINTAINERS: Add Clang CFI section</code></a>: This patch solidifies the path for CFI patches to go upstream.</p>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>This month had quite a lot of review and patch testing, maybe more than the previous month. Code review is so critical for the success of these projects so it is important to do it quickly and well due to the velocity of both LLVM and Linux. There When possible, I link directly to my response but sometimes, the link is to the main post and my response can be seen inline.</p>
+<ul>
+<li>
+<p><a href="https://reviews.llvm.org/D99272#2739081"><code>[AArch64] Adds a pre-indexed paired Load/Store optimization for LDR-STR.</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJL7UoSr42JfMCq1@archlinux-ax161/"><code>Re: CFI violation in drivers/infiniband/core/sysfs.c</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJMJAiwMPqlWmr8Y@archlinux-ax161/"><code>Re: [PATCH v3] arm64: vdso: remove commas between macro name and arguments</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/fd08dce2-71c0-3414-d661-d065480c04ff@kernel.org/"><code>Re: [PATCH 4.19 ONLY v4] arm64: vdso: remove commas between macro name and arguments</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJSr7S7dRty3K8Wd@archlinux-ax161/"><code>Re: [PATCH v2 dwarves] btf: Remove ftrace filter</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/3579aa0d-0470-9a6b-e35b-48f997a5b48b@kernel.org/"><code>Re: [PATCH kernel v2] powerpc/makefile: Do not redefine $(CPP) for preprocessor</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/dedc7262-2956-37b2-ebfd-ae8eb9b56716@kernel.org/"><code>Re: [PATCH kernel v3] powerpc/makefile: Do not redefine $(CPP) for preprocessor</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/84b20dcb-b063-b2b0-b2dc-1a1befbc334c@kernel.org/"><code>Re: [PATCH] HID: i2c-hid: fix format string mismatch</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/7afc367b-8103-9d48-1bfe-d505d86553b9@kernel.org/"><code>Re: [PATCH] iio: si1133: fix format string warnings</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/1904893e-1e7f-b1a4-454c-6999f8ac670a@kernel.org/"><code>Re: [PATCH] mm/shuffle: fix section mismatch warning</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/0ad11966-b286-395e-e9ca-e278de6ef872@kernel.org/"><code>Re: [PATCH] kcsan: fix debugfs initcall return type</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/bd8ae62f-1ead-2d82-5fdb-87308accc023@kernel.org/"><code>Re: [PATCH] riscv: Use -mno-relax when using lld linker</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/057b5568-c4b8-820c-3dd7-2200f61a4d58@kernel.org/"><code>Re: [PATCH] [v2] platform/surface: aggregator: avoid clang -Wconstant-conversion warning</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/58a35b85-eb0e-bc02-29be-0cae46bd75b8@kernel.org/"><code>Re: [PATCH] drm/msm/dsi: fix 32-bit clang warning</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJ9HAg+o8nd2xmix@archlinux-ax161/"><code>Re: [PATCH] arm64: Define only {pud/pmd}_{set/clear}_huge when usefull</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/831d3af5-1e4a-f3c0-f69d-3fff145fde08@kernel.org/"><code>Re: [PATCH v2 3/4] memory: tegra124-emc: Fix compilation warnings on 64bit platforms</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210517125554.1463156-1-jic23@kernel.org/"><code>[RESEND PATCH 0/4] iio: Drop use of %hhx and %hx format strings</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/4aa06438-7bea-a5a6-ff64-0cf8c28e2511@kernel.org/"><code>Re: [PATCH v2] powerpc/powernv/pci: fix header guard</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/34754eda-f135-8da8-c46f-3ef45a08ea11@kernel.org/"><code>Re: [PATCH 00/13] Reorganize sysfs file creation for struct ib_devices</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/be3971b1-cf26-36c7-0f9c-d79c656ec855@kernel.org/"><code>Re: [PATCH v3] kcov: add __no_sanitize_coverage to fix noinstr for all architectures</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YLUl/eQ1EzMFSb9F@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH 1/6] pgo: modules Expose module sections for clang PGO instumentation.</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YLUtUV3ZSIqPZbX+@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH 2/6] pgo: modules Add definitions in pgo/pgo.h for modules</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YLU0VAoWG7qa7u24@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH 3/6] pgo: modules Add module profile data export machinery.</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YLUo6HrhWmeg2g1w@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH 5/6] pgo: modules Fixup memory leak.</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YLUoiJr5+7WX+roL@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH 6/6] pgo: Fixup code style issues.</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/e22afde4-e312-4589-cf2e-3c35219d7249@kernel.org/"><code>Re: [PATCH] pgo: rename the raw profile file to vmlinux.profraw</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YLVRTilQ5k5n+Vmz@archlinux-ax161/"><code>Re: [PATCH v9] pgo: add clang's Profile Guided Optimization infrastructure</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>As always, a little bit all over the place, LLVM and kernel issues, revisiting old problems, and triaging/reporting new ones :)</p>
+<ul>
+<li>
+<p><a href="https://groups.google.com/g/clang-built-linux/c/r1j32US2Ag4/m/imaeSitHAAAJ"><code>FAIL: Test report for kernel 5.12.0 (mainline.kernel.org-clang, 10a3efd0)</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D98213"><code>[InlineCost] Enable the cost benefit analysis on FDO</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/128"><code>arm64 defconfig + full LTO failure</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1368"><code>panic in rcu_do_batch for full lto</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1370"><code>s390 all{mod,yes}config __ashlti3 and __lshrti3 after LLVM commit 1886aad9d03b</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1357"><code>llvm-NN-linker-tools Debian package</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJTwglbUOb67r733@archlinux-ax161/"><code>Re: [BUG mips llvm] MIPS: malformed R_MIPS_{HI16,LO16} with LLVM</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJrARxhVD7QM%2FGPv@archlinux-ax161/"><code>Re: [PATCH v1 2/2] memory: tegra: Enable compile testing for all drivers</code></a></p>
+</li>
+<li>
+<p><a href="https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org/message/B72WDKUO6KVMS4FTTJGGSERYZVWWMUMA/"><code>Re: [broonie-misc:asoc-5.14 5/23] sound/soc/qcom/qdsp6/q6afe.c:1213:18: warning: variable 'port_id' is uninitialized when used here</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/208186f3-aab0-d94e-bcf4-8347983cc1a6@kernel.org/"><code>Re: arch/powerpc/kernel/optprobes.c:34:1: error: unused function 'is_kprobe_ppc_optinsn_slot'</code></a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/Linaro/tuxsuite/-/issues/108"><code>Support CROSS_COMPILE_COMPAT</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YJx48BfKpWMZCbnz@archlinux-ax161/"><code>Re: -Wconstant-conversion in drivers/net/ethernet/marvell/mvpp2/mvpp2_main.c</code></a></p>
+</li>
+<li>
+<p><a href="https://bugs.llvm.org/show_bug.cgi?id=50147"><code>missing mflr/mtlr (link register save/restore) when using inline asm w/ &quot;lr&quot; clobber</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/e6ee5c21-a460-b4f7-9d0a-e2711ec16185@kernel.org/"><code>Re: [next] x86_64 defconfig failed with clang-10</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YKC9CeAfw3aBmHTU@archlinux-ax161/"><code>Re: [PATCH v3] mm, slub: change run-time assertion in kmalloc_index() to compile-time</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YKQdxpHVYB9H0M0j@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v5 3/9] mm/mremap: Use pmd/pud_poplulate to update page table entries</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YKgHy7ZNNxv%2FKMl8@archlinux-ax161/"><code>Re: [staging:staging-next 201/268] drivers/staging/rtl8723bs/core/rtw_security.c:89:6: warning: stack frame size of 1120 bytes in function 'rtw_wep_encrypt'</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1383"><code>Assertion `(IK == IK_FpInduction || Step-&gt;getType()-&gt;isIntegerTy()) &amp;&amp; &quot;StepValue is not an integer&quot;' failed</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1384"><code>Stack alignment plugin option boot failure with CONFIG_CFI_CLANG</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1385"><code>51d334a845a082338735b0fdfc620a4b15fa26fe breaks x86_64 ThinLTO + dynamic ftrace</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YLPjwUUmHDRjyPpR@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v2] fb_defio: Remove custom address_space_operations</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D99481"><code>[InstCombine] Fix miscompile on GEP+load to icmp fold (PR45210)</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements</h2>
+<p>Way more continuous integration work this time around, namely due to the additional testing with Android&rsquo;s LLVM and regressions or changes upstream.</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/127"><code>Disable boot for ppc32 on mainline</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/147"><code>kernel/build.sh: Update name of source flag and variable</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/149"><code>kernel: Update to Linux 5.12</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/130"><code>Add problem matcher</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/131"><code>Enable LLVM_IAS=1 for Android arm32 allmodconfig with LLVM 13</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/130"><code>Add problem matcher</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/134"><code>Fix problem matcher</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/132"><code>Build arm64 with CFI on mainline and next</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/131"><code>Enable LLVM_IAS=1 for Android arm32 allmodconfig with LLVM 13</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/135"><code>Wire up builds with AOSP LLVM</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/136"><code>Update artifact upload name</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/137"><code>utils.py: Fix crash with LLVM_VERSION=android</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/45"><code>boot-utils: Add support for m68k</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/139"><code>Enable LLVM_IAS=1 for 32-bit ARM on mainline and next with LLVM 13</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/140"><code>Fixup the Hexagon jobs and optimize around BOOT=0</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/152"><code>build-llvm.py: Update known good revision</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/153"><code>build-llvm.py: Fix handling of '--projects'</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/154"><code>kernel/build.sh: Build more ARCH=arm configs</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/142"><code>generator.yml: Disable arm64 big endian build with AOSP LLVM</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/143"><code>Notating &quot;failed but unrelated to ClangBuiltLinux&quot; builds</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/144"><code>Enable boot for ppc32 on -next and mainline with LLVM 13</code></a></p>
+</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:</h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+]]></content>
+        </item>
         
         <item>
             <title>April 2021 ClangBuiltLinux Work</title>
