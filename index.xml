@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 01 Jun 2021 08:29:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 01 Jul 2021 13:48:16 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>June 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/june-2021-cbl-work/</link>
+      <pubDate>Thu, 01 Jul 2021 13:48:16 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/june-2021-cbl-work/</guid>
+      <description>Linux kernel patches   ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
+  [PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC&amp;rsquo;s -Wunused-but-set-variable and this instance was found by Intel&amp;rsquo;s kernel test robot.</description>
+    </item>
+    
     <item>
       <title>May 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/may-2021-cbl-work/</link>
