@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 01 Jul 2021 13:48:16 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/clangbuiltlinux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Aug 2021 00:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/clangbuiltlinux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>July 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/july-2021-cbl-work/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/july-2021-cbl-work/</guid>
+      <description>Linux kernel patches  [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it.</description>
+    </item>
+    
     <item>
       <title>June 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/june-2021-cbl-work/</link>
