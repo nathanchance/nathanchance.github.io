@@ -142,7 +142,7 @@
 <p>You can either build the kernel on another machine and download it locally or you can build it within WSL 2 itself. This is a guide for how to do the latter because it is simpler and does not mess with an existing environment you might have working. I am giving the instructions for Debian but these should work for Ubuntu (I just do not want to tear down my current working environment to test&hellip;). I am also going to assume that you are familiar with Linux in general so I am not going to explain every single command.</p>
 <h3 id="1-download-and-install-the-needed-tools">1. Download and install the needed tools.</h3>
 <p>First, we are going to grab the utilities needed to build the kernel, along with some other tools to use for installing clang-10 and lld-10 from apt.llvm.org.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt update
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt update
 $ sudo apt upgrade
 $ sudo apt install -y --no-install-recommends <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>bc <span style="color:#ae81ff">\
@@ -158,38 +158,38 @@ $ sudo apt install -y --no-install-recommends <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>software-properties-common <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>wget
 </code></pre></div><p>Next, we will install a rolling release version of clang-10 and lld-10 from apt.llvm.org. There has been a lot of work done on the LLVM side to make building the Linux kernel a good experience and it is important to have all of those fixes available.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ~
 $ wget https://apt.llvm.org/llvm.sh
 $ chmod +x llvm.sh
 $ sudo ./llvm.sh <span style="color:#ae81ff">10</span>
 </code></pre></div><p>If you are not on an Ubuntu or Debian based operating system, you can build <code>clang</code> and <code>ld.lld</code> from source easily with my <a href="https://github.com/ClangBuiltLinux/tc-build"><code>tc-build</code> script</a>. Read the information in that README for how to use it and file issues at that repo if you run into any, I want to fix them!</p>
 <h3 id="2-download-the-wsl-2-source-code">2. Download the WSL 2 source code.</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/microsoft/WSL2-Linux-Kernel
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/microsoft/WSL2-Linux-Kernel
 $ cd WSL2-Linux-Kernel
 </code></pre></div><h3 id="3-build-the-kernel">3. Build the kernel.</h3>
 <p>I chose to use an out folder for easy clean up.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> -s CC<span style="color:#f92672">=</span>clang-10 KCONFIG_CONFIG<span style="color:#f92672">=</span>../Microsoft/config-wsl LD<span style="color:#f92672">=</span>ld.lld-10 O<span style="color:#f92672">=</span>out.x86_64 distclean olddefconfig all
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> -s CC<span style="color:#f92672">=</span>clang-10 KCONFIG_CONFIG<span style="color:#f92672">=</span>../Microsoft/config-wsl LD<span style="color:#f92672">=</span>ld.lld-10 O<span style="color:#f92672">=</span>out.x86_64 distclean olddefconfig all
 </code></pre></div><p>If you want to just build it in tree:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> -s CC<span style="color:#f92672">=</span>clang-10 KCONFIG_CONFIG<span style="color:#f92672">=</span>Microsoft/config-wsl LD<span style="color:#f92672">=</span>ld.lld-10 distclean olddefconfig all
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> -s CC<span style="color:#f92672">=</span>clang-10 KCONFIG_CONFIG<span style="color:#f92672">=</span>Microsoft/config-wsl LD<span style="color:#f92672">=</span>ld.lld-10 distclean olddefconfig all
 </code></pre></div><p>You do not have to use <code>clang</code> and <code>ld.lld</code>, you can omit the <code>CC=clang-10</code> and <code>LD=ld.lld-10</code> to use <code>gcc</code> and <code>ld</code> respectively but I think that using <code>clang</code> is neat since I work on <a href="https://github.com/ClangBuiltLinux">ClangBuiltLinux</a>.</p>
 <h2 id="using-the-kernel">Using the kernel</h2>
 <p>To boot from the kernel we just compiled, we need to move it out of WSL 2 and add a <code>.wslconfig</code> to say that we want to boot from it.</p>
 <h3 id="1-move-the-kernel-to-the-windows-file-system">1. Move the kernel to the Windows file system.</h3>
 <p>I have a separate folder for my kernels within my user folder (e.g., <code>C:\Users\natec\Linux</code>). It does not have to be there. Assuming that you used the out folder like I did above, the command will look something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cp out.x86_64/arch/x86/boot/bzImage /mnt/c/Users/natec/Linux/kernel-4.19-clang
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cp out.x86_64/arch/x86/boot/bzImage /mnt/c/Users/natec/Linux/kernel-4.19-clang
 </code></pre></div><h3 id="2-tell-wsl-2-to-use-that-kernel-when-booting-up">2. Tell WSL 2 to use that kernel when booting up.</h3>
 <p>This was the tricky part that I had to do some reading about, as their documentation is not the best. This <code>.wslconfig</code> file has to be in your user folder&rsquo;s root (e.g., <code>C:\Users\natec\.wslconfig</code>). This is mine:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /mnt/c/Users/natec/.wslconfig
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /mnt/c/Users/natec/.wslconfig
 <span style="color:#f92672">[</span>wsl2<span style="color:#f92672">]</span>
 kernel <span style="color:#f92672">=</span> C:<span style="color:#ae81ff">\\</span>Users<span style="color:#ae81ff">\\</span>natec<span style="color:#ae81ff">\\</span>Linux<span style="color:#ae81ff">\\</span>kernel-4.19-clang
 </code></pre></div><p>You can create this with Visual Studio Code or a terminal editor like <code>vim</code>. Basically, you pass it the full path to your kernel binary with the &ldquo;<code>\</code>&rdquo; characters escaped. After that, you need to shutdown your WSL 2 VM in Powershell or <code>cmd</code> and just reopen it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wsl --shutdown
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wsl --shutdown
 </code></pre></div><p>After you have done that, you can run <code>cat /proc/version</code> to verify that WSL booted from that kernel.</p>
 <p>Before:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /proc/version
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /proc/version
 Linux version 4.19.84-microsoft-standard <span style="color:#f92672">(</span>oe-user@oe-host<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>gcc version 8.2.0 <span style="color:#f92672">(</span>GCC<span style="color:#f92672">))</span> <span style="color:#75715e">#1 SMP Wed Nov 13 11:44:37 UTC 2019</span>
 </code></pre></div><p>After:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /proc/version
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /proc/version
 Linux version 4.19.84-microsoft-standard+ <span style="color:#f92672">(</span>nathan@Ryzen-7-3700X<span style="color:#f92672">)</span> <span style="color:#f92672">(</span>clang version 10.0.0-+20191217115131+ddd0bb8dba2-1~exp1~20191217105722.470<span style="color:#f92672">)</span> <span style="color:#75715e">#1 SMP Tue Dec 17 17:15:48 MST 2019</span>
 </code></pre></div><p>I have noticed that the VM gets stuck starting with a custom kernel at times; if that happens, run <code>wsl --shutdown</code> and try reopening one of the distributions again, it will usually work after a couple of times.</p>
 <p>Feel free to reach out to me with issues or questions on <a href="https://twitter.com/nathanchance">Twitter</a> or <a href="https://github.com/nathanchance/WSL2-Linux-Kernel">my WSL 2 kernel source on Github</a>.</p>

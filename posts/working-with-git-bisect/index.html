@@ -171,7 +171,7 @@ One caveat before I start: there is great official documentation for git bisect,
 <li>
 <p>Confirm result.</p>
 <p>Once <code>git bisect</code> is done, you are left either on the bad commit or the commit right before, depending on how <code>git bisect</code> converged. At this point, I recommend saving the output of <code>git bisect log</code> to a file like so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git bisect log &gt; bisect.log
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git bisect log &gt; bisect.log
 </code></pre></div><p>It can be handy for reproducing the result later or allowing someone else to confirm the results.</p>
 <p>After this, I usually will try to see if I can revert the problematic commit on the current version of the software to confirm that it was the source of the issue. To get back to that point, run <code>git bisect reset</code>, <code>git checkout</code> to the current version of the software, and attempt to <code>git revert</code> the commit. Sometimes this is not always easy, especially if there have been further changes around that area. Use your best judgement when deciding to report the issue.</p>
 </li>
@@ -193,7 +193,7 @@ One caveat before I start: there is great official documentation for git bisect,
 <p>Similar to the previous note, there are times where doing a merge results in a conflict, which again happens when two trees are developed independently of each other. A quick <code>grep</code> on the logs of the Linux kernel brings up an example of where this happened, commit <a href="https://git.kernel.org/linus/4a601f109614929aee45e58ca3514ec93da070bb">4a601f109614</a> (&ldquo;net: mscc: ocelot: adjust maxlen on NPI port, not CPU&rdquo;).</p>
 <p>This is why I try to leave what the conflicts were in my commit messages; it makes it easier for others to audit my choices.</p>
 <p>If you suspect this is the source of a problem, you can redo the merge and see what the conflicts were. For example, we&rsquo;ll use the merge commit above:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git show -s --format<span style="color:#f92672">=</span>short 1d343579312311aa9875b34d5a921f5e2ec69f0a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git show -s --format<span style="color:#f92672">=</span>short 1d343579312311aa9875b34d5a921f5e2ec69f0a
 commit 1d343579312311aa9875b34d5a921f5e2ec69f0a
 Merge: a8eceea84a3a 0d81a3f29c0a
 Author: David S. Miller &lt;davem@davemloft.net&gt;
@@ -300,12 +300,12 @@ $ git bisect replay bisect.log
 <p>Apply a fix on top of the tested revision</p>
 <p>I will often do this if there was a fix for the issue later in the history. For example, there was a change in clang 11 that broke building <code>scripts/dtc</code> within the Linux kernel. That was fixed by <a href="https://git.kernel.org/linus/e33a814e772cdc36436c8c188d8c42d019fda639">this commit</a> but any revision in the Linux kernel that does not have that as an ancestor will fail to build, which can make bisecting difficult.</p>
 <p>What I will do in this case is temporarily apply that fix on top of whatever revision <code>git</code> is currently testing. I can do this automatically so that <code>git bisect run</code> can handle it.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ grep -q <span style="color:#e6db74">&#34;YYLTYPE yylloc&#34;</span> scripts/dtc/dtc-lexer.l <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ grep -q <span style="color:#e6db74">&#34;YYLTYPE yylloc&#34;</span> scripts/dtc/dtc-lexer.l <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>git format-patch -1 --stdout e33a814e772cdc36436c8c188d8c42d019fda639 | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>git apply -3v
 </code></pre></div><p>This basically says if the line that was removed by the commit is present in the tree, apply (but do not commit) the change to the index.</p>
 <p>After I test this revision, it is important to get rid of that modification before running <code>git bisect &lt;good|bad&gt;</code>, otherwise there will be an error.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git reset --hard
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git reset --hard
 
 $ git bisect good
 </code></pre></div><p>The <code>git bisect</code> documentation that I linked above has an example of doing this with <code>git bisect run</code>.</p>
@@ -313,7 +313,7 @@ $ git bisect good
 </ol>
 <h3 id="finding-the-commit-that-fixed-something">Finding the commit that fixed something</h3>
 <p>Sometimes, it might be necessary to see what commit fixed something versus broke something. Unintentional fixes can be just as bad as unintentional breakages. The process is basically the same as the one described in the beginning but involves setting terms that are a little easier to work with.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git bisect start --term-old broken --term-new fixed
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git bisect start --term-old broken --term-new fixed
 
 $ git bisect fixed &lt;fixed_rev&gt;
 
