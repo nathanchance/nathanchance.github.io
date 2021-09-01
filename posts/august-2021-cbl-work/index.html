@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Nathan Chancellor ">
+<meta name="description" content="Linux kernel patches   [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+  [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up." />
+<meta name="keywords" content=", clangbuiltlinux, linux, linuxfoundation, maintainer" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+<link rel="canonical" href="https://nathanchance.dev/posts/august-2021-cbl-work/" />
+
+
+    <title>
+        
+            August 2021 ClangBuiltLinux Work :: Nathan Chancellor 
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.031a8efc33f94f55a4071bf4e91596478a5809fc8c148fab113801189cfd2152.css">
+
+
+
+
+
+
+<meta itemprop="name" content="August 2021 ClangBuiltLinux Work">
+<meta itemprop="description" content="Linux kernel patches   [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+  [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up."><meta itemprop="datePublished" content="2021-08-31T20:38:00-07:00" />
+<meta itemprop="dateModified" content="2021-08-31T20:38:00-07:00" />
+<meta itemprop="wordCount" content="2071"><meta itemprop="image" content="https://nathanchance.dev/"/>
+<meta itemprop="keywords" content="clangbuiltlinux,linux,linuxfoundation,maintainer," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://nathanchance.dev/"/>
+
+<meta name="twitter:title" content="August 2021 ClangBuiltLinux Work"/>
+<meta name="twitter:description" content="Linux kernel patches   [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+  [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up."/>
+
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-08-31 20:38:00 -0700 PDT" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">nathanchance.dev</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Blog</a></li><li><a href="/nc_resume.pdf">Resume</a></li><li><a href="/downloads">Downloads</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+                <span class="theme-toggle not-selectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+   <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+   3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+   13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+ </svg></span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        10 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://nathanchance.dev/posts/august-2021-cbl-work/">August 2021 ClangBuiltLinux Work</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/20210802175820.3153920-1-nathan@kernel.org/"><code>[PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list()</code></a>: Not a clang specific warning but it impacts builds where I use <code>-Werror</code>, as kernel builds should be as warning clean as possible.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210802190351.3201677-1-nathan@kernel.org/"><code>[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select</code></a>: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210802210307.3202472-1-nathan@kernel.org/"><code>[PATCH] scripts/recordmcount.pl: Remove check_objcopy() and $can_use_local</code></a>: The kernel has certain version checks in place that do not always work with LLVM tools due to different version outputs. This was an easy cleanup because the kernel checks for certain tool versions before building, which provides an airtight reason to remove other version checks for versions older than the mandatory one.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210803191813.282980-1-nathan@kernel.org/"><code>[PATCH] netfilter: ipset: Fix maximal range check in hash_ipportnet4_uadt()</code></a>: A fix for a simple programming error but this was important to catch because the fixed patch was destined for the current merge window as it was in the netfilter tree, rather than netfilter-next tree, and it is a security patch.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210803200836.500658-1-nathan@kernel.org/"><code>[PATCH] PCI: Always initialize dev in pciconfig_read</code></a>: Another small fix for an uninitialized variable warning.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210803211547.1093820-1-nathan@kernel.org/"><code>[PATCH] cpuidle: pseries: Mark pseries_idle_proble() as __init</code></a> | <a href="https://lore.kernel.org/r/20210816185711.21563-1-nathan@kernel.org/"><code>[PATCH] powerpc/xive: Do not mark xive_request_ipi() as __init</code></a>: The kernel marks certain functions as &ldquo;init&rdquo;, meaning that their memory is discarded once the kernel has fully loaded. As a result, the kernel has a tool that checks that all init functions are only called from other init functions and not functions that can run at any point. This commit fixes a warning that clang had because it did not inline a function like GCC did, which is a common reason for these warnings. Whether or not it is an actual issue in practice does not matter, it is important to clean these up to avoid spooky warnings.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210803223609.1627280-1-nathan@kernel.org/"><code>[PATCH 0/4] staging: r8188eu: Fix clang warnings</code></a>: A new version of another driver in the staging directory was introduced without being compiled with clang so this series cleans up the warnings that it found. Eventually, I hope that compiling with both compilers will become easy enough that everyone does it automatically but that is a long-term and lofty goal :)</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210806191339.576318-1-nathan@kernel.org/"><code>[PATCH] net: ethernet: stmmac: Do not use unreachable() in ipq806x_gmac_probe()</code></a>: <code>objtool</code> is an object file validator for x86_64 (and maybe other architectures in the future), which warns when the assembly of a file might have potential issues, which may be compiler bugs. In this particular case, it was easy enough to just fix the code in question but this is most likely related to <a href="https://github.com/ClangBuiltLinux/linux/issues/1440">another open issue</a> that we currently have.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210811005505.3953122-1-nathan@kernel.org/"><code>[PATCH] staging: r8188eu: os_dep: Hoist vmalloc.h include into osdep_service.h</code></a>: Another <code>ARCH=hexagon</code> build fix, which I have mentioned in previous posts is the only architecture in the tree that only compiles with LLVM, meaning we must keep it building.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210810200632.3812797-1-nathan@kernel.org/"><code>[PATCH] mm/hugetlb: Initialize page to NULL in alloc_buddy_huge_page_with_mpol()</code></a>: A common theme throughout all of these posts is fixing uninitialized variables, because Linus disabled GCC&rsquo;s <code>-Wmaybe-uninitialized</code> several releases ago because there are a lot of false positives due to GCC doing its analysis after inlining and optimization. Fun fact, I actually learned today that clang has a similar warning, <code>-Wconditional-uninitialized</code>, which in my testing appears to be just as noisy as GCC&rsquo;s, but it is off by default. <code>-Wsometimes-uninitialized</code> was <a href="https://github.com/llvm/llvm-project/commit/4323bf8e2e5135c49f814940b2b546298c01ecbc">split off from it</a> and added to <code>-Wuninitialized</code> because it does not suffer from the same issues (&ldquo;sometimes&rdquo; is more definitive than &ldquo;maybe&rdquo;).</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210812204027.338872-1-nathan@kernel.org/"><code>[PATCH 0/3] staging: r8188eu: Fix -Wuninitialized instances from clang</code></a>: <code>-Wuninitialized</code> (a common GCC/clang flag) was disabled for this new driver and someone enabled it without testing it with <code>clang</code> so this series cleans up those warnings.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210813171158.2665823-1-nathan@kernel.org/"><code>[PATCH] drm/i915/selftest: Fix use of err in igt_reset_{fail, nop}_engine()</code></a>: Another <code>-Wuninitialized</code> warning :^)</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210814234248.1755703-1-nathan@kernel.org/"><code>[PATCH] iwlwifi: mvm: Fix bitwise vs logical operator in iwl_mvm_scan_fits()</code></a> | <a href="https://lore.kernel.org/r/20210814235625.1780033-1-nathan@kernel.org/"><code>[PATCH] staging: rtl8192u: Fix bitwise vs logical operator in TranslateRxSignalStuff819xUsb()</code></a> | <a href="https://lore.kernel.org/r/20210815004154.1781834-1-nathan@kernel.org/"><code>[PATCH] lib/zstd: Fix bitwise vs logical operators</code></a>: <a href="https://reviews.llvm.org/D108003">A proposed warning</a> in <code>clang</code> exposed a few instances where <code>&amp;</code> was used instead of <code>&amp;&amp;</code> with boolean values. This is not always a bug but it is much clearer to use the logical operators because of short circuiting; <code>b</code> will not be evaluated in <code>if (a &amp;&amp; b)</code> if <code>a</code> is false, whereas it will be in <code>if (a &amp; b)</code>, which <a href="https://arstechnica.com/gadgets/2021/07/google-pushed-a-one-character-typo-to-production-bricking-chrome-os-devices/">caused a bug in ChromeOS</a>.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210815191852.52271-1-nathan@kernel.org/"><code>[PATCH] bus: ti-sysc: Add break in switch statement in sysc_init_soc()</code></a> | <a href="https://lore.kernel.org/r/20210815192959.90142-1-nathan@kernel.org/"><code>[PATCH] drm/radeon: Add break to switch statement in radeonfb_create_pinned_object()</code></a> | <a href="https://lore.kernel.org/r/20210817235531.172995-1-nathan@kernel.org/"><code>[PATCH] scsi: st: Add missing break in switch statement in st_ioctl()</code></a>: In the quest to enable <code>-Wimplicit-fallthrough</code>, which is a little bit more pedantic with clang over GCC (<a href="https://github.com/ClangBuiltLinux/linux/issues/636">a known difference which neither party is interested in changing</a>), I sent a few patches to mark <code>case</code> statements with <code>break</code>. This version of the warning <a href="https://lore.kernel.org/r/20201121124019.21116-1-ogabbay@kernel.org/">can find bugs</a> so it is important to get it enabled so CI systems can start catching them.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YRmbLz1ZivIMKgc5@archlinux-ax161/"><code>Re: Patch &quot;vmlinux.lds.h: Handle clang's module.{c,d}tor sections&quot; has been added to the 5.13-stable tree</code></a>: A stable backport for a commit that I submitted upstream so that Android and ChromeOS do not regress.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210816193041.1164125-1-nathan@kernel.org/"><code>[PATCH] fs/ntfs3: Remove unused variable cnt in ntfs_security_init()</code></a>: A simple clean up of a variable that was unused.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210816202056.4586-1-nathan@kernel.org/"><code>[PATCH 1/3] kbuild: Remove -Wno-format-invalid-specifier from clang block</code></a>: Clean up of our clang warning section in the main Makefile, which is important for future travelers.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210816203635.53864-1-nathan@kernel.org/"><code>[PATCH] kbuild: Switch to 'f' variants of integrated assembler flag</code></a>: A small clean up of the flags used for the integrated assembler, as it has been brought up a few times in various code reviews.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210816234247.139528-1-nathan@kernel.org/"><code>[PATCH] f2fs: Add missing inline to f2fs_sanity_check_cluster() stub</code></a>: The kernel uses <code>inline</code> on stubs to avoid unused function warnings; this patch adds one that was missing.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210818012705.311963-1-nathan@kernel.org/"><code>[PATCH 1/2] ALSA: hda/sigmatel - Sink stac_shutup() into stac_suspend()</code></a>: <code>CONFIG_PM=n</code> builds are not often tested, which can cause warnings with suspend and resume functions. This was uncovered on s390, which <a href="https://git.kernel.org/linus/394216275c7d503d966317da9a01ad6626a6091d">removed support for <code>CONFIG_PM</code></a>.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210823222014.764557-1-nathan@kernel.org/"><code>[PATCH] rtlwifi: rtl8192de: Fix initialization of place in _rtl92c_phy_get_rightchnlplace()</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210824022640.2170859-1-nathan@kernel.org/"><code>[PATCH 0/2] Harden clang against unknown flag options</code></a>: There are some optimization flags that GCC has which clang does not implement and it issues a warning about that. When these flags are added to the compiler flags unconditionally, it causes all <code>cc-option</code> and <code>cc-disable-warning</code> calls (which test support for compiler flags) to fail, meaning that certain warnings or options do not get enabled/disabled, annoying developers. This series resolves the particular instance that Intel&rsquo;s Oday bot ran across in randconfig testing and makes sure that we catch these issues quicker in the future.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210824205104.2778110-1-nathan@kernel.org/"><code>[PATCH] cxgb4: Properly revert VPD changes</code></a>: A botched revert introduced some uninitialized variables so this commit resets the file properly.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210824225427.2065517-1-nathan@kernel.org/"><code>[PATCH 0/3] drm/i915: Enable -Wsometimes-uninitialized</code></a>: <code>-Wuninitialized</code> and <code>-Wsometimes-uninitialized</code> were disabled separately for i915 (because it enables <code>-Wall -Wextra</code> to help catch bugs), even though the latter is a sub-warning of the former (meaning that if <code>-Wuninitialized</code> is disabled, so is <code>-Wsometimes-uninitialized</code>). This series cleans up some instances of the warning then enables it again so that i915 gets coverage like the rest of the kernel.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210824232237.2085342-1-nathan@kernel.org/"><code>[PATCH] drm/i915: Clean up disabled warnings</code></a>: This patch came about from my investigation of the optimization flag issue that I mentioned above. This helps avoid the warnings because we eliminate a few <code>cc-disable-warning</code> calls.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210825173301.358381-1-nathan@kernel.org/"><code>[PATCH] cxl/core: Avoid using dev uninitialized in devm_cxl_add_decoder()</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210825203859.416449-1-nathan@kernel.org/"><code>[PATCH] crypto: sm4 - Do not change section of ck and sbox</code></a>: A warning from GNU as that only appears when compiling with clang. Subtle but important to get right.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210825211823.6406-1-nathan@kernel.org/"><code>[PATCH 1/3] MAINTAINERS: Update ClangBuiltLinux mailing list</code></a>: We moved mailing lists so that we get archival along with the rest of the kernel through <a href="https://lore.kernel.org/lists.html">lore.kernel.org</a> and we no longer have to deal with spam ourselves.</p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210901021510.1561219-1-nathan@kernel.org/"><code>[PATCH] x86/setup: Explicitly include acpi.h</code></a>: A build error that was introduced during the merge window, which is unfortunate because that is what linux-next is for.</p>
+</li>
+</ul>
+<h2 id="llvm-patches">LLVM patches</h2>
+<ul>
+<li><a href="https://github.com/llvm/llvm-project/commit/9ed4a94d6451046a51ef393cd62f00710820a7e8"><code>[clang] Expose unreachable fallthrough annotation warning</code></a>: The commit message is fairly self explanatory; this is necessary to enable clang&rsquo;s <code>-Wimplicit-fallthrough</code>.</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
+<p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/YQg2+C4Z98BMFucg@archlinux-ax161/"><code>Re: [PATCH 3/3] isystem: delete global -isystem compile option</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/95712f4c-9da5-b7b6-f617-b6b686b6eadc@kernel.org/"><code>Re: [PATCH v6 3/3] Documentation/llvm: update CROSS_COMPILE inferencing</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/1847b77a-093a-ce59-5c3b-1a21d3bb66c7@kernel.org/"><code>Re: [PATCH v2] compiler_attributes.h: move __compiletime_{error|warning}</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YQiFNwdFb4DRwykI@archlinux-ax161/"><code>Re: [PATCH] slub: fix kmalloc_pagealloc_invalid_free unit test</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1409"><code>LLVM build of RISCV kernel fails with relocation R_RISCV_PCREL_HI20 out of range</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/615fafba-bdcc-7f13-483d-6f3ef405924c@kernel.org/"><code>Re: [PATCH v3] riscv: explicitly use symbol offsets for VDSO</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/59ce441e-8deb-39ff-700f-4e1c4e871177@kernel.org/"><code>Re: [PATCH] kbuild: check CONFIG_AS_IS_LLVM instead of LLVM_IAS</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YQ2TGPwjvn8w4rKs@archlinux-ax161/"><code>Re: [PATCH v2] scripts/Makefile.clang: default to LLVM_IAS=1</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YRBYHAJSpU5jcTQV@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v2] clang-tools: Print information when clang-tidy tool is missing</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YRMFTm3EJWRqwZkM@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH] Makefile: remove stale cc-option checks</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/cf568688-01a3-849e-2bcc-1cbe6845c9f8@kernel.org/"><code>Re: [PATCH] x86/build: remove stale cc-option checks</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D108003"><code>[Clang] Extend -Wbool-operation to warn about bitwise and of bools with side effects</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/3afe5054-8129-fe42-b5a4-00bd091b1a0c@kernel.org/"><code>Re: [PATCH] kbuild: Fix 'no symbols' warning when CONFIG_TRIM_UNUSD_KSYMS=y</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210817002109.2736222-1-ndesaulniers@google.com/"><code>[PATCH 0/7] kbuild: remove cc-option-yn</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/fd4e3b0b-a052-58a7-c816-f055e8404165@kernel.org/"><code>Re: [PATCH v2 1/7] Compiler Attributes: Add __alloc_size() for better bounds checking</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/6b9a6c49-1b32-c5bc-6313-b0a888e93923@kernel.org/"><code>Re: [PATCH][next] fs/ntfs3: Fix fall-through warnings for Clang</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/b5136c4b-5fe3-43e6-e893-fe74b2ba913f@kernel.org/"><code>Re: [PATCH][next] staging: r8188eu: Fix fall-through warnings for Clang</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/9ef3265b-a5e7-d21b-68a8-ad137ac6ebfd@kernel.org/"><code>Re: [GIT PULL] Enable -Wimplicit-fallthrough for Clang for 5.14-rc7</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YS0nJtNDCwfbaubZ@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v3 0/5] Enable -Warray-bounds and -Wzero-length-bounds</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YS1qYuZ5nM%2FAQeSh@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH] ARM: select HAVE_FUTEX_CMPXCHG</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YS6HDZ%2FXMY6HT4It@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH] powerpc/bug: Cast to unsigned long before passing to inline asm</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YS6Jq3VxpxWy%2Fhpo@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH] powerpc/ptdump: Fix generic ptdump for 64-bit</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
+<ul>
+<li>
+<p><a href="https://groups.google.com/g/clang-built-linux/c/hxwI7QPQXvU/m/KbujekT9BAAJ"><code>Re: [CI-NOTIFY]: TCWG Bisect tcwg_kernel/llvm-release-aarch64-next-allmodconfig - Build # 26 - Successful!</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/a41ca429-9480-9ecf-242b-5e68fade3c10@kernel.org/"><code>Re: [CI-NOTIFY]: TCWG Bisect tcwg_kernel/llvm-release-arm-stable-allyesconfig - Build # 4 - Successful!</code></a></p>
+</li>
+<li>
+<p><a href="https://groups.google.com/g/clang-built-linux/c/f7YJs0lz5Aw/m/fLny2__aAAAJ"><code>Re: [CI-NOTIFY]: TCWG Bisect tcwg_kernel/llvm-master-aarch64-next-allyesconfig - Build # 14 - Successful!</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YQn+GomdRCoYc%2FE8@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v3] ucounts: add missing data type changes</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YQw2P8esj8PMNRQn@Ryzen-9-3900X.localdomain/"><code>Re: [gustavoars-linux:for-next/clang-fallthrough 1/1] warning: fallthrough annotation in unreachable code/</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1435"><code>warning: objtool: can't find jump dest instruction</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D106667"><code>SROA: Enhance speculateSelectInstLoads</code></a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/Linaro/tuxsuite/-/issues/131"><code>Error: make variable 'LLVM_IAS' value invalid '0'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YRcXr8o56PIYHY27@Ryzen-9-3900X.localdomain/"><code>Re: [block:io_uring-fops.v6 58/64] io_uring.c:undefined reference to </code>__compiletime_assert_833'`</a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YRcdxhnte3d0krHx@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH] mm/mempolicy: fix a race between offset_il_node and mpol_rebind_task</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1437"><code>Fedora i686 config &quot;traps: PANIC: double fault, error_code: 0x0&quot; in test_atomic64()</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1438"><code>ERROR: modpost: &quot;__mulodi4&quot; [drivers/block/nbd.ko] undefined!</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1439"><code>-Wshift-count-negative in drivers/net/ethernet/sfc/</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D106056"><code>[CVP] processSwitch: Remove default case when switch cover all possible values.</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YR64CsQVrynR4V%2Fy@Ryzen-9-3900X.localdomain/"><code>Re: [dhowells-fs:netfs-folio-regions 11/28] fs/netfs/read_helper.c:979:13: warning: variable 'folio' is uninitialized when used here</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YSQE2f5teuvKLkON@Ryzen-9-3900X.localdomain/"><code>Re: [linux-next:master 6632/9522] include/linux/pm_opp.h:458:58: warning: unused parameter 'dev'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/5913cdf4-9c8e-38f8-8914-d3b8a3565d73@kernel.org/"><code>objtool warning in cfg80211_edmg_chandef_valid() with ThinLTO</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/2751fd54-f28e-6318-2fc1-3fa5d4a98b2d@kernel.org/"><code>Re: [linux-next:master 8858/10077] fs/statfs.c:131:3: warning: 'memcpy' will always overflow; destination buffer has size 64, but size argument is 84</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YSa1O4fcX1nNKqN%2F@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v2 2/2] powerpc/bug: Provide better flexibility to WARN_ON/__WARN_FLAGS() with asm goto</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1442"><code>Fedora i686 config minus CONFIG_FORTIFY_SOURCE error in arch/x86/include/asm/checksum_32.h</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YSvYFTSwP5EkXQZ0@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v4 4/4] powerpc/ptdump: Convert powerpc to GENERIC_PTDUMP</code></a></p>
+</li>
+<li>
+<p><a href="https://bugs.llvm.org/show_bug.cgi?id=51682"><code>-Warray-bounds warning with asm goto in impossible switch cases</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YS19IBEGrIUnUT2p@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH v5 17/31] target/arm: Enforce alignment for LDM/STM</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YS2RrUma2oOSYtIc@Ryzen-9-3900X.localdomain/"><code>Re: [GIT PULL] s390 updates for 5.15 merge window</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements</h2>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/172"><code>Add some distribution configurations</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/178"><code>Enable sanitizer builds</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/179"><code>Update llvm_tot anchor and LLVM_TOT_VERSION file</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/180"><code>Add separate distribution configuration build set</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/181"><code>Explicitly specify LLVM_IAS=0</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/182"><code>Disable CONFIG_ATOMIC64_SELFTEST for Fedora's i686 config</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/184"><code>Error out if builds.json is not found</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/185"><code>check_logs.py: Increase timeout for CONFIG_KASAN_SW_TAGS builds</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/169"><code>Update to Linux 5.14 for PGO and update known good revision</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/187"><code>Test CONFIG_KASAN on s390 with clang-13+</code></a></p>
+</li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes</h2>
+<ul>
+<li>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 3 and 4, HP desktop, ASUS laptop, and Hyper-V and VMware platforms on my workstation. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:</h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://nathanchance.dev/tags/clangbuiltlinux/">clangbuiltlinux</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/linux/">linux</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/linuxfoundation/">linuxfoundation</a></span>
+        <span class="tag"><a href="https://nathanchance.dev/tags/maintainer/">maintainer</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        2071 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2021-08-31 20:38 -0700
+        
+
+         
+          
+        
+      </p>
+    </div>
+
+    
+    <div class="pagination">
+        <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+        </div>
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://nathanchance.dev/posts/july-2021-cbl-work/">
+                    <span class="button__text">July 2021 ClangBuiltLinux Work</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

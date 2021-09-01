@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 01 Aug 2021 00:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 20:38:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>August 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/august-2021-cbl-work/</link>
+      <pubDate>Tue, 31 Aug 2021 20:38:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/august-2021-cbl-work/</guid>
+      <description>Linux kernel patches   [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+  [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.</description>
+    </item>
+    
     <item>
       <title>July 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/july-2021-cbl-work/</link>
