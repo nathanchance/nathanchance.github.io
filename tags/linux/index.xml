@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 31 Aug 2021 20:38:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Sep 2021 10:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>September 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/september-2021-cbl-work/</link>
+      <pubDate>Thu, 30 Sep 2021 10:00:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/september-2021-cbl-work/</guid>
+      <description>Linux kernel patches   tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
+  Harden clang against unknown flag options (v2): A follow up.
+  ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!</description>
+    </item>
+    
     <item>
       <title>August 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/august-2021-cbl-work/</link>

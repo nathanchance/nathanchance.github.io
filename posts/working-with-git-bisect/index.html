@@ -222,7 +222,7 @@ CONFLICT <span style="color:#f92672">(</span>content<span style="color:#f92672">
 <li>
 <p>Open <code>bisect.log</code> and remove everything after the wrong choice.</p>
 <p>For example, this is the bisect log from one of my recent bisects:</p>
-<pre><code>$ cat bisect.log
+<pre tabindex="0"><code>$ cat bisect.log
 # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests
 # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11
 git bisect start 'origin/master' 'llvmorg-11-init'
@@ -254,7 +254,7 @@ git bisect bad 6aebf0ee56e52afad3887b4230d7ed1beaf0bede
 git bisect good c4cbc5806218bf4232523771805580fa40b83244
 # first bad commit: [6aebf0ee56e52afad3887b4230d7ed1beaf0bede] Specify branch probabilities for callbr dests
 </code></pre><p>Let&rsquo;s say that I meant to mark <code>a46dba24fa35ab52e9a1bbaa52666bcc37859927</code> as <code>bad</code> instead of <code>good</code>. I would edit <code>bisect.log</code> to look like this:</p>
-<pre><code>$ cat bisect.log
+<pre tabindex="0"><code>$ cat bisect.log
 # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests
 # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11
 git bisect start 'origin/master' 'llvmorg-11-init'
@@ -274,7 +274,7 @@ git bisect bad a46dba24fa35ab52e9a1bbaa52666bcc37859927
 <li>
 <p>Restart the bisect using the file.</p>
 <p>To do this, you will run the following commands:</p>
-<pre><code>$ git bisect reset
+<pre tabindex="0"><code>$ git bisect reset
 
 $ git bisect replay bisect.log
 </code></pre><p>The <code>git bisect reset</code> gets us back to where we were when we ran <code>git bisect start</code> and the <code>git bisect replay</code> uses the <code>bisect.log</code> file to get us back to where we should have been been. Continue bisecting from there!</p>

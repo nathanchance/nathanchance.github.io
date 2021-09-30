@@ -6,8 +6,291 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Tue, 31 Aug 2021 20:38:00 -0700</lastBuildDate>
+        <lastBuildDate>Thu, 30 Sep 2021 10:00:00 -0700</lastBuildDate>
         <atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>September 2021 ClangBuiltLinux Work</title>
+            <link>https://nathanchance.dev/posts/september-2021-cbl-work/</link>
+            <pubDate>Thu, 30 Sep 2021 10:00:00 -0700</pubDate>
+            
+            <guid>https://nathanchance.dev/posts/september-2021-cbl-work/</guid>
+            <description>Linux kernel patches   tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
+  Harden clang against unknown flag options (v2): A follow up.
+  ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!</description>
+            <content type="html"><![CDATA[<h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<ul>
+<li>
+<p><code>tools: compiler-gcc.h: Guard error attribute use with __has_attribute</code> (<a href="https://lore.kernel.org/r/20210913220900.142820-1-nathan@kernel.org/">v1</a>): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.</p>
+</li>
+<li>
+<p><code>Harden clang against unknown flag options</code> (<a href="https://lore.kernel.org/r/20210916184017.1881473-1-nathan@kernel.org/">v2</a>): A follow up.</p>
+</li>
+<li>
+<p><code>ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show()</code> (<a href="https://lore.kernel.org/r/20210916194351.3860836-1-nathan@kernel.org/">v1</a>, <a href="https://lore.kernel.org/netdev/20210917045204.1385801-1-nathan@kernel.org/">v2</a>): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!</p>
+</li>
+<li>
+<p><code>locking/ww-mutex: Fix uninitialized use of ret in test_aa()</code> (<a href="https://lore.kernel.org/r/20210922145822.3935141-1-nathan@kernel.org/">v1</a>): More uninitialized variable usage biting us because GCC&rsquo;s warning is turned off for the kernel.</p>
+</li>
+<li>
+<p><code>kasan: Always respect CONFIG_KASAN_STACK</code> (<a href="https://lore.kernel.org/r/20210922205525.570068-1-nathan@kernel.org/">v1</a>): Clang&rsquo;s <code>asan-stack</code> parameter shows high stack usage so it has been disabled but RISC-V&rsquo;s implementation was not respecting that so this patch resolves that, meaning RISC-V&rsquo;s <code>allmodconfig</code> target now builds completely clean with clang. <code>asan-stack</code> has been a topic of <a href="https://github.com/ClangBuiltLinux/linux/issues/39">recent conversation</a> so hopefully that can be resolved soon.</p>
+</li>
+<li>
+<p><code>drm/kmb: Remove set_test_mode_src_osc_freq_target_{hi,low}_bits()</code> (<a href="https://lore.kernel.org/r/20210928192338.1987872-1-nathan@kernel.org/">v1</a>): Intel&rsquo;s kernel test robot exposed a couple of instances of unused inline functions, which GCC will never warn about. Cleaning up dead code always helps with maintainability in the long run.</p>
+</li>
+<li>
+<p><code>drm/amd: Guard IS_OLD_GCC assignment with CONFIG_CC_IS_GCC</code> (<a href="https://lore.kernel.org/r/20210930160142.2301257-1-nathan@kernel.org/">v1</a>): An instance where clang&rsquo;s fake GCC version of 4.2.1 caused problems for us. Hopefully as time goes on, we will run into less of these as more people test with clang.</p>
+</li>
+<li>
+<p><code>drm/amd: Initialize remove_mpcc in dcn201_update_mpcc()</code> (<a href="https://lore.kernel.org/r/20210930161641.2333583-1-nathan@kernel.org/">v1</a>): Another uninitialized warning&hellip;</p>
+</li>
+<li>
+<p><code>drm/amd: Return NULL instead of false in dcn201_acquire_idle_pipe_for_layer()</code> (<a href="https://lore.kernel.org/r/20210930162302.2344542-1-nathan@kernel.org/">v1</a>): Returning 0 or false when the function returns a pointer will cause a clang warning so that you either use NULL or change the value, just to make sure that is what was intended.</p>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
+<p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1440#issuecomment-911966138"><code>9934a5b2ed5aa6e6bbb2e55c3cd98839722c226e breaks x86_64 ThinLTO</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTKuj0Bu0CJRKqU7@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH] s390/unwind: use current_frame_address() to unwind current task</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTfGXn4cTZ87zTP1@archlinux-ax161/"><code>Re: [PATCH] fix missing 'sys' package</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTfvI2it1G2yBiD%2F@MSI.localdomain/"><code>Re: [PATCH] Revert &quot;Enable '-Werror' by default for all kernel builds&quot;</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTfwjGOHqKY55cwQ@MSI.localdomain/"><code>Re: [PATCH] lpfc: Fix compilation errors on kernels with no CONFIG_DEBUG_FS</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTjt5C7xTqNLUSl%2F@archlinux-ax161/"><code>Re: [PATCH v2] gen_compile_commands: fix missing 'sys' package</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTjxDPsaoeQydKkR@archlinux-ax161/"><code>Re: [PATCH v2] lpfc: Fix compilation errors on kernels with no CONFIG_DEBUG_FS</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTqCWyZ7mXDaJ5HQ@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH 0/4] Fix stack usage of DML</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20210910234047.1019925-1-ndesaulniers@google.com/"><code>[PATCH 00/10] raise minimum GCC version to 5.1</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/01f572ab-bea2-f246-2f77-2f119056db84@kernel.org/"><code>Re: [PATCH] hardening: Default to INIT_STACK_ALL_ZERO if CC_HAS_AUTO_VAR_INIT_ZERO</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/026a4e82-da46-a559-06d5-18cff798ad96@kernel.org/"><code>Re: [PATCH] gen_compile_commands: add missing sys import</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/c2ebc59f-c14e-d78f-78f0-2204d09cf81c@kernel.org/"><code>Re: [PATCH] powerpc: clean up UPD_CONSTR</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/decede05-591b-b51c-bd5f-d844b1895e54@kernel.org/"><code>Re: [PATCH] lib/zlib_inflate/inffast: Check config in C to avoid unused function warning</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/199"><code>Add .config artifact checker</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUeva0jP7P2qCr+R@archlinux-ax161/"><code>Re: [PATCH] [RFC/RFT]SCS:Add gcc plugin to support Shadow Call Stack</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUishGbHeaDMJDj+@archlinux-ax161/"><code>Re: [PATCH v3] lib/zlib_inflate/inffast: Check config in C to avoid unused function warning</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUlYpWhGCxpJ9diw@archlinux-ax161/"><code>Re: [PATCH v2] x86/setup: call early_reserve_memory() earlier</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/211#issuecomment-925404667"><code>problem matcher updates</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YU3y2AUpnSKHMZOO@archlinux-ax161/"><code>Re: [PATCH v2] drm/vc4: Unselect PM</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YVX0lxyRxZuN1idm@archlinux-ax161/"><code>Re: [PATCH] objtool: Teach get_alt_entry() about more relocation types</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/ab74f0f3-a7ea-e525-0725-946b1c754df3@kernel.org/"><code>Re: kernel/sched/core.c:5854:20: warning: unused function 'sched_core_cpu_deactivate'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTJumKboBddccDUJ@Ryzen-9-3900X.localdomain/"><code>Re: [vmlinux.lds.h]  d4c6399900: BUG:unable_to_handle_page_fault_for_address</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTK4%2F8lnQykNLj%2Fe@Ryzen-9-3900X.localdomain/"><code>Re: [CI-NOTIFY]: TCWG Bisect tcwg_kernel/llvm-master-aarch64-mainline-allyesconfig - Build # 16 - Successful!</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTK7aNSIjU3KmjH8@Ryzen-9-3900X.localdomain/"><code>Re: ❌ FAIL: Test report for kernel 5.14.0 (mainline.kernel.org-clang, f1583cb1)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/3b461878-a4a0-2f84-e177-9daf8fe285e7@kernel.org/"><code>Re: [GIT PULL v2] Kbuild updates for v5.15-rc1</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/ece61908-f8eb-4c45-5d5f-bfc52f3b8f45@kernel.org/"><code>Re: [linux-next:master 10023/11721] include/linux/memory_hotplug.h:312:26: warning: unused parameter 'group'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTZyMx91zV9kfDkQ@Ryzen-9-3900X.localdomain/"><code>Re: ❌ FAIL: Test report for kernel 5.14.0 (mainline.kernel.org-clang, 1dbe7e38)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTbOs13waorzamZ6@Ryzen-9-3900X.localdomain/"><code>Re: [PATCH] Enable '-Werror' by default for all kernel builds</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/92c20b62-c4a7-8e63-4a94-76bdf6d9481e@kernel.org/"><code>Re: ipv4/tcp.c:4234:1: error: the frame size of 1152 bytes is larger than 1024 bytes [-Werror=frame-larger-than=]</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTjrVWaTIA5ZZumW@archlinux-ax161/"><code>Re: ERROR: modpost: __mulodi4 [drivers/block/nbd.ko] undefined!</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1452"><code>drivers/infiniband/hw/qib/qib_sysfs.c:413:1: error: static_assert expression is not an integral constant expression</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1453"><code>RISC-V KASAN does not disable asan-stack</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1454"><code>Higher stack use with KASAN on 32-bit ARM</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1455"><code>-Wframe-larger-than= in drivers/gpu/drm/amd/display/dc/calcs/dce_calcs.c</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YTwLw+frJLbntgCJ@archlinux-ax161/"><code>Re: [mcgrof-next:20210908-firmware-builtin-v4 2/11] drivers/base/firmware_loader/builtin/main.c:36:6: error: no previous prototype for function 'firmware_is_builtin'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YT+RqrkQAOVhbkWu@archlinux-ax161/"><code>Re: [dborkman:pr/bpf-cgrp 2/4] include/linux/cgroup-defs.h:771:70: warning: unused parameter 'skcd'</code></a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/Linaro/tuxsuite/-/issues/132"><code>&quot;Patch series format unknown&quot; with mbox file</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/3bf6f4f4-9c96-6e0c-951d-5509175dddfe@kernel.org/"><code>Re: linux: build faulure: error: &quot;__has_attribute&quot; is not defined</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1447"><code>QEMU 6.1.0 regression with CONFIG_THUMB2_KERNEL</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUI7UIZvrsfMO716@archlinux-ax161/"><code>Re: ❌ FAIL: Test report for kernel 5.15.0-rc1 (mainline.kernel.org-clang, 80be5998)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/c3a29fd8-e743-868c-3705-460fd38b7add@kernel.org/"><code>Re: clang: error: unsupported argument '-mimplicit-it=always' to option 'Wa,'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUeriU9EIJ5hiFjL@archlinux-ax161/"><code>Re: Odd pci_iounmap() declaration rules..</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUgDV31uzAQy5IcN@archlinux-ax161/"><code>Re: x86_64: clang-10: &lt;instantiation&gt;:2:2: error: unknown use of instruction mnemonic without a size suffix</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUkPsjUUtRewyOn3@archlinux-ax161/"><code>Re: [tip: x86/urgent] x86/setup: Call early_reserve_memory() earlier</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUn+MRw4dkxrMouZ@archlinux-ax161/"><code>Re: [TCWG CI] Regression caused by linux: parisc: Declare pci_iounmap() parisc version only when CONFIG_PCI enabled</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUpjj7IwBqMYSR7z@archlinux-ax161/"><code>Re: [Intel-gfx] [PATCH v3 03/13] drm/dp: add LTTPR DP 2.0 DPCD addresses</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D108607"><code>[RISCV] Optimize (add (mul x, c0), c1)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUtQnml8FO8BC7sM@archlinux-ax161/"><code>Re: [PATCH v3 1/6] drm/vc4: select PM (openrisc)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YUz2t+bdes2I+gMK@archlinux-ax161/"><code>Re: [PATCH v2] platform/x86: amd-pmc: Export Idlemask values based on the APU</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YU0Tgl9qtuItvcxB@archlinux-ax161/"><code>Re: next/master build: 209 builds: 5 failed, 204 passed, 5 errors, 1677 warnings (next-20210923)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YVNGMg%2FTI+jo%2F1R1@archlinux-ax161/"><code>Re: drivers/gpu/drm/kmb/kmb_dsi.c:812:2: warning: unused function 'set_test_mode_src_osc_freq_target_low_bits'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YVNfqUVJ7w4Z3WXK@archlinux-ax161/"><code>Re: [v2 PATCH] crypto: api - Fix built-in testing dependency failures</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YVOiCYXTL63R4Mu9@archlinux-ax161/"><code>Re: [PATCH bpf-next 06/13] xsk: optimize for aligned case</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YVS5k1H8KyVAk%2Fh8@archlinux-ax161/"><code>Re: [PATCH v2 2/7] PCI: ACPI: PM: Do not use pci_platform_pm_ops for ACPI</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YVS9VhrAuKE2YdbF@archlinux-ax161/"><code>Re: [PATCH v7] hugetlbfs: Extend the definition of hugepages parameter to support node allocation</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements</h2>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/190"><code>Disable -Werror for pseries_defconfig for now</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/191"><code>Check matrices for number of jobs</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/194"><code>Disable -Werror for now</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/195"><code>check_logs.py: Increase timeout for CONFIG_KASAN (part 2)</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/196"><code>Make mainline green</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/198"><code>Disable CONFIG_CFI_CLANG=y x86_64 builds with clang-12</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/171"><code>A couple of small fixes</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/203"><code>Switch to directory-based patch management</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/204"><code>Disable boot for CONFIG_KASAN_SW_TAGS=y on clang-11 and clang-12</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/206"><code>patches: Add futex patch to android-mainline</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/207"><code>Disable some builds to make -next green</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/208"><code>check_logs.py: Handle equals sign in configuration value</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/210"><code>patches: Update FPU patch to upstream submission</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/212"><code>patches: Remove FPU patch for -next and -tip</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/214"><code>check_logs.py: Try multiple times to fetch items with exponential backoff</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/215"><code>Add problem matchers for depmod, dtc, and modpost</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/216"><code>Remove lto-cfi-tip patches</code></a></p>
+</li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes</h2>
+<ul>
+<li>
+<p>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 3 and 4, HP desktop, ASUS laptop, and Hyper-V and VMware platforms on my workstation. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</p>
+</li>
+<li>
+<p>This month, we had a few conferences: <a href="https://github.com/ClangBuiltLinux/llvm-distributors-conf-2021">the LLVM Distributors Conference</a>, <a href="https://github.com/ClangBuiltLinux/CBL-meetup-II-turbo">the ClangBuiltLinux meetup</a>, and <a href="https://linuxplumbersconf.org/">Linux Plumbers Conference</a>. It was super helpful for interfacing with the greater LLVM and Linux kernel community and reorient ourselves going into the next year. I gave a talk at the ClangBuiltLinux meetup around our continuous integration.</p>
+</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:</h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+]]></content>
+        </item>
         
         <item>
             <title>August 2021 ClangBuiltLinux Work</title>
@@ -1784,7 +2067,7 @@ CONFLICT <span style="color:#f92672">(</span>content<span style="color:#f92672">
 <li>
 <p>Open <code>bisect.log</code> and remove everything after the wrong choice.</p>
 <p>For example, this is the bisect log from one of my recent bisects:</p>
-<pre><code>$ cat bisect.log
+<pre tabindex="0"><code>$ cat bisect.log
 # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests
 # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11
 git bisect start 'origin/master' 'llvmorg-11-init'
@@ -1816,7 +2099,7 @@ git bisect bad 6aebf0ee56e52afad3887b4230d7ed1beaf0bede
 git bisect good c4cbc5806218bf4232523771805580fa40b83244
 # first bad commit: [6aebf0ee56e52afad3887b4230d7ed1beaf0bede] Specify branch probabilities for callbr dests
 </code></pre><p>Let&rsquo;s say that I meant to mark <code>a46dba24fa35ab52e9a1bbaa52666bcc37859927</code> as <code>bad</code> instead of <code>good</code>. I would edit <code>bisect.log</code> to look like this:</p>
-<pre><code>$ cat bisect.log
+<pre tabindex="0"><code>$ cat bisect.log
 # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests
 # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11
 git bisect start 'origin/master' 'llvmorg-11-init'
@@ -1836,7 +2119,7 @@ git bisect bad a46dba24fa35ab52e9a1bbaa52666bcc37859927
 <li>
 <p>Restart the bisect using the file.</p>
 <p>To do this, you will run the following commands:</p>
-<pre><code>$ git bisect reset
+<pre tabindex="0"><code>$ git bisect reset
 
 $ git bisect replay bisect.log
 </code></pre><p>The <code>git bisect reset</code> gets us back to where we were when we ran <code>git bisect start</code> and the <code>git bisect replay</code> uses the <code>bisect.log</code> file to get us back to where we should have been been. Continue bisecting from there!</p>
@@ -2031,7 +2314,7 @@ $ cd <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</spa
 </code></pre></div><p>Once those have finished downloading, we are ready to run Cuttlefish! We start Cuttlefish using the <code>launch_cvd</code> (Launch Cuttlefish Virtual Device).</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ HOME<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PWD<span style="color:#e6db74">}</span> ./bin/launch_cvd -daemon
 </code></pre></div><p>The <code>HOME=${PWD}</code> is present so that some Cuttlefish runtime files get contained to this folder. The <code>-daemon</code> flag is so that we can interact with Cuttlefish through <code>adb shell</code> in the same terminal window (i.e. it gets sent to the background). You should see a bunch of text fire up then it end with something like:</p>
-<pre><code>run_cvd I 01-31 20:07:50  9571  9571 main.cc:198] VIRTUAL_DEVICE_BOOT_COMPLETED
+<pre tabindex="0"><code>run_cvd I 01-31 20:07:50  9571  9571 main.cc:198] VIRTUAL_DEVICE_BOOT_COMPLETED
 launch_cvd I 01-31 20:07:50  9543  9543 launch_cvd.cc:131] run_cvd exited successfully.
 </code></pre><p>It takes about 20 seconds for Cuttlefish to boot up for me (which is extremely impressive in my opinion). After that, you can run <code>adb</code> to connect to it. You might need to run the command a couple of times so that <code>adb</code> can start and connect to the device but once you do, you should be able to interact with it like any other Android device.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./bin/adb shell
