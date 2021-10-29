@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Thu, 30 Sep 2021 10:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 29 Oct 2021 14:10:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>October 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/october-2021-cbl-work/</link>
+      <pubDate>Fri, 29 Oct 2021 14:10:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/october-2021-cbl-work/</guid>
+      <description>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend&amp;rsquo;s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned.</description>
+    </item>
+    
     <item>
       <title>September 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/september-2021-cbl-work/</link>

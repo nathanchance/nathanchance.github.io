@@ -6,8 +6,196 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Thu, 30 Sep 2021 10:00:00 -0700</lastBuildDate>
+        <lastBuildDate>Fri, 29 Oct 2021 14:10:00 -0700</lastBuildDate>
         <atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>October 2021 ClangBuiltLinux Work</title>
+            <link>https://nathanchance.dev/posts/october-2021-cbl-work/</link>
+            <pubDate>Fri, 29 Oct 2021 14:10:00 -0700</pubDate>
+            
+            <guid>https://nathanchance.dev/posts/october-2021-cbl-work/</guid>
+            <description>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend&amp;rsquo;s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned.</description>
+            <content type="html"><![CDATA[<p>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend&rsquo;s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned.</p>
+<p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on <a href="https://lore.kernel.org/all/?q=f:nathan@kernel.org">lore.kernel.org</a>.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<ul>
+<li>
+<p><code>-Wbitwise-instead-of-logical</code>: A new warning in LLVM exposed a few places in the kernel where bitwise operations were being used with boolean expressions with side effects, which may be undesirable (ChromeOS had <a href="https://www.xda-developers.com/cant-login-chromebook-google-readying-fix/">a massive bug</a> due to this behavior&hellip;). Cleaning these up in the kernel was done with this patch and the following six here. Luckily, there were no bugs but getting the kernel free of this warning will allow new instances to pop up clearly.</p>
+<ul>
+<li><code>Input: touchscreen - Avoid bitwise vs logical OR warning</code> (<a href="https://lore.kernel.org/r/20211014205757.3474635-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>drm/i915: Avoid bitwise vs logical OR warning in snb_wm_latency_quirk()</code> (<a href="https://lore.kernel.org/r/20211014211916.3550122-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>staging: wlan-ng: Avoid bitwise vs logical OR warning in hfa384x_usb_throttlefn()</code> (<a href="https://lore.kernel.org/r/20211014215703.3705371-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>platform/x86: thinkpad_acpi: Fix bitwise vs. logical warning</code> (<a href="https://lore.kernel.org/r/20211018182537.2316800-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>nfp: bpf: Fix bitwise vs. logical OR warning</code> (<a href="https://lore.kernel.org/r/20211018193101.2340261-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>lib: zstd: Add cast to silence clang's -Wbitwise-instead-of-logical</code> (<a href="https://lore.kernel.org/r/20211021202353.2356400-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>soc/tegra: fuse: Fix bitwise vs. logical OR warning</code> (<a href="https://lore.kernel.org/r/20211021214500.2388146-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wenum-conversion</code>: A simple implicit conversion between two different enumerated types, which can be a bug if the two values are not mapped in a one to one manner. Thankfully, the one instance of this warning that cropped up this month was not a true bug because the two enums had the same value but it was simple enough to clean up to keep the kernel warning free.</p>
+<ul>
+<li><code>regulator: lp872x: Remove lp872x_dvs_state</code> (<a href="https://lore.kernel.org/r/20211019004335.193492-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wimplicit-fallthrough</code>: I would argue one of the biggest deficiencies of C as a language is implicit fallthroughs in switch statements. There has been <a href="https://github.com/KSPP/linux/issues/115">a lot of work done</a> by Gustavo A.R. Silva to clean these up for both GCC and clang because they disagree in <a href="https://github.com/ClangBuiltLinux/linux/issues/636">one specific case</a>. These patches help keep the warning free of new instances in linux-next so that this warning can be turned on for clang in 5.16.</p>
+<ul>
+<li><code>ice: Fix clang -Wimplicit-fallthrough in ice_pull_qvec_from_rc()</code> (<a href="https://lore.kernel.org/r/20211019014203.1926130-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>net: ax88796c: Fix clang -Wimplicit-fallthrough in ax88796c_set_mac()</code> (<a href="https://lore.kernel.org/r/20211025211238.178768-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>ASoC: qdsp6: audioreach: Fix clang -Wimplicit-fallthrough</code> (<a href="https://lore.kernel.org/r/20211027190823.4057382-1-nathan@kernel.org/"><code>v1</code></a>):</li>
+</ul>
+</li>
+<li>
+<p><code>-Winfinite-recursion</code>: This is a super interesting warning and the first time I have ever seen an instance of this warning in the kernel since I started building with <code>clang</code> a little over three years ago. In the kernel, it is common to have a function name then the same function name with two underscores before it (e.g. <code>foo()</code> and <code>__foo()</code>) to signify that <code>foo()</code> holds a lock while <code>__foo()</code> does not so that more code can be reused. In this particular instance, <code>__foo()</code> was created but the newly created <code>foo()</code> was not updated properly.</p>
+<ul>
+<li><code>iio: frequency: adrf6780: Fix adrf6780_spi_{read,write}()</code> (<a href="https://lore.kernel.org/r/20211022195656.1513147-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wpointer-bool-conversion</code>: This warning points out that arrays in structures cannot be <code>NULL</code> when it is not the first member in said structure so the check does not do anything. The author may have intended to have a different check (such as the first element of the array being 0) or the check can just be removed. In this case, it was the latter.</p>
+<ul>
+<li><code>net: ax88796c: Remove pointless check in ax88796c_open()</code> (<a href="https://lore.kernel.org/r/20211025211238.178768-2-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wuninitialized</code>/<code>-Wsometimes-uninitialized</code>: Unfortunately, because the kernel is written in C, uninitialized variables continue to be an issue, especially since GCC&rsquo;s <code>-Wmaybe-uninitialized</code> has been <a href="https://git.kernel.org/linus/78a5255ffb6a1af189a83e493d916ba1c54d8c75">disabled by default since 5.7</a>. These will continue to pop up until GCC can be fixed but it does not seem like that will occur anytime soon as it has been a deficiency for a long time; until then, we will continue to fix them.</p>
+<ul>
+<li><code>mm/memory_failure: Initialize extra_pins in me_pagecache_clean()</code> (<a href="https://lore.kernel.org/r/20211021180336.2328086-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>drm/msm/dpu: Remove commit and its uses in dpu_crtc_set_crc_source()</code> (<a href="https://lore.kernel.org/r/20211026142435.3606413-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>net/mlx5: Add esw assignment back in mlx5e_tc_sample_unoffload()</code> (<a href="https://lore.kernel.org/r/20211027153122.3224673-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
+<p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/YV0NPnUbElw7cTRH@archlinux-ax161/"><code>Re: [PATCH] kasan: Always respect CONFIG_KASAN_STACK</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YWhoQ2lKeOx2U2e2@archlinux-ax161/"><code>Re: [PATCH] compiler_types: mark __compiletime_assert failure as __noreturn</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YWmuPOB6%2FrXWqXBH@archlinux-ax161/"><code>Re: [PATCH] KVM: x86: avoid warning with -Wbitwise-instead-of-logical</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YW38KOA8ct12F7IG@archlinux-ax161/"><code>Re: [PATCH 3/3] arm64: vdso32: require CROSS_COMPILE_COMPAT for gcc+bfd</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20211019223646.1146945-1-ndesaulniers@google.com/"><code>[PATCH v2 0/4] compat vdso cleanups</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20211020173554.38122-1-keescook@chromium.org/"><code>[PATCH 0/2] gcc-plugins: Explicitly document purpose and deprecation schedule</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXCRPsNl2Vlgd7ct@archlinux-ax161/"><code>Re: [PATCH] compiler-gcc.h: Define __SANITIZE_ADDRESS__ under hwaddress sanitizer</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXc0KlqXvm5W61ee@archlinux-ax161/"><code>Re: [PATCH] dma-buf: fix uninitialized variable usage in selftests</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXgK0HAe1+dEPvL1@archlinux-ax161/"><code>Re: [PATCH] dma-buf: st: fix error handling in test_get_fences()</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D110869"><code>[X86] Implement -fzero-call-used-regs option</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D112600"><code>[ARM] Use hardware TLS register in Thumb2 mode when -mtp=cp15 is passed</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXrQnQNRGaE7anWy@archlinux-ax161/"><code>Re: [PATCH] ARM: Thumb2: avoid __builtin_thread_pointer() on Clang</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXrhZoOgv5dtFMTs@archlinux-ax161/"><code>Re: [PATCH] kbuild: Support clang-$ver builds</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/YVdJS5RUjvokrSnn@archlinux-ax161/"><code>Re: [Intel-gfx] [vfio:next 33/38] drivers/gpu/drm/i915/i915_pci.c:975:2: warning: missing field 'override_only' initializer</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YVdNFzs8HUQwHa54@archlinux-ax161/"><code>Re: [v2 PATCH] crypto: api - Fix built-in testing dependency failures</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YV0REIpkY6TkuGA+@archlinux-ax161/"><code>Re: How to check my LLVM toolchain is optimized for PGO and/or ThinLTO?</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YWew3ItdPC5QrL%2Fw@archlinux-ax161/"><code>Re: [tip:sched/core 14/47] kernel/sched/fair.c:893:22: error: variable 'p' set but not used</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YWht7v%2F1RuAiHIvC@archlinux-ax161/"><code>Re: [BUG] [5.15] Compilation error in arch/x86/kvm/mmu/spte.h with clang-14</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1477"><code>LTO crash related to fortify</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXMaZoQJiR5WFZTw@archlinux-ax161/"><code>Re: [PATCH 4/4] block: cleanup the flush plug helpers</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXbCFdz4R7cikpnE@archlinux-ax161/"><code>Re: i386: tinyconfig: perf_event.h:838:21: error: invalid output size for constraint '=q'</code></a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/Linaro/tuxsuite/-/issues/141"><code>ModuleNotFoundError: No module named 'attr'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YXl98bQRrJvVKdwC@archlinux-ax161/"><code>Apply 091bb549f7722723b284f63ac665e2aedcf9dec9 to 4.19</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements</h2>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/218"><code>patches: Drop RDMA patch from mainline</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/219"><code>Update patches</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/actions-workflows/pull/1"><code>actions-workflows: Initial shfmt action and workflow</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/224"><code>Fetch metadata.json and use it to display clang checkout date and hash</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/225"><code>patches: Remove -next folder</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/actions-workflows/pull/2"><code>github: Add shellcheck and yapf workflows</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/227"><code>github: Switch to shared lint workflows</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/173"><code>ci.sh: Build release/13.x</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/228"><code>Refresh patches</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/174"><code>build-llvm.py: Add '--llvm-folder'</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/229"><code>patches: android-mainline: Remove ARM futex patch</code></a></p>
+</li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes</h2>
+<ul>
+<li>
+<p>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 3 and 4, HP desktop, ASUS laptop, and Hyper-V and VMware platforms on my workstation. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</p>
+</li>
+<li>
+<p>While researching an old issue, I noticed that some of the links were dead. As a result, I spent some time going through <a href="https://github.com/ClangBuiltLinux/linux/issues">our issue tracker</a> to replace all links to other archive sites (such as <a href="https://lkml.org/">lkml.org</a>, <a href="https://www.spinics.net/">spinics.net</a>, and <a href="https://marc.info/">marc.info</a>) with canonical links to <a href="https://lore.kernel.org/">lore.kernel.org</a>, as those links are <a href="https://www.kernel.org/lore.html">expected to be stable and not disappear</a>; even if they did, the message ID is in the URL so it can be looked up across the internet, rather than some arbitrary URL. There is nothing worse than looking into an old issue and having a dead link (I always think of <a href="https://xkcd.com/979/">this xkcd</a>). There is a lot of mailing list discussions that come up later so being able to access that is of the utmost importance.</p>
+</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:</h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+]]></content>
+        </item>
         
         <item>
             <title>September 2021 ClangBuiltLinux Work</title>
