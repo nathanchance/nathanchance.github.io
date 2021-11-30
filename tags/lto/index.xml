@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>lto on Nathan Chancellor</title>
+    <link>https://nathanchance.dev/tags/lto/</link>
+    <description>Recent content in lto on Nathan Chancellor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 29 Nov 2021 10:07:16 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/lto/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Reducing an LTO Linux kernel bug with cvise</title>
+      <link>https://nathanchance.dev/posts/cvise-lto-kernel-bug/</link>
+      <pubDate>Mon, 29 Nov 2021 10:07:16 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/cvise-lto-kernel-bug/</guid>
+      <description>My co-maintainer Nick Desaulniers wrote a great post about taking a several thousand line C file that exposed a compiler bug down to 12 lines with creduce. I thought I would do the same thing with a bug that only happens with link time optimization (LTO) in the Linux kernel, which is a bit of a different beast. Hopefully this post can help others reduce their own bugs and think about the best way to triage a bug.</description>
+    </item>
+    
+  </channel>
+</rss>
