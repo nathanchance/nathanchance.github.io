@@ -464,11 +464,7 @@ ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0g
 $ echo $?
 0
 </code></pre><p>Now, we want to make sure <code>creduce</code>/<code>cvise</code> gives us code that stresses the error under these specific conditions and not others. For this reason, I typically write two other tests within my interestingness test. The first is making sure that <code>creduce</code>/<code>cvise</code> does not introduce new warnings under either GCC and <code>clang</code>; this also makes sure the code is accepted by two compilers, which improves its quality. This directly contradicts <a href="https://github.com/marxin/cvise#notes">note #3 in the <code>cvise</code> README</a> but I have seen some dumb looking code generated from these tools so keeping it somewhat warning clean makes that less likely. The one downside of this is it typically makes the reduction take longer so keep that in mind if you decide to add it.</p>
-<p>First, let&rsquo;s try to build the source with <code>gcc</code>:</p>
-<pre tabindex="0"><code>$ gcc -c -o /dev/null file.i
-...
-./arch/x86/include/asm/jump_label.h:27:2: error: impossible constraint in ‘asm’
-</code></pre><p>The Linux kernel pretty much expects <code>-O2</code> or higher.</p>
+<p>First, let&rsquo;s try to build the source with <code>gcc</code> (as mentioned above, the Linux kernel requires optimizations to build so we add <code>-O2</code>):</p>
 <pre tabindex="0"><code>$ gcc -O2 -c -o /dev/null file.i
 ...
 
