@@ -6,7 +6,18 @@
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 30 Nov 2021 16:23:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Dec 2021 12:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>December 2021 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/december-2021-cbl-work/</link>
+      <pubDate>Fri, 31 Dec 2021 12:00:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/december-2021-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
+  Revert &amp;quot;ANDROID: disable INFINIBAND_QIB from allmodconfig build&amp;quot;</description>
+    </item>
+    
     <item>
       <title>November 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/november-2021-cbl-work/</link>
