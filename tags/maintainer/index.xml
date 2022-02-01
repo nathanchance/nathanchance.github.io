@@ -6,7 +6,18 @@
     <description>Recent content in maintainer on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 31 Dec 2021 12:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/maintainer/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 31 Jan 2022 00:18:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/maintainer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>January 2022 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/january-2022-cbl-work/</link>
+      <pubDate>Mon, 31 Jan 2022 00:18:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/january-2022-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
+ [PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.</description>
+    </item>
+    
     <item>
       <title>December 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/december-2021-cbl-work/</link>
