@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> February 2022 ClangBuiltLinux Work | Nathan Chancellor</title>
+  <link rel = 'canonical' href = 'https://nathanchance.dev/posts/february-2022-cbl-work/'>
+  <meta name="description" content="I am a Linux kernel developer focused on improving compatibility with LLVM and clang as part of [ClangBuiltLinux](https://clangbuiltlinux.github.io/). I mostly blog about my work and tips and tricks that I discover.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="February 2022 ClangBuiltLinux Work" />
+<meta property="og:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
+ Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1)    -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nathanchance.dev/posts/february-2022-cbl-work/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-28T00:17:30-07:00" />
+<meta property="article:modified_time" content="2022-02-28T00:17:30-07:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="February 2022 ClangBuiltLinux Work"/>
+<meta name="twitter:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
+ Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1)    -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here)."/>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://nathanchance.dev/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://nathanchance.dev/images/favicon.ico" />
+
+  
+  
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/posts">Blog</a></li>
+         
+        <li><a href="/about">About</a></li>
+         
+        <li><a href="/nc_resume.pdf">Resume</a></li>
+         
+        <li><a href="/downloads">Downloads</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://nathanchance.dev/posts/january-2022-cbl-work/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&text=February%202022%20ClangBuiltLinux%20Work" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&title=February%202022%20ClangBuiltLinux%20Work" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&is_video=false&description=February%202022%20ClangBuiltLinux%20Work" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=February%202022%20ClangBuiltLinux%20Work&body=Check out this article: https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&title=February%202022%20ClangBuiltLinux%20Work" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&title=February%202022%20ClangBuiltLinux%20Work" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&name=February%202022%20ClangBuiltLinux%20Work&description=Occasionally%2c%20I%20will%20forget%20to%20link%20something%20from%20the%20mailing%20list%20in%20this%20post.%20To%20see%20my%20full%20mailing%20list%20activity%20%28patches%2c%20reviews%2c%20and%20reports%29%2c%20you%20can%20view%20it%20on%20lore.kernel.org.%0aLinux%20kernel%20patches%20%20%20Miscellaneous%20improvements%3a%20These%20are%20series%20or%20patches%20that%20do%20not%20really%20fit%20into%20any%20of%20the%20other%20categories%20I%20typically%20use%20with%20my%20reports.%0a%20Allow%20CONFIG_DEBUG_INFO_DWARF5%3dy%20%2b%20CONFIG_DEBUG_INFO_BTF%3dy%20%28v1%29%20tools%2fresolve_btfids%3a%20Do%20not%20print%20any%20commands%20when%20building%20silently%20%28v1%29%20%20%20%20-Wenum-conversion%3a%20This%20warning%20occurs%20when%20one%20enumerated%20type%20is%20implicitly%20converted%20to%20another%20enumerated%20type%2c%20which%20is%20typically%20a%20bug%2c%20although%20it%20might%20not%20actually%20be%20a%20problem%20in%20practice%20if%20the%20used%20enum%20has%20the%20same%20value%20as%20the%20intended%20enum%20%28which%20is%20the%20case%20here%29." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&t=February%202022%20ClangBuiltLinux%20Work" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux-kernel-patches">Linux kernel patches</a></li>
+    <li><a href="#patch-review-and-input">Patch review and input</a></li>
+    <li><a href="#issue-triage-and-reporting">Issue triage and reporting</a></li>
+    <li><a href="#tooling-improvements">Tooling improvements</a></li>
+    <li><a href="#behind-the-scenes">Behind the scenes</a></li>
+    <li><a href="#special-thanks-to">Special thanks to:</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        February 2022 ClangBuiltLinux Work
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2022-02-28 00:17:30 -0700 MST" itemprop="datePublished">2022-02-28</time>
+          
+        </div>
+        
+        
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/clangbuiltlinux" rel="tag">clangbuiltlinux</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/linux" rel="tag">linux</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/linuxfoundation" rel="tag">linuxfoundation</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/maintainer" rel="tag">maintainer</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on <a href="https://lore.kernel.org/all/?q=f:nathan@kernel.org">lore.kernel.org</a>.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<ul>
+<li>
+<p>Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.</p>
+<ul>
+<li><code>Allow CONFIG_DEBUG_INFO_DWARF5=y + CONFIG_DEBUG_INFO_BTF=y</code> (<a href="https://lore.kernel.org/r/20220201205624.652313-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>tools/resolve_btfids: Do not print any commands when building silently</code> (<a href="https://lore.kernel.org/r/20220201212503.731732-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wenum-conversion</code>: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here). It is still good to get it corrected, as the enums might not stay in sync.</p>
+<ul>
+<li><code>drm/amdkfd: Use proper enum in pm_unmap_queues_v9()</code> (<a href="https://lore.kernel.org/r/20220217162142.1828990-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wimplicit-fallthrough</code>: Clang&rsquo;s <code>-Wimplicit-fallthrough</code> (enabled in commit <a href="https://git.kernel.org/linus/dee2b702bcf067d7b6b62c18bdd060ff0810a800">dee2b702bcf0</a> (&ldquo;kconfig: Add support for -Wimplicit-fallthrough&rdquo;)) is more pedantic than GCC&rsquo;s version, requiring all case statements to have a <code>fallthrough</code> annotation, not just ones that do not fallthrough to <code>break</code> or <code>return</code>. Clang&rsquo;s version matches <a href="https://www.kernel.org/doc/html/latest/process/deprecated.html#implicit-switch-case-fall-through">the kernel&rsquo;s preference for switch statements</a>, so keeping the kernel clean of these warnings is important, in case GCC ever allows a mode that conforms to the kernel&rsquo;s preference.</p>
+<ul>
+<li><code>lib/maple_tree: Fix clang -Wimplicit-fallthrough in mte_set_pivot()</code> (<a href="https://lore.kernel.org/r/20220224161705.1937458-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wunaligned-access</code>: This is a new warning introduced in <code>clang-14</code> to help catch unaligned accesses on ARM, which can be expensive, as they have to go through the exception handler for fixups. The warning is quite noisy, so we shut it up for default builds, but we allow it to show up for <code>W=1</code> to help prevent new instances from creeping in. This should eventually be enabled for default builds as well but cleaning up the instances will take time.</p>
+<ul>
+<li><code>Makefile.extrawarn: Move -Wunaligned-access to W=1</code> (<a href="https://lore.kernel.org/r/20220201232229.2992968-1-nathan@kernel.org/"><code>v1</code></a>, <a href="https://lore.kernel.org/r/20220202230515.2931333-1-nathan@kernel.org/"><code>v2</code></a>, <a href="https://lore.kernel.org/r/20220214161641.1818-1-nathan@kernel.org/"><code>stable backport</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wunitialized</code> / <code>-Wsometimes-uninitialized</code>: As always, Clang will catch uninitialized variables because GCC&rsquo;s version of the warning was <a href="https://git.kernel.org/linus/78a5255ffb6a1af189a83e493d916ba1c54d8c75">moved to <code>W=2</code></a>, which people rarely test with, due to the noise.</p>
+<ul>
+<li><code>io_uring: Fix use of uninitialized ret in io_eventfd_register()</code> (<a href="https://lore.kernel.org/r/20220207162410.1013466-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>drm/stm: Avoid using val uninitialized in ltdc_set_ycbcr_config()</code> (<a href="https://lore.kernel.org/r/20220207165304.1046867-1-nathan@kernel.org/"><code>v1</code></a>, <a href="https://lore.kernel.org/r/20220222152045.484610-1-nathan@kernel.org/"><code>v2</code></a>)</li>
+<li><code>iio: accel: adxl367: Fix handled initialization in adxl367_irq_handler()</code> (<a href="https://lore.kernel.org/r/20220224211034.625130-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wunneeded-internal-declaration</code>: This is a really interesting warning that only Clang appears to have. When a variable is only used in a compile time expression (such as in <code>sizeof()</code> or <code>typeof()</code>), clang will warn about it, as the programmer might have intended to use it elsewhere. In this particular case, it is expected, but there have been <a href="https://git.kernel.org/linus/8289c4b6f2e53750de78bd38cecb6bce4d7a988c">other times</a> where it is clearly a bug.</p>
+<ul>
+<li><code>mm/page_alloc: Mark pagesets as __maybe_unused</code> (<a href="https://lore.kernel.org/r/20220215184322.440969-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wunused-function</code>: This is not typically a Clang specific warning but in this case, only Clang caught it because GCC does not warn on <code>static inline</code> functions in <code>.c</code> files, whereas Clang does. We make Clang match GCC for a default build but Masahiro Yamada <a href="https://git.kernel.org/linus/6863f5643dd717376c2fdc85a47a00f9d738a834">changed that behavior for <code>W=1</code></a> to help clean up or fix unused code.</p>
+<ul>
+<li><code>ftrace: Remove unused ftrace_startup_enable() stub</code> (<a href="https://lore.kernel.org/r/20220214192847.488166-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wunused-variable</code>: Another warning that is not Clang specific but it impacts our builds just like GCC so it is important to clean them up.</p>
+<ul>
+<li><code>proc: Avoid unused variable warning in pagemap_pmd_range()</code> (<a href="https://lore.kernel.org/r/20220207171049.1102239-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p><code>-Wvisibility</code>: This warning merely tells a developer that they have declared a type within a function, which cannot be used outside of the function. GCC has a similar warning, and like the past few warnings, it is important to fix all warnings that appear.</p>
+<ul>
+<li><code>thermal: netlink: Fix parameter type of thermal_genl_cpu_capability_event() stub</code> (<a href="https://lore.kernel.org/r/20220207163829.1025904-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
+<p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/YflZcEjaPoN8G84c@dev-arch.archlinux-ax161/"><code>Re: [PATCH] tools: Ignore errors from </code>which' when searching a GCC toolchain`</a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YflfI9uAz0bR2r4m@dev-arch.archlinux-ax161/"><code>Re: [PATCH v3] seq_file: fix NULL pointer arithmetic warning</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yflg560OtUrCNt7F@dev-arch.archlinux-ax161/"><code>Re: [PATCH] kallsyms: ignore all local labels prefixed by '.L'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YfqqwxKCP+qJCyYg@dev-arch.archlinux-ax161/"><code>Re: [PATCH] include: drop pointless __compiler_offsetof indirection</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D110869#3294696"><code>[X86] Implement -fzero-call-used-regs option</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YgB36FwuRaF85WQq@dev-arch.archlinux-ax161/"><code>Re: [PATCH 1/1] Drivers: hv: vmbus: Rework use of DMA_BIT_MASK(64)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YgR4nzB294ZZEs9j@dev-arch.archlinux-ax161/"><code>Re: [PATCH] drm/amd/pm: fix enabled features retrieving on Renoir and Cyan Skillfish</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YglQW7gVNoRJ7QpQ@dev-arch.archlinux-ax161/"><code>Re: [PATCH] drm/i915: fix build issue when using clang</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Ygpz2M9sH+vAKqNL@dev-arch.archlinux-ax161/"><code>Re: [PATCH] spi: Fix warning for Clang build and simplify code</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Ygv2fvIKiM9w+aSb@dev-arch.archlinux-ax161/"><code>Re: [PATCH v2] drm/i915: fix build issue when using clang</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Ygw7s5XRokaPP1J5@dev-arch.archlinux-ax161/"><code>Re: [PATCH] Documentation/llvm: refresh docs for LLVM=1</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D119978"><code>[libc] Use '+' constraint on inline assembly</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yg2YubZxvYvx7%2Fnm@dev-arch.archlinux-ax161/"><code>Re: [PATCH] um: Allow builds with Clang</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yg6PousYSZXimFCS@dev-arch.archlinux-ax161/"><code>Re: [PATCH] tools: fix unavoidable GCC call in Clang builds</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yg%2FKjpHOZ7HwZq9f@dev-arch.archlinux-ax161/"><code>Re: [PATCH] arm64 module: remove (NOLOAD)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YhEelqnPDr1u4uTD@dev-arch.archlinux-ax161/"><code>Re: [PATCH] riscv module: remove (NOLOAD)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YhUMRoLDan7tJRiL@dev-arch.archlinux-ax161/"><code>Re: [PATCH] [PATCH] AARCH64: Add gcc Shadow Call Stack support</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YhZuk8eA6rsDuJkd@dev-arch.archlinux-ax161/"><code>Re: [PATCH] KVM: x86: Fix pointer mistmatch warning when patching RET0 static calls</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YhfwuCA71h8vMYUQ@dev-arch.archlinux-ax161/"><code>Re: [PATCH v21 2/2] dmaengine: tegra: Add tegra gpcdma driver</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yhz+rfcdp9jxgr+P@archlinux-ax161/"><code>Re: [PATCH] [v2] Kbuild: move to -std=gnu11</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/Yfq3XwozrxYaFhgD@dev-arch.archlinux-ax161/"><code>Re: [PATCH 5/5] drm/stm: ltdc: add support of ycbcr pixel formats</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1578"><code>[LLVM 15] Getting invalid-symbol-name-offset while linking with LLD</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/Rust-for-Linux/linux/issues/657"><code>Skipping BTF generation for net/netfilter/nf_conntrack_h323.ko because it's a Rust module</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YgBtAdhl8dZVTAV+@dev-arch.archlinux-ax161/"><code>Re: ld.lld: error: undefined symbol: socfpga_reset_init</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1581"><code>Boot hang with certain PowerPC configurations after da0e5b885b25cf4ded0fa89b965dc6979ac02ca9</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1582"><code>-Wgnu-variable-sized-type-not-at-end in include/linux/cgroup-defs.h</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YgK1Xetw4YVcUJ+n@dev-arch.archlinux-ax161/"><code>Re: [PATCH V3 4/7] drm/amd/pm: correct the usage for 'supported' member of smu_feature structure</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YgK63cI177ZeF5v1@dev-arch.archlinux-ax161/"><code>Re: [PATCH 1/3] pwm: driver for qualcomm ipq6018 pwm block</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/246"><code>Turn on CONFIG_WERROR for arm64</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/245"><code>Turn on CONFIG_WERROR for x86_64</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1585"><code>Boot issue with CONFIG_ZERO_CALL_USED_REGS=y and _paravirt_ident_64()</code></a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/Linaro/tuxsuite/-/issues/149"><code>Recent infrastructure errors</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D118663"><code>[AArch64] Adds SUBS and ADDS instructions to the MIPeepholeOpt.</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Ygp2wVo8JfWh5iOk@dev-arch.archlinux-ax161/"><code>Re: arm64: clang-nightly: net/ipv4/tcp_input.c: clang: error: clang frontend command failed with exit code 139</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Ygp64CsyyKyRykqE@dev-arch.archlinux-ax161/"><code>Re: kernel/trace/ftrace.c:7157:20: error: unused function 'ftrace_startup_enable'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/20220214174951.131423-1-nathan@kernel.org/"><code>Re: [PATCH v6 7/7] kernfs: Replace per-fs rwsem with hashed ones.</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1590"><code>-Wattribute-warning in drivers/scsi/libfc/fc_elsct.c</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1591"><code>-Wattribute-warning in drivers/misc/habanalabs/common/firmware_if.c</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1592"><code>-Wattribute-warning in drivers/net/ethernet/huawei/hinic/hinic_devlink.c</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/llvm/llvm-project/issues/53391#issuecomment-1040923723"><code>[clang] Assertion tripped in X86 FP Stackifier</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yg2h2Q2vXFkkLGTh@dev-arch.archlinux-ax161/"><code>Re: BUG: Kernel NULL pointer dereference on write at 0x00000000 (rtmsg_ifinfo_build_skb)</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1597"><code>&quot;ld.lld: error: section type mismatch for .plt&quot; after LLVM commit 66f8ac8d3604d67599734c3fd272032e9448aca2</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/issues/181"><code>[Question] Does build-llvm.py need an update for clang-14?</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YhPXX+CSoK++9MP6@dev-arch.archlinux-ax161/"><code>Re: [PATCH v7 1/2] ACPI: APEI: explicit init HEST and GHES in apci_init</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YhUBt20I471s9Bhv@dev-arch.archlinux-ax161/"><code>Re: [PATCH v20 2/2] dmaengine: tegra: Add tegra gpcdma driver</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1602"><code>-Wpointer-type-mismatch in arch/x86/include/asm/kvm-x86-ops.h</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1603"><code>-Wdeclaration-after-statement in lib/raid6/ with proposed -std=gnu11</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/llvm/llvm-project/issues/54062"><code>-Wdeclaration-after-statement in arm_neon.h</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D120192"><code>[DAG] Attempt to fold bswap(shl(x,c)) -&gt; zext(bswap(trunc(shl(x,c-bw/2))))</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1606"><code>.plt section in modules with IBT</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yhlfkk%2FgTz6a%2FhOD@archlinux-ax161/"><code>Re: [PATCH v6 00/71] Introducing the Maple Tree</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/315"><code>Full LTO builds getting killed again?</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/316"><code>android-4.9 + clang-13 &quot;Inconsistent kallsyms data&quot;</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements</h2>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/293"><code>patches: Remove max20086-regulator.c patch from mainline</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/294"><code>patches: Remove mainline series</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/296"><code>Bump llvm_tot anchor and LLVM_TOT_VERSION</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/297"><code>Stop doing builds of linux-4.4.y</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/55"><code>debian/build.sh improvements</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/298"><code>Drop CFI patch on android-mainline</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/299"><code>Enable CONFIG_DEBUG_INFO_BTF for Android and Fedora configs</code></a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/Linaro/tuxmake/-/merge_requests/234"><code>docker: clang-android: Update to r445002</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/300"><code>Run generate.sh on pull requests and pushes</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/301"><code>Add script to generate Markdown for CI badges</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/302"><code>Split GitHub Actions and TuxSuite by toolchain version</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/304"><code>Add support for clang-14</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/305"><code>Include toolchain version in workflow name</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/306"><code>Fix CI badges</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/307"><code>Move shell scripts to scripts/</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/309"><code>Move and update cron logic</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/310"><code>Update cron schedule logic</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/311"><code>Make it green (February 18th, 2022)</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/312"><code>patches: next: Drop net/netfilter/xt_socket.c patch</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/313"><code>patches: next: Add a patch to fix build with KVM_WERROR</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/314"><code>patches: mainline: Drop netfilter patch</code></a></p>
+</li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes</h2>
+<ul>
+<li>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Windows Subsystem for Linux instance, a Raspberry Pi 3 and 4, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:</h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+  <div class="blog-post-comments">
+    
+      <div id="disqus_thread">
+  <script type="text/javascript">
+    (function() {
+      
+      
+      
+      
+    
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'nathanchance';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    
+  </div>
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/posts">Blog</a></li>
+         
+          <li><a href="/about">About</a></li>
+         
+          <li><a href="/nc_resume.pdf">Resume</a></li>
+         
+          <li><a href="/downloads">Downloads</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux-kernel-patches">Linux kernel patches</a></li>
+    <li><a href="#patch-review-and-input">Patch review and input</a></li>
+    <li><a href="#issue-triage-and-reporting">Issue triage and reporting</a></li>
+    <li><a href="#tooling-improvements">Tooling improvements</a></li>
+    <li><a href="#behind-the-scenes">Behind the scenes</a></li>
+    <li><a href="#special-thanks-to">Special thanks to:</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&text=February%202022%20ClangBuiltLinux%20Work" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&title=February%202022%20ClangBuiltLinux%20Work" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&is_video=false&description=February%202022%20ClangBuiltLinux%20Work" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=February%202022%20ClangBuiltLinux%20Work&body=Check out this article: https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&title=February%202022%20ClangBuiltLinux%20Work" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&title=February%202022%20ClangBuiltLinux%20Work" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&name=February%202022%20ClangBuiltLinux%20Work&description=Occasionally%2c%20I%20will%20forget%20to%20link%20something%20from%20the%20mailing%20list%20in%20this%20post.%20To%20see%20my%20full%20mailing%20list%20activity%20%28patches%2c%20reviews%2c%20and%20reports%29%2c%20you%20can%20view%20it%20on%20lore.kernel.org.%0aLinux%20kernel%20patches%20%20%20Miscellaneous%20improvements%3a%20These%20are%20series%20or%20patches%20that%20do%20not%20really%20fit%20into%20any%20of%20the%20other%20categories%20I%20typically%20use%20with%20my%20reports.%0a%20Allow%20CONFIG_DEBUG_INFO_DWARF5%3dy%20%2b%20CONFIG_DEBUG_INFO_BTF%3dy%20%28v1%29%20tools%2fresolve_btfids%3a%20Do%20not%20print%20any%20commands%20when%20building%20silently%20%28v1%29%20%20%20%20-Wenum-conversion%3a%20This%20warning%20occurs%20when%20one%20enumerated%20type%20is%20implicitly%20converted%20to%20another%20enumerated%20type%2c%20which%20is%20typically%20a%20bug%2c%20although%20it%20might%20not%20actually%20be%20a%20problem%20in%20practice%20if%20the%20used%20enum%20has%20the%20same%20value%20as%20the%20intended%20enum%20%28which%20is%20the%20case%20here%29." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2022-cbl-work%2f&t=February%202022%20ClangBuiltLinux%20Work" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Nathan Chancellor 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/posts">Blog</a></li>
+         
+        <li><a href="/about">About</a></li>
+         
+        <li><a href="/nc_resume.pdf">Resume</a></li>
+         
+        <li><a href="/downloads">Downloads</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+
+</html>
