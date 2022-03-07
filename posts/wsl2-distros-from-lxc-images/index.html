@@ -221,45 +221,45 @@
 <p>Once it is downloaded, extract it using something like <a href="https://www.7-zip.org/">7-Zip</a> (I use the &ldquo;Extract Here&rdquo; option). Once you have the raw <code>rootfs.tar</code> file, we are good to go.</p>
 <h3 id="2-import-the-rootfs">2. Import the rootfs</h3>
 <p>Open up a PowerShell instance (I use Windows Terminal). The format of <code>wsl.exe --import</code> is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe --import &lt;distro_name&gt; &lt;distro_folder&gt; &lt;rootfs&gt;
-</code></pre></div><p>I have a <code>Linux</code> folder in my user account where I house all of my Linux files so that is where I am going to install it. By default, PowerShell spawns me in my user folder so I am going to use relative paths.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe --import alpine .\Linux\alpine .\Downloads\rootfs.tar
-</code></pre></div><h3 id="3-run-the-distro-and-start-setting-it-up">3. Run the distro and start setting it up</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>&gt; wsl.exe --import &lt;distro_name&gt; &lt;distro_folder&gt; &lt;rootfs&gt;
+</span></span></code></pre></div><p>I have a <code>Linux</code> folder in my user account where I house all of my Linux files so that is where I am going to install it. By default, PowerShell spawns me in my user folder so I am going to use relative paths.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>&gt; wsl.exe --import alpine .\Linux\alpine .\Downloads\rootfs.tar
+</span></span></code></pre></div><h3 id="3-run-the-distro-and-start-setting-it-up">3. Run the distro and start setting it up</h3>
 <p>Once you have imported the rootfs, the distribution is now available to spawn into with <code>wsl.exe</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">&gt; wsl.exe -d alpine
-<span style="color:#75715e"># uname</span>
-Linux
-</code></pre></div><p>I recommend getting the distribution up to date right out of the gate (Google instructions for the specific distribution you chose):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># apk update</span>
-fetch http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
-fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
-v20200319-2352-g9a801feaea <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/main<span style="color:#f92672">]</span>
-v20200319-2346-g9aab507aee <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/community<span style="color:#f92672">]</span>
-OK: <span style="color:#ae81ff">12421</span> distinct packages available
-<span style="color:#75715e"># apk upgrade</span>
-OK: <span style="color:#ae81ff">39</span> MiB in <span style="color:#ae81ff">25</span> packages
-</code></pre></div><p>After this, I recommend setting up a user account like an official WSL distribution would:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># adduser nathan</span>
-Changing password <span style="color:#66d9ef">for</span> nathan
-New password:
-Retype password:
-passwd: password <span style="color:#66d9ef">for</span> nathan changed by root
-</code></pre></div><p>After this, you should give yourself the ability to use <code>sudo</code> to avoid logging into the <code>root</code> account constantly. It is recommended that you use <code>visudo</code> and insert yourself after the <code>root    ALL=(ALL) ALL</code> line. There are plenty of resources on Google for how to give yourself <code>sudo</code> access, follow those instead of me :)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>&gt; wsl.exe -d alpine
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># uname</span>
+</span></span><span style="display:flex;"><span>Linux
+</span></span></code></pre></div><p>I recommend getting the distribution up to date right out of the gate (Google instructions for the specific distribution you chose):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># apk update</span>
+</span></span><span style="display:flex;"><span>fetch http://dl-cdn.alpinelinux.org/alpine/edge/main/x86_64/APKINDEX.tar.gz
+</span></span><span style="display:flex;"><span>fetch http://dl-cdn.alpinelinux.org/alpine/edge/community/x86_64/APKINDEX.tar.gz
+</span></span><span style="display:flex;"><span>v20200319-2352-g9a801feaea <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/main<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>v20200319-2346-g9aab507aee <span style="color:#f92672">[</span>http://dl-cdn.alpinelinux.org/alpine/edge/community<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>OK: <span style="color:#ae81ff">12421</span> distinct packages available
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># apk upgrade</span>
+</span></span><span style="display:flex;"><span>OK: <span style="color:#ae81ff">39</span> MiB in <span style="color:#ae81ff">25</span> packages
+</span></span></code></pre></div><p>After this, I recommend setting up a user account like an official WSL distribution would:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># adduser nathan</span>
+</span></span><span style="display:flex;"><span>Changing password <span style="color:#66d9ef">for</span> nathan
+</span></span><span style="display:flex;"><span>New password:
+</span></span><span style="display:flex;"><span>Retype password:
+</span></span><span style="display:flex;"><span>passwd: password <span style="color:#66d9ef">for</span> nathan changed by root
+</span></span></code></pre></div><p>After this, you should give yourself the ability to use <code>sudo</code> to avoid logging into the <code>root</code> account constantly. It is recommended that you use <code>visudo</code> and insert yourself after the <code>root    ALL=(ALL) ALL</code> line. There are plenty of resources on Google for how to give yourself <code>sudo</code> access, follow those instead of me :)</p>
 <p>Once you have created your user account, you can tell WSL to use it by default when you run <code>wsl.exe -d &lt;name&gt;</code> through <code>/etc/wsl.conf</code> (obviously replace my name with the one you chose with <code>adduser</code> above):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e"># cat &lt;&lt;EOF &gt; /etc/wsl.conf</span>
-<span style="color:#f92672">[</span>user<span style="color:#f92672">]</span>
-default <span style="color:#f92672">=</span> nathan
-EOF
-</code></pre></div><p>To have these changes get reflected in the distro, restart it:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; wsl.exe -d alpine
-<span style="color:#75715e"># whoami</span>
-root
-<span style="color:#75715e"># exit</span>
-&gt; wsl.exe --terminate alpine
-&gt; wsl.exe -d alpine
-$ whoami
-nathan
-</code></pre></div><p>Hopefully this was somewhat informative. This process might work with Docker images as well since they are usually created from a raw rootfs as well (see <a href="https://github.com/debuerreotype/docker-debian-artifacts/tree/c7d149fa1214588199f3f0b8c30851b9cea47c6b/stable">Debian&rsquo;s</a> for example), feel free to give it a try. I have been uncovering more and more things with WSL 2 lately that I hope to continue to share here. If you have any questions or comments, feel free to reach out to me on <a href="https://twitter.com/nathanchance">Twitter</a>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># cat &lt;&lt;EOF &gt; /etc/wsl.conf</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>user<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>default <span style="color:#f92672">=</span> nathan
+</span></span><span style="display:flex;"><span>EOF
+</span></span></code></pre></div><p>To have these changes get reflected in the distro, restart it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt; wsl.exe -d alpine
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># whoami</span>
+</span></span><span style="display:flex;"><span>root
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># exit</span>
+</span></span><span style="display:flex;"><span>&gt; wsl.exe --terminate alpine
+</span></span><span style="display:flex;"><span>&gt; wsl.exe -d alpine
+</span></span><span style="display:flex;"><span>$ whoami
+</span></span><span style="display:flex;"><span>nathan
+</span></span></code></pre></div><p>Hopefully this was somewhat informative. This process might work with Docker images as well since they are usually created from a raw rootfs as well (see <a href="https://github.com/debuerreotype/docker-debian-artifacts/tree/c7d149fa1214588199f3f0b8c30851b9cea47c6b/stable">Debian&rsquo;s</a> for example), feel free to give it a try. I have been uncovering more and more things with WSL 2 lately that I hope to continue to share here. If you have any questions or comments, feel free to reach out to me on <a href="https://twitter.com/nathanchance">Twitter</a>.</p>
 
     </div>
   </article>

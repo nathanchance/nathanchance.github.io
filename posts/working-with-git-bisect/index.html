@@ -254,8 +254,8 @@ One caveat before I start: there is great official documentation for git bisect,
 <li>
 <p>Confirm result.</p>
 <p>Once <code>git bisect</code> is done, you are left either on the bad commit or the commit right before, depending on how <code>git bisect</code> converged. At this point, I recommend saving the output of <code>git bisect log</code> to a file like so:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git bisect log &gt; bisect.log
-</code></pre></div><p>It can be handy for reproducing the result later or allowing someone else to confirm the results.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect log &gt; bisect.log
+</span></span></code></pre></div><p>It can be handy for reproducing the result later or allowing someone else to confirm the results.</p>
 <p>After this, I usually will try to see if I can revert the problematic commit on the current version of the software to confirm that it was the source of the issue. To get back to that point, run <code>git bisect reset</code>, <code>git checkout</code> to the current version of the software, and attempt to <code>git revert</code> the commit. Sometimes this is not always easy, especially if there have been further changes around that area. Use your best judgement when deciding to report the issue.</p>
 </li>
 </ol>
@@ -276,22 +276,22 @@ One caveat before I start: there is great official documentation for git bisect,
 <p>Similar to the previous note, there are times where doing a merge results in a conflict, which again happens when two trees are developed independently of each other. A quick <code>grep</code> on the logs of the Linux kernel brings up an example of where this happened, commit <a href="https://git.kernel.org/linus/4a601f109614929aee45e58ca3514ec93da070bb">4a601f109614</a> (&ldquo;net: mscc: ocelot: adjust maxlen on NPI port, not CPU&rdquo;).</p>
 <p>This is why I try to leave what the conflicts were in my commit messages; it makes it easier for others to audit my choices.</p>
 <p>If you suspect this is the source of a problem, you can redo the merge and see what the conflicts were. For example, we&rsquo;ll use the merge commit above:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git show -s --format<span style="color:#f92672">=</span>short 1d343579312311aa9875b34d5a921f5e2ec69f0a
-commit 1d343579312311aa9875b34d5a921f5e2ec69f0a
-Merge: a8eceea84a3a 0d81a3f29c0a
-Author: David S. Miller &lt;davem@davemloft.net&gt;
-
-    Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
-
-$ git checkout 0d81a3f29c0a
-...
-HEAD is now at 0d81a3f29c0a Merge tag <span style="color:#e6db74">&#39;drm-fixes-2020-03-13&#39;</span> of git://anongit.freedesktop.org/drm/drm
-
-$ git merge a8eceea84a3a
-...
-CONFLICT <span style="color:#f92672">(</span>content<span style="color:#f92672">)</span>: Merge conflict in drivers/net/ethernet/mscc/ocelot.c
-...
-</code></pre></div><p>I will not go into the details but looking at the conflicts and comparing how they were resolved in the actual commit can help narrow down where the bug is coming from (again, if it is not immediately obvious).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git show -s --format<span style="color:#f92672">=</span>short 1d343579312311aa9875b34d5a921f5e2ec69f0a
+</span></span><span style="display:flex;"><span>commit 1d343579312311aa9875b34d5a921f5e2ec69f0a
+</span></span><span style="display:flex;"><span>Merge: a8eceea84a3a 0d81a3f29c0a
+</span></span><span style="display:flex;"><span>Author: David S. Miller &lt;davem@davemloft.net&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git checkout 0d81a3f29c0a
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>HEAD is now at 0d81a3f29c0a Merge tag <span style="color:#e6db74">&#39;drm-fixes-2020-03-13&#39;</span> of git://anongit.freedesktop.org/drm/drm
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git merge a8eceea84a3a
+</span></span><span style="display:flex;"><span>...
+</span></span><span style="display:flex;"><span>CONFLICT <span style="color:#f92672">(</span>content<span style="color:#f92672">)</span>: Merge conflict in drivers/net/ethernet/mscc/ocelot.c
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>I will not go into the details but looking at the conflicts and comparing how they were resolved in the actual commit can help narrow down where the bug is coming from (again, if it is not immediately obvious).</p>
 </li>
 </ol>
 <h3 id="what-to-do-if-you-chose-wrong-when-bisecting">What to do if you chose wrong when bisecting</h3>
@@ -308,7 +308,7 @@ CONFLICT <span style="color:#f92672">(</span>content<span style="color:#f92672">
 <pre tabindex="0"><code>$ cat bisect.log
 # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests
 # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11
-git bisect start 'origin/master' 'llvmorg-11-init'
+git bisect start &#39;origin/master&#39; &#39;llvmorg-11-init&#39;
 # good: [60fea2713d3f37d70383aacaa75f61344cc3234a] AMDGPU/GlobalISel: Improve 16-bit bswap
 git bisect good 60fea2713d3f37d70383aacaa75f61344cc3234a
 # good: [31e03317633909c50ead53edf8a19b60698075cc] [ORC] Skip ST_File symbols in MaterializationUnit interfaces / resolution.
@@ -319,7 +319,7 @@ git bisect bad 263c4a3c75a46996bec1f23264874b7f1334426a
 git bisect good b28ed9cec8dd7225164eb8c0884aa463654ef3fc
 # good: [a46dba24fa35ab52e9a1bbaa52666bcc37859927] [AMDGPU] Extend macro fusion for ADDC and SUBB to SUBBREV
 git bisect good a46dba24fa35ab52e9a1bbaa52666bcc37859927
-# bad: [df90a15b1ac938559a8c3af12126559c1e1e9558] [lldb] Clear all settings during a test's setUp
+# bad: [df90a15b1ac938559a8c3af12126559c1e1e9558] [lldb] Clear all settings during a test&#39;s setUp
 git bisect bad df90a15b1ac938559a8c3af12126559c1e1e9558
 # good: [ab69cd0779c529519eb7d26e0fa1b8dfb505f838] [X86] Support intrinsic _mm_cldemote
 git bisect good ab69cd0779c529519eb7d26e0fa1b8dfb505f838
@@ -340,7 +340,7 @@ git bisect good c4cbc5806218bf4232523771805580fa40b83244
 <pre tabindex="0"><code>$ cat bisect.log
 # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests
 # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11
-git bisect start 'origin/master' 'llvmorg-11-init'
+git bisect start &#39;origin/master&#39; &#39;llvmorg-11-init&#39;
 # good: [60fea2713d3f37d70383aacaa75f61344cc3234a] AMDGPU/GlobalISel: Improve 16-bit bswap
 git bisect good 60fea2713d3f37d70383aacaa75f61344cc3234a
 # good: [31e03317633909c50ead53edf8a19b60698075cc] [ORC] Skip ST_File symbols in MaterializationUnit interfaces / resolution.
@@ -383,25 +383,25 @@ $ git bisect replay bisect.log
 <p>Apply a fix on top of the tested revision</p>
 <p>I will often do this if there was a fix for the issue later in the history. For example, there was a change in clang 11 that broke building <code>scripts/dtc</code> within the Linux kernel. That was fixed by <a href="https://git.kernel.org/linus/e33a814e772cdc36436c8c188d8c42d019fda639">this commit</a> but any revision in the Linux kernel that does not have that as an ancestor will fail to build, which can make bisecting difficult.</p>
 <p>What I will do in this case is temporarily apply that fix on top of whatever revision <code>git</code> is currently testing. I can do this automatically so that <code>git bisect run</code> can handle it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ grep -q <span style="color:#e6db74">&#34;YYLTYPE yylloc&#34;</span> scripts/dtc/dtc-lexer.l <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>git format-patch -1 --stdout e33a814e772cdc36436c8c188d8c42d019fda639 | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>git apply -3v
-</code></pre></div><p>This basically says if the line that was removed by the commit is present in the tree, apply (but do not commit) the change to the index.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ grep -q <span style="color:#e6db74">&#34;YYLTYPE yylloc&#34;</span> scripts/dtc/dtc-lexer.l <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>git format-patch -1 --stdout e33a814e772cdc36436c8c188d8c42d019fda639 | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>git apply -3v
+</span></span></code></pre></div><p>This basically says if the line that was removed by the commit is present in the tree, apply (but do not commit) the change to the index.</p>
 <p>After I test this revision, it is important to get rid of that modification before running <code>git bisect &lt;good|bad&gt;</code>, otherwise there will be an error.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git reset --hard
-
-$ git bisect good
-</code></pre></div><p>The <code>git bisect</code> documentation that I linked above has an example of doing this with <code>git bisect run</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git reset --hard
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git bisect good
+</span></span></code></pre></div><p>The <code>git bisect</code> documentation that I linked above has an example of doing this with <code>git bisect run</code>.</p>
 </li>
 </ol>
 <h3 id="finding-the-commit-that-fixed-something">Finding the commit that fixed something</h3>
 <p>Sometimes, it might be necessary to see what commit fixed something versus broke something. Unintentional fixes can be just as bad as unintentional breakages. The process is basically the same as the one described in the beginning but involves setting terms that are a little easier to work with.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git bisect start --term-old broken --term-new fixed
-
-$ git bisect fixed &lt;fixed_rev&gt;
-
-$ git bisect broken &lt;broken_rev&gt;
-</code></pre></div><p>After that, the process is the exact same but <code>git bisect &lt;fixed|broken&gt;</code> is used instead of <code>git bisect &lt;good|bad&gt;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect start --term-old broken --term-new fixed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git bisect fixed &lt;fixed_rev&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$ git bisect broken &lt;broken_rev&gt;
+</span></span></code></pre></div><p>After that, the process is the exact same but <code>git bisect &lt;fixed|broken&gt;</code> is used instead of <code>git bisect &lt;good|bad&gt;</code>.</p>
 <h2 id="real-time-example">Real time example</h2>
 <p>I recently came across a bug in LLVM exposed by building the RISC-V Linux kernel&rsquo;s <code>allyesconfig</code> target. I determined that it was working at <a href="https://github.com/llvm/llvm-project/commit/b98ad941a40c96c841bceb171725c925500fce6c">the flang merge</a> but it was broken at <a href="https://github.com/llvm/llvm-project/commit/314f00a03489c84b764de2a6f4401996865ff281">top of tree</a> (at the time).</p>
 <p>To bisect this, I used <a href="https://github.com/ClangBuiltLinux/tc-build">tc-build</a>, an LLVM build script that builds a toolchain able to build the Linux kernel. If you run into an issue with LLVM and the Linux kernel, it can be very helpful (and I am more than willing to give a more in-depth tutorial around this if needed).</p>

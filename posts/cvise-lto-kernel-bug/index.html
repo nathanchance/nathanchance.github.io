@@ -231,7 +231,7 @@ Date:   Sun Nov 28 14:09:19 2021 -0800
 
     Linux 5.16-rc3
 
-$ echo &quot;CONFIG_FTRACE_MCOUNT_USE_RECORDMCOUNT=n
+$ echo &#34;CONFIG_FTRACE_MCOUNT_USE_RECORDMCOUNT=n
 CONFIG_KASAN=n
 CONFIG_GCOV_KERNEL=n
 CONFIG_COMPILE_TEST=n
@@ -240,7 +240,7 @@ CONFIG_TRIM_UNUSED_KSYMS=y
 CONFIG_CFI_CLANG=y
 CONFIG_CFI_CLANG_SHADOW=y
 CONFIG_SHADOW_CALL_STACK=y
-CONFIG_INIT_STACK_ALL_ZERO=y&quot; &gt;kernel/configs/repro.config
+CONFIG_INIT_STACK_ALL_ZERO=y&#34; &gt;kernel/configs/repro.config
 
 $ tuxmake \
     -a x86_64 \
@@ -250,18 +250,18 @@ $ tuxmake \
     -t clang-13 \
     LLVM=1 LLVM_IAS=1 default
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM13.0.1' Reader: 'LLVM 13.0.1')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM13.0.1&#39; Reader: &#39;LLVM 13.0.1&#39;)
 make[3]: *** [/home/nathan/cbl/worktrees/cbl-1215/scripts/Makefile.build:307: fs/overlayfs/overlay.lto.o] Error 1
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM13.0.1' Reader: 'LLVM 13.0.1')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM13.0.1&#39; Reader: &#39;LLVM 13.0.1&#39;)
 make[3]: *** [/home/nathan/cbl/worktrees/cbl-1215/scripts/Makefile.build:307: fs/xfs/xfs.lto.o] Error 1
 ...
 </code></pre><p>Okay, so the bug is reproducible locally. Now, I know that some of these configuration options are not needed to reproduce the issue. <code>CONFIG_CFI_CLANG</code> and <code>CONFIG_CFI_CLANG_SHADOW</code> do not currently work for x86_64. <code>CONFIG_SHADOW_CALL_STACK</code> is an arm64 only feature. <code>CONFIG_FTRACE_MCOUNT_USE_RECORDMCOUNT</code> is not a user selectable Kconfig value (it is just <code>bool</code>, rather than <code>bool &quot;...&quot;</code>). <code>CONFIG_INIT_STACK_ALL_ZERO</code> and <code>CONFIG_TRIM_UNUSED_KSYMS</code> are a little suspect but let&rsquo;s see if we can reproduce this bug without them to keep our scope more limited (fewer variables can make the bug easier to fix down the road).</p>
 <p><code>CONFIG_LTO_CLANG_FULL</code> appears critical to the problem and <code>CONFIG_KASAN</code>, <code>CONFIG_GCOV_KERNEL</code>, and <code>CONFIG_COMPILE_TEST</code> all need to be disabled for it to be selected. So:</p>
-<pre tabindex="0"><code>$ echo &quot;CONFIG_COMPILE_TEST=n
+<pre tabindex="0"><code>$ echo &#34;CONFIG_COMPILE_TEST=n
 CONFIG_GCOV_KERNEL=n
 CONFIG_KASAN=n
-CONFIG_LTO_CLANG_FULL=y&quot; &gt;kernel/configs/repro.config
+CONFIG_LTO_CLANG_FULL=y&#34; &gt;kernel/configs/repro.config
 
 $ tuxmake \
     -a x86_64 \
@@ -271,10 +271,10 @@ $ tuxmake \
     -t clang-13 \
     LLVM=1 LLVM_IAS=1 default
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM13.0.1' Reader: 'LLVM 13.0.1')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM13.0.1&#39; Reader: &#39;LLVM 13.0.1&#39;)
 make[3]: *** [/home/nathan/cbl/worktrees/cbl-1215/scripts/Makefile.build:307: fs/overlayfs/overlay.lto.o] Error 1
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM13.0.1' Reader: 'LLVM 13.0.1')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM13.0.1&#39; Reader: &#39;LLVM 13.0.1&#39;)
 make[3]: *** [/home/nathan/cbl/worktrees/cbl-1215/scripts/Makefile.build:307: fs/xfs/xfs.lto.o] Error 1
 ...
 I: config: PASS in 0:00:07.230375
@@ -282,7 +282,7 @@ I: default: FAIL in 0:09:36.347980
 I: build output in /home/nathan/.cache/tuxmake/builds/273
 </code></pre><p>Alright, we have a decently minimal configuration (<code>allmodconfig</code> with full LTO) to work off of. Take note of the <code>.../.cache/tuxmake/builds/273</code>, that will come in handy later.</p>
 <h2 id="reproduce-the-bug-with-the-latest-compiler">Reproduce the bug with the latest compiler</h2>
-<p>We reproduced the bug with the latest Linux kernel development release but we used a released version of <code>clang</code> (13). For the same reason as above, we want to make sure the bug is not already fixed with the development branch, as duplicate reports waste developers' time. <a href="https://apt.llvm.org/">apt.llvm.org</a> is a great resource for quickly getting access to a close to tip of tree <code>clang</code> to test with, if you are on Debian/Ubuntu or willing to work out of a Docker image. For the purpose of this tutorial, we are just going to build it from source. I developed a Python LLVM build script (<code>build-llvm.py</code>) as part of <a href="https://github.com/ClangBuiltLinux/tc-build">tc-build</a> to help with situations like this.</p>
+<p>We reproduced the bug with the latest Linux kernel development release but we used a released version of <code>clang</code> (13). For the same reason as above, we want to make sure the bug is not already fixed with the development branch, as duplicate reports waste developers&rsquo; time. <a href="https://apt.llvm.org/">apt.llvm.org</a> is a great resource for quickly getting access to a close to tip of tree <code>clang</code> to test with, if you are on Debian/Ubuntu or willing to work out of a Docker image. For the purpose of this tutorial, we are just going to build it from source. I developed a Python LLVM build script (<code>build-llvm.py</code>) as part of <a href="https://github.com/ClangBuiltLinux/tc-build">tc-build</a> to help with situations like this.</p>
 <p>I will explain the flags below:</p>
 <ul>
 <li><code>--build-folder</code>/<code>--llvm-folder</code>: By default, the script keeps everything self-contained; it builds the toolchain in <code>build/</code> and it downloads the source to <code>llvm-project/</code>. I have a separate tree that I use for development so I provide these flags to point those folders to that tree. These will not be necessary under normal circumstances.</li>
@@ -298,7 +298,7 @@ I: build output in /home/nathan/.cache/tuxmake/builds/273
     --build-stage1-only \
     --check-targets clang ll{d,vm{,-unit}} \
     --llvm-folder $CBL_SRC/llvm-project \
-    --projects &quot;clang;lld&quot; \
+    --projects &#34;clang;lld&#34; \
     --targets X86
 ...
 
@@ -329,34 +329,34 @@ LLD 14.0.0 (compatible with GNU linkers)
 <pre tabindex="0"><code>$ cp $HOME/.cache/tuxmake/builds/273/config .config
 
 $ PATH=$CBL_SRC/llvm-project/build/stage1/bin:$PATH \
-    make -skj&quot;$(nproc)&quot; LLVM=1 LLVM_IAS=1 olddefconfig all
+    make -skj&#34;$(nproc)&#34; LLVM=1 LLVM_IAS=1 olddefconfig all
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0git' Reader: 'LLVM 14.0.0git')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM14.0.0git&#39; Reader: &#39;LLVM 14.0.0git&#39;)
 make[3]: *** [scripts/Makefile.build:307: fs/overlayfs/overlay.lto.o] Error 1
 ...
-drivers/gpu/drm/i915/intel_pm.c:3065:12: error: use of bitwise '|' with boolean operands [-Werror,-Wbitwise-instead-of-logical]
+drivers/gpu/drm/i915/intel_pm.c:3065:12: error: use of bitwise &#39;|&#39; with boolean operands [-Werror,-Wbitwise-instead-of-logical]
         changed = ilk_increase_wm_latency(dev_priv, dev_priv-&gt;wm.pri_latency, 12) |
                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 drivers/gpu/drm/i915/intel_pm.c:3065:12: note: cast one or both operands to int to silence this warning
-drivers/gpu/drm/i915/intel_pm.c:3065:12: error: use of bitwise '|' with boolean operands [-Werror,-Wbitwise-instead-of-logical]
+drivers/gpu/drm/i915/intel_pm.c:3065:12: error: use of bitwise &#39;|&#39; with boolean operands [-Werror,-Wbitwise-instead-of-logical]
         changed = ilk_increase_wm_latency(dev_priv, dev_priv-&gt;wm.pri_latency, 12) |
                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                                                                   ||
 drivers/gpu/drm/i915/intel_pm.c:3065:12: note: cast one or both operands to int to silence this warning
 2 errors generated.
 ...
-drivers/power/reset/ltc2952-poweroff.c:162:28: error: expression requires  'long double' type support, but target 'x86_64-unknown-linux-gnu' does not support it
+drivers/power/reset/ltc2952-poweroff.c:162:28: error: expression requires  &#39;long double&#39; type support, but target &#39;x86_64-unknown-linux-gnu&#39; does not support it
         data-&gt;wde_interval = 300L * 1E6L;
                                   ^
-drivers/power/reset/ltc2952-poweroff.c:162:21: error: expression requires  'long double' type support, but target 'x86_64-unknown-linux-gnu' does not support it
+drivers/power/reset/ltc2952-poweroff.c:162:21: error: expression requires  &#39;long double&#39; type support, but target &#39;x86_64-unknown-linux-gnu&#39; does not support it
         data-&gt;wde_interval = 300L * 1E6L;
                            ^
-drivers/power/reset/ltc2952-poweroff.c:163:41: error: expression requires  'long double' type support, but target 'x86_64-unknown-linux-gnu' does not support it
+drivers/power/reset/ltc2952-poweroff.c:163:41: error: expression requires  &#39;long double&#39; type support, but target &#39;x86_64-unknown-linux-gnu&#39; does not support it
         data-&gt;trigger_delay = ktime_set(2, 500L*1E6L);
                                                ^
 3 errors generated.
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0git' Reader: 'LLVM 14.0.0git')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM14.0.0git&#39; Reader: &#39;LLVM 14.0.0git&#39;)
 make[3]: *** [scripts/Makefile.build:307: fs/xfs/xfs.lto.o] Error 1
 ...
 </code></pre><p>So the issue reproduces but we picked up a couple new issues by the nature of going to a development build of LLVM. These are not going to impact our triage but it is still good to fix them. Thankfully, patches to fix these issues exist on the mailing list:</p>
@@ -371,7 +371,7 @@ patching file drivers/power/reset/ltc2952-poweroff.c
 <p>The next step is getting the files that we need to reproduce the issue separated from the build system. We can choose to look at <code>fs/overlayfs/overlay.lto.o</code> or <code>fs/xfs/xfs.lto.o</code>; I am going to choose the former, as <code>fs/overlayfs/</code> is a smaller directory than <code>fs/xfs/</code>.</p>
 <p>The Linux kernel&rsquo;s build system has a variable <code>V=1</code> to see every build step, which we can dump to a text file for easy inspection and searching. Note: the <code>-s</code> flag needs to be dropped from <code>make</code> to get the full output.</p>
 <pre tabindex="0"><code>$ PATH=$CBL_SRC/llvm-project/build/stage1/bin:$PATH \
-    make -kj&quot;$(nproc)&quot; LLVM=1 LLVM_IAS=1 olddefconfig clean all V=1 &amp;&gt;build.log
+    make -kj&#34;$(nproc)&#34; LLVM=1 LLVM_IAS=1 olddefconfig clean all V=1 &amp;&gt;build.log
 </code></pre><p>First, we need to see how <code>fs/overlayfs/overlay.lto.o</code> is generated.</p>
 <pre tabindex="0"><code>$ rg fs/overlayfs/overlay.lto.o build.log
 6011:  ld.lld -m elf_x86_64 -mllvm -import-instr-limit=5   -r -o fs/overlayfs/overlay.lto.o  --whole-archive fs/overlayfs/overlay.o  ; ./tools/objtool/objtool orc generate  --module  --no-fp  --no-unreachable  --retpoline  --uaccess  --mcount fs/overlayfs/overlay.lto.o
@@ -391,21 +391,21 @@ $ echo $?
 <pre tabindex="0"><code>$ rm fs/overlayfs/overlay.o
 
 $ $CBL_SRC/llvm-project/build/stage1/bin/ld.lld -m elf_x86_64 -mllvm -import-instr-limit=5 -r -o fs/overlayfs/overlay.lto.o --whole-archive fs/overlayfs/file.o
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0git' Reader: 'LLVM 14.0.0git')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM14.0.0git&#39; Reader: &#39;LLVM 14.0.0git&#39;)
 </code></pre><p>Okay, we have a single C file that can reproduce the issue, which we can reduce from. The Linux kernel allows us to generate a preprocessed file (<code>.i</code>) from source files (<code>.c</code>) directly, which is important for reduction purposes as it will be one file that can be built anywhere, rather than being tied to a build system and headers. The other thing we need is the build command for the object file (<code>.o</code>) so we know what flags to use for reproducing the issue. The kernel&rsquo;s build system generates <code>.cmd</code> to show the command used to build the object file but these only show up when the object file can be successfully built. If you are reducing a build error on the object file, you can use the <code>V=1</code> trick above to see the command. So, putting that all together:</p>
-<pre tabindex="0"><code># Generate the '.i' and '.o' files
+<pre tabindex="0"><code># Generate the &#39;.i&#39; and &#39;.o&#39; files
 $ PATH=$CBL_SRC/llvm-project/build/stage1/bin:$PATH \
-    make -kj&quot;$(nproc)&quot; LLVM=1 LLVM_IAS=1 olddefconfig clean fs/overlayfs/file.{i,o}
+    make -kj&#34;$(nproc)&#34; LLVM=1 LLVM_IAS=1 olddefconfig clean fs/overlayfs/file.{i,o}
 
 # Get the compiler command from the .cmd file
 $ head -1 fs/overlayfs/.file.o.cmd
-cmd_fs/overlayfs/file.o := clang -Wp,-MMD,fs/overlayfs/.file.o.d -nostdinc -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -Qunused-arguments -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 --target=x86_64-linux-gnu -fintegrated-as -Werror=unknown-warning-option -Werror=ignored-optimization-argument -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mstack-alignment=8 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mretpoline-external-thunk -fno-delete-null-pointer-checks -Wno-frame-address -Wno-address-of-packed-member -O2 -Wframe-larger-than=2048 -fstack-protector-strong -Werror &quot;-Wimplicit-fallthrough&quot; -Wno-gnu -mno-global-merge -Wno-unused-but-set-variable -Wno-unused-const-variable -ftrivial-auto-var-init=pattern -fno-stack-clash-protection -pg -mfentry -DCC_USING_NOP_MCOUNT -DCC_USING_FENTRY -fno-lto -flto -fvisibility=hidden -falign-functions=64 -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-array-bounds -fno-strict-overflow -fno-stack-check -Werror=date-time -Werror=incompatible-pointer-types -Wno-initializer-overrides -Wno-format -Wno-sign-compare -Wno-format-zero-length -Wno-pointer-to-enum-cast -Wno-tautological-constant-out-of-range-compare  -fsanitize=array-bounds -fsanitize=shift -fsanitize=integer-divide-by-zero -fsanitize=object-size -fsanitize=bool -fsanitize=enum  -fsanitize-coverage=trace-pc -fsanitize-coverage=trace-cmp  -DMODULE  -DKBUILD_BASENAME='&quot;file&quot;' -DKBUILD_MODNAME='&quot;overlay&quot;' -D__KBUILD_MODNAME=kmod_overlay -c -o fs/overlayfs/file.o fs/overlayfs/file.c
+cmd_fs/overlayfs/file.o := clang -Wp,-MMD,fs/overlayfs/.file.o.d -nostdinc -I./arch/x86/include -I./arch/x86/include/generated  -I./include -I./arch/x86/include/uapi -I./arch/x86/include/generated/uapi -I./include/uapi -I./include/generated/uapi -include ./include/linux/compiler-version.h -include ./include/linux/kconfig.h -include ./include/linux/compiler_types.h -D__KERNEL__ -Qunused-arguments -fmacro-prefix-map=./= -Wall -Wundef -Werror=strict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -fshort-wchar -fno-PIE -Werror=implicit-function-declaration -Werror=implicit-int -Werror=return-type -Wno-format-security -std=gnu89 --target=x86_64-linux-gnu -fintegrated-as -Werror=unknown-warning-option -Werror=ignored-optimization-argument -mno-sse -mno-mmx -mno-sse2 -mno-3dnow -mno-avx -fcf-protection=none -m64 -falign-loops=1 -mno-80387 -mno-fp-ret-in-387 -mstack-alignment=8 -mskip-rax-setup -mtune=generic -mno-red-zone -mcmodel=kernel -DCONFIG_X86_X32_ABI -Wno-sign-compare -fno-asynchronous-unwind-tables -mretpoline-external-thunk -fno-delete-null-pointer-checks -Wno-frame-address -Wno-address-of-packed-member -O2 -Wframe-larger-than=2048 -fstack-protector-strong -Werror &#34;-Wimplicit-fallthrough&#34; -Wno-gnu -mno-global-merge -Wno-unused-but-set-variable -Wno-unused-const-variable -ftrivial-auto-var-init=pattern -fno-stack-clash-protection -pg -mfentry -DCC_USING_NOP_MCOUNT -DCC_USING_FENTRY -fno-lto -flto -fvisibility=hidden -falign-functions=64 -Wdeclaration-after-statement -Wvla -Wno-pointer-sign -Wno-array-bounds -fno-strict-overflow -fno-stack-check -Werror=date-time -Werror=incompatible-pointer-types -Wno-initializer-overrides -Wno-format -Wno-sign-compare -Wno-format-zero-length -Wno-pointer-to-enum-cast -Wno-tautological-constant-out-of-range-compare  -fsanitize=array-bounds -fsanitize=shift -fsanitize=integer-divide-by-zero -fsanitize=object-size -fsanitize=bool -fsanitize=enum  -fsanitize-coverage=trace-pc -fsanitize-coverage=trace-cmp  -DMODULE  -DKBUILD_BASENAME=&#39;&#34;file&#34;&#39; -DKBUILD_MODNAME=&#39;&#34;overlay&#34;&#39; -D__KBUILD_MODNAME=kmod_overlay -c -o fs/overlayfs/file.o fs/overlayfs/file.c
 </code></pre><p>We can take that <code>clang</code> command and use it to generate <code>fs/overlayfs/file.o</code> from <code>fs/overlayfs/file.i</code> to make sure the issue is completely reproducible outside of the kernel&rsquo;s build system. To do so, I like to copy the files into a separate folder and work within there.</p>
 <pre tabindex="0"><code>$ tmp_dir=$(mktemp -d)
 
-$ cp fs/overlayfs/file.i &quot;$tmp_dir&quot;
+$ cp fs/overlayfs/file.i &#34;$tmp_dir&#34;
 
-$ cd &quot;$tmp_dir&quot;
+$ cd &#34;$tmp_dir&#34;
 </code></pre><p>Now, the clang command has several flags in it that we do not need:</p>
 <ul>
 <li>Any of the flags prior to <code>-Wall</code> and define flags (<code>-D...</code>) since those are all preprocessor flags (the file has already been preprocessed at this stage).</li>
@@ -429,7 +429,7 @@ $ chmod +x test.sh
 
 $ ./test.sh
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0git' Reader: 'LLVM 14.0.0git')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM14.0.0git&#39; Reader: &#39;LLVM 14.0.0git&#39;)
 </code></pre><p>Before we move on, we should trim down the compiler flags, as some of them may not be necessary to reproduce the issue. Dropping flags after this point is definitely possible but doing it now can help <code>creduce</code> or <code>cvise</code> really tease out the source code that triggers the problem, as your interesting test can be written in a clearer manner (more on that later). There is not really any art to this; I will typically remove four to five flags at a time to see if I can reproduce the issue. If it does, the flags were not important but if it doesn&rsquo;t, the flag needs to stick around (the Linux kernel is no longer buildable without optimizations so <code>-Os</code>/<code>-O2</code>/<code>-O3</code> will almost always be needed). After running through that process with this issue, we end up with:</p>
 <pre tabindex="0"><code>$ cat test.sh
 #!/usr/bin/env bash
@@ -442,7 +442,7 @@ $llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o
 
 $ ./test.sh
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0git' Reader: 'LLVM 14.0.0git')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM14.0.0git&#39; Reader: &#39;LLVM 14.0.0git&#39;)
 </code></pre><p>Sweet! We have a single preprocessed file that we can use to reproduce the issue with two simple commands. Now, we can reduce this input using either <code>creduce</code> or a more recent Python implementation called <a href="https://github.com/marxin/cvise"><code>cvise</code></a>. They work the same but I prefer <code>cvise</code>, as it appears to be faster for me and it produces more readable C code (as it keeps function and variable names from the original source).</p>
 <h2 id="writing-a-good-interestingness-test-and-running-the-reduction">Writing a good interestingness test and running the reduction</h2>
 <p>NOTE: This is distilled down from <a href="https://embed.cs.utah.edu/creduce/using/">the official &ldquo;Using C-Reduce&rdquo; documentation</a>. If I say something that contradicts the documentation, assume the documentation is correct (but drop me a note so I can tell).</p>
@@ -450,18 +450,18 @@ ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0g
 <p>So in this case, we might want our interestingness test to look something like:</p>
 <pre tabindex="0"><code>#!/usr/bin/env bash
 
-# Location of your built toolchain's bin/ folder
+# Location of your built toolchain&#39;s bin/ folder
 llvm_bin=$CBL_SRC/llvm-project/build/stage1/bin
 
-# If the source cannot be compiled with LTO and '-fsanitize=object-size', it is not interesting (we know the source builds at the beginning)
+# If the source cannot be compiled with LTO and &#39;-fsanitize=object-size&#39;, it is not interesting (we know the source builds at the beginning)
 $llvm_bin/clang -O2 -flto -fsanitize=object-size -c -o file.o file.i || exit
 
-# If &quot;error: Never resolved function from blockaddress&quot; is present, the test is interesting (grep returns 0 when the string is found)
-$llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o |&amp; grep &quot;error: Never resolved function from blockaddress&quot;
+# If &#34;error: Never resolved function from blockaddress&#34; is present, the test is interesting (grep returns 0 when the string is found)
+$llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o |&amp; grep &#34;error: Never resolved function from blockaddress&#34;
 </code></pre><p>Running this, we get:</p>
 <pre tabindex="0"><code>$ ./test.sh
 ...
-ld.lld: error: Never resolved function from blockaddress (Producer: 'LLVM14.0.0git' Reader: 'LLVM 14.0.0git')
+ld.lld: error: Never resolved function from blockaddress (Producer: &#39;LLVM14.0.0git&#39; Reader: &#39;LLVM 14.0.0git&#39;)
 
 $ echo $?
 0
@@ -489,18 +489,18 @@ $ echo $?
 <pre tabindex="0"><code>$ cat test.sh
 #!/usr/bin/env bash
 
-# Location of your built toolchain's bin/ folder
+# Location of your built toolchain&#39;s bin/ folder
 llvm_bin=$CBL_SRC/llvm-project/build/stage1/bin
 
 # New warnings or invalid source are not interesting (smoke test)
 gcc -O2 -Werror -Werror={address-of-packed-member,unused-value} -Wno-error=attributes -c -o /dev/null file.i || exit
 $llvm_bin/clang -O2 -Werror -Wno-error={address-of-packed-member,unused-value} -c -o /dev/null file.i || exit
 
-# If the source cannot be compiled with LTO and '-fsanitize=object-size', it is not interesting (we know the source builds at the beginning)
+# If the source cannot be compiled with LTO and &#39;-fsanitize=object-size&#39;, it is not interesting (we know the source builds at the beginning)
 $llvm_bin/clang -O2 -flto -fsanitize=object-size -c -o file.o file.i || exit
 
-# If &quot;error: Never resolved function from blockaddress&quot; is present, the test is interesting (grep returns 0 when the string is found)
-$llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o |&amp; grep &quot;error: Never resolved function from blockaddress&quot;
+# If &#34;error: Never resolved function from blockaddress&#34; is present, the test is interesting (grep returns 0 when the string is found)
+$llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o |&amp; grep &#34;error: Never resolved function from blockaddress&#34;
 
 $ ./test.sh
 ...
@@ -512,26 +512,26 @@ $ echo $?
 <pre tabindex="0"><code>$ cat test.sh
 #!/usr/bin/env bash
 
-# Location of your built toolchain's bin/ folder
+# Location of your built toolchain&#39;s bin/ folder
 llvm_bin=$CBL_SRC/llvm-project/build/stage1/bin
 
 # New warnings or invalid source are not interesting (smoke test)
 gcc -O2 -Werror -Werror={address-of-packed-member,unused-value} -Wno-error=attributes -c -o /dev/null file.i || exit
 $llvm_bin/clang -O2 -Werror -Wno-error={address-of-packed-member,unused-value} -c -o /dev/null file.i || exit
 
-# If the source cannot be compiling and linked with '-fsanitize=object-size' without LTO, it is not interesting
+# If the source cannot be compiling and linked with &#39;-fsanitize=object-size&#39; without LTO, it is not interesting
 $llvm_bin/clang -O2 -fsanitize=object-size -c -o file.o file.i || exit
 $llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o || exit
 
-# If the source cannot be compiled and linked with LTO without '-fsanitize=object-size', it is not interesting
+# If the source cannot be compiled and linked with LTO without &#39;-fsanitize=object-size&#39;, it is not interesting
 $llvm_bin/clang -O2 -flto -c -o file.o file.i || exit
 $llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o || exit
 
-# If the source cannot be compiled with LTO and '-fsanitize=object-size', it is not interesting (we know the source builds at the beginning)
+# If the source cannot be compiled with LTO and &#39;-fsanitize=object-size&#39;, it is not interesting (we know the source builds at the beginning)
 $llvm_bin/clang -O2 -flto -fsanitize=object-size -c -o file.o file.i || exit
 
-# If &quot;error: Never resolved function from blockaddress&quot; is present, the test is interesting (grep returns 0 when the string is found)
-$llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o |&amp; grep &quot;error: Never resolved function from blockaddress&quot;
+# If &#34;error: Never resolved function from blockaddress&#34; is present, the test is interesting (grep returns 0 when the string is found)
+$llvm_bin/ld.lld -m elf_x86_64 -r -o /dev/null --whole-archive file.o |&amp; grep &#34;error: Never resolved function from blockaddress&#34;
 
 $ ./test.sh
 ...
