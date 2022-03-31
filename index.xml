@@ -6,7 +6,17 @@
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Feb 2022 00:17:30 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 31 Mar 2022 16:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>March 2022 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/march-2022-cbl-work/</link>
+      <pubDate>Thu, 31 Mar 2022 16:30:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/march-2022-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.</description>
+    </item>
+    
     <item>
       <title>February 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/february-2022-cbl-work/</link>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> March 2022 ClangBuiltLinux Work | Nathan Chancellor</title>
+  <link rel = 'canonical' href = 'https://nathanchance.dev/posts/march-2022-cbl-work/'>
+  <meta name="description" content="I am a Linux kernel developer focused on improving compatibility with LLVM and clang as part of [ClangBuiltLinux](https://clangbuiltlinux.github.io/). I mostly blog about my work and tips and tricks that I discover.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="March 2022 ClangBuiltLinux Work" />
+<meta property="og:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nathanchance.dev/posts/march-2022-cbl-work/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-31T16:30:00-07:00" />
+<meta property="article:modified_time" content="2022-03-31T16:30:00-07:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="March 2022 ClangBuiltLinux Work"/>
+<meta name="twitter:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing."/>
+
+  
+  
+  
+  <link rel="stylesheet" href="https://nathanchance.dev/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://nathanchance.dev/images/favicon.ico" />
+
+  
+  
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/posts">Blog</a></li>
+         
+        <li><a href="/about">About</a></li>
+         
+        <li><a href="/nc_resume.pdf">Resume</a></li>
+         
+        <li><a href="/downloads">Downloads</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://nathanchance.dev/posts/february-2022-cbl-work/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&text=March%202022%20ClangBuiltLinux%20Work" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&title=March%202022%20ClangBuiltLinux%20Work" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&is_video=false&description=March%202022%20ClangBuiltLinux%20Work" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=March%202022%20ClangBuiltLinux%20Work&body=Check out this article: https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&title=March%202022%20ClangBuiltLinux%20Work" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&title=March%202022%20ClangBuiltLinux%20Work" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&name=March%202022%20ClangBuiltLinux%20Work&description=Occasionally%2c%20I%20will%20forget%20to%20link%20something%20from%20the%20mailing%20list%20in%20this%20post.%20To%20see%20my%20full%20mailing%20list%20activity%20%28patches%2c%20reviews%2c%20and%20reports%29%2c%20you%20can%20view%20it%20on%20lore.kernel.org.%0aLinux%20kernel%20patches%20%20%20Boot%20fixes%3a%20These%20patches%20fix%20boot%20failures%20that%20we%20have%20seen%20in%20testing.%20In%20this%20case%2c%20it%20is%20a%20User%20Mode%20Linux%20fix%2c%20which%20we%20are%20looking%20to%20enable%20in%20our%20continuous%20integration%20setup%2c%20as%20it%20is%20useful%20for%20quick%20testing." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&t=March%202022%20ClangBuiltLinux%20Work" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux-kernel-patches">Linux kernel patches</a></li>
+    <li><a href="#patch-review-and-input">Patch review and input</a></li>
+    <li><a href="#issue-triage-and-reporting">Issue triage and reporting</a></li>
+    <li><a href="#tooling-improvements">Tooling improvements</a></li>
+    <li><a href="#behind-the-scenes">Behind the scenes</a></li>
+    <li><a href="#special-thanks-to">Special thanks to:</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        March 2022 ClangBuiltLinux Work
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2022-03-31 16:30:00 -0700 MST" itemprop="datePublished">2022-03-31</time>
+          
+        </div>
+        
+        
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/clangbuiltlinux" rel="tag">clangbuiltlinux</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/linux" rel="tag">linux</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/linuxfoundation" rel="tag">linuxfoundation</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/maintainer" rel="tag">maintainer</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on <a href="https://lore.kernel.org/all/?q=f:nathan@kernel.org">lore.kernel.org</a>.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches</h2>
+<ul>
+<li>
+<p>Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.</p>
+<ul>
+<li><code>um: Fix filtering '-mno-global-merge'</code> (<a href="https://lore.kernel.org/r/20220322173547.677760-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p>Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</p>
+<ul>
+<li>
+<p><code>crypto: virtio - Select new dependencies</code> (<a href="https://lore.kernel.org/r/20220308205309.2192502-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>arm64: Do not include __READ_ONCE() block in assembly files</code> (<a href="https://lore.kernel.org/r/20220309191633.2307110-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>ARM: Do not use NOCROSSREFS directive with ld.lld</code> (<a href="https://lore.kernel.org/r/20220309220726.1525113-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>x86/ibt: Fix CC_HAS_IBT check for clang</code> (<a href="https://lore.kernel.org/r/20220311195642.2033108-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>x86: Avoid CONFIG_X86_X32_ABI=y with llvm-objcopy</code> (<a href="https://lore.kernel.org/r/20220314194842.3452-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>Fix CONFIG_X86_KERNEL_IBT for clang and ld.lld &lt; 14.0.0</code> (<a href="https://lore.kernel.org/r/20220318230747.3900772-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Kbuild improvements: These are patches to improve or fix issues with how we build the kernel with LLVM. The first one is particularly notable, as it was requested by a high profile kernel developer.</p>
+<ul>
+<li>
+<p><code>kbuild: Make $(LLVM) more flexible</code> (<a href="https://lore.kernel.org/r/20220302234400.782002-1-nathan@kernel.org/"><code>v1</code></a>, <a href="https://lore.kernel.org/r/20220304170813.1689186-1-nathan@kernel.org/"><code>v2</code></a>)</p>
+</li>
+<li>
+<p><code>Remove '-mno-global-merge' from KBUILD_CFLAGS</code> (<a href="https://lore.kernel.org/r/20220330234528.1426991-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as <a href="https://lore.kernel.org/r/CAHk-=wifoM9VOp-55OZCRcO9MnqQ109UTuCiXeZ-eyX_JcNVGg@mail.gmail.com/">everyone should be using <code>CONFIG_WERROR</code></a>, which will turn these all into failures. Maybe these should be in the build failures section&hellip;</p>
+<ul>
+<li>
+<p><code>drm/selftest: plane_helper: Put test structures in static storage</code> (<a href="https://lore.kernel.org/r/20220302235909.784935-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>KVM: x86: Fix clang -Wimplicit-fallthrough in do_host_cpuid()</code> (<a href="https://lore.kernel.org/r/20220322152906.112164-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>netfs: Ensure ret is always initialized in netfs_begin_read()</code> (<a href="https://lore.kernel.org/r/20220303163826.1120936-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>btrfs: Remove unused variable in btrfs_{start,write}_dirty_block_groups()</code> (<a href="https://lore.kernel.org/r/20220324153644.4079376-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>clocksource/drivers/imx-tpm: Move tpm_read_sched_clock() under CONFIG_ARM</code> (<a href="https://lore.kernel.org/r/20220303184212.2356245-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>i2c: designware: Mark dw_i2c_plat_{suspend,resume}() as __maybe_unused</code> (<a href="https://lore.kernel.org/r/20220303191713.2402461-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+<li>
+<p><code>drm/msm/gpu: Avoid -Wunused-function with !CONFIG_PM_SLEEP</code> (<a href="https://lore.kernel.org/r/20220330180541.62250-1-nathan@kernel.org/"><code>v1</code></a>)</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input</h2>
+<p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
+<p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/Yh5PhDDLcVe4kSqk@dev-arch.archlinux-ax161/"><code>Re: [PATCH 1/3] [v3] Kbuild: move to -std=gnu11</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yh+dMJsH+ZMPfqwD@thelio-3990X/"><code>Re: [PATCH v2 01/39] kbuild: Fix clang build</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YiD7R2wRxoWxtVq7@dev-arch.thelio-3990X/"><code>Re: [PATCH] um: clang: Strip out -mno-global-merge from USER_CFLAGS</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YiEFbKk12F0UPfx5@thelio-3990X/"><code>Re: [PATCH bpf-next v2 5/8] compiler-clang.h: Add __diag infrastructure for clang</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D120926"><code>[Mips] support &quot;sp&quot; named register</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YiJKZ2541K0ll0Ed@dev-arch.thelio-3990X/"><code>Re: [PATCH v2 0/2] *** Fix reformat_objdump.awk ***</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YiZG0Nx9j++bJaA4@dev-arch.thelio-3990X/"><code>Re: [PATCH] virtio_ring: Initialize vring_size_in_bytes</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yie+9J0hyA6k2KvD@dev-arch.thelio-3990X/"><code>Re: [PATCH] ARM: fix compilation error when BPF_SYSCALL is disabled</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YifLzLl4IE%2FxFMdn@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] kbuild: add --target to correctly cross-compile UAPI headers with Clang</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YijftpaApSJWuZ3m@dev-arch.thelio-3990X/"><code>Re: [PATCH] arm64: Paper over ARM_SMCCC_ARCH_WORKAROUND_3 Clang issue</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YijuEmuuPZYdBt0I@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] drm/amkfd: bail out early if no get_atc_vmid_pasid_mapping_info</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yij5p+TanPYnUM5V@dev-arch.thelio-3990X/"><code>Re: [PATCH] powerpc: Replace ppc64 DT_RELACOUNT usage with DT_RELASZ/24</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YikTQRql+il3HbrK@dev-arch.thelio-3990X/"><code>Re: [PATCH] MIPS: Only use current_stack_pointer on GCC</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YilBFcKIN1Ao5Ld1@dev-arch.thelio-3990X/"><code>Re: [PATCH 0/4] [v4] Kbuild: std=gnu11 changes</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yi+8ft7yXrNN4+Yx@dev-arch.thelio-3990X/"><code>Re: [PATCH] ASoC: atmel: mchp-pdmc: Fix -Wpointer-bool-conversion warning</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YjTJRqlFOsXz7Ss7@dev-arch.thelio-3990X/"><code>Re: [PATCH] soc: qcom: smem: use correct format characters</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yjib7hDFRFEOwaWf@dev-arch.thelio-3990X/"><code>Re: [PATCH -next] sched/headers: ARM needs asm/paravirt_api_clock.h</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D122189"><code>[Clang][NeonEmitter] emit ret decl first for -Wdeclaration-after-statement</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YjkrGAqx9nl%2FPtWh@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] riscv module: remove (NOLOAD)</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YjySjys3QZAWFlfo@dev-arch.thelio-3990X/"><code>Re: [PATCH] x86/config: Make the x86 defconfigs a bit more usable</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yj9zooV4TO8tZr9f@dev-arch.thelio-3990X/"><code>Re: [PATCH -next] PCI: hv: Remove unused function hv_set_msi_entry_from_desc()</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YkHdKQ8TlhXTv1FP@dev-arch.thelio-3990X/"><code>Re: [PATCH] cifs: fix enum usage</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YkNu6zmjxzhbjmei@dev-arch.thelio-3990X/"><code>Re: [PATCH] x86/extable: prefer local labels in .set directives</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YkYma7wwps8LZJnH@dev-arch.thelio-3990X/"><code>Re: [PATCH] Fix kernel build with LLVM=1</code></a></p>
+</li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting</h2>
+<p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
+<ul>
+<li>
+<p><a href="https://lore.kernel.org/r/Yh%2F9LS7zc3nhTjsR@thelio-3990X/"><code>Re: [PATCH bpf-next v1 6/6] selftests/bpf: Add tests for kfunc register offset checks</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YiD1UruDryIyZAJc@dev-arch.thelio-3990X/"><code>Re: [next] mips: clang-14-defconfig build regression</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YieOPO1WaQ%2FVnqdD@dev-arch.thelio-3990X/"><code>Re: [PATCH 1/2] drm/amdkfd: judge get_atc_vmid_pasid_mapping_info before call</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1609"><code>ARM: AT expected, but got NOCROSSREFS</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1610"><code>aspeed_g5_defconfig &quot;error: invalid operand for instruction&quot;</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YilD68QeKpgJG1W2@dev-arch.thelio-3990X/"><code>Re: [lpieralisi-pci:pci/rcar 2/2] drivers/pci/controller/pcie-rcar-host.c:139:3: error: instruction requires: data-barriers</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yio5gfTHY5qvcEyU@dev-arch.thelio-3990X/"><code>Re: [kvm:queue 210/210] arch/x86/kvm/cpuid.c:739:2: warning: unannotated fall-through between switch labels</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YipOoAaBIHjeCKOq@dev-arch.thelio-3990X/"><code>CONFIG_THUMB2_KERNEL=y boot failure after Spectre BHB fixes</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YipVB6MiWdjY3HI3@dev-arch.thelio-3990X/"><code>Re: [kvm:queue 182/205] &lt;inline asm&gt;:40:208: error: expected relocatable expression</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YjDFBKhV0ALzu36l@dev-arch.thelio-3990X/"><code>Re: [PATCH v2 8/8] media: i2c: ov5670: Add .get_selection() support</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YjIVzw4JdSY4NcLz@dev-arch.thelio-3990X/"><code>Re: [ammarfaizi2-block:google/android/kernel/common/android-4.19-q-release 5202/7636] ld.lld: error: -plugin-opt=-: ld.lld: Unknown command line argument '-stack-alignment=8'. Try: 'ld.lld --help'</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YjiddAnoCCz7Tbt3@dev-arch.thelio-3990X/"><code>Re: [GIT PULL] scheduler updates for v5.18</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/334"><code>s390 ext4 crash on -next</code></a></p>
+</li>
+<li>
+<p><a href="https://reviews.llvm.org/D122166"><code>[InstCombine] try to narrow shifted bswap-of-zext</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/Yjt31seiNv18HYrf@dev-arch.thelio-3990X/"><code>Re: [PATCH 1/1] um: fix error return code in winch_tramp()</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1612"><code>ld.lld: error: &lt;instantiation&gt;:1:13: redefinition of 'found'</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/linux/issues/1615"><code>pcie-rcar-host.c:(.text.fixup+0x4): relocation R_ARM_JUMP24 out of range</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YkHZRzbi54t0pZkO@thelio-3990X/"><code>Re: [PATCH 2/4] hwmon: (asus-ec-sensors) implement locking via the ACPI global lock</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YkH%2FrRikE2CilpqU@dev-arch.thelio-3990X/"><code>s390 defconfig fails to build after 4afeb670710efa5cd5ed8b1d9f2d22d6ce332bcc</code></a></p>
+</li>
+<li>
+<p><a href="https://lore.kernel.org/r/YkXSv8exRRUbT%2FoM@dev-arch.thelio-3990X/"><code>Re: [ammarfaizi2-block:google/android/kernel/common/android12-trusty-5.10 4036/5872] WARNING: modpost: vmlinux.o(.text+0x4111c4): Section mismatch in reference from the function memblock_bottom_up() to the variable .meminit.data:memblock</code></a></p>
+</li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements</h2>
+<ul>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/317"><code>Fix up check_logs.py and messages/documentation after scripts move</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/318"><code>patches: next: Replace warning hiding patch with proper fix</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/319"><code>patches: next: Drop drm patch</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/320"><code>Drop android-4.14 hack patch for ld.lld</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/321"><code>Build most powerpc64le configs with LLVM=1 LLVM_IAS=1</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/322"><code>Update markdown badge alternative text</code></a></p>
+</li>
+<li>
+<p><code>workflows: Bump actions/checkout to v3</code> (<a href="https://github.com/ClangBuiltLinux/actions-workflows/pull/3">actions-workflows</a>, <a href="https://github.com/ClangBuiltLinux/containers/pull/3">containers</a>, <a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/323">continuous-integration2</a>, <a href="https://github.com/ClangBuiltLinux/tc-build/pull/182">tc-build</a>)</p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/326"><code>[v2] Build most powerpc64le configs with LLVM=1 LLVM_IAS=1</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/329"><code>check_logs.py: Use proper syntax for removing problem matcher</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/56"><code>boot-qemu.sh: Do not set '-cpu' for 32-bit x86</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/57"><code>Improve default '-smp' value</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/58"><code>boot-qemu.sh: arm64: Pass 'lpa2=off' when necessary</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/330"><code>Drop arm64-fixes patches</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/331"><code>boot-utils: Update to latest main branch</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/335"><code>patches: Drop -next</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/336"><code>Test the latest stable release</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/337"><code>Add support for ARCH=um</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/59"><code>Add support for User Mode Linux</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/tc-build/pull/183"><code>Update to Linux 5.17 and update known good revision</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/338"><code>Revert 4eec5c448d09646659806afdd42b080a7002620f for stable</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/339"><code>Disable ARCH=um builds for now</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/340"><code>Update AOSP LLVM builds</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/341"><code>Disable ARCH=arm allyesconfig on -next</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/343"><code>Update mainline patches</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/344"><code>Disable ARCH=arm allyesconfig on mainline</code></a></p>
+</li>
+<li>
+<p><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/345"><code>Remove Fedora i686 configuration</code></a></p>
+</li>
+<li>
+<p><a href="https://android-review.googlesource.com/c/toolchain/llvm_android/+/2047927"><code>[patches] Cherry pick CLS for: x86 mainline Linux kernel</code></a></p>
+</li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes</h2>
+<ul>
+<li>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Windows Subsystem for Linux instance, a Raspberry Pi 3 and 4, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:</h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+  <div class="blog-post-comments">
+    
+      <div id="disqus_thread">
+  <script type="text/javascript">
+    (function() {
+      
+      
+      
+      
+    
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'nathanchance';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+    
+  </div>
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/posts">Blog</a></li>
+         
+          <li><a href="/about">About</a></li>
+         
+          <li><a href="/nc_resume.pdf">Resume</a></li>
+         
+          <li><a href="/downloads">Downloads</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux-kernel-patches">Linux kernel patches</a></li>
+    <li><a href="#patch-review-and-input">Patch review and input</a></li>
+    <li><a href="#issue-triage-and-reporting">Issue triage and reporting</a></li>
+    <li><a href="#tooling-improvements">Tooling improvements</a></li>
+    <li><a href="#behind-the-scenes">Behind the scenes</a></li>
+    <li><a href="#special-thanks-to">Special thanks to:</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&text=March%202022%20ClangBuiltLinux%20Work" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&title=March%202022%20ClangBuiltLinux%20Work" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&is_video=false&description=March%202022%20ClangBuiltLinux%20Work" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=March%202022%20ClangBuiltLinux%20Work&body=Check out this article: https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&title=March%202022%20ClangBuiltLinux%20Work" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&title=March%202022%20ClangBuiltLinux%20Work" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&name=March%202022%20ClangBuiltLinux%20Work&description=Occasionally%2c%20I%20will%20forget%20to%20link%20something%20from%20the%20mailing%20list%20in%20this%20post.%20To%20see%20my%20full%20mailing%20list%20activity%20%28patches%2c%20reviews%2c%20and%20reports%29%2c%20you%20can%20view%20it%20on%20lore.kernel.org.%0aLinux%20kernel%20patches%20%20%20Boot%20fixes%3a%20These%20patches%20fix%20boot%20failures%20that%20we%20have%20seen%20in%20testing.%20In%20this%20case%2c%20it%20is%20a%20User%20Mode%20Linux%20fix%2c%20which%20we%20are%20looking%20to%20enable%20in%20our%20continuous%20integration%20setup%2c%20as%20it%20is%20useful%20for%20quick%20testing." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnathanchance.dev%2fposts%2fmarch-2022-cbl-work%2f&t=March%202022%20ClangBuiltLinux%20Work" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Nathan Chancellor 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/posts">Blog</a></li>
+         
+        <li><a href="/about">About</a></li>
+         
+        <li><a href="/nc_resume.pdf">Resume</a></li>
+         
+        <li><a href="/downloads">Downloads</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+
+</html>
