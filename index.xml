@@ -6,7 +6,16 @@
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 31 Mar 2022 16:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Apr 2022 14:06:01 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Package a standalone Linux kernel using the Arch Linux Build System</title>
+      <link>https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/</link>
+      <pubDate>Wed, 27 Apr 2022 14:06:01 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/</guid>
+      <description>As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution&amp;rsquo;s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively.</description>
+    </item>
+    
     <item>
       <title>March 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/march-2022-cbl-work/</link>
