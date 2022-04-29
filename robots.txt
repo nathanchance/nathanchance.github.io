@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://nathanchance.dev/sitemap.xml

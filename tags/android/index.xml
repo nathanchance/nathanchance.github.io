@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>android on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/android/</link>
     <description>Recent content in android on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
     <lastBuildDate>Fri, 31 Jan 2020 18:52:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Building and using Cuttlefish</title>

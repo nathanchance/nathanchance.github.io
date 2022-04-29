@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Nathan Chancellor</title>
     <link>https://nathanchance.dev/</link>
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 27 Apr 2022 14:06:01 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Apr 2022 14:21:18 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://nathanchance.dev/about/</link>
+      <pubDate>Fri, 29 Apr 2022 10:15:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/about/</guid>
+      <description>I am a 27 year old Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.
+Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.</description>
+    </item>
+    
+    <item>
+      <title>Bisecting a Linux Kernel boot failure due to changed compiler flags</title>
+      <link>https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/</link>
+      <pubDate>Thu, 28 Apr 2022 14:21:18 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/</guid>
+      <description>Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &amp;ldquo;negative&amp;rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem.</description>
+    </item>
+    
     <item>
       <title>Package a standalone Linux kernel using the Arch Linux Build System</title>
       <link>https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/</link>
@@ -193,17 +211,6 @@ One caveat before I start: there is great official documentation for git bisect,
       
       <guid>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</guid>
       <description>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://nathanchance.dev/about/</link>
-      <pubDate>Tue, 14 Apr 2020 19:09:55 -0700</pubDate>
-      
-      <guid>https://nathanchance.dev/about/</guid>
-      <description>I am a 27 year old university student at Grand Canyon University, majoring in Information Technology and a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux.
-I am interested in performance analysis, compilers, security, and operating systems.
-Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.</description>
     </item>
     
     <item>

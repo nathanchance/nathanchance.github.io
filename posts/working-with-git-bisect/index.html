@@ -1,21 +1,63 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<head>
-  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
-  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Working with git bisect | Nathan Chancellor</title>
-  <link rel = 'canonical' href = 'https://nathanchance.dev/posts/working-with-git-bisect/'>
-  <meta name="description" content="I am a Linux kernel developer focused on improving compatibility with LLVM and clang as part of [ClangBuiltLinux](https://clangbuiltlinux.github.io/). I mostly blog about my work and tips and tricks that I discover.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="all,follow">
-  <meta name="googlebot" content="index,follow,snippet,archive">
-  <meta property="og:title" content="Working with git bisect" />
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Working with git bisect | Nathan Chancellor</title>
+<meta name="keywords" content="git, linux, llvm">
+<meta name="description" content="Before Google&#43; shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
+One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information.">
+<meta name="author" content="Nathan Chancellor">
+<link rel="canonical" href="https://nathanchance.dev/posts/working-with-git-bisect/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.b4e19c453811e60acfec1f00c15ac2be1c53f6ab90187e684358ce7faaf48bab.css" integrity="sha256-tOGcRTgR5grP7B8AwVrCvhxT9quQGH5oQ1jOf6r0i6s=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.2840b7fccd34145847db71a290569594bdbdb00047097f75d6495d162f5d7dff.js" integrity="sha256-KEC3/M00FFhH23GikFaVlL29sABHCX911kldFi9dff8="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://nathanchance.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://nathanchance.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Working with git bisect" />
 <meta property="og:description" content="Before Google&#43; shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
 One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information." />
 <meta property="og:type" content="article" />
@@ -23,212 +65,180 @@ One caveat before I start: there is great official documentation for git bisect,
 <meta property="article:published_time" content="2020-04-17T15:23:45-07:00" />
 <meta property="article:modified_time" content="2020-04-17T15:23:45-07:00" />
 
-
-  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Working with git bisect"/>
 <meta name="twitter:description" content="Before Google&#43; shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
 One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information."/>
 
-  
-  
-  
-  <link rel="stylesheet" href="https://nathanchance.dev/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
 
-  
-  
-  
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  
-
-  
-<link rel="icon" type="image/png" href="https://nathanchance.dev/images/favicon.ico" />
-
-  
-  
-  
-  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://nathanchance.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Working with git bisect",
+      "item": "https://nathanchance.dev/posts/working-with-git-bisect/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Working with git bisect",
+  "name": "Working with git bisect",
+  "description": "Before Google+ shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.\nOne caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information.",
+  "keywords": [
+    "git", "linux", "llvm"
+  ],
+  "articleBody": "Before Google+ shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.\nOne caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right.\nWhat is git bisect? git bisect allows you to find out specifically which change or commit caused a particular issue. This can be a build error/warning, test failure, or a runtime issue. It does this by taking a good commit and a bad commit then running a binary search on it using your input through git bisect good or git bisect bad. I will give an overview of how exactly to do this in the next section.\nThis tool is incredibly powerful because it massively cuts down the time that it takes to hunt down exactly where something went wrong. There are times where you might pull in two hundred commits and run into a weird error in a file that was not touched by any of those commits. Without git bisect, testing all two hundred changes individually would take a long time. Additionally, it saves you from manually binary searching yourself. I did this once when I was a git noob and it was not fun.\nHow to do a bisect   Find a good commit.\ngit bisect only works when there was a point where the issue did not happen. If the issue has happened since the beginning of the project then it is not a regression and the problem will have to be isolated and solved via other means.\n  Start the bisect.\nYou start a bisect by running git bisect start  . If your current HEAD is the bad commit, you can just put HEAD for . These can be branches, tags, or raw commit hashes. For example, if I was bisecting a bug in the Linux kernel that happened between 5.5 and 5.6, I would run git bisect start v5.6 v5.5..\n  Run the test case.\nThis can be anything that you need to do to verify the issue. For example, if you are bisecting a bug in a compiler like clang or GCC, you might build the compiler from the current source then take that freshly built compiler and run it to see if it produces the bug. If you are bisecting a kernel not booting, build the kernel and try to boot it.\nA word of caution: Make sure that your test case is as objective and reliable as possible. The result of git bisect is only as accurate at the results of the test case. I was tracking down some boot flakiness in the Linux kernel a couple of weeks ago and there were times where the same kernel would boot one time and not boot another time. To make sure of the result when bisecting, I did a boot ten times over and only considered it passing when it booted all ten times.\n  Run git bisect good or git bisect bad based on that result\nThis is pretty self explanatory. If the current source reproduces the bug, run git bisect bad. If it does not, run git bisect good.\n  Repeat steps 3 and 4 until git produces a bad commit.\ngit bisect will tell you how many more runs it approximately has to do before it can find a bad commit so you are not left in the dark. When git bisect has converged on the commit, it will print out the commit hash and its message.\n  Confirm result.\nOnce git bisect is done, you are left either on the bad commit or the commit right before, depending on how git bisect converged. At this point, I recommend saving the output of git bisect log to a file like so:\n$ git bisect log  bisect.log It can be handy for reproducing the result later or allowing someone else to confirm the results.\nAfter this, I usually will try to see if I can revert the problematic commit on the current version of the software to confirm that it was the source of the issue. To get back to that point, run git bisect reset, git checkout to the current version of the software, and attempt to git revert the commit. Sometimes this is not always easy, especially if there have been further changes around that area. Use your best judgement when deciding to report the issue.\n  Some tips and notes around bisecting git bisect has its quirks but it does also have some kind of hidden things. I am going to call out all of the ones that I can think of below.\ngit bisect converged on a merge commit There are times where git bisect will claim the first bad commit is a merge commit. This can be for a couple of reasons:\n  Two trees are independently fine but break when put together\nThis might seem somewhat obvious but there are times where series of commits are developed completely independently and work fine by themselves; an issue only occurs when they are merged together. This can happen a lot in projects that have subsystems (independently maintained folders/code in one repository).\nFor example, in the Linux kernel, maintainers typically will base their trees on the previous -rc1 (so changes targeting 5.8 will be based on 5.7-rc1). If a change in the tree of maintainer A changes an interface that is used by a new driver in the tree of maintainer B, a bisect would converge on the merge of whatever tree was merged second because each tree is fine by themselves.\nThis is why integration trees (such as linux-next) exist: to try and tease these out so that they can be fixed during the merge instead of afterwards. I reported an issue that occurs from a scenario such as the one described above before the Linux kernel’s merge window (where all maintainer trees get merged into the main one) but neither maintainer noticed it so the issue had to be fixed up after the fact.\nGetting around this usually involves cherry-picking the changes from one branch on top of the other and then running a bisect on that so that the problematic commit can be converged on easier (if it is not immediately obvious).\n  A conflict resolution caused the issue\nSimilar to the previous note, there are times where doing a merge results in a conflict, which again happens when two trees are developed independently of each other. A quick grep on the logs of the Linux kernel brings up an example of where this happened, commit 4a601f109614 (“net: mscc: ocelot: adjust maxlen on NPI port, not CPU”).\nThis is why I try to leave what the conflicts were in my commit messages; it makes it easier for others to audit my choices.\nIf you suspect this is the source of a problem, you can redo the merge and see what the conflicts were. For example, we’ll use the merge commit above:\n$ git show -s --format=short 1d343579312311aa9875b34d5a921f5e2ec69f0a commit 1d343579312311aa9875b34d5a921f5e2ec69f0a Merge: a8eceea84a3a 0d81a3f29c0a Author: David S. Miller  Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net $ git checkout 0d81a3f29c0a ... HEAD is now at 0d81a3f29c0a Merge tag 'drm-fixes-2020-03-13' of git://anongit.freedesktop.org/drm/drm $ git merge a8eceea84a3a ... CONFLICT (content): Merge conflict in drivers/net/ethernet/mscc/ocelot.c ... I will not go into the details but looking at the conflicts and comparing how they were resolved in the actual commit can help narrow down where the bug is coming from (again, if it is not immediately obvious).\n  What to do if you chose wrong when bisecting When I bisect, I will often use the arrow key to scroll back to find my last git bisect ... command and hit enter. The problem is I might chose the wrong one (git bisect good when I meant to chose git bisect bad or vice versa). Unfortunately, that will result in my bisect not converging properly. To fix this, I will have to start my bisect all over, right?\nThankfully, you can use git bisect log + git bisect replay to get back to the state before that choice.\n  Run git bisect log  bisect.log.\nThis dumps the log of the current bisect, which we will edit to remove that last choice.\n  Open bisect.log and remove everything after the wrong choice.\nFor example, this is the bisect log from one of my recent bisects:\n$ cat bisect.log # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11 git bisect start 'origin/master' 'llvmorg-11-init' # good: [60fea2713d3f37d70383aacaa75f61344cc3234a] AMDGPU/GlobalISel: Improve 16-bit bswap git bisect good 60fea2713d3f37d70383aacaa75f61344cc3234a # good: [31e03317633909c50ead53edf8a19b60698075cc] [ORC] Skip ST_File symbols in MaterializationUnit interfaces / resolution. git bisect good 31e03317633909c50ead53edf8a19b60698075cc # bad: [263c4a3c75a46996bec1f23264874b7f1334426a] Fix compiler warning when compiling without asserts git bisect bad 263c4a3c75a46996bec1f23264874b7f1334426a # good: [b28ed9cec8dd7225164eb8c0884aa463654ef3fc] [clang-format] cleanup from D75517 git bisect good b28ed9cec8dd7225164eb8c0884aa463654ef3fc # good: [a46dba24fa35ab52e9a1bbaa52666bcc37859927] [AMDGPU] Extend macro fusion for ADDC and SUBB to SUBBREV git bisect good a46dba24fa35ab52e9a1bbaa52666bcc37859927 # bad: [df90a15b1ac938559a8c3af12126559c1e1e9558] [lldb] Clear all settings during a test's setUp git bisect bad df90a15b1ac938559a8c3af12126559c1e1e9558 # good: [ab69cd0779c529519eb7d26e0fa1b8dfb505f838] [X86] Support intrinsic _mm_cldemote git bisect good ab69cd0779c529519eb7d26e0fa1b8dfb505f838 # bad: [4327a9b46b46d587816f765c619838ea3e01cd19] [AMDGPU] Use progbits type for .AMDGPU.disasm section git bisect bad 4327a9b46b46d587816f765c619838ea3e01cd19 # bad: [c4d23d8854840294bf49c524f93e2be85a401f00] Add a missing include to clang unit tests git bisect bad c4d23d8854840294bf49c524f93e2be85a401f00 # good: [c700e0317c25f3f397a8ba368752c4960f4ab975] [JITLink] Read symbol linkage from the correct field. git bisect good c700e0317c25f3f397a8ba368752c4960f4ab975 # bad: [b47c9f535c8a0fffeb7634a82e3901d416915938] [libc] Add initial assert definition git bisect bad b47c9f535c8a0fffeb7634a82e3901d416915938 # bad: [6aebf0ee56e52afad3887b4230d7ed1beaf0bede] Specify branch probabilities for callbr dests git bisect bad 6aebf0ee56e52afad3887b4230d7ed1beaf0bede # good: [c4cbc5806218bf4232523771805580fa40b83244] [NFC][PowerPC] Add a new MIR file te test ppc-early-ret pass git bisect good c4cbc5806218bf4232523771805580fa40b83244 # first bad commit: [6aebf0ee56e52afad3887b4230d7ed1beaf0bede] Specify branch probabilities for callbr dests Let’s say that I meant to mark a46dba24fa35ab52e9a1bbaa52666bcc37859927 as bad instead of good. I would edit bisect.log to look like this:\n$ cat bisect.log # bad: [0cc124c186a5211ae5a734fe7708d61b5a150bc2] [llvm-objdump][test] Improve PowerPC branch offset tests # good: [5852475e2c049ce29dcb1f0da3ac33035f8c9156] Bump the trunk major version to 11 git bisect start 'origin/master' 'llvmorg-11-init' # good: [60fea2713d3f37d70383aacaa75f61344cc3234a] AMDGPU/GlobalISel: Improve 16-bit bswap git bisect good 60fea2713d3f37d70383aacaa75f61344cc3234a # good: [31e03317633909c50ead53edf8a19b60698075cc] [ORC] Skip ST_File symbols in MaterializationUnit interfaces / resolution. git bisect good 31e03317633909c50ead53edf8a19b60698075cc # bad: [263c4a3c75a46996bec1f23264874b7f1334426a] Fix compiler warning when compiling without asserts git bisect bad 263c4a3c75a46996bec1f23264874b7f1334426a # good: [b28ed9cec8dd7225164eb8c0884aa463654ef3fc] [clang-format] cleanup from D75517 git bisect good b28ed9cec8dd7225164eb8c0884aa463654ef3fc # bad: [a46dba24fa35ab52e9a1bbaa52666bcc37859927] [AMDGPU] Extend macro fusion for ADDC and SUBB to SUBBREV git bisect bad a46dba24fa35ab52e9a1bbaa52666bcc37859927 Basically, you need to remove everything after the incorrect choice and you need to change the line where you made the wrong choice to make the right one. I also edited the comment (lines that start with # are not run as commands) but that is not necessary.\nSave that file once you have properly edited it.\n  Restart the bisect using the file.\nTo do this, you will run the following commands:\n$ git bisect reset $ git bisect replay bisect.log The git bisect reset gets us back to where we were when we ran git bisect start and the git bisect replay uses the bisect.log file to get us back to where we should have been been. Continue bisecting from there!\n  Automating bisects If there is anything that you need to know about me, it is that I LOVE automation. If I am going to run a command more than twice, I usually automate it. I could not live without my scripts. As a result, I love using git bisect run.\ngit bisect run takes a shell script and uses it to automate running git bisect good or git bisect bad. This helps avoid issues like in the previous section, where choosing wrong means that you go down the wrong path and end up at the wrong problematic commit.\nI am not going to go into a huge amount of detail about writing shell scripts as I assume if you care about something like this, you understand how to do that.\nTo do an automated bisect, you start the same way (git bisect start  ) but instead of running the test case and choosing git bisect good/git bisect bad, you run git bisect run .\nWhen writing the script, you should make sure that the exit code is 0 if git bisect good should be run and exits with an error code between 1 and 127 if git bisect bad should be run.\nIf the source code is untestable (cannot be built or there was some other breakage independent of the issue being tracked down), the script should exit with 125 so that git bisect skip is run. I will go over that command in the next section.\nYou can see an example of a git bisect run script that I made here. There are a couple in the git bisect documentation as well.\nTo get accurate bisect results, you need to make sure that the script handles all possible outcomes and accurately tests for the problem. This varies widely by projects so I cannot give more specific advice than that.\nDealing with independent breakage There are times when you are bisecting that the revision cannot be tested because of a problem unrelated to the one that you are bisecting. For example, when bisecting an compiler bug, the compiler cannot be tested if it cannot be built. There are two ways to handle this situation:\n  git bisect skip\ngit bisect skip tells git that the revision it has chosen cannot be tested; in other words, it is neither good nor bad due to reasons outside of your control. git will try to find another commit around it to test. The caveat with this option is that if the commit you skipped is right next to the problematic one, git will not be able to tell you which one was the bad one (but that is usually easy enough to deduce).\n  Apply a fix on top of the tested revision\nI will often do this if there was a fix for the issue later in the history. For example, there was a change in clang 11 that broke building scripts/dtc within the Linux kernel. That was fixed by this commit but any revision in the Linux kernel that does not have that as an ancestor will fail to build, which can make bisecting difficult.\nWhat I will do in this case is temporarily apply that fix on top of whatever revision git is currently testing. I can do this automatically so that git bisect run can handle it.\n$ grep -q \"YYLTYPE yylloc\" scripts/dtc/dtc-lexer.l \u0026\u0026 \\ git format-patch -1 --stdout e33a814e772cdc36436c8c188d8c42d019fda639 | \\ git apply -3v This basically says if the line that was removed by the commit is present in the tree, apply (but do not commit) the change to the index.\nAfter I test this revision, it is important to get rid of that modification before running git bisect , otherwise there will be an error.\n$ git reset --hard $ git bisect good The git bisect documentation that I linked above has an example of doing this with git bisect run.\n  Finding the commit that fixed something Sometimes, it might be necessary to see what commit fixed something versus broke something. Unintentional fixes can be just as bad as unintentional breakages. The process is basically the same as the one described in the beginning but involves setting terms that are a little easier to work with.\n$ git bisect start --term-old broken --term-new fixed $ git bisect fixed  $ git bisect broken  After that, the process is the exact same but git bisect  is used instead of git bisect .\nReal time example I recently came across a bug in LLVM exposed by building the RISC-V Linux kernel’s allyesconfig target. I determined that it was working at the flang merge but it was broken at top of tree (at the time).\nTo bisect this, I used tc-build, an LLVM build script that builds a toolchain able to build the Linux kernel. If you run into an issue with LLVM and the Linux kernel, it can be very helpful (and I am more than willing to give a more in-depth tutorial around this if needed).\nThe basic principle is we build a toolchain and then use that toolchain to build the translation unit that crashes in the kernel and see what happens.\nTo demonstrate everything, I took a screen recording of my bisect (run script here):\n\nWhen I did this bisect manually, it took me over an hour, between having to make sure that I typed the right command and remembering that I had a bisect running. When I did it automated without ccache (to make sure everything worked before I did the recording), it took 22 minutes, of which I was involved for 30 seconds :)\nHopefully this information was helpful in some way! If you have any questions or comments, please feel free to reach out to me on Twitter\n",
+  "wordCount" : "2865",
+  "inLanguage": "en",
+  "datePublished": "2020-04-17T15:23:45-07:00",
+  "dateModified": "2020-04-17T15:23:45-07:00",
+  "author":{
+    "@type": "Person",
+    "name": "Nathan Chancellor"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nathanchance.dev/posts/working-with-git-bisect/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nathan Chancellor",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nathanchance.dev/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
 
-  <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-        <li><a href="/posts">Blog</a></li>
-         
-        <li><a href="/about">About</a></li>
-         
-        <li><a href="/nc_resume.pdf">Resume</a></li>
-         
-        <li><a href="/downloads">Downloads</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li>
-          <a class="icon" href=" https://nathanchance.dev/posts/art-of-git-revert/" aria-label="Previous">
-            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
-          </a>
-        </li>
-        
-        
-        <li>
-          <a class="icon" href="https://nathanchance.dev/posts/february-2021-cbl-work/" aria-label="Next">
-            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
-          </a>
-        </li>
-        
-        <li>
-          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
-            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
-          </a>
-        </li>
-        <li>
-          <a class="icon" href="#" aria-label="Share">
-            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
-          </a>
-        </li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      
-      <ul>
-  
-  
-    
-  
-  
-  <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f" aria-label="Facebook">
-      <i class="fab fa-facebook " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&text=Working%20with%20git%20bisect" aria-label="Twitter">
-      <i class="fab fa-twitter " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&title=Working%20with%20git%20bisect" aria-label="Linkedin">
-      <i class="fab fa-linkedin " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&is_video=false&description=Working%20with%20git%20bisect" aria-label="Pinterest">
-      <i class="fab fa-pinterest " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="mailto:?subject=Working%20with%20git%20bisect&body=Check out this article: https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f" aria-label="Email">
-      <i class="fas fa-envelope " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&title=Working%20with%20git%20bisect" aria-label="Pocket">
-      <i class="fab fa-get-pocket " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&title=Working%20with%20git%20bisect" aria-label="reddit">
-      <i class="fab fa-reddit " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&name=Working%20with%20git%20bisect&description=Before%20Google%2b%20shut%20down%2c%20I%20had%20a%20post%20on%20there%20giving%20a%20brief%20overview%20of%20git%20bisect%2c%20which%20a%20lot%20of%20people%20found%20useful.%20Unfortunately%2c%20I%20forgot%20to%20save%20it%20and%20move%20it%20somewhere%20else%20before%20the%20shutdown%20deadline.%20As%20a%20result%2c%20I%20am%20going%20to%20redo%20it%20here%20and%20spice%20it%20up%20a%20bit.%0aOne%20caveat%20before%20I%20start%3a%20there%20is%20great%20official%20documentation%20for%20git%20bisect%2c%20from%20which%20I%20have%20taken%20quite%20a%20bit%20of%20information." aria-label="Tumblr">
-      <i class="fab fa-tumblr " aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&t=Working%20with%20git%20bisect" aria-label="Hacker News">
-      <i class="fab fa-hacker-news " aria-hidden="true"></i>
-    </a>
-  </li>
-</ul>
+</script>
 
-    </div>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://nathanchance.dev/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/nc_resume.pdf" title="Resume">
+                    <span>Resume</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/downloads/" title="Downloads">
+                    <span>Downloads</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
     
-    <div id="toc">
-      <nav id="TableOfContents">
-  <ul>
-    <li><a href="#what-is-git-bisect">What is git bisect?</a></li>
-    <li><a href="#how-to-do-a-bisect">How to do a bisect</a></li>
-    <li><a href="#some-tips-and-notes-around-bisecting">Some tips and notes around bisecting</a>
-      <ul>
-        <li><a href="#git-bisect-converged-on-a-merge-commit">git bisect converged on a merge commit</a></li>
-        <li><a href="#what-to-do-if-you-chose-wrong-when-bisecting">What to do if you chose wrong when bisecting</a></li>
-        <li><a href="#automating-bisects">Automating bisects</a></li>
-        <li><a href="#dealing-with-independent-breakage">Dealing with independent breakage</a></li>
-        <li><a href="#finding-the-commit-that-fixed-something">Finding the commit that fixed something</a></li>
-      </ul>
-    </li>
-    <li><a href="#real-time-example">Real time example</a></li>
-  </ul>
-</nav>
-    </div>
-    
-  </span>
+    <h1 class="post-title">
+      Working with git bisect
+    </h1>
+    <div class="post-meta"><span title='2020-04-17 15:23:45 -0700 MST'>April 17, 2020</span>&nbsp;·&nbsp;14 min&nbsp;·&nbsp;Nathan Chancellor&nbsp;|&nbsp;<a href="https://github.com/nathanchance/hugo-files/blob/main/content/posts/working-with-git-bisect.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#what-is-git-bisect" aria-label="What is git bisect?">What is git bisect?</a></li>
+                <li>
+                    <a href="#how-to-do-a-bisect" aria-label="How to do a bisect">How to do a bisect</a></li>
+                <li>
+                    <a href="#some-tips-and-notes-around-bisecting" aria-label="Some tips and notes around bisecting">Some tips and notes around bisecting</a><ul>
+                        
+                <li>
+                    <a href="#git-bisect-converged-on-a-merge-commit" aria-label="git bisect converged on a merge commit">git bisect converged on a merge commit</a></li>
+                <li>
+                    <a href="#what-to-do-if-you-chose-wrong-when-bisecting" aria-label="What to do if you chose wrong when bisecting">What to do if you chose wrong when bisecting</a></li>
+                <li>
+                    <a href="#automating-bisects" aria-label="Automating bisects">Automating bisects</a></li>
+                <li>
+                    <a href="#dealing-with-independent-breakage" aria-label="Dealing with independent breakage">Dealing with independent breakage</a></li>
+                <li>
+                    <a href="#finding-the-commit-that-fixed-something" aria-label="Finding the commit that fixed something">Finding the commit that fixed something</a></li></ul>
+                </li>
+                <li>
+                    <a href="#real-time-example" aria-label="Real time example">Real time example</a>
+                </li>
+            </ul>
+        </div>
+    </details>
 </div>
 
-
-  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-    <header>
-      <h1 class="posttitle" itemprop="name headline">
-        Working with git bisect
-      </h1>
-      <div class="meta">
-        
-        <div class="postdate">
-          
-          <time datetime="2020-04-17 15:23:45 -0700 MST" itemprop="datePublished">2020-04-17</time>
-          
-        </div>
-        
-        
-        
-        
-        <div class="article-tag">
-            <i class="fas fa-tag"></i>
-            
-            
-            <a class="tag-link" href="/tags/git" rel="tag">git</a>
-            
-             ,  
-            <a class="tag-link" href="/tags/linux" rel="tag">linux</a>
-            
-             ,  
-            <a class="tag-link" href="/tags/llvm" rel="tag">llvm</a>
-            
-        </div>
-        
-      </div>
-    </header>
-
-  
-    
-    <div class="content" itemprop="articleBody">
-      <p>Before Google+ shut down, I had a post on there giving a brief overview of <code>git bisect</code>, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.</p>
+  <div class="post-content"><p>Before Google+ shut down, I had a post on there giving a brief overview of <code>git bisect</code>, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.</p>
 <p>One caveat before I start: there is <a href="https://git-scm.com/docs/git-bisect">great official documentation</a> for <code>git bisect</code>, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right.</p>
-<h2 id="what-is-git-bisect">What is git bisect?</h2>
+<h2 id="what-is-git-bisect">What is git bisect?<a hidden class="anchor" aria-hidden="true" href="#what-is-git-bisect">#</a></h2>
 <p><code>git bisect</code> allows you to find out specifically which change or commit caused a particular issue. This can be a build error/warning, test failure, or a runtime issue. It does this by taking a good commit and a bad commit then running a binary search on it using your input through <code>git bisect good</code> or <code>git bisect bad</code>. I will give an overview of how exactly to do this in the next section.</p>
 <p>This tool is incredibly powerful because it massively cuts down the time that it takes to hunt down exactly where something went wrong. There are times where you might pull in two hundred commits and run into a weird error in a file that was not touched by any of those commits. Without <code>git bisect</code>, testing all two hundred changes individually would take a long time. Additionally, it saves you from manually binary searching yourself. I did this once when I was a <code>git</code> noob and it was not fun.</p>
-<h2 id="how-to-do-a-bisect">How to do a bisect</h2>
+<h2 id="how-to-do-a-bisect">How to do a bisect<a hidden class="anchor" aria-hidden="true" href="#how-to-do-a-bisect">#</a></h2>
 <ol>
 <li>
 <p>Find a good commit.</p>
@@ -254,14 +264,14 @@ One caveat before I start: there is great official documentation for git bisect,
 <li>
 <p>Confirm result.</p>
 <p>Once <code>git bisect</code> is done, you are left either on the bad commit or the commit right before, depending on how <code>git bisect</code> converged. At this point, I recommend saving the output of <code>git bisect log</code> to a file like so:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect log &gt; bisect.log
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git bisect log &gt; bisect.log
 </span></span></code></pre></div><p>It can be handy for reproducing the result later or allowing someone else to confirm the results.</p>
 <p>After this, I usually will try to see if I can revert the problematic commit on the current version of the software to confirm that it was the source of the issue. To get back to that point, run <code>git bisect reset</code>, <code>git checkout</code> to the current version of the software, and attempt to <code>git revert</code> the commit. Sometimes this is not always easy, especially if there have been further changes around that area. Use your best judgement when deciding to report the issue.</p>
 </li>
 </ol>
-<h2 id="some-tips-and-notes-around-bisecting">Some tips and notes around bisecting</h2>
+<h2 id="some-tips-and-notes-around-bisecting">Some tips and notes around bisecting<a hidden class="anchor" aria-hidden="true" href="#some-tips-and-notes-around-bisecting">#</a></h2>
 <p><code>git bisect</code> has its quirks but it does also have some kind of hidden things. I am going to call out all of the ones that I can think of below.</p>
-<h3 id="git-bisect-converged-on-a-merge-commit">git bisect converged on a merge commit</h3>
+<h3 id="git-bisect-converged-on-a-merge-commit">git bisect converged on a merge commit<a hidden class="anchor" aria-hidden="true" href="#git-bisect-converged-on-a-merge-commit">#</a></h3>
 <p>There are times where <code>git bisect</code> will claim the first bad commit is a merge commit. This can be for a couple of reasons:</p>
 <ol>
 <li>
@@ -276,25 +286,25 @@ One caveat before I start: there is great official documentation for git bisect,
 <p>Similar to the previous note, there are times where doing a merge results in a conflict, which again happens when two trees are developed independently of each other. A quick <code>grep</code> on the logs of the Linux kernel brings up an example of where this happened, commit <a href="https://git.kernel.org/linus/4a601f109614929aee45e58ca3514ec93da070bb">4a601f109614</a> (&ldquo;net: mscc: ocelot: adjust maxlen on NPI port, not CPU&rdquo;).</p>
 <p>This is why I try to leave what the conflicts were in my commit messages; it makes it easier for others to audit my choices.</p>
 <p>If you suspect this is the source of a problem, you can redo the merge and see what the conflicts were. For example, we&rsquo;ll use the merge commit above:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git show -s --format<span style="color:#f92672">=</span>short 1d343579312311aa9875b34d5a921f5e2ec69f0a
-</span></span><span style="display:flex;"><span>commit 1d343579312311aa9875b34d5a921f5e2ec69f0a
-</span></span><span style="display:flex;"><span>Merge: a8eceea84a3a 0d81a3f29c0a
-</span></span><span style="display:flex;"><span>Author: David S. Miller &lt;davem@davemloft.net&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ git checkout 0d81a3f29c0a
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>HEAD is now at 0d81a3f29c0a Merge tag <span style="color:#e6db74">&#39;drm-fixes-2020-03-13&#39;</span> of git://anongit.freedesktop.org/drm/drm
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ git merge a8eceea84a3a
-</span></span><span style="display:flex;"><span>...
-</span></span><span style="display:flex;"><span>CONFLICT <span style="color:#f92672">(</span>content<span style="color:#f92672">)</span>: Merge conflict in drivers/net/ethernet/mscc/ocelot.c
-</span></span><span style="display:flex;"><span>...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git show -s --format<span class="o">=</span>short 1d343579312311aa9875b34d5a921f5e2ec69f0a
+</span></span><span class="line"><span class="cl">commit 1d343579312311aa9875b34d5a921f5e2ec69f0a
+</span></span><span class="line"><span class="cl">Merge: a8eceea84a3a 0d81a3f29c0a
+</span></span><span class="line"><span class="cl">Author: David S. Miller &lt;davem@davemloft.net&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ git checkout 0d81a3f29c0a
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">HEAD is now at 0d81a3f29c0a Merge tag <span class="s1">&#39;drm-fixes-2020-03-13&#39;</span> of git://anongit.freedesktop.org/drm/drm
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ git merge a8eceea84a3a
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict in drivers/net/ethernet/mscc/ocelot.c
+</span></span><span class="line"><span class="cl">...
 </span></span></code></pre></div><p>I will not go into the details but looking at the conflicts and comparing how they were resolved in the actual commit can help narrow down where the bug is coming from (again, if it is not immediately obvious).</p>
 </li>
 </ol>
-<h3 id="what-to-do-if-you-chose-wrong-when-bisecting">What to do if you chose wrong when bisecting</h3>
+<h3 id="what-to-do-if-you-chose-wrong-when-bisecting">What to do if you chose wrong when bisecting<a hidden class="anchor" aria-hidden="true" href="#what-to-do-if-you-chose-wrong-when-bisecting">#</a></h3>
 <p>When I bisect, I will often use the arrow key to scroll back to find my last <code>git bisect ...</code> command and hit enter. The problem is I might chose the wrong one (<code>git bisect good</code> when I meant to chose <code>git bisect bad</code> or vice versa). Unfortunately, that will result in my bisect not converging properly. To fix this, I will have to start my bisect all over, right?</p>
 <p>Thankfully, you can use <code>git bisect log</code> + <code>git bisect replay</code> to get back to the state before that choice.</p>
 <ol>
@@ -363,7 +373,7 @@ $ git bisect replay bisect.log
 </code></pre><p>The <code>git bisect reset</code> gets us back to where we were when we ran <code>git bisect start</code> and the <code>git bisect replay</code> uses the <code>bisect.log</code> file to get us back to where we should have been been. Continue bisecting from there!</p>
 </li>
 </ol>
-<h3 id="automating-bisects">Automating bisects</h3>
+<h3 id="automating-bisects">Automating bisects<a hidden class="anchor" aria-hidden="true" href="#automating-bisects">#</a></h3>
 <p>If there is anything that you need to know about me, it is that I LOVE automation. If I am going to run a command more than twice, I usually automate it. I could not live without <a href="https://github.com/nathanchance/scripts">my scripts</a>. As a result, I love using <code>git bisect run</code>.</p>
 <p><code>git bisect run</code> takes a shell script and uses it to automate running <code>git bisect good</code> or <code>git bisect bad</code>. This helps avoid issues like in the previous section, where choosing wrong means that you go down the wrong path and end up at the wrong problematic commit.</p>
 <p>I am not going to go into a huge amount of detail about writing shell scripts as I assume if you care about something like this, you understand how to do that.</p>
@@ -372,7 +382,7 @@ $ git bisect replay bisect.log
 <p>If the source code is untestable (cannot be built or there was some other breakage independent of the issue being tracked down), the script should exit with <code>125</code> so that <code>git bisect skip</code> is run. I will go over that command in the next section.</p>
 <p>You can see an example of a <code>git bisect run</code> script that I made <a href="https://github.com/ClangBuiltLinux/linux/issues/657">here</a>. There are a couple in the <code>git bisect</code> documentation as well.</p>
 <p>To get accurate bisect results, you need to make sure that the script handles all possible outcomes and accurately tests for the problem. This varies widely by projects so I cannot give more specific advice than that.</p>
-<h3 id="dealing-with-independent-breakage">Dealing with independent breakage</h3>
+<h3 id="dealing-with-independent-breakage">Dealing with independent breakage<a hidden class="anchor" aria-hidden="true" href="#dealing-with-independent-breakage">#</a></h3>
 <p>There are times when you are bisecting that the revision cannot be tested because of a problem unrelated to the one that you are bisecting. For example, when bisecting an compiler bug, the compiler cannot be tested if it cannot be built. There are two ways to handle this situation:</p>
 <ol>
 <li>
@@ -383,213 +393,235 @@ $ git bisect replay bisect.log
 <p>Apply a fix on top of the tested revision</p>
 <p>I will often do this if there was a fix for the issue later in the history. For example, there was a change in clang 11 that broke building <code>scripts/dtc</code> within the Linux kernel. That was fixed by <a href="https://git.kernel.org/linus/e33a814e772cdc36436c8c188d8c42d019fda639">this commit</a> but any revision in the Linux kernel that does not have that as an ancestor will fail to build, which can make bisecting difficult.</p>
 <p>What I will do in this case is temporarily apply that fix on top of whatever revision <code>git</code> is currently testing. I can do this automatically so that <code>git bisect run</code> can handle it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ grep -q <span style="color:#e6db74">&#34;YYLTYPE yylloc&#34;</span> scripts/dtc/dtc-lexer.l <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>git format-patch -1 --stdout e33a814e772cdc36436c8c188d8c42d019fda639 | <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>git apply -3v
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ grep -q <span class="s2">&#34;YYLTYPE yylloc&#34;</span> scripts/dtc/dtc-lexer.l <span class="o">&amp;&amp;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>git format-patch -1 --stdout e33a814e772cdc36436c8c188d8c42d019fda639 <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>git apply -3v
 </span></span></code></pre></div><p>This basically says if the line that was removed by the commit is present in the tree, apply (but do not commit) the change to the index.</p>
 <p>After I test this revision, it is important to get rid of that modification before running <code>git bisect &lt;good|bad&gt;</code>, otherwise there will be an error.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git reset --hard
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ git bisect good
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git reset --hard
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ git bisect good
 </span></span></code></pre></div><p>The <code>git bisect</code> documentation that I linked above has an example of doing this with <code>git bisect run</code>.</p>
 </li>
 </ol>
-<h3 id="finding-the-commit-that-fixed-something">Finding the commit that fixed something</h3>
+<h3 id="finding-the-commit-that-fixed-something">Finding the commit that fixed something<a hidden class="anchor" aria-hidden="true" href="#finding-the-commit-that-fixed-something">#</a></h3>
 <p>Sometimes, it might be necessary to see what commit fixed something versus broke something. Unintentional fixes can be just as bad as unintentional breakages. The process is basically the same as the one described in the beginning but involves setting terms that are a little easier to work with.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect start --term-old broken --term-new fixed
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ git bisect fixed &lt;fixed_rev&gt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>$ git bisect broken &lt;broken_rev&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git bisect start --term-old broken --term-new fixed
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ git bisect fixed &lt;fixed_rev&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ git bisect broken &lt;broken_rev&gt;
 </span></span></code></pre></div><p>After that, the process is the exact same but <code>git bisect &lt;fixed|broken&gt;</code> is used instead of <code>git bisect &lt;good|bad&gt;</code>.</p>
-<h2 id="real-time-example">Real time example</h2>
+<h2 id="real-time-example">Real time example<a hidden class="anchor" aria-hidden="true" href="#real-time-example">#</a></h2>
 <p>I recently came across a bug in LLVM exposed by building the RISC-V Linux kernel&rsquo;s <code>allyesconfig</code> target. I determined that it was working at <a href="https://github.com/llvm/llvm-project/commit/b98ad941a40c96c841bceb171725c925500fce6c">the flang merge</a> but it was broken at <a href="https://github.com/llvm/llvm-project/commit/314f00a03489c84b764de2a6f4401996865ff281">top of tree</a> (at the time).</p>
 <p>To bisect this, I used <a href="https://github.com/ClangBuiltLinux/tc-build">tc-build</a>, an LLVM build script that builds a toolchain able to build the Linux kernel. If you run into an issue with LLVM and the Linux kernel, it can be very helpful (and I am more than willing to give a more in-depth tutorial around this if needed).</p>
 <p>The basic principle is we build a toolchain and then use that toolchain to build the translation unit that crashes in the kernel and see what happens.</p>
 <p>To demonstrate everything, I took a screen recording of my bisect (<a href="https://gist.github.com/9a9be43ee4eb393952f6ac18e77fb7e2">run script here</a>):</p>
-<p><a href="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG"><img src="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG.svg" alt="asciicast"></a></p>
+<p><a href="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG"><img loading="lazy" src="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG.svg" alt="asciicast"  />
+</a></p>
 <p>When I did this bisect manually, it took me over an hour, between having to make sure that I typed the right command and remembering that I had a bisect running. When I did it automated without <code>ccache</code> (to make sure everything worked before I did the recording), it took 22 minutes, of which I was involved for 30 seconds :)</p>
 <p>Hopefully this information was helpful in some way! If you have any questions or comments, please feel free to reach out to me on <a href="https://twitter.com/nathanchance">Twitter</a></p>
 
-    </div>
-  </article>
 
-  
-  
-
-
-
-
-  <div class="blog-post-comments">
-    
-      <div id="disqus_thread">
-  <script type="text/javascript">
-    (function() {
-      
-      
-      
-      
-    
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      var disqus_shortname = 'nathanchance';
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</div>
-
-    
   </div>
 
-
-
-  <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/posts">Blog</a></li>
-         
-          <li><a href="/about">About</a></li>
-         
-          <li><a href="/nc_resume.pdf">Resume</a></li>
-         
-          <li><a href="/downloads">Downloads</a></li>
-        
-      </ul>
-    </div>
-
-    
-    <div id="toc-footer" style="display: none">
-      <nav id="TableOfContents">
-  <ul>
-    <li><a href="#what-is-git-bisect">What is git bisect?</a></li>
-    <li><a href="#how-to-do-a-bisect">How to do a bisect</a></li>
-    <li><a href="#some-tips-and-notes-around-bisecting">Some tips and notes around bisecting</a>
-      <ul>
-        <li><a href="#git-bisect-converged-on-a-merge-commit">git bisect converged on a merge commit</a></li>
-        <li><a href="#what-to-do-if-you-chose-wrong-when-bisecting">What to do if you chose wrong when bisecting</a></li>
-        <li><a href="#automating-bisects">Automating bisects</a></li>
-        <li><a href="#dealing-with-independent-breakage">Dealing with independent breakage</a></li>
-        <li><a href="#finding-the-commit-that-fixed-something">Finding the commit that fixed something</a></li>
-      </ul>
-    </li>
-    <li><a href="#real-time-example">Real time example</a></li>
-  </ul>
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://nathanchance.dev/tags/git/">git</a></li>
+      <li><a href="https://nathanchance.dev/tags/linux/">linux</a></li>
+      <li><a href="https://nathanchance.dev/tags/llvm/">llvm</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://nathanchance.dev/posts/february-2021-cbl-work/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>February 2021 ClangBuiltLinux Work</span>
+  </a>
+  <a class="next" href="https://nathanchance.dev/posts/art-of-git-revert/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>The art of git revert</span>
+  </a>
 </nav>
-    </div>
-    
 
-    <div id="share-footer" style="display: none">
-      
-      <ul>
-  
-  
-    
-  
-  
-  <li>
-    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f" aria-label="Facebook">
-      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&text=Working%20with%20git%20bisect" aria-label="Twitter">
-      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&title=Working%20with%20git%20bisect" aria-label="Linkedin">
-      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&is_video=false&description=Working%20with%20git%20bisect" aria-label="Pinterest">
-      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="mailto:?subject=Working%20with%20git%20bisect&body=Check out this article: https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f" aria-label="Email">
-      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&title=Working%20with%20git%20bisect" aria-label="Pocket">
-      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&title=Working%20with%20git%20bisect" aria-label="reddit">
-      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&name=Working%20with%20git%20bisect&description=Before%20Google%2b%20shut%20down%2c%20I%20had%20a%20post%20on%20there%20giving%20a%20brief%20overview%20of%20git%20bisect%2c%20which%20a%20lot%20of%20people%20found%20useful.%20Unfortunately%2c%20I%20forgot%20to%20save%20it%20and%20move%20it%20somewhere%20else%20before%20the%20shutdown%20deadline.%20As%20a%20result%2c%20I%20am%20going%20to%20redo%20it%20here%20and%20spice%20it%20up%20a%20bit.%0aOne%20caveat%20before%20I%20start%3a%20there%20is%20great%20official%20documentation%20for%20git%20bisect%2c%20from%20which%20I%20have%20taken%20quite%20a%20bit%20of%20information." aria-label="Tumblr">
-      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-  <li>
-    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&t=Working%20with%20git%20bisect" aria-label="Hacker News">
-      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
-    </a>
-  </li>
-</ul>
 
-    </div>
-
-    <div id="actions-footer">
-      
-        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
-          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
-          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
-          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
-          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
-  </div>
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Working with git bisect on twitter"
+        href="https://twitter.com/intent/tweet/?text=Working%20with%20git%20bisect&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&amp;hashtags=git%2clinux%2cllvm">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Working with git bisect on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&amp;title=Working%20with%20git%20bisect&amp;summary=Working%20with%20git%20bisect&amp;source=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Working with git bisect on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f&title=Working%20with%20git%20bisect">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Working with git bisect on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Working with git bisect on whatsapp"
+        href="https://api.whatsapp.com/send?text=Working%20with%20git%20bisect%20-%20https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share Working with git bisect on telegram"
+        href="https://telegram.me/share/url?text=Working%20with%20git%20bisect&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fworking-with-git-bisect%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
 </div>
 
+  </footer><div id="disqus_thread"></div>
+<script>
+    
 
-  <footer id="footer">
-  <div class="footer-left">
-    Copyright  &copy; 2022  Nathan Chancellor 
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-        <li><a href="/posts">Blog</a></li>
-         
-        <li><a href="/about">About</a></li>
-         
-        <li><a href="/nc_resume.pdf">Resume</a></li>
-         
-        <li><a href="/downloads">Downloads</a></li>
-        
-      </ul>
-    </nav>
-  </div>
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://nathanchance.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
 </footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
-  </div>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
 </body>
-
-<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
-<script src=/lib/jquery/jquery.min.js></script>
-<script src=/js/main.js></script>
-
-<script src=/js/code-copy.js></script>
-
-
-
 
 </html>

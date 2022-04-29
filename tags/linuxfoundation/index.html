@@ -1,288 +1,345 @@
 <!DOCTYPE html>
-<html lang="en-us">
-<head>
-  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
-  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Nathan Chancellor</title>
-  <link rel = 'canonical' href = 'https://nathanchance.dev/tags/linuxfoundation/'>
-  <meta name="description" content="I am a Linux kernel developer focused on improving compatibility with LLVM and clang as part of [ClangBuiltLinux](https://clangbuiltlinux.github.io/). I mostly blog about my work and tips and tricks that I discover.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="all,follow">
-  <meta name="googlebot" content="index,follow,snippet,archive">
-  <meta property="og:title" content="linuxfoundation" />
-<meta property="og:description" content="I am a Linux kernel developer focused on improving compatibility with LLVM and clang as part of [ClangBuiltLinux](https://clangbuiltlinux.github.io/). I mostly blog about my work and tips and tricks that I discover." />
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>linuxfoundation | Nathan Chancellor</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="Nathan Chancellor">
+<link rel="canonical" href="https://nathanchance.dev/tags/linuxfoundation/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.b4e19c453811e60acfec1f00c15ac2be1c53f6ab90187e684358ce7faaf48bab.css" integrity="sha256-tOGcRTgR5grP7B8AwVrCvhxT9quQGH5oQ1jOf6r0i6s=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://nathanchance.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://nathanchance.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://nathanchance.dev/tags/linuxfoundation/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="linuxfoundation" />
+<meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://nathanchance.dev/tags/linuxfoundation/" />
 
-
-  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="linuxfoundation"/>
-<meta name="twitter:description" content="I am a Linux kernel developer focused on improving compatibility with LLVM and clang as part of [ClangBuiltLinux](https://clangbuiltlinux.github.io/). I mostly blog about my work and tips and tricks that I discover."/>
+<meta name="twitter:description" content=""/>
 
-  
-  
-  
-  <link rel="stylesheet" href="https://nathanchance.dev/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
-
-  
-  
-  
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  
-
-  
-<link rel="icon" type="image/png" href="https://nathanchance.dev/images/favicon.ico" />
-
-  
-  
-    <link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="alternate" type="application/rss+xml" title="Nathan Chancellor" />
-  
-  
-  
 </head>
 
-<body class="max-width mx-auto px3 ltr">
-  <div class="content index py4">
+<body class="list" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
 
-    <header id="header">
-  <a href="https://nathanchance.dev/">
-  
-    <div id="logo" style="background-image: url(https://nathanchance.dev/images/logo.png)"></div>
-  
-  <div id="title">
-    <h1>Nathan Chancellor</h1>
-  </div>
-  </a>
-  <div id="nav">
-    <ul>
-      <li class="icon">
-        <a href="#" aria-label="Menu"><i class="fas fa-bars fa-2x" aria-hidden="true"></i></a>
-      </li>
-      
-        <li><a href="/posts">Blog</a></li>
-      
-        <li><a href="/about">About</a></li>
-      
-        <li><a href="/nc_resume.pdf">Resume</a></li>
-      
-        <li><a href="/downloads">Downloads</a></li>
-      
-    </ul>
-  </div>
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://nathanchance.dev/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/nc_resume.pdf" title="Resume">
+                    <span>Resume</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/downloads/" title="Downloads">
+                    <span>Downloads</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header">
+  <h1>linuxfoundation</h1>
 </header>
 
-
-
-    
-<div id="archive">
-  <ul class="post-list">
-
-  
-  
-    
-  
-
-  
-    
-    
-    
-    <h2>2022</h2>
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2022-03-31 16:30:00 -0700 MST" itemprop="datePublished">2022-03-31</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/march-2022-cbl-work/"> March 2022 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2022-02-28 00:17:30 -0700 MST" itemprop="datePublished">2022-02-28</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/february-2022-cbl-work/"> February 2022 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2022-01-31 00:18:00 -0700 MST" itemprop="datePublished">2022-01-31</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/january-2022-cbl-work/"> January 2022 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    
-    <h2>2021</h2>
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-12-31 12:00:00 -0700 MST" itemprop="datePublished">2021-12-31</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/december-2021-cbl-work/"> December 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-11-30 16:23:00 -0700 MST" itemprop="datePublished">2021-11-30</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/november-2021-cbl-work/"> November 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-10-29 14:10:00 -0700 MST" itemprop="datePublished">2021-10-29</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/october-2021-cbl-work/"> October 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-09-30 10:00:00 -0700 MST" itemprop="datePublished">2021-09-30</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/september-2021-cbl-work/"> September 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-08-31 20:38:00 -0700 MST" itemprop="datePublished">2021-08-31</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/august-2021-cbl-work/"> August 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-08-01 00:00:00 -0700 MST" itemprop="datePublished">2021-08-01</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/july-2021-cbl-work/"> July 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-07-01 13:48:16 -0700 MST" itemprop="datePublished">2021-07-01</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/june-2021-cbl-work/"> June 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-06-01 08:29:00 -0700 MST" itemprop="datePublished">2021-06-01</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/may-2021-cbl-work/"> May 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-04-30 21:14:13 -0700 MST" itemprop="datePublished">2021-04-30</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/april-2021-cbl-work/"> April 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-04-01 10:25:53 -0700 MST" itemprop="datePublished">2021-04-01</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/march-2021-cbl-work/"> March 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-    
-    
-    <li class="post-item">
-      <div class="meta">
-        <time datetime="2021-02-28 00:01:20 -0700 MST" itemprop="datePublished">2021-02-28</time>
-      </div>
-      <span>    
-        <a class="" href="https://nathanchance.dev/posts/february-2021-cbl-work/"> February 2021 ClangBuiltLinux Work </a>
-      </span>
-    </li>
-    
-  </ul>
-  
-</div>
-
-
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright  &copy; 2022  Nathan Chancellor 
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>March 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing....</p>
   </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-        <li><a href="/posts">Blog</a></li>
-         
-        <li><a href="/about">About</a></li>
-         
-        <li><a href="/nc_resume.pdf">Resume</a></li>
-         
-        <li><a href="/downloads">Downloads</a></li>
-        
-      </ul>
-    </nav>
+  <footer class="entry-footer"><span title='2022-03-31 16:30:00 -0700 MST'>March 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to March 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>February 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
+ Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1)    -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here)....</p>
   </div>
+  <footer class="entry-footer"><span title='2022-02-28 00:17:30 -0700 MST'>February 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to February 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>January 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
+ [PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-01-31 00:18:00 -0700 MST'>January 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to January 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/january-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>December 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
+  Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-12-31 12:00:00 -0700 MST'>December 31, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to December 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/december-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>November 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches   Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C)....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-11-30 16:23:00 -0700 MST'>November 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to November 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/november-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>October 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend’s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-10-29 14:10:00 -0700 MST'>October 29, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to October 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/october-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>September 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux kernel patches   tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
+  Harden clang against unknown flag options (v2): A follow up.
+  ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-09-30 10:00:00 -0700 MST'>September 30, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to September 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/september-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>August 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux kernel patches   [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+  [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-08-31 20:38:00 -0700 MST'>August 31, 2021</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to August 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/august-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>July 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux kernel patches   [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-08-01 00:00:00 -0700 MST'>August 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to July 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>June 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux kernel patches   ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
+  [PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC’s -Wunused-but-set-variable and this instance was found by Intel’s kernel test robot....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-07-01 13:48:16 -0700 MST'>July 1, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to June 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/june-2021-cbl-work/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://nathanchance.dev/tags/linuxfoundation/page/2/">Next Page »</a>
+  </nav>
 </footer>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
-  </div>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
 </body>
 
-<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
-<script src=/lib/jquery/jquery.min.js></script>
-<script src=/js/main.js></script>
 </html>
