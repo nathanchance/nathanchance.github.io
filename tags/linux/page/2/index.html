@@ -136,6 +136,19 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>August 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux kernel patches   [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+  [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-08-31 20:38:00 -0700 MST'>August 31, 2021</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to August 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/august-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>July 2021 ClangBuiltLinux Work
     </h2>
   </header>
@@ -247,21 +260,10 @@ One caveat before I start: there is great official documentation for git bisect,
   <footer class="entry-footer"><span title='2020-01-31 18:52:00 -0700 MST'>January 31, 2020</span>&nbsp;·&nbsp;13 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to Building and using Cuttlefish" href="https://nathanchance.dev/posts/building-using-cuttlefish/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Building the WSL 2 kernel with Clang
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward....</p>
-  </div>
-  <footer class="entry-footer"><span title='2019-12-17 13:53:23 -0700 MST'>December 17, 2019</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to Building the WSL 2 kernel with Clang" href="https://nathanchance.dev/posts/wsl2-kernel-clang/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://nathanchance.dev/tags/linux/">« Prev Page</a>
+    <a class="next" href="https://nathanchance.dev/tags/linux/page/3/">Next Page »</a>
   </nav>
 </footer>
     </main>
