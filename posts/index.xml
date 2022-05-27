@@ -5,7 +5,16 @@
     <link>https://nathanchance.dev/posts/</link>
     <description>Recent content in Posts on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 29 Apr 2022 16:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 May 2022 09:21:35 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setting up a self-hosted GitHub Actions runner in a Fedora virtual machine using libvirt</title>
+      <link>https://nathanchance.dev/posts/github-actions-fedora-libvirt/</link>
+      <pubDate>Fri, 27 May 2022 09:21:35 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/github-actions-fedora-libvirt/</guid>
+      <description>Recently, I started exploring setting up a self-hosted GitHub Actions runner for the work-in-progress LLVM builds that ClangBuiltLinux is looking to distribute on kernel.org, as GitHub Actions hosted runners are pretty underwhelming in terms of performance and we want to soup these builds up with Profile Guided Optimization. Additionallly, GitHub Actions does not have a hosted arm64 Linux option, which is becoming increasingly important with chips such as Apple&amp;rsquo;s M1 getting strong mainline Linux support.</description>
+    </item>
+    
     <item>
       <title>April 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/april-2022-cbl-work/</link>

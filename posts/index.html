@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - Nathan Chancellor">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.min.b4e19c453811e60acfec1f00c15ac2be1c53f6ab90187e684358ce7faaf48bab.css" integrity="sha256-tOGcRTgR5grP7B8AwVrCvhxT9quQGH5oQ1jOf6r0i6s=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -97,7 +97,7 @@
     <nav class="nav">
         <div class="logo">
             <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
-            <span class="logo-switches">
+            <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -118,7 +118,7 @@
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                     </svg>
                 </button>
-            </span>
+            </div>
         </div>
         <ul id="menu">
             <li>
@@ -146,8 +146,22 @@
 </header>
 <main class="main"> 
 <header class="page-header">
-  <h1>Posts</h1>
+  <h1>
+    Posts
+  </h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Setting up a self-hosted GitHub Actions runner in a Fedora virtual machine using libvirt
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Recently, I started exploring setting up a self-hosted GitHub Actions runner for the work-in-progress LLVM builds that ClangBuiltLinux is looking to distribute on kernel.org, as GitHub Actions hosted runners are pretty underwhelming in terms of performance and we want to soup these builds up with Profile Guided Optimization. Additionallly, GitHub Actions does not have a hosted arm64 Linux option, which is becoming increasingly important with chips such as Apple’s M1 getting strong mainline Linux support....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-05-27 09:21:35 -0700 MST'>May 27, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to Setting up a self-hosted GitHub Actions runner in a Fedora virtual machine using libvirt" href="https://nathanchance.dev/posts/github-actions-fedora-libvirt/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -265,21 +279,9 @@ Linux kernel patches   Build errors: These are hard errors that appear for one r
   <footer class="entry-footer"><span title='2021-11-29 10:07:16 -0700 MST'>November 29, 2021</span>&nbsp;·&nbsp;19 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to Reducing an LTO Linux kernel bug with cvise" href="https://nathanchance.dev/posts/cvise-lto-kernel-bug/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>October 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend’s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned....</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-10-29 14:10:00 -0700 MST'>October 29, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to October 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/october-2021-cbl-work/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="next" href="https://nathanchance.dev/posts/page/2/">Next Page »</a>
+    <a class="next" href="https://nathanchance.dev/posts/page/2/">Next »</a>
   </nav>
 </footer>
     </main>

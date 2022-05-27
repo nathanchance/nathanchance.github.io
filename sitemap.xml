@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://nathanchance.dev/</loc>
+    <lastmod>2022-05-27T09:21:35-07:00</lastmod>
+  </url><url>
+    <loc>https://nathanchance.dev/posts/</loc>
+    <lastmod>2022-05-27T09:21:35-07:00</lastmod>
+  </url><url>
+    <loc>https://nathanchance.dev/posts/github-actions-fedora-libvirt/</loc>
+    <lastmod>2022-05-27T09:21:35-07:00</lastmod>
+  </url><url>
     <loc>https://nathanchance.dev/posts/april-2022-cbl-work/</loc>
     <lastmod>2022-04-29T16:30:00-07:00</lastmod>
   </url><url>
@@ -15,12 +24,6 @@
     <lastmod>2022-04-29T16:30:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/tags/maintainer/</loc>
-    <lastmod>2022-04-29T16:30:00-07:00</lastmod>
-  </url><url>
-    <loc>https://nathanchance.dev/</loc>
-    <lastmod>2022-04-29T16:30:00-07:00</lastmod>
-  </url><url>
-    <loc>https://nathanchance.dev/posts/</loc>
     <lastmod>2022-04-29T16:30:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/tags/</loc>
