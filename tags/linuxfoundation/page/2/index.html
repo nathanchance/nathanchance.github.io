@@ -138,11 +138,24 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>August 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-08-31 20:38:00 -0700 MST'>August 31, 2021</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to August 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/august-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>July 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
-    <p>Linux kernel patches   [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it....</p>
+    <p>Linux kernel patches [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it....</p>
   </div>
   <footer class="entry-footer"><span title='2021-08-01 00:00:00 -0700 MST'>August 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to July 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2021-cbl-work/"></a>
@@ -154,8 +167,8 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>Linux kernel patches   ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
-  [PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC’s -Wunused-but-set-variable and this instance was found by Intel’s kernel test robot....</p>
+    <p>Linux kernel patches ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
+[PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC’s -Wunused-but-set-variable and this instance was found by Intel’s kernel test robot....</p>
   </div>
   <footer class="entry-footer"><span title='2021-07-01 13:48:16 -0700 MST'>July 1, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to June 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/june-2021-cbl-work/"></a>
@@ -168,7 +181,7 @@
   </header>
   <div class="entry-content">
     <p>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let’s dive in, shall we?
-Linux kernel patches / backports   [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting “struct ” with an attribute, in this case “__maybe_unused”, which clang warns about while GCC does not....</p>
+Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting “struct ” with an attribute, in this case “__maybe_unused”, which clang warns about while GCC does not. This causes a warning in all of our builds....</p>
   </div>
   <footer class="entry-footer"><span title='2021-06-01 08:29:00 -0700 MST'>June 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to May 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2021-cbl-work/"></a>
@@ -181,7 +194,7 @@ Linux kernel patches / backports   [PATCH] fbmem: Correct position of &#39;__may
   </header>
   <div class="entry-content">
     <p>Another month down! Feels like I just wrote the March 2021 post… but I suppose that is what happens when your project moves super quickly :)
-Linux kernel patches   [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen’s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing....</p>
+Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen’s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing....</p>
   </div>
   <footer class="entry-footer"><span title='2021-04-30 21:14:13 -0700 MST'>April 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to April 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2021-cbl-work/"></a>
@@ -194,7 +207,7 @@ Linux kernel patches   [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribut
   </header>
   <div class="entry-content">
     <p>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
-Linux kernel patches   powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations....</p>
+Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations....</p>
   </div>
   <footer class="entry-footer"><span title='2021-04-01 10:25:53 -0700 MST'>April 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to March 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2021-cbl-work/"></a>

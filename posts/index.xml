@@ -5,7 +5,17 @@
     <link>https://nathanchance.dev/posts/</link>
     <description>Recent content in Posts on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 31 May 2022 16:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Jun 2022 16:25:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>June 2022 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/june-2022-cbl-work/</link>
+      <pubDate>Thu, 30 Jun 2022 16:25:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/june-2022-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.</description>
+    </item>
+    
     <item>
       <title>May 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/may-2022-cbl-work/</link>
@@ -13,7 +23,7 @@
       
       <guid>https://nathanchance.dev/posts/may-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches   Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
     
     <item>
@@ -32,7 +42,7 @@ Linux kernel patches   Build errors: These are patches to fix various build erro
       
       <guid>https://nathanchance.dev/posts/april-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches   Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
+Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
     
     <item>
@@ -60,7 +70,7 @@ Linux kernel patches   Build failures: These are patches to fix various build er
       
       <guid>https://nathanchance.dev/posts/march-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches   Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.</description>
+Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.</description>
     </item>
     
     <item>
@@ -70,8 +80,8 @@ Linux kernel patches   Boot fixes: These patches fix boot failures that we have 
       
       <guid>https://nathanchance.dev/posts/february-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches   Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
- Allow CONFIG_DEBUG_INFO_DWARF5=y + CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1)    -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here).</description>
+Linux kernel patches Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
+Allow CONFIG_DEBUG_INFO_DWARF5=y + CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here).</description>
     </item>
     
     <item>
@@ -81,8 +91,8 @@ Linux kernel patches   Miscellaneous improvements: These are series or patches t
       
       <guid>https://nathanchance.dev/posts/january-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches   Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
- [PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.</description>
+Linux kernel patches Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
+[PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.</description>
     </item>
     
     <item>
@@ -92,8 +102,8 @@ Linux kernel patches   Stable patches: The stable trees are the trees that most 
       
       <guid>https://nathanchance.dev/posts/december-2021-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches   Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
-  Revert &amp;quot;ANDROID: disable INFINIBAND_QIB from allmodconfig build&amp;quot;</description>
+Linux kernel patches Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
+Revert &amp;quot;ANDROID: disable INFINIBAND_QIB from allmodconfig build&amp;quot;</description>
     </item>
     
     <item>
@@ -103,7 +113,7 @@ Linux kernel patches   Android patches: Android is one of the biggest downstream
       
       <guid>https://nathanchance.dev/posts/november-2021-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches   Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C).</description>
+Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C).</description>
     </item>
     
     <item>
@@ -130,9 +140,9 @@ Linux kernel patches   Build errors: These are hard errors that appear for one r
       <pubDate>Thu, 30 Sep 2021 10:00:00 -0700</pubDate>
       
       <guid>https://nathanchance.dev/posts/september-2021-cbl-work/</guid>
-      <description>Linux kernel patches   tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
-  Harden clang against unknown flag options (v2): A follow up.
-  ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!</description>
+      <description>Linux kernel patches tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
+Harden clang against unknown flag options (v2): A follow up.
+ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!</description>
     </item>
     
     <item>
@@ -141,8 +151,8 @@ Linux kernel patches   Build errors: These are hard errors that appear for one r
       <pubDate>Tue, 31 Aug 2021 20:38:00 -0700</pubDate>
       
       <guid>https://nathanchance.dev/posts/august-2021-cbl-work/</guid>
-      <description>Linux kernel patches   [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
-  [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.</description>
+      <description>Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.</description>
     </item>
     
     <item>
@@ -151,7 +161,7 @@ Linux kernel patches   Build errors: These are hard errors that appear for one r
       <pubDate>Sun, 01 Aug 2021 00:00:00 -0700</pubDate>
       
       <guid>https://nathanchance.dev/posts/july-2021-cbl-work/</guid>
-      <description>Linux kernel patches   [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it.</description>
+      <description>Linux kernel patches [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it.</description>
     </item>
     
     <item>
@@ -160,8 +170,8 @@ Linux kernel patches   Build errors: These are hard errors that appear for one r
       <pubDate>Thu, 01 Jul 2021 13:48:16 -0700</pubDate>
       
       <guid>https://nathanchance.dev/posts/june-2021-cbl-work/</guid>
-      <description>Linux kernel patches   ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
-  [PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC&amp;rsquo;s -Wunused-but-set-variable and this instance was found by Intel&amp;rsquo;s kernel test robot.</description>
+      <description>Linux kernel patches ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
+[PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC&amp;rsquo;s -Wunused-but-set-variable and this instance was found by Intel&amp;rsquo;s kernel test robot.</description>
     </item>
     
     <item>
@@ -171,7 +181,7 @@ Linux kernel patches   Build errors: These are hard errors that appear for one r
       
       <guid>https://nathanchance.dev/posts/may-2021-cbl-work/</guid>
       <description>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let&amp;rsquo;s dive in, shall we?
-Linux kernel patches / backports   [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting &amp;ldquo;struct &amp;rdquo; with an attribute, in this case &amp;ldquo;__maybe_unused&amp;rdquo;, which clang warns about while GCC does not.</description>
+Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting &amp;ldquo;struct &amp;rdquo; with an attribute, in this case &amp;ldquo;__maybe_unused&amp;rdquo;, which clang warns about while GCC does not. This causes a warning in all of our builds.</description>
     </item>
     
     <item>
@@ -181,7 +191,7 @@ Linux kernel patches / backports   [PATCH] fbmem: Correct position of &#39;__may
       
       <guid>https://nathanchance.dev/posts/april-2021-cbl-work/</guid>
       <description>Another month down! Feels like I just wrote the March 2021 post&amp;hellip; but I suppose that is what happens when your project moves super quickly :)
-Linux kernel patches   [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&amp;rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing.</description>
+Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&amp;rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing.</description>
     </item>
     
     <item>
@@ -191,7 +201,7 @@ Linux kernel patches   [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribut
       
       <guid>https://nathanchance.dev/posts/march-2021-cbl-work/</guid>
       <description>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
-Linux kernel patches   powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations.</description>
+Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations.</description>
     </item>
     
     <item>

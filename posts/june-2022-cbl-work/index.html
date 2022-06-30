@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>June 2022 ClangBuiltLinux Work | Nathan Chancellor</title>
+<meta name="keywords" content="clangbuiltlinux, linux, linuxfoundation, maintainer">
+<meta name="description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.">
+<meta name="author" content="Nathan Chancellor">
+<link rel="canonical" href="https://nathanchance.dev/posts/june-2022-cbl-work/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.ec8da366ca2fb647537ccb7a8f6fa5b4e9cd3c7a0d3171dd2d3baad1e49c8bfc.css" integrity="sha256-7I2jZsovtkdTfMt6j2&#43;ltOnNPHoNMXHdLTuq0eSci/w=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.e85ad0406048e8176e1c7661b25d5c69297ddfe41dc4124cf75ecb99a4f7b3d1.js" integrity="sha256-6FrQQGBI6BduHHZhsl1caSl93&#43;QdxBJM917LmaT3s9E="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://nathanchance.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://nathanchance.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="June 2022 ClangBuiltLinux Work" />
+<meta property="og:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nathanchance.dev/posts/june-2022-cbl-work/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-30T16:25:00-07:00" />
+<meta property="article:modified_time" content="2022-06-30T16:25:00-07:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="June 2022 ClangBuiltLinux Work"/>
+<meta name="twitter:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://nathanchance.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "June 2022 ClangBuiltLinux Work",
+      "item": "https://nathanchance.dev/posts/june-2022-cbl-work/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "June 2022 ClangBuiltLinux Work",
+  "name": "June 2022 ClangBuiltLinux Work",
+  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.",
+  "keywords": [
+    "clangbuiltlinux", "linux", "linuxfoundation", "maintainer"
+  ],
+  "articleBody": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.\nANDROID: Incremental fs: Use ERR_CAST in handle_mapped_file() Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)\nntb_perf: Fix 64-bit division on 32-bit architectures (v1) arm64: vdso32: Small fixes for ld.lld 11 and CONFIG_DEBUG_INFO (v1) Miscellaneous fixes: These are fixes that don’t fit into a particular category but are important to ClangBuiltLinux. In this case, I noticed that Chimera Linux was carrying a patch downstream to enable the stackprotector on x86_64 when cross compiling, which typically means the --target flag is missing somewhere, which I fixed with this patch.\nx86/Kconfig: Fix CONFIG_CC_HAS_SANE_STACKPROTECTOR when cross compiling with clang (v1) Stable patches and backport requests: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.\nApply 1e70212e031528918066a631c9fdccda93a1ffaa to 5.18 Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures. Maybe these should be in the build failures section…\nmmc: sdhci-brcmstb: Initialize base_clk to NULL in sdhci_brcmstb_probe() (v1) soc: mediatek: SVS: Use DEFINE_SIMPLE_DEV_PM_OPS for svs_pm_ops (v1) drm/amd/display: Fix indentation in dcn32_get_vco_frequency_from_reg() (v1) Patch review and input For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.\nReviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.\nRe: [PATCH] netfilter: conntrack: fix this -Wformat clang warning: Re: [PATCH] rtw88: 8821c: fix access const table of channel parameters Re: [PATCH] s390: disable -Warray-bounds Re: [PATCH v3] include/uapi/linux/swab.h: move explicit cast outside ternary Re: [PATCH] KVM: SVM: Hide SEV migration lockdep goo behind CONFIG_DEBUG_LOCK_ALLOC Re: [PATCH] hinic: Replace memcpy() with direct assignment Re: [PATCH] Documentation/llvm: Update Supported Arch table Re: [PATCH] Fix use of uninitialized variable in rts5261_init_from_hw, when efuse_valid == 1 Re: [PATCH 16/31] drm/amd/display: refactor function transmitter_to_phy_id Re: [PATCH] [RFC] Kbuild: change CONFIG_FRAME_WARN for 32-bit Re: [PATCH] scripts/Makefile.clang: set --target for host based on make -v Re: [PATCH for-next 03/10] io_uring: fix io_poll_remove_all clang warnings stage 4 \u0026 stage 5 Re: [PATCH] lib/test_printf.c: fix clang -Wformat warnings Issue triage and reporting The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.\nRe: [PATCH 09/15] swiotlb: make the swiotlb_init interface more useful Re: [PATCH v11 1/4] trace: Add trace any kernel object Considering uninitialized function parameters UB LLD segfaults while linking drivers/scsi/megaraid/megaraid_mm.ko Re: [PATCH v3 4/4] rtw88: Fix Sparse warning for rtw8821c_hw_spec INIT_STACK_ALL_ZERO - Framework Laptop system freezes (kernel oops?) on boot error: write on a pipe with no reader \"Unable to apply kernel patch\" when git quiltimport works locally -Wframe-larger-than in sound/soc/intel/avs/path.c Contextual conflict between kspp and rcu trees Re: linux-next: Tree for Jun 15 (drivers/gpu/drm/amd/amdgpu/../display/amdgpu_dm/amdgpu_dm.c) -Wunused-but-set-variable building perf Re: [PATCH for-next v3 16/16] io_uring: mutex locked poll hashing Re: [GIT PULL] Char/Misc driver fixes 5.19-rc3 Re: [PATCH] kbuild: pass jobserver to cmd_ld_vmlinux.o Re: [TCWG CI] Regression caused by llvm: [GlobalOpt] Perform store-\u003edominated load forwarding for stored once globals Re: mainline build failure due to 281d0c962752 (\"fortify: Add Clang support\") Triggered assertion from \"mm: Add an assertion that PG_private and folio-\u003eprivate are in sync\" Re: [PATCH v1 1/2] arm64: vdso32: add ARM.exidx* sections Re: Regression for duplicate (?) console parameters on next-20220630 Tooling improvements These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as AOSP’s distribution of LLVM and TuxMake.\npatches: Add RISC-V inline asm fixes to mainline and -next Switch to self-hosted GitHub Actions for llvm-project Update to Linux 5.18 and update known good revision boot-uml.sh: Remove exec hack build-llvm.py: Add LLVM_DEFAULT_TARGET_TRIPLE when possible patches: mainline: Drop a RISC-V patch Improve shell script style ci.sh: Use release/14.x for testing kernel/build.sh: Support all*config for Hexagon, RISC-V, and s390 ci/test-clang.sh: Skip toolchain archive creation when run locally Improve podman compatibility Add support for arm64 to llvm-project Drop objtool patch on stable and 5.15 Fix tags and update Makefile workflow to match github: build-test-llvm-project: Add build-args Re-enable ChromeOS jobs boot-utils: Update patches: mainline: Add a fix for ARCH=arm allmodconfig patches: mainline: Drop watchdog patch Drop -next patches (June 21st, 2022) Disable ChromeOS jobs again Drop mainline patches (June 24th, 2022) kernel/build.sh: Print kernel version and small fix for header Enable ChromeOS jobs (round 3) Behind the scenes Every day that there is a new linux-next release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Windows Subsystem for Linux instance, a Raspberry Pi 3 and 4, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered. Special thanks to: Google and the Linux Foundation for sponsoring my work. ",
+  "wordCount" : "1103",
+  "inLanguage": "en",
+  "datePublished": "2022-06-30T16:25:00-07:00",
+  "dateModified": "2022-06-30T16:25:00-07:00",
+  "author":{
+    "@type": "Person",
+    "name": "Nathan Chancellor"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nathanchance.dev/posts/june-2022-cbl-work/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nathan Chancellor",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nathanchance.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://nathanchance.dev/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/nc_resume.pdf" title="Resume">
+                    <span>Resume</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/downloads/" title="Downloads">
+                    <span>Downloads</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      June 2022 ClangBuiltLinux Work
+    </h1>
+    <div class="post-meta"><span title='2022-06-30 16:25:00 -0700 MST'>June 30, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor&nbsp;|&nbsp;<a href="https://github.com/nathanchance/hugo-files/blob/main/content/posts/june-2022-cbl-work.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#linux-kernel-patches" aria-label="Linux kernel patches">Linux kernel patches</a></li>
+                <li>
+                    <a href="#patch-review-and-input" aria-label="Patch review and input">Patch review and input</a></li>
+                <li>
+                    <a href="#issue-triage-and-reporting" aria-label="Issue triage and reporting">Issue triage and reporting</a></li>
+                <li>
+                    <a href="#tooling-improvements" aria-label="Tooling improvements">Tooling improvements</a></li>
+                <li>
+                    <a href="#behind-the-scenes" aria-label="Behind the scenes">Behind the scenes</a></li>
+                <li>
+                    <a href="#special-thanks-to" aria-label="Special thanks to:">Special thanks to:</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on <a href="https://lore.kernel.org/all/?q=f:nathan@kernel.org">lore.kernel.org</a>.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches<a hidden class="anchor" aria-hidden="true" href="#linux-kernel-patches">#</a></h2>
+<ul>
+<li>
+<p>Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.</p>
+<ul>
+<li><a href="https://android-review.googlesource.com/c/kernel/common/+/2134978"><code>ANDROID: Incremental fs: Use ERR_CAST in handle_mapped_file()</code></a></li>
+</ul>
+</li>
+<li>
+<p>Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</p>
+<ul>
+<li><code>ntb_perf: Fix 64-bit division on 32-bit architectures</code> (<a href="https://lore.kernel.org/20220622174326.1832697-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>arm64: vdso32: Small fixes for ld.lld 11 and CONFIG_DEBUG_INFO</code> (<a href="https://lore.kernel.org/20220630153121.1317045-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p>Miscellaneous fixes: These are fixes that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux. In this case, I noticed that Chimera Linux was carrying a patch downstream to enable the stackprotector on x86_64 when cross compiling, which typically means the <code>--target</code> flag is missing somewhere, which I fixed with this patch.</p>
+<ul>
+<li><code>x86/Kconfig: Fix CONFIG_CC_HAS_SANE_STACKPROTECTOR when cross compiling with clang</code> (<a href="https://lore.kernel.org/20220617180845.2788442-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p>Stable patches and backport requests: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.</p>
+<ul>
+<li><a href="https://lore.kernel.org/Yrnvm6mwtaiKu6Rj@dev-arch.thelio-3990X"><code>Apply 1e70212e031528918066a631c9fdccda93a1ffaa to 5.18</code></a></li>
+</ul>
+</li>
+<li>
+<p>Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as <a href="https://lore.kernel.org/r/CAHk-=wifoM9VOp-55OZCRcO9MnqQ109UTuCiXeZ-eyX_JcNVGg@mail.gmail.com/">all developers should be using <code>CONFIG_WERROR</code></a>, which will turn these all into failures. Maybe these should be in the build failures section&hellip;</p>
+<ul>
+<li><code>mmc: sdhci-brcmstb: Initialize base_clk to NULL in sdhci_brcmstb_probe()</code> (<a href="https://lore.kernel.org/20220608152757.82529-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>soc: mediatek: SVS: Use DEFINE_SIMPLE_DEV_PM_OPS for svs_pm_ops</code> (<a href="https://lore.kernel.org/20220622175649.1856337-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>drm/amd/display: Fix indentation in dcn32_get_vco_frequency_from_reg()</code> (<a href="https://lore.kernel.org/20220623153001.3136739-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input<a hidden class="anchor" aria-hidden="true" href="#patch-review-and-input">#</a></h2>
+<p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
+<p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
+<ul>
+<li><a href="https://lore.kernel.org/Yp9uRz40J24vWLSb@dev-arch.thelio-3990X/"><code>Re: [PATCH] netfilter: conntrack: fix this -Wformat clang warning:</code></a></li>
+<li><a href="https://lore.kernel.org/YqAQTJqOTB2+242p@dev-arch.thelio-3990X/"><code>Re: [PATCH] rtw88: 8821c: fix access const table of channel parameters</code></a></li>
+<li><a href="https://lore.kernel.org/YqIJ1iimwIlFDa4n@dev-arch.thelio-3990X/"><code>Re: [PATCH] s390: disable -Warray-bounds</code></a></li>
+<li><a href="https://lore.kernel.org/YqJYrImC3Bk40H1H@dev-arch.thelio-3990X/"><code>Re: [PATCH v3] include/uapi/linux/swab.h: move explicit cast outside ternary</code></a></li>
+<li><a href="https://lore.kernel.org/Yqexcdad6oghl8sv@dev-arch.thelio-3990X/"><code>Re: [PATCH] KVM: SVM: Hide SEV migration lockdep goo behind CONFIG_DEBUG_LOCK_ALLOC</code></a></li>
+<li><a href="https://lore.kernel.org/YqtmIIAOH7uRNAZ5@dev-arch.thelio-3990X/"><code>Re: [PATCH] hinic: Replace memcpy() with direct assignment</code></a></li>
+<li><a href="https://lore.kernel.org/Yqy0EkraT0O52Na7@dev-arch.thelio-3990X/"><code>Re: [PATCH] Documentation/llvm: Update Supported Arch table</code></a></li>
+<li><a href="https://lore.kernel.org/YqzKrdI0JBORlptt@dev-arch.thelio-3990X/"><code>Re: [PATCH] Fix use of uninitialized variable in rts5261_init_from_hw, when efuse_valid == 1</code></a></li>
+<li><a href="https://lore.kernel.org/YqzbVxByDw1xSdXb@dev-arch.thelio-3990X/"><code>Re: [PATCH 16/31] drm/amd/display: refactor function transmitter_to_phy_id</code></a></li>
+<li><a href="https://lore.kernel.org/Yqzzuk+Wv5q1zIKm@dev-arch.thelio-3990X/"><code>Re: [PATCH] [RFC] Kbuild: change CONFIG_FRAME_WARN for 32-bit</code></a></li>
+<li><a href="https://lore.kernel.org/Yq0MV2Z%2FhqSuSYbt@dev-arch.thelio-3990X/"><code>Re: [PATCH] scripts/Makefile.clang: set --target for host based on make -v</code></a></li>
+<li><a href="https://lore.kernel.org/YrHmaOd1md4qqlHx@dev-arch.thelio-3990X/"><code>Re: [PATCH for-next 03/10] io_uring: fix io_poll_remove_all clang warnings</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/containers/pull/37"><code>stage 4 &amp; stage 5</code></a></li>
+<li><a href="https://lore.kernel.org/Yr3JN%2FmMn4K+7WnR@dev-arch.thelio-3990X/"><code>Re: [PATCH] lib/test_printf.c: fix clang -Wformat warnings</code></a></li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting<a hidden class="anchor" aria-hidden="true" href="#issue-triage-and-reporting">#</a></h2>
+<p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
+<ul>
+<li><a href="https://lore.kernel.org/YpehC7BwBlnuxplF@dev-arch.thelio-3990X/"><code>Re: [PATCH 09/15] swiotlb: make the swiotlb_init interface more useful</code></a></li>
+<li><a href="https://lore.kernel.org/YpoqulzEvwNDHFMH@dev-arch.thelio-3990X/"><code>Re: [PATCH v11 1/4] trace: Add trace any kernel object</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1648"><code>Considering uninitialized function parameters UB</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1649"><code>LLD segfaults while linking drivers/scsi/megaraid/megaraid_mm.ko</code></a></li>
+<li><a href="https://lore.kernel.org/Yp+hfo5Uual8ZUkR@dev-arch.thelio-3990X/"><code>Re: [PATCH v3 4/4] rtw88: Fix Sparse warning for rtw8821c_hw_spec</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1626"><code>INIT_STACK_ALL_ZERO - Framework Laptop system freezes (kernel oops?) on boot</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1651"><code>error: write on a pipe with no reader</code></a></li>
+<li><a href="https://gitlab.com/Linaro/tuxsuite/-/issues/169"><code>&quot;Unable to apply kernel patch&quot; when git quiltimport works locally</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1642"><code>-Wframe-larger-than in sound/soc/intel/avs/path.c</code></a></li>
+<li><a href="https://lore.kernel.org/Yqo5SequJuC2qX6S@dev-arch.thelio-3990X/"><code>Contextual conflict between kspp and rcu trees</code></a></li>
+<li><a href="https://lore.kernel.org/YqpACmvbwiEcUfta@dev-arch.thelio-3990X/"><code>Re: linux-next: Tree for Jun 15 (drivers/gpu/drm/amd/amdgpu/../display/amdgpu_dm/amdgpu_dm.c)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1654"><code>-Wunused-but-set-variable building perf</code></a></li>
+<li><a href="https://lore.kernel.org/YqyfK34NJakiLiVe@dev-arch.thelio-3990X/"><code>Re: [PATCH for-next v3 16/16] io_uring: mutex locked poll hashing</code></a></li>
+<li><a href="https://lore.kernel.org/Yqywy+Md2AfGDu8v@dev-arch.thelio-3990X/"><code>Re: [GIT PULL] Char/Misc driver fixes 5.19-rc3</code></a></li>
+<li><a href="https://lore.kernel.org/YqzXKaaWRNP9C4b0@dev-arch.thelio-3990X/"><code>Re: [PATCH] kbuild: pass jobserver to cmd_ld_vmlinux.o</code></a></li>
+<li><a href="https://lore.kernel.org/YrHl20+cA20MwpAP@dev-arch.thelio-3990X/"><code>Re: [TCWG CI] Regression caused by llvm: [GlobalOpt] Perform store-&gt;dominated load forwarding for stored once globals</code></a></li>
+<li><a href="https://lore.kernel.org/YrMu5bdhkPzkxv%2FX@dev-arch.thelio-3990X/"><code>Re: mainline build failure due to 281d0c962752 (&quot;fortify: Add Clang support&quot;)</code></a></li>
+<li><a href="https://lore.kernel.org/YrYzhB7aDNIBz%2FuV@dev-arch.thelio-3990X/"><code>Triggered assertion from &quot;mm: Add an assertion that PG_private and folio-&gt;private are in sync&quot;</code></a></li>
+<li><a href="https://lore.kernel.org/YryxouOYOJLM+DDK@dev-arch.thelio-3990X/"><code>Re: [PATCH v1 1/2] arm64: vdso32: add ARM.exidx* sections</code></a></li>
+<li><a href="https://lore.kernel.org/Yr37D4P2Dmnbkb+M@dev-arch.thelio-3990X/"><code>Re: Regression for duplicate (?) console parameters on next-20220630</code></a></li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements<a hidden class="anchor" aria-hidden="true" href="#tooling-improvements">#</a></h2>
+<p>These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as <a href="https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/">AOSP&rsquo;s distribution of LLVM</a> and <a href="https://tuxmake.org">TuxMake</a>.</p>
+<ul>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/373"><code>patches: Add RISC-V inline asm fixes to mainline and -next</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/containers/pull/25"><code>Switch to self-hosted GitHub Actions for llvm-project</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/191"><code>Update to Linux 5.18 and update known good revision</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/boot-utils/pull/64"><code>boot-uml.sh: Remove exec hack</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/194"><code>build-llvm.py: Add LLVM_DEFAULT_TARGET_TRIPLE when possible</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/374"><code>patches: mainline: Drop a RISC-V patch</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/195"><code>Improve shell script style</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/196"><code>ci.sh: Use release/14.x for testing</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/197"><code>kernel/build.sh: Support all*config for Hexagon, RISC-V, and s390</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/containers/pull/27"><code>ci/test-clang.sh: Skip toolchain archive creation when run locally</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/containers/pull/28"><code>Improve podman compatibility</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/containers/pull/29"><code>Add support for arm64 to llvm-project</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/375"><code>Drop objtool patch on stable and 5.15</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/containers/pull/32"><code>Fix tags and update Makefile workflow to match</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/containers/pull/33"><code>github: build-test-llvm-project: Add build-args</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/376"><code>Re-enable ChromeOS jobs</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/377"><code>boot-utils: Update</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/378"><code>patches: mainline: Add a fix for ARCH=arm allmodconfig</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/379"><code>patches: mainline: Drop watchdog patch</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/380"><code>Drop -next patches (June 21st, 2022)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/381"><code>Disable ChromeOS jobs again</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/382"><code>Drop mainline patches (June 24th, 2022)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/199"><code>kernel/build.sh: Print kernel version and small fix for header</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/383"><code>Enable ChromeOS jobs (round 3)</code></a></li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes<a hidden class="anchor" aria-hidden="true" href="#behind-the-scenes">#</a></h2>
+<ul>
+<li>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Windows Subsystem for Linux instance, a Raspberry Pi 3 and 4, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:<a hidden class="anchor" aria-hidden="true" href="#special-thanks-to">#</a></h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://nathanchance.dev/tags/clangbuiltlinux/">clangbuiltlinux</a></li>
+      <li><a href="https://nathanchance.dev/tags/linux/">linux</a></li>
+      <li><a href="https://nathanchance.dev/tags/linuxfoundation/">linuxfoundation</a></li>
+      <li><a href="https://nathanchance.dev/tags/maintainer/">maintainer</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://nathanchance.dev/posts/may-2022-cbl-work/">
+    <span class="title">Next »</span>
+    <br>
+    <span>May 2022 ClangBuiltLinux Work</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share June 2022 ClangBuiltLinux Work on twitter"
+        href="https://twitter.com/intent/tweet/?text=June%202022%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjune-2022-cbl-work%2f&amp;hashtags=clangbuiltlinux%2clinux%2clinuxfoundation%2cmaintainer">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share June 2022 ClangBuiltLinux Work on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjune-2022-cbl-work%2f&amp;title=June%202022%20ClangBuiltLinux%20Work&amp;summary=June%202022%20ClangBuiltLinux%20Work&amp;source=https%3a%2f%2fnathanchance.dev%2fposts%2fjune-2022-cbl-work%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share June 2022 ClangBuiltLinux Work on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fjune-2022-cbl-work%2f&title=June%202022%20ClangBuiltLinux%20Work">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share June 2022 ClangBuiltLinux Work on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fjune-2022-cbl-work%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share June 2022 ClangBuiltLinux Work on whatsapp"
+        href="https://api.whatsapp.com/send?text=June%202022%20ClangBuiltLinux%20Work%20-%20https%3a%2f%2fnathanchance.dev%2fposts%2fjune-2022-cbl-work%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share June 2022 ClangBuiltLinux Work on telegram"
+        href="https://telegram.me/share/url?text=June%202022%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjune-2022-cbl-work%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+
+  </footer><div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://nathanchance.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://git.io/hugopapermod" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
