@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>July 2022 ClangBuiltLinux Work | Nathan Chancellor</title>
+<meta name="keywords" content="clangbuiltlinux, linux, linuxfoundation, maintainer">
+<meta name="description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)">
+<meta name="author" content="Nathan Chancellor">
+<link rel="canonical" href="https://nathanchance.dev/posts/july-2022-cbl-work/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.bc1149f4a72aa4858d3a9f71462f75e5884ffe8073ea9d6d5761d5663d651e20.css" integrity="sha256-vBFJ9KcqpIWNOp9xRi915YhP/oBz6p1tV2HVZj1lHiA=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://nathanchance.dev/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://nathanchance.dev/apple-touch-icon.png">
+<link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript><meta property="og:title" content="July 2022 ClangBuiltLinux Work" />
+<meta property="og:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nathanchance.dev/posts/july-2022-cbl-work/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-29T16:00:00-07:00" />
+<meta property="article:modified_time" content="2022-07-29T16:00:00-07:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="July 2022 ClangBuiltLinux Work"/>
+<meta name="twitter:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://nathanchance.dev/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "July 2022 ClangBuiltLinux Work",
+      "item": "https://nathanchance.dev/posts/july-2022-cbl-work/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "July 2022 ClangBuiltLinux Work",
+  "name": "July 2022 ClangBuiltLinux Work",
+  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)",
+  "keywords": [
+    "clangbuiltlinux", "linux", "linuxfoundation", "maintainer"
+  ],
+  "articleBody": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)\nclk: qcom: gpucc-sm8350: Fix \"initializer element is not constant\" error (v1, v2) bpf, arm64: Mark dummy_tramp as global (v1) Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures. Maybe these should be in the build failures section…\nx86/speculation: Use DECLARE_PER_CPU for x86_spec_ctrl_current (v1, v2) ASoC: Intel: avs: Mark avs_path_module_type_create() as noinline (v1) btrfs: Fix unused variable in load_free_space_cache() (v1) ASoC: amd: acp: Fix initialization of ext_intr_stat1 in i2s_irq_handler() (v1) ion: Make user_ion_handle_put_nolock() a void function (v1) Other fixes: These are fixes that don’t fit into a particular category but are important to ClangBuiltLinux. In this particular case, there was a Control Flow Integrity (CFI) violation in the simpledrm driver, which can cause kernels compiled with CFI to panic when booting.\ndrm/simpledrm: Fix return type of simpledrm_simple_display_pipe_mode_valid() (v1) Patch review and input For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.\nReviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.\nRe: [PATCH] kernfs: Avoid re-adding kernfs_node into kernfs_notify_list. Re: [PATCH 5.15 02/28] clocksource/drivers/ixp4xx: remove __init from ixp4xx_timer_setup() Re: [PATCH] x86/Kconfig: Allow X86_X32_ABI with llvm-objcopy in some cases Re: [PATCH v1 net-next] af_unix: Put a named socket in the global hash table. Re: [PATCH] MAINTAINERS: Add a general \"kernel hardening\" section Re: [PATCH] lib: overflow: Do not define 64-bit tests on 32-bit Re: [PATCH] x86/Kconfig: Fix CONFIG_CC_HAS_SANE_STACKPROTECTOR when cross compiling with clang Re: [PATCH] net: rxrpc: fix clang -Wformat warning Re: [PATCH] eeprom: idt_89hpesx: fix clang -Wformat warnings Re: [PATCH v2] net: rxrpc: fix clang -Wformat warning [BasicBlockUtils] Allow critical edge splitting with callbr terminators Re: [PATCH] riscv: Pass -mno-relax only on lld \u003c 15.0.0 [IR] Don't use blockaddresses as callbr arguments Re: [PATCH] netfilter: xt_TPROXY: remove pr_debug invocations Re: [linux-stable-rc:linux-5.10.y 7109/7120] arch/x86/kernel/cpu/bugs.c:57:21: warning: section attribute is specified on redeclared variable [clang][CodeGen] add fn_ret_thunk_extern to synthetic fns Re: [PATCH] ubsan: disable UBSAN_DIV_ZERO for clang Re: [PATCH v3] include/uapi/linux/swab.h: move explicit cast outside ternary [IR] Don't treat callbr as indirect terminator [Local] Allow creating callbr with duplicate successors Re: [PATCH] Makefile.extrawarn: re-enable -Wformat for clang Re: [PATCH] ASoC: Intel: avs: Mark avs_path_module_type_create() as noinline Re: [PATCH] can: pch_can: fix uninitialized use of errc Re: [PATCH] drivers: iommu: fix clang -wformat warning Re: [PATCH] soc: sof: fix clang -Wformat warnings Re: [PATCH] drivers: lkdtm: fix clang -Wformat warning Re: [PATCH v2] drivers: lkdtm: fix clang -Wformat warning Issue triage and reporting The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.\nRe: [char-misc:char-misc-linus 3/3] drivers/misc/cardreader/rtsx_usb.c:639:6: warning: variable 'ret' is used uninitialized whenever 'if' condition is true [SimplifyCFG] Thread branches on same condition in more cases (PR54980) Re: Generating LLVM IR Re: [PATCH 02/40] drm/amd/display: Add SubVP required code [LSR] Fix bug for optimizing unused IVs to final values Re: [PATCH v5 2/4] module: panic: Taint the kernel when selftest modules load LLVM ERROR: Broken module found, compilation aborted! when building nouveau \"error: undefined symbol: dummy_tramp\" with CONFIG_CFI_CLANG objtool \"'naked' return found in RETHUNK build\" with clang + CONFIG_K{A,C}SAN=y objtool: foo() falls through to the next function bar() Re: Linux v5.19-rc6: Building and testing x86/retbleed Re: linux-next: Tree for Jul 14 Re: [linux-next:master 7409/10678] drivers/clk/qcom/gpucc-sm8350.c:111:2: error: initializer element is not a compile-time constant Re: help with clang build for mips clang-15 crash trying to build linux kernel for Target: powerpc64-unknown-linux __aeabi_uldivmod in float64_rem() after LLVM commit 3bc09c7da50a7bb2df51b1829f837f017da5ee34 Re: :3:3: error: invalid instruction mnemonic 'annotate_unret_safe' Re: [git pull] drm fixes for 5.19-rc7 Re: x86_64 build failure of next-20220715 and next-20220718 with clang Re: [PATCH net-next 18/29] can: pch_can: do not report txerr and rxerr during bus-off Re: [TCWG CI] Regression caused by llvm: [IR] Don't use blockaddresses as callbr arguments Re: [PATCH v4 15/25] KVM: VMX: Extend VMX controls macro shenanigans ./kernel/smp.c an unaligned pointer access [-Walign-mismatch] Re: [TCWG CI] Regression caused by linux: lib/nodemask: inline next_node_in() and node_random() Re: [linux-stable-rc:linux-4.9.y 967/2229] drivers/staging/android/ion/ion-ioctl.c:71:6: warning: variable 'ret' is used uninitialized whenever 'if' condition is false cc-option failures after LLVM commit 8f0c901c1a172313a32bc06a1fcface76cd1220f Re: sound/soc/codecs/wm_adsp.c:1490:32: warning: taking address of packed member 'name' of class or structure 'wm_adsp_host_buf_coeff_v1' may result in an unaligned pointer value Re: drivers/iio/adc/ti-tsc2046.c:242:62: warning: taking address of packed member 'data' of class or structure 'tsc2046_adc_atom' may result in an unaligned pointer value Re: [PATCH v2 6/7] HID: uclogic: Add support for UGEE v2 mouse frames Re: [PATCH v12 08/69] mm: start tracking VMAs with maple tree Use sccache to speed up builds ppc44x_defconfig __umoddi3 with '-mcpu=440' Re: arm ixp4xx_defconfig build failure with linux-next and mainline Tooling improvements These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as AOSP’s distribution of LLVM and TuxMake.\nStop disabling CONFIG_WERROR on x86_64 Behind the scenes Every day that there is a new linux-next release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Windows Subsystem for Linux instance, a Raspberry Pi 3 and 4, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered. Special thanks to: Google and the Linux Foundation for sponsoring my work. ",
+  "wordCount" : "1126",
+  "inLanguage": "en",
+  "datePublished": "2022-07-29T16:00:00-07:00",
+  "dateModified": "2022-07-29T16:00:00-07:00",
+  "author":{
+    "@type": "Person",
+    "name": "Nathan Chancellor"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://nathanchance.dev/posts/july-2022-cbl-work/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Nathan Chancellor",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://nathanchance.dev/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://nathanchance.dev/posts/" title="Blog">
+                    <span>Blog</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/about/" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/nc_resume.pdf" title="Resume">
+                    <span>Resume</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://nathanchance.dev/downloads/" title="Downloads">
+                    <span>Downloads</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title">
+      July 2022 ClangBuiltLinux Work
+    </h1>
+    <div class="post-meta"><span title='2022-07-29 16:00:00 -0700 MST'>July 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor&nbsp;|&nbsp;<a href="https://github.com/nathanchance/hugo-files/blob/main/content/posts/july-2022-cbl-work.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#linux-kernel-patches" aria-label="Linux kernel patches">Linux kernel patches</a></li>
+                <li>
+                    <a href="#patch-review-and-input" aria-label="Patch review and input">Patch review and input</a></li>
+                <li>
+                    <a href="#issue-triage-and-reporting" aria-label="Issue triage and reporting">Issue triage and reporting</a></li>
+                <li>
+                    <a href="#tooling-improvements" aria-label="Tooling improvements">Tooling improvements</a></li>
+                <li>
+                    <a href="#behind-the-scenes" aria-label="Behind the scenes">Behind the scenes</a></li>
+                <li>
+                    <a href="#special-thanks-to" aria-label="Special thanks to:">Special thanks to:</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on <a href="https://lore.kernel.org/all/?q=f:nathan@kernel.org">lore.kernel.org</a>.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches<a hidden class="anchor" aria-hidden="true" href="#linux-kernel-patches">#</a></h2>
+<ul>
+<li>
+<p>Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</p>
+<ul>
+<li><code>clk: qcom: gpucc-sm8350: Fix &quot;initializer element is not constant&quot; error</code> (<a href="https://lore.kernel.org/20220711163021.152578-1-nathan@kernel.org/"><code>v1</code></a>, <a href="https://lore.kernel.org/20220711174004.3047516-1-nathan@kernel.org/"><code>v2</code></a>)</li>
+<li><code>bpf, arm64: Mark dummy_tramp as global</code> (<a href="https://lore.kernel.org/20220713173503.3889486-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p>Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as <a href="https://lore.kernel.org/r/CAHk-=wifoM9VOp-55OZCRcO9MnqQ109UTuCiXeZ-eyX_JcNVGg@mail.gmail.com/">all developers should be using <code>CONFIG_WERROR</code></a>, which will turn these all into failures. Maybe these should be in the build failures section&hellip;</p>
+<ul>
+<li><code>x86/speculation: Use DECLARE_PER_CPU for x86_spec_ctrl_current</code> (<a href="https://lore.kernel.org/20220713152222.1697913-1-nathan@kernel.org/"><code>v1</code></a>, <a href="https://lore.kernel.org/20220713152436.2294819-1-nathan@kernel.org/"><code>v2</code></a>)</li>
+<li><code>ASoC: Intel: avs: Mark avs_path_module_type_create() as noinline</code> (<a href="https://lore.kernel.org/20220720185228.3182663-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>btrfs: Fix unused variable in load_free_space_cache()</code> (<a href="https://lore.kernel.org/20220722163854.1189931-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>ASoC: amd: acp: Fix initialization of ext_intr_stat1 in i2s_irq_handler()</code> (<a href="https://lore.kernel.org/20220725180539.1315066-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+<li><code>ion: Make user_ion_handle_put_nolock() a void function</code> (<a href="https://lore.kernel.org/20220727164617.980209-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+<li>
+<p>Other fixes: These are fixes that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux. In this particular case, there was a Control Flow Integrity (CFI) violation in the simpledrm driver, which can cause kernels compiled with CFI to panic when booting.</p>
+<ul>
+<li><code>drm/simpledrm: Fix return type of simpledrm_simple_display_pipe_mode_valid()</code> (<a href="https://lore.kernel.org/20220725233629.223223-1-nathan@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
+</ul>
+<h2 id="patch-review-and-input">Patch review and input<a hidden class="anchor" aria-hidden="true" href="#patch-review-and-input">#</a></h2>
+<p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
+<p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
+<ul>
+<li><a href="https://lore.kernel.org/Yr8OSxotW2VEUyKQ@dev-arch.thelio-3990X/"><code>Re: [PATCH] kernfs: Avoid re-adding kernfs_node into kernfs_notify_list.</code></a></li>
+<li><a href="https://lore.kernel.org/Yr8TSxroBaL3oRDV@dev-arch.thelio-3990X/"><code>Re: [PATCH 5.15 02/28] clocksource/drivers/ixp4xx: remove __init from ixp4xx_timer_setup()</code></a></li>
+<li><a href="https://lore.kernel.org/Yr9lIs6H03uq+UuV@dev-arch.thelio-3990X/"><code>Re: [PATCH] x86/Kconfig: Allow X86_X32_ABI with llvm-objcopy in some cases</code></a></li>
+<li><a href="https://lore.kernel.org/Yr9pPJGoCDYOB3Tm@dev-arch.thelio-3990X/"><code>Re: [PATCH v1 net-next] af_unix: Put a named socket in the global hash table.</code></a></li>
+<li><a href="https://lore.kernel.org/YsRYORcovwCGvztR@dev-arch.thelio-3990X/"><code>Re: [PATCH] MAINTAINERS: Add a general &quot;kernel hardening&quot; section</code></a></li>
+<li><a href="https://lore.kernel.org/YsRajaMsQ5oFFL0l@dev-arch.thelio-3990X/"><code>Re: [PATCH] lib: overflow: Do not define 64-bit tests on 32-bit</code></a></li>
+<li><a href="https://lore.kernel.org/YscVEIBtyoX2jrBV@dev-arch.thelio-3990X/"><code>Re: [PATCH] x86/Kconfig: Fix CONFIG_CC_HAS_SANE_STACKPROTECTOR when cross compiling with clang</code></a></li>
+<li><a href="https://lore.kernel.org/Ysce1Xur72MYp0%2Fd@dev-arch.thelio-3990X/"><code>Re: [PATCH] net: rxrpc: fix clang -Wformat warning</code></a></li>
+<li><a href="https://lore.kernel.org/YscgBZuT5%2FGVLdIs@dev-arch.thelio-3990X/"><code>Re: [PATCH] eeprom: idt_89hpesx: fix clang -Wformat warnings</code></a></li>
+<li><a href="https://lore.kernel.org/Ysckw9ok670tojo1@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] net: rxrpc: fix clang -Wformat warning</code></a></li>
+<li><a href="https://reviews.llvm.org/D129256"><code>[BasicBlockUtils] Allow critical edge splitting with callbr terminators</code></a></li>
+<li><a href="https://lore.kernel.org/YsxfiKC%2FZBr7U7qI@dev-arch.thelio-3990X/"><code>Re: [PATCH] riscv: Pass -mno-relax only on lld &lt; 15.0.0</code></a></li>
+<li><a href="https://reviews.llvm.org/D129288"><code>[IR] Don't use blockaddresses as callbr arguments</code></a></li>
+<li><a href="https://lore.kernel.org/Ys3DwnYiF9eDwr2T@dev-arch.thelio-3990X/"><code>Re: [PATCH] netfilter: xt_TPROXY: remove pr_debug invocations</code></a></li>
+<li><a href=""><code>Re: [linux-stable-rc:linux-5.10.y 7109/7120] arch/x86/kernel/cpu/bugs.c:57:21: warning: section attribute is specified on redeclared variable</code></a></li>
+<li><a href="https://reviews.llvm.org/D129709"><code>[clang][CodeGen] add fn_ret_thunk_extern to synthetic fns</code></a></li>
+<li><a href="https://lore.kernel.org/YtCJqK2axavXWny8@dev-arch.thelio-3990X/"><code>Re: [PATCH] ubsan: disable UBSAN_DIV_ZERO for clang</code></a></li>
+<li><a href="https://lore.kernel.org/YtWq1vX+8VylSa4G@dev-arch.thelio-3990X/"><code>Re: [PATCH v3] include/uapi/linux/swab.h: move explicit cast outside ternary</code></a></li>
+<li><a href="https://reviews.llvm.org/D129849#3656711"><code>[IR] Don't treat callbr as indirect terminator</code></a></li>
+<li><a href="https://reviews.llvm.org/D129997"><code>[Local] Allow creating callbr with duplicate successors</code></a></li>
+<li><a href="https://lore.kernel.org/YtlsY2A2ZWK97Y8O@dev-arch.thelio-3990X/"><code>Re: [PATCH] Makefile.extrawarn: re-enable -Wformat for clang</code></a></li>
+<li><a href="https://lore.kernel.org/YtlzY9aYdbS4Y3+l@dev-arch.thelio-3990X/"><code>Re: [PATCH] ASoC: Intel: avs: Mark avs_path_module_type_create() as noinline</code></a></li>
+<li><a href="https://lore.kernel.org/Ytl3I9MY9tkuqTKZ@dev-arch.thelio-3990X/"><code>Re: [PATCH] can: pch_can: fix uninitialized use of errc</code></a></li>
+<li><a href="https://lore.kernel.org/Ytm%2Fqj2ozeSY0a3Y@dev-arch.thelio-3990X/"><code>Re: [PATCH] drivers: iommu: fix clang -wformat warning</code></a></li>
+<li><a href="https://lore.kernel.org/YtnDltqEVeJQQkbW@dev-arch.thelio-3990X/"><code>Re: [PATCH] soc: sof: fix clang -Wformat warnings</code></a></li>
+<li><a href="https://lore.kernel.org/YtnGfFuYhQrbed76@dev-arch.thelio-3990X/"><code>Re: [PATCH] drivers: lkdtm: fix clang -Wformat warning</code></a></li>
+<li><a href="https://lore.kernel.org/YtnNlZYZCEVUiuaE@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] drivers: lkdtm: fix clang -Wformat warning</code></a></li>
+</ul>
+<h2 id="issue-triage-and-reporting">Issue triage and reporting<a hidden class="anchor" aria-hidden="true" href="#issue-triage-and-reporting">#</a></h2>
+<p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
+<ul>
+<li><a href="https://lore.kernel.org/Yr8VIT2vjvGYrbmR@dev-arch.thelio-3990X/"><code>Re: [char-misc:char-misc-linus 3/3] drivers/misc/cardreader/rtsx_usb.c:639:6: warning: variable 'ret' is used uninitialized whenever 'if' condition is true</code></a></li>
+<li><a href="https://reviews.llvm.org/D124159"><code>[SimplifyCFG] Thread branches on same condition in more cases (PR54980)</code></a></li>
+<li><a href="https://lore.kernel.org/YsWnr0C2hFNSAqch@dev-arch.thelio-3990X/"><code>Re: Generating LLVM IR</code></a></li>
+<li><a href="https://lore.kernel.org/YsXNPayfiUGS67i0@dev-arch.thelio-3990X/"><code>Re: [PATCH 02/40] drm/amd/display: Add SubVP required code</code></a></li>
+<li><a href="https://reviews.llvm.org/D125990"><code>[LSR] Fix bug for optimizing unused IVs to final values</code></a></li>
+<li><a href="https://lore.kernel.org/Ysd9FG1fOSnzKv8d@dev-arch.thelio-3990X/"><code>Re: [PATCH v5 2/4] module: panic: Taint the kernel when selftest modules load</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1659"><code>LLVM ERROR: Broken module found, compilation aborted! when building nouveau</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1661"><code>&quot;error: undefined symbol: dummy_tramp&quot; with CONFIG_CFI_CLANG</code></a></li>
+<li><a href="https://lore.kernel.org/Ys7pLq+tQk5xEa%2FB@dev-arch.thelio-3990X/"><code>objtool &quot;'naked' return found in RETHUNK build&quot; with clang + CONFIG_K{A,C}SAN=y</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1657"><code>objtool: foo() falls through to the next function bar()</code></a></li>
+<li><a href="https://lore.kernel.org/YtA8ZH5sZWL35%2FPr@dev-arch.thelio-3990X/"><code>Re: Linux v5.19-rc6: Building and testing x86/retbleed</code></a></li>
+<li><a href="https://lore.kernel.org/YtA+127QgRifnRBZ@dev-arch.thelio-3990X/"><code>Re: linux-next: Tree for Jul 14</code></a></li>
+<li><a href="https://lore.kernel.org/YtBKWDIaU9Z59CEm@dev-arch.thelio-3990X/"><code>Re: [linux-next:master 7409/10678] drivers/clk/qcom/gpucc-sm8350.c:111:2: error: initializer element is not a compile-time constant</code></a></li>
+<li><a href="https://lore.kernel.org/YtBMNLXEQ4WVJezu@dev-arch.thelio-3990X/"><code>Re: help with clang build for mips</code></a></li>
+<li><a href="https://github.com/llvm/llvm-project/issues/56530"><code>clang-15 crash trying to build linux kernel for Target: powerpc64-unknown-linux</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1666"><code>__aeabi_uldivmod in float64_rem() after LLVM commit 3bc09c7da50a7bb2df51b1829f837f017da5ee34</code></a></li>
+<li><a href="https://lore.kernel.org/YtHJm0Uiv4c7ihTf@dev-arch.thelio-3990X/"><code>Re: &lt;instantiation&gt;:3:3: error: invalid instruction mnemonic 'annotate_unret_safe'</code></a></li>
+<li><a href="https://lore.kernel.org/YtHXe4PcWXfihF9Q@dev-arch.thelio-3990X/"><code>Re: [git pull] drm fixes for 5.19-rc7</code></a></li>
+<li><a href="https://lore.kernel.org/YtV3Y4Ha4tPk3kU4@dev-arch.thelio-3990X/"><code>Re: x86_64 build failure of next-20220715 and next-20220718 with clang</code></a></li>
+<li><a href="https://lore.kernel.org/YtlwSpoeT+nhmhVn@dev-arch.thelio-3990X/"><code>Re: [PATCH net-next 18/29] can: pch_can: do not report txerr and rxerr during bus-off</code></a></li>
+<li><a href="https://lore.kernel.org/YtnYBVt2OH%2FxqB+S@dev-arch.thelio-3990X/"><code>Re: [TCWG CI] Regression caused by llvm: [IR] Don't use blockaddresses as callbr arguments</code></a></li>
+<li><a href="https://lore.kernel.org/YtsQ5SkCJXQIuKGS@dev-arch.thelio-3990X/"><code>Re: [PATCH v4 15/25] KVM: VMX: Extend VMX controls macro shenanigans</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1673"><code>./kernel/smp.c an unaligned pointer access [-Walign-mismatch]</code></a></li>
+<li><a href="https://lore.kernel.org/Yt63uwyLKqQl2Sak@Ryzen-9-3900X./"><code>Re: [TCWG CI] Regression caused by linux: lib/nodemask: inline next_node_in() and node_random()</code></a></li>
+<li><a href="https://lore.kernel.org/Yt65G3x2Hmoj4q/b@Ryzen-9-3900X./"><code>Re: [linux-stable-rc:linux-4.9.y 967/2229] drivers/staging/android/ion/ion-ioctl.c:71:6: warning: variable 'ret' is used uninitialized whenever 'if' condition is false</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1674"><code>cc-option failures after LLVM commit 8f0c901c1a172313a32bc06a1fcface76cd1220f</code></a></li>
+<li><a href="https://lore.kernel.org/Yt8aZ3OZ7lJBgf1V@dev-arch.thelio-3990X/"><code>Re: sound/soc/codecs/wm_adsp.c:1490:32: warning: taking address of packed member 'name' of class or structure 'wm_adsp_host_buf_coeff_v1' may result in an unaligned pointer value</code></a></li>
+<li><a href="https://lore.kernel.org/YuAFeyKirrneGPSB@dev-arch.thelio-3990X/"><code>Re: drivers/iio/adc/ti-tsc2046.c:242:62: warning: taking address of packed member 'data' of class or structure 'tsc2046_adc_atom' may result in an unaligned pointer value</code></a></li>
+<li><a href="https://lore.kernel.org/YuAMzSBcfsyGMjNy@dev-arch.thelio-3990X/"><code>Re: [PATCH v2 6/7] HID: uclogic: Add support for UGEE v2 mouse frames</code></a></li>
+<li><a href="https://lore.kernel.org/YuCGoB3Ackadj5up@dev-arch.thelio-3990X/"><code>Re: [PATCH v12 08/69] mm: start tracking VMAs with maple tree</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/issues/200"><code>Use sccache to speed up builds</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1679"><code>ppc44x_defconfig __umoddi3 with '-mcpu=440'</code></a></li>
+<li><a href="https://lore.kernel.org/YuLqQrKtDnTuJdZK@dev-arch.thelio-3990X/"><code>Re: arm ixp4xx_defconfig build failure with linux-next and mainline</code></a></li>
+</ul>
+<h2 id="tooling-improvements">Tooling improvements<a hidden class="anchor" aria-hidden="true" href="#tooling-improvements">#</a></h2>
+<p>These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as <a href="https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/">AOSP&rsquo;s distribution of LLVM</a> and <a href="https://tuxmake.org">TuxMake</a>.</p>
+<ul>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/385"><code>Stop disabling CONFIG_WERROR on x86_64</code></a></li>
+</ul>
+<h2 id="behind-the-scenes">Behind the scenes<a hidden class="anchor" aria-hidden="true" href="#behind-the-scenes">#</a></h2>
+<ul>
+<li>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Windows Subsystem for Linux instance, a Raspberry Pi 3 and 4, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</li>
+</ul>
+<h2 id="special-thanks-to">Special thanks to:<a hidden class="anchor" aria-hidden="true" href="#special-thanks-to">#</a></h2>
+<ul>
+<li><a href="https://www.google.com/">Google</a> and <a href="https://linuxfoundation.org/">the Linux Foundation</a> for <a href="https://linuxfoundation.org/en/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security/">sponsoring my work</a>.</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://nathanchance.dev/tags/clangbuiltlinux/">clangbuiltlinux</a></li>
+      <li><a href="https://nathanchance.dev/tags/linux/">linux</a></li>
+      <li><a href="https://nathanchance.dev/tags/linuxfoundation/">linuxfoundation</a></li>
+      <li><a href="https://nathanchance.dev/tags/maintainer/">maintainer</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://nathanchance.dev/posts/june-2022-cbl-work/">
+    <span class="title">Next »</span>
+    <br>
+    <span>June 2022 ClangBuiltLinux Work</span>
+  </a>
+</nav>
+
+
+<div class="share-buttons">
+    <a target="_blank" rel="noopener noreferrer" aria-label="share July 2022 ClangBuiltLinux Work on twitter"
+        href="https://twitter.com/intent/tweet/?text=July%202022%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjuly-2022-cbl-work%2f&amp;hashtags=clangbuiltlinux%2clinux%2clinuxfoundation%2cmaintainer">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-253.927,424.544c135.939,0 210.268,-112.643 210.268,-210.268c0,-3.218 0,-6.437 -0.153,-9.502c14.406,-10.421 26.973,-23.448 36.935,-38.314c-13.18,5.824 -27.433,9.809 -42.452,11.648c15.326,-9.196 26.973,-23.602 32.49,-40.92c-14.252,8.429 -30.038,14.56 -46.896,17.931c-13.487,-14.406 -32.644,-23.295 -53.946,-23.295c-40.767,0 -73.87,33.104 -73.87,73.87c0,5.824 0.613,11.494 1.992,16.858c-61.456,-3.065 -115.862,-32.49 -152.337,-77.241c-6.284,10.881 -9.962,23.601 -9.962,37.088c0,25.594 13.027,48.276 32.95,61.456c-12.107,-0.307 -23.448,-3.678 -33.41,-9.196l0,0.92c0,35.862 25.441,65.594 59.311,72.49c-6.13,1.686 -12.72,2.606 -19.464,2.606c-4.751,0 -9.348,-0.46 -13.946,-1.38c9.349,29.426 36.628,50.728 68.965,51.341c-25.287,19.771 -57.164,31.571 -91.8,31.571c-5.977,0 -11.801,-0.306 -17.625,-1.073c32.337,21.15 71.264,33.41 112.95,33.41Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share July 2022 ClangBuiltLinux Work on linkedin"
+        href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjuly-2022-cbl-work%2f&amp;title=July%202022%20ClangBuiltLinux%20Work&amp;summary=July%202022%20ClangBuiltLinux%20Work&amp;source=https%3a%2f%2fnathanchance.dev%2fposts%2fjuly-2022-cbl-work%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share July 2022 ClangBuiltLinux Work on reddit"
+        href="https://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fjuly-2022-cbl-work%2f&title=July%202022%20ClangBuiltLinux%20Work">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share July 2022 ClangBuiltLinux Work on facebook"
+        href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fjuly-2022-cbl-work%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share July 2022 ClangBuiltLinux Work on whatsapp"
+        href="https://api.whatsapp.com/send?text=July%202022%20ClangBuiltLinux%20Work%20-%20https%3a%2f%2fnathanchance.dev%2fposts%2fjuly-2022-cbl-work%2f">
+        <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+        </svg>
+    </a>
+    <a target="_blank" rel="noopener noreferrer" aria-label="share July 2022 ClangBuiltLinux Work on telegram"
+        href="https://telegram.me/share/url?text=July%202022%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjuly-2022-cbl-work%2f">
+        <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+            <path
+                d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+        </svg>
+    </a>
+</div>
+  </footer><div id="disqus_thread"></div>
+<script>
+    
+
+    
+
+    (function() { 
+    var d = document, s = d.createElement('script');
+    s.src = 'https://nathanchance.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
