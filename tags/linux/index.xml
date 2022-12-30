@@ -5,7 +5,27 @@
     <link>https://nathanchance.dev/tags/linux/</link>
     <description>Recent content in linux on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 30 Nov 2022 16:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Dec 2022 11:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2022 ClangBuiltLinux Retrospective</title>
+      <link>https://nathanchance.dev/posts/2022-cbl-retrospective/</link>
+      <pubDate>Fri, 30 Dec 2022 11:00:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/2022-cbl-retrospective/</guid>
+      <description>I have been contracting for the Linux Foundation for two years now, going onto the third, and it dawned on me that I have never done a retrospective or yearly report. This is useful for looking back on the year&amp;rsquo;s worth of accomplishments, both to understand how much I have evolved and to look for areas that I would like to improve upon going forward. I have struggled with imposter syndrome for as long as I have been involved with the kernel community, so looking back to give credit where credit is due for particular solutions is a good way to try and combat that.</description>
+    </item>
+    
+    <item>
+      <title>December 2022 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/december-2022-cbl-work/</link>
+      <pubDate>Fri, 30 Dec 2022 11:00:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/december-2022-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Miscellaneous fixes: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.
+Fix lack of section mismatch warnings with LTO (v2, v3) security: Restrict CONFIG_ZERO_CALL_USED_REGS to gcc or clang &amp;gt; 15.</description>
+    </item>
+    
     <item>
       <title>November 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/november-2022-cbl-work/</link>

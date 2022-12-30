@@ -2,28 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://nathanchance.dev/posts/2022-cbl-retrospective/</loc>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
+  </url><url>
     <loc>https://nathanchance.dev/tags/clangbuiltlinux/</loc>
-    <lastmod>2022-11-30T16:30:00-07:00</lastmod>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://nathanchance.dev/posts/december-2022-cbl-work/</loc>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/tags/linux/</loc>
-    <lastmod>2022-11-30T16:30:00-07:00</lastmod>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/tags/linuxfoundation/</loc>
-    <lastmod>2022-11-30T16:30:00-07:00</lastmod>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/tags/maintainer/</loc>
-    <lastmod>2022-11-30T16:30:00-07:00</lastmod>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/</loc>
-    <lastmod>2022-11-30T16:30:00-07:00</lastmod>
-  </url><url>
-    <loc>https://nathanchance.dev/posts/november-2022-cbl-work/</loc>
-    <lastmod>2022-11-30T16:30:00-07:00</lastmod>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/posts/</loc>
-    <lastmod>2022-11-30T16:30:00-07:00</lastmod>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/tags/</loc>
+    <lastmod>2022-12-30T11:00:00-07:00</lastmod>
+  </url><url>
+    <loc>https://nathanchance.dev/posts/november-2022-cbl-work/</loc>
     <lastmod>2022-11-30T16:30:00-07:00</lastmod>
   </url><url>
     <loc>https://nathanchance.dev/posts/october-2022-cbl-work/</loc>
