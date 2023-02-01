@@ -5,7 +5,18 @@
     <link>https://nathanchance.dev/tags/clangbuiltlinux/</link>
     <description>Recent content in clangbuiltlinux on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 30 Dec 2022 11:00:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/clangbuiltlinux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Jan 2023 17:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/clangbuiltlinux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>January 2023 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/january-2023-cbl-work/</link>
+      <pubDate>Tue, 31 Jan 2023 17:30:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/january-2023-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Downstream fixes: These are fixes and improvements that occur in a downstream Linux tree, such as Android or ChromeOS, which our continuous integration regularly tests.
+ANDROID: fuse: Restore upstream type of bitfields in fuse_args Miscellaneous fixes: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.</description>
+    </item>
+    
     <item>
       <title>2022 ClangBuiltLinux Retrospective</title>
       <link>https://nathanchance.dev/posts/2022-cbl-retrospective/</link>
