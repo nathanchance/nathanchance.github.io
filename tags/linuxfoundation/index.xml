@@ -5,7 +5,18 @@
     <link>https://nathanchance.dev/tags/linuxfoundation/</link>
     <description>Recent content in linuxfoundation on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 28 Apr 2023 16:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Wed, 31 May 2023 16:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/linuxfoundation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>May 2023 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/may-2023-cbl-work/</link>
+      <pubDate>Wed, 31 May 2023 16:30:00 -0700</pubDate>
+      
+      <guid>https://nathanchance.dev/posts/may-2023-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures.</description>
+    </item>
+    
     <item>
       <title>April 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/april-2023-cbl-work/</link>

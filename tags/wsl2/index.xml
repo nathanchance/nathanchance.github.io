@@ -5,6 +5,7 @@
     <link>https://nathanchance.dev/tags/wsl2/</link>
     <description>Recent content in wsl2 on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
     <lastBuildDate>Wed, 15 Apr 2020 12:40:20 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/wsl2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating WSL 2 distributions from LXC images</title>
