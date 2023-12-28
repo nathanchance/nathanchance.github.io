@@ -1,464 +1,391 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nathan Chancellor</title>
     <link>https://nathanchance.dev/</link>
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Nov 2023 17:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Dec 2023 12:00:00 -0700</lastBuildDate>
+    <atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2023 ClangBuiltLinux Retrospective</title>
+      <link>https://nathanchance.dev/posts/2023-cbl-retrospective/</link>
+      <pubDate>Thu, 28 Dec 2023 12:00:00 -0700</pubDate>
+      <guid>https://nathanchance.dev/posts/2023-cbl-retrospective/</guid>
+      <description>Just like I did last year, I want to do a yearly report/retrospective for 2023 to look at what I (and the whole ClangBuiltLinux team in some cases) accomplished. I do monthly reports but looking at a high level across the year helps put things into perspective and drive improvements going into the new year.
+Linux kernel This year, I had 129 commits accepted into maintainer trees (not all will be merged into mainline in 2023 but they were written and added in maintainer trees in 2023).</description>
+    </item>
+    <item>
+      <title>December 2023 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/december-2023-cbl-work/</link>
+      <pubDate>Thu, 28 Dec 2023 11:30:00 -0700</pubDate>
+      <guid>https://nathanchance.dev/posts/december-2023-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Miscellaneous fixes and improvements: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.
+RISC-V: Disable DWARF5 with known broken LLVM versions (v2) Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.</description>
+    </item>
     <item>
       <title>November 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/november-2023-cbl-work/</link>
       <pubDate>Thu, 30 Nov 2023 17:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/november-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>October 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/october-2023-cbl-work/</link>
       <pubDate>Tue, 31 Oct 2023 16:15:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/october-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>September 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/september-2023-cbl-work/</link>
       <pubDate>Fri, 29 Sep 2023 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/september-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>August 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/august-2023-cbl-work/</link>
       <pubDate>Thu, 31 Aug 2023 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/august-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>July 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/july-2023-cbl-work/</link>
       <pubDate>Mon, 31 Jul 2023 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/july-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>June 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/june-2023-cbl-work/</link>
       <pubDate>Fri, 30 Jun 2023 13:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/june-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>May 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/may-2023-cbl-work/</link>
       <pubDate>Wed, 31 May 2023 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/may-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures.</description>
     </item>
-    
     <item>
       <title>April 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/april-2023-cbl-work/</link>
       <pubDate>Fri, 28 Apr 2023 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/april-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>March 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/march-2023-cbl-work/</link>
       <pubDate>Fri, 31 Mar 2023 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/march-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>February 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/february-2023-cbl-work/</link>
       <pubDate>Tue, 28 Feb 2023 17:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/february-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Downstream fixes: These are fixes and improvements that occur in a downstream Linux tree, such as Android or ChromeOS, which our continuous integration regularly tests.
 ANDROID: GKI: Fix copying of protected_exports Miscellaneous fixes and improvements: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.</description>
     </item>
-    
     <item>
       <title>January 2023 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/january-2023-cbl-work/</link>
       <pubDate>Tue, 31 Jan 2023 17:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/january-2023-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Downstream fixes: These are fixes and improvements that occur in a downstream Linux tree, such as Android or ChromeOS, which our continuous integration regularly tests.
 ANDROID: fuse: Restore upstream type of bitfields in fuse_args Miscellaneous fixes: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.</description>
     </item>
-    
     <item>
       <title>2022 ClangBuiltLinux Retrospective</title>
       <link>https://nathanchance.dev/posts/2022-cbl-retrospective/</link>
       <pubDate>Fri, 30 Dec 2022 11:00:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/2022-cbl-retrospective/</guid>
       <description>I have been contracting for the Linux Foundation for two years now, going onto the third, and it dawned on me that I have never done a retrospective or yearly report. This is useful for looking back on the year&amp;rsquo;s worth of accomplishments, both to understand how much I have evolved and to look for areas that I would like to improve upon going forward. I have struggled with imposter syndrome for as long as I have been involved with the kernel community, so looking back to give credit where credit is due for particular solutions is a good way to try and combat that.</description>
     </item>
-    
     <item>
       <title>December 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/december-2022-cbl-work/</link>
       <pubDate>Fri, 30 Dec 2022 11:00:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/december-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Miscellaneous fixes: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.
 Fix lack of section mismatch warnings with LTO (v2, v3) security: Restrict CONFIG_ZERO_CALL_USED_REGS to gcc or clang &amp;gt; 15.</description>
     </item>
-    
     <item>
       <title>November 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/november-2022-cbl-work/</link>
       <pubDate>Wed, 30 Nov 2022 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/november-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>October 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/october-2022-cbl-work/</link>
       <pubDate>Mon, 31 Oct 2022 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/october-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>September 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/september-2022-cbl-work/</link>
       <pubDate>Thu, 29 Sep 2022 15:55:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/september-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>August 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/august-2022-cbl-work/</link>
       <pubDate>Wed, 31 Aug 2022 16:15:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/august-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Miscellaneous fixes and improvements: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.
 scripts/Makefile.extrawarn: Do not disable clang&#39;s -Wformat-zero-length (v1) x86/build: Move &#39;-mindirect-branch-cs-prefix&#39; out of GCC-only block (v1) Stable backport requests: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.</description>
     </item>
-    
     <item>
       <title>July 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/july-2022-cbl-work/</link>
       <pubDate>Fri, 29 Jul 2022 16:00:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/july-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>June 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/june-2022-cbl-work/</link>
       <pubDate>Thu, 30 Jun 2022 16:25:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/june-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.</description>
     </item>
-    
     <item>
       <title>May 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/may-2022-cbl-work/</link>
       <pubDate>Tue, 31 May 2022 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/may-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>Setting up a self-hosted GitHub Actions runner in a Fedora virtual machine using libvirt</title>
       <link>https://nathanchance.dev/posts/github-actions-fedora-libvirt/</link>
       <pubDate>Fri, 27 May 2022 09:21:35 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/github-actions-fedora-libvirt/</guid>
       <description>Recently, I started exploring setting up a self-hosted GitHub Actions runner for the work-in-progress LLVM builds that ClangBuiltLinux is looking to distribute on kernel.org, as GitHub Actions hosted runners are pretty underwhelming in terms of performance and we want to soup these builds up with Profile Guided Optimization. Additionallly, GitHub Actions does not have a hosted arm64 Linux option, which is becoming increasingly important with chips such as Apple&amp;rsquo;s M1 getting strong mainline Linux support.</description>
     </item>
-    
     <item>
       <title>April 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/april-2022-cbl-work/</link>
       <pubDate>Fri, 29 Apr 2022 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/april-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
     </item>
-    
     <item>
       <title>About</title>
       <link>https://nathanchance.dev/about/</link>
       <pubDate>Fri, 29 Apr 2022 10:15:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/about/</guid>
       <description>I am a 28 year old Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.
 Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.</description>
     </item>
-    
     <item>
       <title>Bisecting a Linux Kernel boot failure due to changed compiler flags</title>
       <link>https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/</link>
       <pubDate>Thu, 28 Apr 2022 14:21:18 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/</guid>
       <description>Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &amp;ldquo;negative&amp;rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem.</description>
     </item>
-    
     <item>
       <title>Package a standalone Linux kernel using the Arch Linux Build System</title>
       <link>https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/</link>
       <pubDate>Wed, 27 Apr 2022 14:06:01 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/</guid>
       <description>As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution&amp;rsquo;s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively.</description>
     </item>
-    
     <item>
       <title>March 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/march-2022-cbl-work/</link>
       <pubDate>Thu, 31 Mar 2022 16:30:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/march-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.</description>
     </item>
-    
     <item>
       <title>February 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/february-2022-cbl-work/</link>
       <pubDate>Mon, 28 Feb 2022 00:17:30 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/february-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
 Allow CONFIG_DEBUG_INFO_DWARF5=y + CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here).</description>
     </item>
-    
     <item>
       <title>January 2022 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/january-2022-cbl-work/</link>
       <pubDate>Mon, 31 Jan 2022 00:18:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/january-2022-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
 [PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.</description>
     </item>
-    
     <item>
       <title>December 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/december-2021-cbl-work/</link>
       <pubDate>Fri, 31 Dec 2021 12:00:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/december-2021-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
 Revert &amp;quot;ANDROID: disable INFINIBAND_QIB from allmodconfig build&amp;quot;</description>
     </item>
-    
     <item>
       <title>November 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/november-2021-cbl-work/</link>
       <pubDate>Tue, 30 Nov 2021 16:23:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/november-2021-cbl-work/</guid>
       <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C).</description>
     </item>
-    
     <item>
       <title>Reducing an LTO Linux kernel bug with cvise</title>
       <link>https://nathanchance.dev/posts/cvise-lto-kernel-bug/</link>
       <pubDate>Mon, 29 Nov 2021 10:07:16 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/cvise-lto-kernel-bug/</guid>
       <description>My co-maintainer Nick Desaulniers wrote a great post about taking a several thousand line C file that exposed a compiler bug down to 12 lines with creduce. I thought I would do the same thing with a bug that only happens with link time optimization (LTO) in the Linux kernel, which is a bit of a different beast. Hopefully this post can help others reduce their own bugs and think about the best way to triage a bug.</description>
     </item>
-    
     <item>
       <title>October 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/october-2021-cbl-work/</link>
       <pubDate>Fri, 29 Oct 2021 14:10:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/october-2021-cbl-work/</guid>
       <description>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend&amp;rsquo;s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned.</description>
     </item>
-    
     <item>
       <title>September 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/september-2021-cbl-work/</link>
       <pubDate>Thu, 30 Sep 2021 10:00:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/september-2021-cbl-work/</guid>
       <description>Linux kernel patches tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
 Harden clang against unknown flag options (v2): A follow up.
 ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!</description>
     </item>
-    
     <item>
       <title>August 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/august-2021-cbl-work/</link>
       <pubDate>Tue, 31 Aug 2021 20:38:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/august-2021-cbl-work/</guid>
       <description>Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
 [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.</description>
     </item>
-    
     <item>
       <title>July 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/july-2021-cbl-work/</link>
       <pubDate>Sun, 01 Aug 2021 00:00:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/july-2021-cbl-work/</guid>
       <description>Linux kernel patches [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it.</description>
     </item>
-    
     <item>
       <title>June 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/june-2021-cbl-work/</link>
       <pubDate>Thu, 01 Jul 2021 13:48:16 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/june-2021-cbl-work/</guid>
       <description>Linux kernel patches ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
 [PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC&amp;rsquo;s -Wunused-but-set-variable and this instance was found by Intel&amp;rsquo;s kernel test robot.</description>
     </item>
-    
     <item>
       <title>May 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/may-2021-cbl-work/</link>
       <pubDate>Tue, 01 Jun 2021 08:29:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/may-2021-cbl-work/</guid>
       <description>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let&amp;rsquo;s dive in, shall we?
 Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting &amp;ldquo;struct &amp;rdquo; with an attribute, in this case &amp;ldquo;__maybe_unused&amp;rdquo;, which clang warns about while GCC does not. This causes a warning in all of our builds.</description>
     </item>
-    
     <item>
       <title>April 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/april-2021-cbl-work/</link>
       <pubDate>Fri, 30 Apr 2021 21:14:13 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/april-2021-cbl-work/</guid>
       <description>Another month down! Feels like I just wrote the March 2021 post&amp;hellip; but I suppose that is what happens when your project moves super quickly :)
 Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&amp;rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing.</description>
     </item>
-    
     <item>
       <title>March 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/march-2021-cbl-work/</link>
       <pubDate>Thu, 01 Apr 2021 10:25:53 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/march-2021-cbl-work/</guid>
       <description>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
 Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations.</description>
     </item>
-    
     <item>
       <title>February 2021 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/february-2021-cbl-work/</link>
       <pubDate>Sun, 28 Feb 2021 00:01:20 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/february-2021-cbl-work/</guid>
       <description>As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
 Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome.</description>
     </item>
-    
     <item>
       <title>Working with git bisect</title>
       <link>https://nathanchance.dev/posts/working-with-git-bisect/</link>
       <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/working-with-git-bisect/</guid>
       <description>Before Google+ shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
 One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information.</description>
     </item>
-    
     <item>
       <title>The art of git revert</title>
       <link>https://nathanchance.dev/posts/art-of-git-revert/</link>
       <pubDate>Wed, 15 Apr 2020 15:11:58 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/art-of-git-revert/</guid>
       <description>I have always loved reading good commit messages and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&amp;rsquo;t have a denvercoder9 situation) and it allows other people to get familiar with your project by fully understanding the why behind a change.</description>
     </item>
-    
     <item>
       <title>Creating WSL 2 distributions from LXC images</title>
       <link>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</link>
       <pubDate>Wed, 15 Apr 2020 12:40:20 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</guid>
       <description>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it.</description>
     </item>
-    
     <item>
       <title>Building and using Cuttlefish</title>
       <link>https://nathanchance.dev/posts/building-using-cuttlefish/</link>
       <pubDate>Fri, 31 Jan 2020 18:52:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/building-using-cuttlefish/</guid>
       <description>Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell.</description>
     </item>
-    
     <item>
       <title>Building the WSL 2 kernel with Clang</title>
       <link>https://nathanchance.dev/posts/wsl2-kernel-clang/</link>
       <pubDate>Tue, 17 Dec 2019 13:53:23 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/wsl2-kernel-clang/</guid>
       <description>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward.</description>
     </item>
-    
     <item>
       <title>Downloads</title>
       <link>https://nathanchance.dev/downloads/</link>
       <pubDate>Tue, 02 Jul 2019 00:00:00 +0000</pubDate>
-      
       <guid>https://nathanchance.dev/downloads/</guid>
       <description>I used to host files on this website but I have offloaded them to other services.
 Flash Kernel downloads can be found in their individual repos:
@@ -466,6 +393,5 @@ Nexus 6P OnePlus 5 OnePlus 6 Pixel (XL) Pixel 2 (XL) Note, these are all unmaint
 TWRP downloads can be found in the threads that referenced them:
 Nexus 6 Nexus 6P Anything else wasn&amp;rsquo;t important enough to mention here.</description>
     </item>
-    
   </channel>
 </rss>

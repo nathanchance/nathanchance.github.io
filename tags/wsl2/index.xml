@@ -1,29 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>wsl2 on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/wsl2/</link>
     <description>Recent content in wsl2 on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 15 Apr 2020 12:40:20 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/wsl2/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Apr 2020 12:40:20 -0700</lastBuildDate>
+    <atom:link href="https://nathanchance.dev/tags/wsl2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating WSL 2 distributions from LXC images</title>
       <link>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</link>
       <pubDate>Wed, 15 Apr 2020 12:40:20 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</guid>
       <description>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it.</description>
     </item>
-    
     <item>
       <title>Building the WSL 2 kernel with Clang</title>
       <link>https://nathanchance.dev/posts/wsl2-kernel-clang/</link>
       <pubDate>Tue, 17 Dec 2019 13:53:23 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/posts/wsl2-kernel-clang/</guid>
       <description>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward.</description>
     </item>
-    
   </channel>
 </rss>

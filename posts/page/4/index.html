@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - Nathan Chancellor">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.5cfc680b1eeaeef9efbced92d46c2a9e876b72ee14fba85846afc4cff9e6e6f8.css" integrity="sha256-XPxoCx7q7vnvvO2S1Gwqnodrcu4U&#43;6hYRq/Ez/nm5vg=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.e087fd1dc76e73a35ae6d7028ddc1ba41e0131e7f9b3a6e2d019a208e6d6c4b5.css" integrity="sha256-4If9Hcduc6Na5tcCjdwbpB4BMef5s6bi0BmiCObWxLU=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -153,7 +153,32 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>October 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">November 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C)....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-11-30 16:23:00 -0700 MST'>November 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to November 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/november-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Reducing an LTO Linux kernel bug with cvise
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>My co-maintainer Nick Desaulniers wrote a great post about taking a several thousand line C file that exposed a compiler bug down to 12 lines with creduce. I thought I would do the same thing with a bug that only happens with link time optimization (LTO) in the Linux kernel, which is a bit of a different beast. Hopefully this post can help others reduce their own bugs and think about the best way to triage a bug....</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-11-29 10:07:16 -0700 MST'>November 29, 2021</span>&nbsp;·&nbsp;19 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to Reducing an LTO Linux kernel bug with cvise" href="https://nathanchance.dev/posts/cvise-lto-kernel-bug/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">October 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -165,7 +190,7 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>September 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">September 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -179,7 +204,7 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>August 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">August 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -192,7 +217,7 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>July 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">July 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -204,7 +229,7 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>June 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">June 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -217,7 +242,7 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>May 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">May 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -230,7 +255,7 @@ Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>April 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">April 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -243,7 +268,7 @@ Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute:
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>March 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">March 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
@@ -252,32 +277,6 @@ Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __ini
   </div>
   <footer class="entry-footer"><span title='2021-04-01 10:25:53 -0700 MST'>April 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to March 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>February 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
-Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome....</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-02-28 00:01:20 -0700 MST'>February 28, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to February 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Working with git bisect
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Before Google&#43; shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
-One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information....</p>
-  </div>
-  <footer class="entry-footer"><span title='2020-04-17 15:23:45 -0700 MST'>April 17, 2020</span>&nbsp;·&nbsp;14 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to Working with git bisect" href="https://nathanchance.dev/posts/working-with-git-bisect/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

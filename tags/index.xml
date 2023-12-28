@@ -1,101 +1,82 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/</link>
     <description>Recent content in Tags on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 30 Nov 2023 17:30:00 -0700</lastBuildDate><atom:link href="https://nathanchance.dev/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Dec 2023 12:00:00 -0700</lastBuildDate>
+    <atom:link href="https://nathanchance.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>clangbuiltlinux</title>
       <link>https://nathanchance.dev/tags/clangbuiltlinux/</link>
-      <pubDate>Thu, 30 Nov 2023 17:30:00 -0700</pubDate>
-      
+      <pubDate>Thu, 28 Dec 2023 12:00:00 -0700</pubDate>
       <guid>https://nathanchance.dev/tags/clangbuiltlinux/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>linux</title>
       <link>https://nathanchance.dev/tags/linux/</link>
-      <pubDate>Thu, 30 Nov 2023 17:30:00 -0700</pubDate>
-      
+      <pubDate>Thu, 28 Dec 2023 12:00:00 -0700</pubDate>
       <guid>https://nathanchance.dev/tags/linux/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>linuxfoundation</title>
       <link>https://nathanchance.dev/tags/linuxfoundation/</link>
-      <pubDate>Thu, 30 Nov 2023 17:30:00 -0700</pubDate>
-      
+      <pubDate>Thu, 28 Dec 2023 12:00:00 -0700</pubDate>
       <guid>https://nathanchance.dev/tags/linuxfoundation/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>maintainer</title>
       <link>https://nathanchance.dev/tags/maintainer/</link>
-      <pubDate>Thu, 30 Nov 2023 17:30:00 -0700</pubDate>
-      
+      <pubDate>Thu, 28 Dec 2023 12:00:00 -0700</pubDate>
       <guid>https://nathanchance.dev/tags/maintainer/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>clang</title>
       <link>https://nathanchance.dev/tags/clang/</link>
       <pubDate>Mon, 29 Nov 2021 10:07:16 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/tags/clang/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>llvm</title>
       <link>https://nathanchance.dev/tags/llvm/</link>
       <pubDate>Mon, 29 Nov 2021 10:07:16 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/tags/llvm/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>lto</title>
       <link>https://nathanchance.dev/tags/lto/</link>
       <pubDate>Mon, 29 Nov 2021 10:07:16 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/tags/lto/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>git</title>
       <link>https://nathanchance.dev/tags/git/</link>
       <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/tags/git/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>wsl2</title>
       <link>https://nathanchance.dev/tags/wsl2/</link>
       <pubDate>Wed, 15 Apr 2020 12:40:20 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/tags/wsl2/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>android</title>
       <link>https://nathanchance.dev/tags/android/</link>
       <pubDate>Fri, 31 Jan 2020 18:52:00 -0700</pubDate>
-      
       <guid>https://nathanchance.dev/tags/android/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>
