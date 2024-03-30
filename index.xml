@@ -6,8 +6,16 @@
     <description>Recent content on Nathan Chancellor</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 29 Feb 2024 16:30:00 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 29 Mar 2024 14:30:00 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>March 2024 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/march-2024-cbl-work/</link>
+      <pubDate>Fri, 29 Mar 2024 14:30:00 -0700</pubDate>
+      <guid>https://nathanchance.dev/posts/march-2024-cbl-work/</guid>
+      <description>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</description>
+    </item>
     <item>
       <title>February 2024 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/february-2024-cbl-work/</link>
