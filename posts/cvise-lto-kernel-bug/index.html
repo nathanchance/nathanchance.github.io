@@ -55,7 +55,10 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Reducing an LTO Linux kernel bug with cvise" />
+</noscript>
+  
+
+<meta property="og:title" content="Reducing an LTO Linux kernel bug with cvise" />
 <meta property="og:description" content="My co-maintainer Nick Desaulniers wrote a great post about taking a several thousand line C file that exposed a compiler bug down to 12 lines with creduce. I thought I would do the same thing with a bug that only happens with link time optimization (LTO) in the Linux kernel, which is a bit of a different beast. Hopefully this post can help others reduce their own bugs and think about the best way to triage a bug." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanchance.dev/posts/cvise-lto-kernel-bug/" /><meta property="article:section" content="posts" />
@@ -706,7 +709,8 @@ out_unlock:
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+        <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

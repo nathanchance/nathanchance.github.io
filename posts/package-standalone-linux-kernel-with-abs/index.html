@@ -55,7 +55,10 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Package a standalone Linux kernel using the Arch Linux Build System" />
+</noscript>
+  
+
+<meta property="og:title" content="Package a standalone Linux kernel using the Arch Linux Build System" />
 <meta property="og:description" content="As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution&rsquo;s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/" /><meta property="article:section" content="posts" />
@@ -410,7 +413,8 @@ $ makepkg -R
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+        <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

@@ -55,7 +55,10 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Bisecting a Linux Kernel boot failure due to changed compiler flags" />
+</noscript>
+  
+
+<meta property="og:title" content="Bisecting a Linux Kernel boot failure due to changed compiler flags" />
 <meta property="og:description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/" /><meta property="article:section" content="posts" />
@@ -445,7 +448,8 @@ done &gt;&gt;mm/Makefile
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+        <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &

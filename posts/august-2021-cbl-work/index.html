@@ -56,7 +56,10 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="August 2021 ClangBuiltLinux Work" />
+</noscript>
+  
+
+<meta property="og:title" content="August 2021 ClangBuiltLinux Work" />
 <meta property="og:description" content="Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
 [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up." />
 <meta property="og:type" content="article" />
@@ -618,7 +621,8 @@
     </main>
     
 <footer class="footer">
-    <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span>
+        <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span> · 
+
     <span>
         Powered by
         <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
