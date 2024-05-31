@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><meta charset="utf-8">
+<head>
+	<meta name="generator" content="Hugo 0.126.1"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Maintainer | Nathan Chancellor</title>
-<meta name="keywords" content="">
+<title>Nathan Chancellor</title>
+
 <meta name="description" content="">
 <meta name="author" content="Nathan Chancellor">
-<link rel="canonical" href="https://nathanchance.dev/tags/maintainer/">
+<link rel="canonical" href="https://nathanchance.dev/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
@@ -18,8 +19,9 @@
 <link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://nathanchance.dev/tags/maintainer/index.xml">
-<link rel="alternate" hreflang="en" href="https://nathanchance.dev/tags/maintainer/">
+<link rel="alternate" type="application/rss+xml" href="https://nathanchance.dev/index.xml">
+<link rel="alternate" type="application/json" href="https://nathanchance.dev/index.json">
+<link rel="alternate" hreflang="en" href="https://nathanchance.dev/">
 <noscript>
     <style>
         #theme-toggle,
@@ -59,15 +61,28 @@
 </noscript>
   
 
-<meta property="og:title" content="Maintainer" />
+<meta property="og:title" content="Nathan Chancellor" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://nathanchance.dev/tags/maintainer/" />
+<meta property="og:url" content="https://nathanchance.dev/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Maintainer"/>
+<meta name="twitter:title" content="Nathan Chancellor"/>
 <meta name="twitter:description" content=""/>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Nathan Chancellor",
+  "url": "https://nathanchance.dev/",
+  "description": "",
+  "thumbnailUrl": "https://nathanchance.dev/favicon.ico",
+  "sameAs": [
+      "/index.xml", "mailto:nathan@kernel.org", "/nc_resume.pdf", "/99739260CB6CB716.asc", "https://github.com/nathanchance", "https://gitlab.com/nathanchance", "https://instagram.com/nchancellor", "https://linkedin.com/in/nathanchancellor", "https://fosstodon.org/@nathanchance", "https://t.me/nathanchance", "https://twitch.tv/nathanchance", "https://twitter.com/nathanchance", "https://forum.xda-developers.com/m/nathanchance.6842057/", "https://www.youtube.com/user/NateChs"
+  ]
+}
+</script>
 </head>
 
 <body class="list" id="top">
@@ -134,40 +149,21 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header">
-  <h1>
-    Maintainer
-  </h1>
-</header>
 
-<article class="post-entry tag-entry"> 
+<article class="post-entry"> 
   <header class="entry-header">
-    <h2 class="entry-hint-parent">March 2021 ClangBuiltLinux Work
+    <h2 class="entry-hint-parent">Building the WSL 2 kernel with Clang
     </h2>
   </header>
   <div class="entry-content">
-    <p>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
-Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations....</p>
+    <p>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward....</p>
   </div>
-  <footer class="entry-footer"><span title='2021-04-01 10:25:53 -0700 MST'>April 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to March 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">February 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
-Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome....</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-02-28 00:01:20 -0700 MST'>February 28, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to February 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2021-cbl-work/"></a>
+  <footer class="entry-footer"><span title='2019-12-17 13:53:23 -0700 MST'>December 17, 2019</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to Building the WSL 2 kernel with Clang" href="https://nathanchance.dev/posts/wsl2-kernel-clang/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://nathanchance.dev/tags/maintainer/page/4/">
+    <a class="prev" href="https://nathanchance.dev/page/5/">
       «&nbsp;Prev&nbsp;
     </a>
   </nav>
