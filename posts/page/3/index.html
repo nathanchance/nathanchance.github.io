@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - Nathan Chancellor">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.b609c58d5c11bb90b1a54e04005d74ad1ddf22165eb79f5533967e57df9c3b50.css" integrity="sha256-tgnFjVwRu5CxpU4EAF10rR3fIhZet59VM5Z&#43;V9&#43;cO1A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -157,6 +157,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">December 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Miscellaneous fixes: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.
+Fix lack of section mismatch warnings with LTO (v2, v3) security: Restrict CONFIG_ZERO_CALL_USED_REGS to gcc or clang &gt; 15....</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-12-30 11:00:00 -0700 MST'>December 30, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to December 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/december-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">November 2022 ClangBuiltLinux Work
     </h2>
   </header>
@@ -270,18 +284,6 @@ Linux kernel patches Build failures: These are patches to fix various build erro
   </div>
   <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 MST'>April 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to April 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2022-cbl-work/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Bisecting a Linux Kernel boot failure due to changed compiler flags
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the “negative” version of it) to try and figure out the exact translation unit and function that causes the problem....</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-04-28 14:21:18 -0700 MST'>April 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to Bisecting a Linux Kernel boot failure due to changed compiler flags" href="https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
