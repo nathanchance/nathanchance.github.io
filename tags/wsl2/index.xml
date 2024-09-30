@@ -4,7 +4,7 @@
     <title>Wsl2 on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/wsl2/</link>
     <description>Recent content in Wsl2 on Nathan Chancellor</description>
-    <generator>Hugo -- 0.133.1</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>en</language>
     <lastBuildDate>Wed, 15 Apr 2020 12:40:20 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/tags/wsl2/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,14 @@
       <link>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</link>
       <pubDate>Wed, 15 Apr 2020 12:40:20 -0700</pubDate>
       <guid>https://nathanchance.dev/posts/wsl2-distros-from-lxc-images/</guid>
-      <description>I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize here) and all of the various distributions that you can run are basically containers on top of it.</description>
+      <description>&lt;p&gt;I have been a big fan of Windows Subsystem for Linux 2 as I need Windows for school but I am so used to the command line for remoting into my server and automating various tasks locally. For those of you who do not know, WSL 2 uses a Linux kernel under the hood (which I customize &lt;a href=&#34;https://github.com/nathanchance/WSL2-Linux-Kernel&#34;&gt;here&lt;/a&gt;) and all of &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distros&#34;&gt;the various distributions&lt;/a&gt; that you can run are basically containers on top of it.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Building the WSL 2 kernel with Clang</title>
       <link>https://nathanchance.dev/posts/wsl2-kernel-clang/</link>
       <pubDate>Tue, 17 Dec 2019 13:53:23 -0700</pubDate>
       <guid>https://nathanchance.dev/posts/wsl2-kernel-clang/</guid>
-      <description>Recently, I built a computer for school that I installed Windows 10 Pro on (link to the current specs if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward.</description>
+      <description>&lt;p&gt;Recently, I built a computer for school that I installed Windows 10 Pro on (&lt;a href=&#34;https://pcpartpicker.com/user/nchancellor/saved/bLjTCJ&#34;&gt;link to the current specs&lt;/a&gt; if you are curious). I was a little bummed about leaving Chrome OS because I was going to lose my local Linux development environment; however, Windows Subsystem for Linux is a thing and it has gotten even better with WSL 2, as it is actually running a Linux kernel so there is full Linux compatibility going forward. I also learned that it is possible to replace the Linux kernel that Microsoft ships with your own. This is a mini guide for what I uncovered because there is not a ton of information around for how to do this.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

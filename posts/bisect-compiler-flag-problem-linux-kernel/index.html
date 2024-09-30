@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>Bisecting a Linux Kernel boot failure due to changed compiler flags | Nathan Chancellor</title>
 <meta name="keywords" content="">
-<meta name="description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem.">
+<meta name="description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem. I&rsquo;ll go over this process at a high level to help others who might encounter this same issue.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
@@ -55,11 +55,8 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="Bisecting a Linux Kernel boot failure due to changed compiler flags" />
-<meta property="og:description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem." />
+</noscript><meta property="og:title" content="Bisecting a Linux Kernel boot failure due to changed compiler flags" />
+<meta property="og:description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem. I&rsquo;ll go over this process at a high level to help others who might encounter this same issue." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-28T14:21:18-07:00" />
@@ -67,7 +64,7 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Bisecting a Linux Kernel boot failure due to changed compiler flags"/>
-<meta name="twitter:description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem."/>
+<meta name="twitter:description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem. I&rsquo;ll go over this process at a high level to help others who might encounter this same issue."/>
 
 
 <script type="application/ld+json">
@@ -96,7 +93,7 @@
   "@type": "BlogPosting",
   "headline": "Bisecting a Linux Kernel boot failure due to changed compiler flags",
   "name": "Bisecting a Linux Kernel boot failure due to changed compiler flags",
-  "description": "Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the \u0026ldquo;negative\u0026rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem.",
+  "description": "Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the \u0026ldquo;negative\u0026rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem. I\u0026rsquo;ll go over this process at a high level to help others who might encounter this same issue.\n",
   "keywords": [
     
   ],

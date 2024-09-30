@@ -8,7 +8,10 @@
 <title>November 2021 ClangBuiltLinux Work | Nathan Chancellor</title>
 <meta name="keywords" content="clangbuiltlinux, linux, linuxfoundation, maintainer">
 <meta name="description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C).">
+Linux kernel patches
+
+
+Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C). The third series is a resend that fixes ARCH=hexagon allmodconfig, which is an important target for us because ARCH=hexagon requires LLVM. Lastly, the final series fixes a generic issue uncovered by the kernel test robot with an ARCH=hexagon randconfig.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/november-2021-cbl-work/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
@@ -56,12 +59,12 @@ Linux kernel patches Build errors: These are hard errors that appear for one rea
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="November 2021 ClangBuiltLinux Work" />
+</noscript><meta property="og:title" content="November 2021 ClangBuiltLinux Work" />
 <meta property="og:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C)." />
+Linux kernel patches
+
+
+Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C). The third series is a resend that fixes ARCH=hexagon allmodconfig, which is an important target for us because ARCH=hexagon requires LLVM. Lastly, the final series fixes a generic issue uncovered by the kernel test robot with an ARCH=hexagon randconfig." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanchance.dev/posts/november-2021-cbl-work/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-11-30T16:23:00-07:00" />
@@ -70,7 +73,10 @@ Linux kernel patches Build errors: These are hard errors that appear for one rea
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="November 2021 ClangBuiltLinux Work"/>
 <meta name="twitter:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C)."/>
+Linux kernel patches
+
+
+Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C). The third series is a resend that fixes ARCH=hexagon allmodconfig, which is an important target for us because ARCH=hexagon requires LLVM. Lastly, the final series fixes a generic issue uncovered by the kernel test robot with an ARCH=hexagon randconfig."/>
 
 
 <script type="application/ld+json">
@@ -99,7 +105,7 @@ Linux kernel patches Build errors: These are hard errors that appear for one rea
   "@type": "BlogPosting",
   "headline": "November 2021 ClangBuiltLinux Work",
   "name": "November 2021 ClangBuiltLinux Work",
-  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C).",
+  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C). The third series is a resend that fixes ARCH=hexagon allmodconfig, which is an important target for us because ARCH=hexagon requires LLVM. Lastly, the final series fixes a generic issue uncovered by the kernel test robot with an ARCH=hexagon randconfig.\n",
   "keywords": [
     "clangbuiltlinux", "linux", "linuxfoundation", "maintainer"
   ],

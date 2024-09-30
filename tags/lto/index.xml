@@ -4,7 +4,7 @@
     <title>Lto on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/lto/</link>
     <description>Recent content in Lto on Nathan Chancellor</description>
-    <generator>Hugo -- 0.133.1</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>en</language>
     <lastBuildDate>Mon, 29 Nov 2021 10:07:16 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/tags/lto/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,7 @@
       <link>https://nathanchance.dev/posts/cvise-lto-kernel-bug/</link>
       <pubDate>Mon, 29 Nov 2021 10:07:16 -0700</pubDate>
       <guid>https://nathanchance.dev/posts/cvise-lto-kernel-bug/</guid>
-      <description>My co-maintainer Nick Desaulniers wrote a great post about taking a several thousand line C file that exposed a compiler bug down to 12 lines with creduce. I thought I would do the same thing with a bug that only happens with link time optimization (LTO) in the Linux kernel, which is a bit of a different beast. Hopefully this post can help others reduce their own bugs and think about the best way to triage a bug.</description>
+      <description>&lt;p&gt;My co-maintainer Nick Desaulniers wrote &lt;a href=&#34;https://nickdesaulniers.github.io/blog/2019/01/18/finding-compiler-bugs-with-c-reduce/&#34;&gt;a great post&lt;/a&gt; about taking a several thousand line C file that exposed a compiler bug down to 12 lines with &lt;code&gt;creduce&lt;/code&gt;. I thought I would do the same thing with a bug that only happens with link time optimization (LTO) in the Linux kernel, which is a bit of a different beast. Hopefully this post can help others reduce their own bugs and think about the best way to triage a bug.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

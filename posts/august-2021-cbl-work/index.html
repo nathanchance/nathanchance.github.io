@@ -7,7 +7,12 @@
 <meta name="robots" content="index, follow">
 <title>August 2021 ClangBuiltLinux Work | Nathan Chancellor</title>
 <meta name="keywords" content="clangbuiltlinux, linux, linuxfoundation, maintainer">
-<meta name="description" content="Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+<meta name="description" content="Linux kernel patches
+
+
+[PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+
+
 [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/august-2021-cbl-work/">
@@ -56,11 +61,13 @@
         }
 
     </style>
-</noscript>
-  
+</noscript><meta property="og:title" content="August 2021 ClangBuiltLinux Work" />
+<meta property="og:description" content="Linux kernel patches
 
-<meta property="og:title" content="August 2021 ClangBuiltLinux Work" />
-<meta property="og:description" content="Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+
+[PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+
+
 [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://nathanchance.dev/posts/august-2021-cbl-work/" /><meta property="article:section" content="posts" />
@@ -69,7 +76,12 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="August 2021 ClangBuiltLinux Work"/>
-<meta name="twitter:description" content="Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+<meta name="twitter:description" content="Linux kernel patches
+
+
+[PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
+
+
 [PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up."/>
 
 
@@ -99,7 +111,7 @@
   "@type": "BlogPosting",
   "headline": "August 2021 ClangBuiltLinux Work",
   "name": "August 2021 ClangBuiltLinux Work",
-  "description": "Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.\n[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.",
+  "description": "Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.\n[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.\n",
   "keywords": [
     "clangbuiltlinux", "linux", "linuxfoundation", "maintainer"
   ],

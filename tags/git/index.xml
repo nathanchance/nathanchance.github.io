@@ -4,7 +4,7 @@
     <title>Git on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/git/</link>
     <description>Recent content in Git on Nathan Chancellor</description>
-    <generator>Hugo -- 0.133.1</generator>
+    <generator>Hugo -- 0.135.0</generator>
     <language>en</language>
     <lastBuildDate>Fri, 17 Apr 2020 15:23:45 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/tags/git/index.xml" rel="self" type="application/rss+xml" />
@@ -13,15 +13,15 @@
       <link>https://nathanchance.dev/posts/working-with-git-bisect/</link>
       <pubDate>Fri, 17 Apr 2020 15:23:45 -0700</pubDate>
       <guid>https://nathanchance.dev/posts/working-with-git-bisect/</guid>
-      <description>Before Google+ shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
-One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information.</description>
+      <description>&lt;p&gt;Before Google+ shut down, I had a post on there giving a brief overview of &lt;code&gt;git bisect&lt;/code&gt;, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.&lt;/p&gt;
+&lt;p&gt;One caveat before I start: there is &lt;a href=&#34;https://git-scm.com/docs/git-bisect&#34;&gt;great official documentation&lt;/a&gt; for &lt;code&gt;git bisect&lt;/code&gt;, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The art of git revert</title>
       <link>https://nathanchance.dev/posts/art-of-git-revert/</link>
       <pubDate>Wed, 15 Apr 2020 15:11:58 -0700</pubDate>
       <guid>https://nathanchance.dev/posts/art-of-git-revert/</guid>
-      <description>I have always loved reading good commit messages and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&amp;rsquo;t have a denvercoder9 situation) and it allows other people to get familiar with your project by fully understanding the why behind a change.</description>
+      <description>&lt;p&gt;I have always loved reading &lt;a href=&#34;https://chris.beams.io/posts/git-commit/&#34;&gt;good commit messages&lt;/a&gt; and I have tried myself to write good commit messages to inspire others to do the same. I see good commit messages as important for two reasons: it allows people who work on a project afterwards to understand the context behind a change (so that you don&amp;rsquo;t have a &lt;a href=&#34;https://xkcd.com/979/&#34;&gt;denvercoder9 situation&lt;/a&gt;) and it allows other people to get familiar with your project by fully understanding the why behind a change. I learned a lot about the Linux kernel purely through reading the commit messages in certain subsystems.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

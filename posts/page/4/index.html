@@ -56,10 +56,7 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="Posts" />
+</noscript><meta property="og:title" content="Posts" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://nathanchance.dev/posts/" />
@@ -157,11 +154,26 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">May 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-05-31 16:30:00 -0700 MST'>May 31, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to May 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">Setting up a self-hosted GitHub Actions runner in a Fedora virtual machine using libvirt
     </h2>
   </header>
   <div class="entry-content">
-    <p>Recently, I started exploring setting up a self-hosted GitHub Actions runner for the work-in-progress LLVM builds that ClangBuiltLinux is looking to distribute on kernel.org, as GitHub Actions hosted runners are pretty underwhelming in terms of performance and we want to soup these builds up with Profile Guided Optimization. Additionallly, GitHub Actions does not have a hosted arm64 Linux option, which is becoming increasingly important with chips such as Apple’s M1 getting strong mainline Linux support....</p>
+    <p>Recently, I started exploring setting up a self-hosted GitHub Actions runner for the work-in-progress LLVM builds that ClangBuiltLinux is looking to distribute on kernel.org, as GitHub Actions hosted runners are pretty underwhelming in terms of performance and we want to soup these builds up with Profile Guided Optimization. Additionallly, GitHub Actions does not have a hosted arm64 Linux option, which is becoming increasingly important with chips such as Apple’s M1 getting strong mainline Linux support.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-05-27 09:21:35 -0700 MST'>May 27, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to Setting up a self-hosted GitHub Actions runner in a Fedora virtual machine using libvirt" href="https://nathanchance.dev/posts/github-actions-fedora-libvirt/"></a>
@@ -174,7 +186,8 @@
   </header>
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)...</p>
+Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 MST'>April 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to April 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2022-cbl-work/"></a>
@@ -186,7 +199,8 @@ Linux kernel patches Build failures: These are patches to fix various build erro
     </h2>
   </header>
   <div class="entry-content">
-    <p>Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the “negative” version of it) to try and figure out the exact translation unit and function that causes the problem....</p>
+    <p>Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the “negative” version of it) to try and figure out the exact translation unit and function that causes the problem. I’ll go over this process at a high level to help others who might encounter this same issue.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-04-28 14:21:18 -0700 MST'>April 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to Bisecting a Linux Kernel boot failure due to changed compiler flags" href="https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/"></a>
@@ -198,7 +212,8 @@ Linux kernel patches Build failures: These are patches to fix various build erro
     </h2>
   </header>
   <div class="entry-content">
-    <p>As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution’s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively....</p>
+    <p>As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution’s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively. However, for Arch Linux, my distribution of choice, that is not so simple. Furthermore, when doing certain types of development, such as bisecting an issue, it is more convenient to do all the building in an actual source tree, rather than one that is managed by the Arch Build System. The following process might not be the most efficient or optimal way to do this process (the Arch wiki has a whole article about doing a git bisect with a PKGBUILD) but it works for me :)
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-04-27 14:06:01 -0700 MST'>April 27, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to Package a standalone Linux kernel using the Arch Linux Build System" href="https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/"></a>
@@ -211,7 +226,8 @@ Linux kernel patches Build failures: These are patches to fix various build erro
   </header>
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing....</p>
+Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-03-31 16:30:00 -0700 MST'>March 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to March 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2022-cbl-work/"></a>
@@ -225,7 +241,8 @@ Linux kernel patches Boot fixes: These patches fix boot failures that we have se
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
-Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here)....</p>
+Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here). It is still good to get it corrected, as the enums might not stay in sync.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-02-28 00:17:30 -0700 MST'>February 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to February 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2022-cbl-work/"></a>
@@ -239,7 +256,8 @@ Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolv
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
-[PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4....</p>
+[PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.9 0/5] Fix booting arm64 big endian with QEMU 5.0.0&#43; (v1) [PATCH 4.4,4.9] power: reset: ltc2952: Fix use of floating point literals (v1) Patches for clang and CONFIG_WERROR (arm64/x86_64) -Wpointer-bool-conversion: This warning is usually harmless, as it is typically just a developer checking if an array in the middle of a structure is NULL, which is not possible if the structure is not NULL, which would likely cause issues further up a call chain. In this one case, the fix was just to remove the check.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-01-31 00:18:00 -0700 MST'>January 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to January 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/january-2022-cbl-work/"></a>
@@ -253,7 +271,9 @@ Linux kernel patches Stable patches: The stable trees are the trees that most us
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
-Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;...</p>
+Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;
+ANDROID: allmodconfig: Re-enable TEST_KMOD
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-12-31 12:00:00 -0700 MST'>December 31, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to December 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/december-2021-cbl-work/"></a>
@@ -266,22 +286,11 @@ Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;...</p>
   </header>
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C)....</p>
+Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C). The third series is a resend that fixes ARCH=hexagon allmodconfig, which is an important target for us because ARCH=hexagon requires LLVM. Lastly, the final series fixes a generic issue uncovered by the kernel test robot with an ARCH=hexagon randconfig.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-11-30 16:23:00 -0700 MST'>November 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to November 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/november-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Reducing an LTO Linux kernel bug with cvise
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>My co-maintainer Nick Desaulniers wrote a great post about taking a several thousand line C file that exposed a compiler bug down to 12 lines with creduce. I thought I would do the same thing with a bug that only happens with link time optimization (LTO) in the Linux kernel, which is a bit of a different beast. Hopefully this post can help others reduce their own bugs and think about the best way to triage a bug....</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-11-29 10:07:16 -0700 MST'>November 29, 2021</span>&nbsp;·&nbsp;19 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to Reducing an LTO Linux kernel bug with cvise" href="https://nathanchance.dev/posts/cvise-lto-kernel-bug/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

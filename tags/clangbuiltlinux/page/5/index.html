@@ -56,10 +56,7 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="Clangbuiltlinux" />
+</noscript><meta property="og:title" content="Clangbuiltlinux" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://nathanchance.dev/tags/clangbuiltlinux/" />
@@ -142,12 +139,28 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">September 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Linux kernel patches tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
+Harden clang against unknown flag options (v2): A follow up.
+ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-09-30 10:00:00 -0700 MST'>September 30, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to September 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/september-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">August 2021 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
     <p>Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
-[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up....</p>
+[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-08-31 20:38:00 -0700 MST'>August 31, 2021</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to August 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/august-2021-cbl-work/"></a>
@@ -159,7 +172,8 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>Linux kernel patches [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it....</p>
+    <p>Linux kernel patches [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-08-01 00:00:00 -0700 MST'>August 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to July 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2021-cbl-work/"></a>
@@ -172,7 +186,8 @@
   </header>
   <div class="entry-content">
     <p>Linux kernel patches ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
-[PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC’s -Wunused-but-set-variable and this instance was found by Intel’s kernel test robot....</p>
+[PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC’s -Wunused-but-set-variable and this instance was found by Intel’s kernel test robot. Rather simple fix but it is important to fix warnings as they crop up so that the build stays as clean as possible so that the real issues are easily visible.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-07-01 13:48:16 -0700 MST'>July 1, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to June 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/june-2021-cbl-work/"></a>
@@ -185,7 +200,8 @@
   </header>
   <div class="entry-content">
     <p>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let’s dive in, shall we?
-Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting “struct ” with an attribute, in this case “__maybe_unused”, which clang warns about while GCC does not. This causes a warning in all of our builds....</p>
+Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting “struct ” with an attribute, in this case “__maybe_unused”, which clang warns about while GCC does not. This causes a warning in all of our builds. Unfortunately, this patch did not actually make it into mainline because Linus fixed it himself.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-06-01 08:29:00 -0700 MST'>June 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to May 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2021-cbl-work/"></a>
@@ -198,7 +214,8 @@ Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe
   </header>
   <div class="entry-content">
     <p>Another month down! Feels like I just wrote the March 2021 post… but I suppose that is what happens when your project moves super quickly :)
-Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen’s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing....</p>
+Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen’s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-04-30 21:14:13 -0700 MST'>April 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to April 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2021-cbl-work/"></a>
@@ -211,7 +228,8 @@ Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute:
   </header>
   <div class="entry-content">
     <p>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
-Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations....</p>
+Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-04-01 10:25:53 -0700 MST'>April 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to March 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2021-cbl-work/"></a>
@@ -224,7 +242,8 @@ Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __ini
   </header>
   <div class="entry-content">
     <p>As some of you may or may not know by now, I am now employed by the Linux Foundation to help improve Linux security. The primary way that I am doing that is through the work I do for ClangBuiltLinux, of which I am an official maintainer.
-Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome....</p>
+Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-02-28 00:01:20 -0700 MST'>February 28, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to February 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2021-cbl-work/"></a>

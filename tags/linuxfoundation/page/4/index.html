@@ -56,10 +56,7 @@
         }
 
     </style>
-</noscript>
-  
-
-<meta property="og:title" content="Linuxfoundation" />
+</noscript><meta property="og:title" content="Linuxfoundation" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://nathanchance.dev/tags/linuxfoundation/" />
@@ -142,12 +139,27 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">May 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-05-31 16:30:00 -0700 MST'>May 31, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to May 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">April 2022 ClangBuiltLinux Work
     </h2>
   </header>
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)...</p>
+Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 MST'>April 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to April 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2022-cbl-work/"></a>
@@ -160,7 +172,8 @@ Linux kernel patches Build failures: These are patches to fix various build erro
   </header>
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing....</p>
+Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-03-31 16:30:00 -0700 MST'>March 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to March 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2022-cbl-work/"></a>
@@ -174,7 +187,8 @@ Linux kernel patches Boot fixes: These patches fix boot failures that we have se
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
-Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here)....</p>
+Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here). It is still good to get it corrected, as the enums might not stay in sync.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-02-28 00:17:30 -0700 MST'>February 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to February 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2022-cbl-work/"></a>
@@ -188,7 +202,8 @@ Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolv
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
-[PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4....</p>
+[PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.9 0/5] Fix booting arm64 big endian with QEMU 5.0.0&#43; (v1) [PATCH 4.4,4.9] power: reset: ltc2952: Fix use of floating point literals (v1) Patches for clang and CONFIG_WERROR (arm64/x86_64) -Wpointer-bool-conversion: This warning is usually harmless, as it is typically just a developer checking if an array in the middle of a structure is NULL, which is not possible if the structure is not NULL, which would likely cause issues further up a call chain. In this one case, the fix was just to remove the check.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2022-01-31 00:18:00 -0700 MST'>January 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to January 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/january-2022-cbl-work/"></a>
@@ -202,7 +217,9 @@ Linux kernel patches Stable patches: The stable trees are the trees that most us
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
-Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;...</p>
+Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;
+ANDROID: allmodconfig: Re-enable TEST_KMOD
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-12-31 12:00:00 -0700 MST'>December 31, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to December 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/december-2021-cbl-work/"></a>
@@ -215,7 +232,8 @@ Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;...</p>
   </header>
   <div class="entry-content">
     <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C)....</p>
+Linux kernel patches Build errors: These are hard errors that appear for one reason or another. The first two are from a recent change in LLVM to avoid crashing the compiler (see the commit message for more details, I learned floating point literals exist in C). The third series is a resend that fixes ARCH=hexagon allmodconfig, which is an important target for us because ARCH=hexagon requires LLVM. Lastly, the final series fixes a generic issue uncovered by the kernel test robot with an ARCH=hexagon randconfig.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-11-30 16:23:00 -0700 MST'>November 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to November 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/november-2021-cbl-work/"></a>
@@ -227,7 +245,8 @@ Linux kernel patches Build errors: These are hard errors that appear for one rea
     </h2>
   </header>
   <div class="entry-content">
-    <p>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend’s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned....</p>
+    <p>This was a bit of a shorter month for me, as I took some vacation at the beginning of the month to recouperate and meet half of my girlfriend’s extended family and friends for the first time. Thankfully, the rest of the ClangBuiltLinux team was able to keep everything churning along in my absence and I was able to be super productive the rest of the month once I returned.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-10-29 14:10:00 -0700 MST'>October 29, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to October 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/october-2021-cbl-work/"></a>
@@ -241,7 +260,8 @@ Linux kernel patches Build errors: These are hard errors that appear for one rea
   <div class="entry-content">
     <p>Linux kernel patches tools: compiler-gcc.h: Guard error attribute use with __has_attribute (v1): The minimum version of GCC was raised to 5.1, which helped simplify a lot of code but caused issues for older versions of clang. This helps resolve it.
 Harden clang against unknown flag options (v2): A follow up.
-ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!...</p>
+ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): An interesting warning around operator precedence, which will not be an issue in practice but now that Linus has decreed that warnings are unacceptable, it is important to clean them up!
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-09-30 10:00:00 -0700 MST'>September 30, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to September 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/september-2021-cbl-work/"></a>
@@ -254,22 +274,11 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
   </header>
   <div class="entry-content">
     <p>Linux kernel patches [PATCH] dmaengine: idxd: Remove unused status variable in irq_process_work_list(): Not a clang specific warning but it impacts builds where I use -Werror, as kernel builds should be as warning clean as possible.
-[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up....</p>
+[PATCH] ASoC: Intel: boards: Fix CONFIG_SND_SOC_SDW_MOCKUP select: Not a clang specific warning but Kconfig warnings such as this can potentially be build errors later due to incorrect dependency selection so it is important to fix them when they pop up.
+...</p>
   </div>
   <footer class="entry-footer"><span title='2021-08-31 20:38:00 -0700 MST'>August 31, 2021</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to August 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/august-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">July 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Linux kernel patches [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it....</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-08-01 00:00:00 -0700 MST'>August 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to July 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2021-cbl-work/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
