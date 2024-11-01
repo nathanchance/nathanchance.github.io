@@ -4,10 +4,27 @@
     <title>Maintainer on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/maintainer/</link>
     <description>Recent content in Maintainer on Nathan Chancellor</description>
-    <generator>Hugo -- 0.135.0</generator>
+    <generator>Hugo -- 0.136.5</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 30 Sep 2024 15:15:00 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 31 Oct 2024 16:30:00 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/tags/maintainer/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>October 2024 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/october-2024-cbl-work/</link>
+      <pubDate>Thu, 31 Oct 2024 16:30:00 -0700</pubDate>
+      <guid>https://nathanchance.dev/posts/october-2024-cbl-work/</guid>
+      <description>&lt;p&gt;Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on &lt;a href=&#34;https://lore.kernel.org/all/?q=f:nathan@kernel.org&#34;&gt;lore.kernel.org&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;linux-kernel-patches&#34;&gt;Linux kernel patches&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Downstream fixes: These are fixes and improvements that occur in a downstream Linux tree, such as Android or ChromeOS, which our continuous integration regularly tests.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/+/3311875&#34;&gt;&lt;code&gt;ANDROID: GKI: Put vendor_data_pad behind CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Miscellaneous fixes and improvements: These are fixes and improvements that don&amp;rsquo;t fit into a particular category but are important to ClangBuiltLinux.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>September 2024 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/september-2024-cbl-work/</link>
