@@ -14,7 +14,7 @@ Linux kernel patches
 [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/april-2021-cbl-work/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -59,24 +59,27 @@ Linux kernel patches
         }
 
     </style>
-</noscript><meta property="og:title" content="April 2021 ClangBuiltLinux Work" />
-<meta property="og:description" content="Another month down! Feels like I just wrote the March 2021 post&hellip; but I suppose that is what happens when your project moves super quickly :)
-Linux kernel patches
-
-
-[PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nathanchance.dev/posts/april-2021-cbl-work/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-04-30T21:14:13-07:00" />
-<meta property="article:modified_time" content="2021-04-30T21:14:13-07:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="April 2021 ClangBuiltLinux Work"/>
+</noscript><meta property="og:url" content="https://nathanchance.dev/posts/april-2021-cbl-work/">
+  <meta property="og:site_name" content="Nathan Chancellor">
+  <meta property="og:title" content="April 2021 ClangBuiltLinux Work">
+  <meta property="og:description" content="Another month down! Feels like I just wrote the March 2021 post… but I suppose that is what happens when your project moves super quickly :)
+Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen’s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-04-30T21:14:13-07:00">
+    <meta property="article:modified_time" content="2021-04-30T21:14:13-07:00">
+    <meta property="article:tag" content="Clangbuiltlinux">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Linuxfoundation">
+    <meta property="article:tag" content="Maintainer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="April 2021 ClangBuiltLinux Work">
 <meta name="twitter:description" content="Another month down! Feels like I just wrote the March 2021 post&hellip; but I suppose that is what happens when your project moves super quickly :)
 Linux kernel patches
 
 
-[PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there."/>
+[PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen&rsquo;s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there.">
 
 
 <script type="application/ld+json">

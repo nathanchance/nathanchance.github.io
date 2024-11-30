@@ -10,7 +10,7 @@
 <meta name="description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even view it with TightVNC.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/building-using-cuttlefish/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -55,16 +55,21 @@
         }
 
     </style>
-</noscript><meta property="og:title" content="Building and using Cuttlefish" />
-<meta property="og:description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even view it with TightVNC." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nathanchance.dev/posts/building-using-cuttlefish/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-01-31T18:52:00-07:00" />
-<meta property="article:modified_time" content="2020-01-31T18:52:00-07:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Building and using Cuttlefish"/>
-<meta name="twitter:description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even view it with TightVNC."/>
+</noscript><meta property="og:url" content="https://nathanchance.dev/posts/building-using-cuttlefish/">
+  <meta property="og:site_name" content="Nathan Chancellor">
+  <meta property="og:title" content="Building and using Cuttlefish">
+  <meta property="og:description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even view it with TightVNC.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-01-31T18:52:00-07:00">
+    <meta property="article:modified_time" content="2020-01-31T18:52:00-07:00">
+    <meta property="article:tag" content="Android">
+    <meta property="article:tag" content="Clang">
+    <meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Building and using Cuttlefish">
+<meta name="twitter:description" content="Recently, I stumbled upon a talk that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from adb shell. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even view it with TightVNC.">
 
 
 <script type="application/ld+json">
@@ -222,8 +227,7 @@
 
   <div class="post-content"><p>Recently, I stumbled upon <a href="https://youtu.be/xMtDDEj-02c?t=9502">a talk</a> that Alistair Delva, a Google engineer, gave at the 2018 Linux Plumbers Conference around Cuttlefish, an Android Virtual Device (AVD) that is used to validate the Android platform virtually (i.e. without a separate device). This is something that is really cool because it makes it easy to follow along with upstream Android development and see what changes they are making under the hood, all from <code>adb shell</code>. Cuttlefish boots in around 20 seconds on my machine and swapping out kernels is as simple as adding two command flags which I will go over later. If you are running Cuttlefish locally, you can even <a href="https://android.googlesource.com/device/google/cuttlefish/#so-you-want-to-see-cuttlefish">view it</a> with TightVNC.</p>
 <p>A brief demo:</p>
-<p><a href="https://asciinema.org/a/tfDhVZKCL0URqP58lnxuRsKZd"><img loading="lazy" src="https://asciinema.org/a/tfDhVZKCL0URqP58lnxuRsKZd.svg" alt="asciicast"  />
-</a></p>
+<p><a href="https://asciinema.org/a/tfDhVZKCL0URqP58lnxuRsKZd"><img alt="asciicast" loading="lazy" src="https://asciinema.org/a/tfDhVZKCL0URqP58lnxuRsKZd.svg"></a></p>
 <p>A few things to note:</p>
 <ol>
 <li>

@@ -11,7 +11,7 @@
 One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/working-with-git-bisect/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -56,18 +56,23 @@ One caveat before I start: there is great official documentation for git bisect,
         }
 
     </style>
-</noscript><meta property="og:title" content="Working with git bisect" />
-<meta property="og:description" content="Before Google&#43; shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
-One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nathanchance.dev/posts/working-with-git-bisect/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-04-17T15:23:45-07:00" />
-<meta property="article:modified_time" content="2020-04-17T15:23:45-07:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Working with git bisect"/>
+</noscript><meta property="og:url" content="https://nathanchance.dev/posts/working-with-git-bisect/">
+  <meta property="og:site_name" content="Nathan Chancellor">
+  <meta property="og:title" content="Working with git bisect">
+  <meta property="og:description" content="Before Google&#43; shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
+One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-04-17T15:23:45-07:00">
+    <meta property="article:modified_time" content="2020-04-17T15:23:45-07:00">
+    <meta property="article:tag" content="Git">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Llvm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Working with git bisect">
 <meta name="twitter:description" content="Before Google&#43; shut down, I had a post on there giving a brief overview of git bisect, which a lot of people found useful. Unfortunately, I forgot to save it and move it somewhere else before the shutdown deadline. As a result, I am going to redo it here and spice it up a bit.
-One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right."/>
+One caveat before I start: there is great official documentation for git bisect, from which I have taken quite a bit of information. If I say something that contradicts what the documentation says, assume the documentation is right.">
 
 
 <script type="application/ld+json">
@@ -416,8 +421,7 @@ $ git bisect replay bisect.log
 <p>To bisect this, I used <a href="https://github.com/ClangBuiltLinux/tc-build">tc-build</a>, an LLVM build script that builds a toolchain able to build the Linux kernel. If you run into an issue with LLVM and the Linux kernel, it can be very helpful (and I am more than willing to give a more in-depth tutorial around this if needed).</p>
 <p>The basic principle is we build a toolchain and then use that toolchain to build the translation unit that crashes in the kernel and see what happens.</p>
 <p>To demonstrate everything, I took a screen recording of my bisect (<a href="https://gist.github.com/9a9be43ee4eb393952f6ac18e77fb7e2">run script here</a>):</p>
-<p><a href="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG"><img loading="lazy" src="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG.svg" alt="asciicast"  />
-</a></p>
+<p><a href="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG"><img alt="asciicast" loading="lazy" src="https://asciinema.org/a/MiNTU9USGiApGE4UidfTtZUUG.svg"></a></p>
 <p>When I did this bisect manually, it took me over an hour, between having to make sure that I typed the right command and remembering that I had a bisect running. When I did it automated without <code>ccache</code> (to make sure everything worked before I did the recording), it took 22 minutes, of which I was involved for 30 seconds :)</p>
 <p>Hopefully this information was helpful in some way! If you have any questions or comments, please feel free to reach out to me on <a href="https://twitter.com/nathanchance">Twitter</a></p>
 

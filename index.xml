@@ -4,10 +4,21 @@
     <title>Nathan Chancellor</title>
     <link>https://nathanchance.dev/</link>
     <description>Recent content on Nathan Chancellor</description>
-    <generator>Hugo -- 0.138.0</generator>
+    <generator>Hugo -- 0.139.3</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 31 Oct 2024 16:30:00 -0700</lastBuildDate>
+    <lastBuildDate>Fri, 29 Nov 2024 17:30:00 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>November 2024 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/november-2024-cbl-work/</link>
+      <pubDate>Fri, 29 Nov 2024 17:30:00 -0700</pubDate>
+      <guid>https://nathanchance.dev/posts/november-2024-cbl-work/</guid>
+      <description>&lt;p&gt;Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on &lt;a href=&#34;https://lore.kernel.org/all/?q=f:nathan@kernel.org&#34;&gt;lore.kernel.org&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;linux-kernel-patches&#34;&gt;Linux kernel patches&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)&lt;/p&gt;</description>
+    </item>
     <item>
       <title>October 2024 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/october-2024-cbl-work/</link>
@@ -421,8 +432,7 @@
       <link>https://nathanchance.dev/about/</link>
       <pubDate>Fri, 29 Apr 2022 10:15:00 -0700</pubDate>
       <guid>https://nathanchance.dev/about/</guid>
-      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://nathanchance.dev/profile.jpg&#34; alt=&#34;&#34;  /&gt;
-&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://nathanchance.dev/profile.jpg&#34;&gt;&lt;/p&gt;
 &lt;p&gt;I am a Linux kernel and LLVM hacker, currently employed as an independent contractor through &lt;a href=&#34;https://www.linuxfoundation.org&#34;&gt;The Linux Foundation&lt;/a&gt; to maintain &lt;a href=&#34;https://clangbuiltlinux.github.io/&#34;&gt;ClangBuiltLinux&lt;/a&gt;. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at &lt;a href=&#34;https://gcu.edu/&#34;&gt;Grand Canyon University&lt;/a&gt; in 2022.&lt;/p&gt;
 &lt;p&gt;Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.&lt;/p&gt;</description>
     </item>

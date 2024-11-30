@@ -8,12 +8,11 @@
 <title>About | Nathan Chancellor</title>
 <meta name="keywords" content="">
 <meta name="description" content="
-
 I am a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.
 Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/about/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -58,22 +57,21 @@ Below are links to some of my open source contributions. If you have any questio
         }
 
     </style>
-</noscript><meta property="og:title" content="About" />
-<meta property="og:description" content="
-
+</noscript><meta property="og:url" content="https://nathanchance.dev/about/">
+  <meta property="og:site_name" content="Nathan Chancellor">
+  <meta property="og:title" content="About">
+  <meta property="og:description" content="
 I am a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.
-Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nathanchance.dev/about/" /><meta property="article:section" content="" />
-<meta property="article:published_time" content="2022-04-29T10:15:00-07:00" />
-<meta property="article:modified_time" content="2022-04-29T10:15:00-07:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="About"/>
+Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2022-04-29T10:15:00-07:00">
+    <meta property="article:modified_time" content="2022-04-29T10:15:00-07:00">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About">
 <meta name="twitter:description" content="
-
 I am a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.
-Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page."/>
+Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.">
 
 
 <script type="application/ld+json">
@@ -96,11 +94,11 @@ Below are links to some of my open source contributions. If you have any questio
   "@type": "BlogPosting",
   "headline": "About",
   "name": "About",
-  "description": " I am a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.\nBelow are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.\n",
+  "description": "\nI am a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.\nBelow are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.\n",
   "keywords": [
     
   ],
-  "articleBody": " I am a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.\nBelow are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.\nClangBuiltLinux ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld. I have contributed various fixes to the Linux kernel and LLVM, helped triage and debug issues on the issue tracker, improved the continuous integration setups (Travis CI based and TuxSuite / GitHub Actions based), developed a QEMU and buildroot boot framework, a Docker testing environment (former and current), and a set of toolchain build scripts for myself and others to use for consistent testing/developing.\nFlash Kernel I supported the Pixel 2 (XL) [walleye/taimen], Pixel (XL) [sailfish/marlin], OnePlus 6 (enchilada), OnePlus 5/T (cheeseburger/dumpling), and Nexus 6P (angler).\nAll of my kernels focused on stability/security by merging in the stable updates from kernel.org, any relevant updates from Qualcomm, and building with newer compilers to fix warnings during compilation. Below are the highlights for each kernel.\nPixel 2 (XL): First to merge in linux-stable and build with up to date versions of Clang. Added EAS 1.5 from kernel/common.\nPixel (XL): First standalone custom kernel to be compiled properly with Clang, fixing the vast majority of warnings.\nOnePlus 6: I recieved this device as part of OnePlus’s developer program. I was the first to merge in linux-stable and the updates from Code Aurora Forum, build with Clang, and port over the 32-bit vDSO for arm64 from the Pixel 2 kernels (initially created on a 4.4 base).\nMiscellaneous open source contributions android-linux-stable: Several Android kernel trees with the latest stable tags from kernel.org merged into them, along with conflict resolution notes and a how-to process for other developers and information for users to understand the process. Testing includes merging into my own Flash Kernel repositories linked above and building with all of the relevant defconfigs/compilers. I report results back to the stable tree maintainers, receiving praise for my efforts on a couple occasions (one and two). I streamlined the maintenance of these repos into a script.\nandroid-kernel-clang: Collected the core Clang patchset for Android kernels from the Pixel 2 and Chromium kernel repositories, supplementing them with fixes for warnings from out of tree code.\nAnyKernel3: A kernel flashing utility for TWRP, responsible for unpacking the boot image, applying any requested ramdisk changes, repacking the files, and flashing them to the boot image partition.\nkernel/common: Google’s common Android kernel.\nsonyxperiadev/kernel: The Linux kernel used for Sony’s Open Devices program.\nMiscellaneous interesting personal repos My environment: The scripts and tools I use for my workflow and personal configuration files, focusing on increasing productivity by decreasing manual intervention needed to doing repetitive tasks.\nWSL2-Linux-Kernel: My personal kernel for Windows Subsystem for Linux 2.\n",
+  "articleBody": "\nI am a Linux kernel and LLVM hacker, currently employed as an independent contractor through The Linux Foundation to maintain ClangBuiltLinux. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at Grand Canyon University in 2022.\nBelow are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.\nClangBuiltLinux ClangBuiltLinux is a collaborative organization between several engineers across different companies like Google, Linaro, and IBM to improve building the Linux kernel with the LLVM tools such as clang and lld. I have contributed various fixes to the Linux kernel and LLVM, helped triage and debug issues on the issue tracker, improved the continuous integration setups (Travis CI based and TuxSuite / GitHub Actions based), developed a QEMU and buildroot boot framework, a Docker testing environment (former and current), and a set of toolchain build scripts for myself and others to use for consistent testing/developing.\nFlash Kernel I supported the Pixel 2 (XL) [walleye/taimen], Pixel (XL) [sailfish/marlin], OnePlus 6 (enchilada), OnePlus 5/T (cheeseburger/dumpling), and Nexus 6P (angler).\nAll of my kernels focused on stability/security by merging in the stable updates from kernel.org, any relevant updates from Qualcomm, and building with newer compilers to fix warnings during compilation. Below are the highlights for each kernel.\nPixel 2 (XL): First to merge in linux-stable and build with up to date versions of Clang. Added EAS 1.5 from kernel/common.\nPixel (XL): First standalone custom kernel to be compiled properly with Clang, fixing the vast majority of warnings.\nOnePlus 6: I recieved this device as part of OnePlus’s developer program. I was the first to merge in linux-stable and the updates from Code Aurora Forum, build with Clang, and port over the 32-bit vDSO for arm64 from the Pixel 2 kernels (initially created on a 4.4 base).\nMiscellaneous open source contributions android-linux-stable: Several Android kernel trees with the latest stable tags from kernel.org merged into them, along with conflict resolution notes and a how-to process for other developers and information for users to understand the process. Testing includes merging into my own Flash Kernel repositories linked above and building with all of the relevant defconfigs/compilers. I report results back to the stable tree maintainers, receiving praise for my efforts on a couple occasions (one and two). I streamlined the maintenance of these repos into a script.\nandroid-kernel-clang: Collected the core Clang patchset for Android kernels from the Pixel 2 and Chromium kernel repositories, supplementing them with fixes for warnings from out of tree code.\nAnyKernel3: A kernel flashing utility for TWRP, responsible for unpacking the boot image, applying any requested ramdisk changes, repacking the files, and flashing them to the boot image partition.\nkernel/common: Google’s common Android kernel.\nsonyxperiadev/kernel: The Linux kernel used for Sony’s Open Devices program.\nMiscellaneous interesting personal repos My environment: The scripts and tools I use for my workflow and personal configuration files, focusing on increasing productivity by decreasing manual intervention needed to doing repetitive tasks.\nWSL2-Linux-Kernel: My personal kernel for Windows Subsystem for Linux 2.\n",
   "wordCount" : "525",
   "inLanguage": "en",
   "datePublished": "2022-04-29T10:15:00-07:00",
@@ -220,8 +218,7 @@ Below are links to some of my open source contributions. If you have any questio
     </details>
 </div>
 
-  <div class="post-content"><p><img loading="lazy" src="/profile.jpg" alt=""  />
-</p>
+  <div class="post-content"><p><img loading="lazy" src="/profile.jpg"></p>
 <p>I am a Linux kernel and LLVM hacker, currently employed as an independent contractor through <a href="https://www.linuxfoundation.org">The Linux Foundation</a> to maintain <a href="https://clangbuiltlinux.github.io/">ClangBuiltLinux</a>. I am interested in performance analysis, compilers, security, and operating systems. I completed my Bachelor of Science in Information Technology at <a href="https://gcu.edu/">Grand Canyon University</a> in 2022.</p>
 <p>Below are links to some of my open source contributions. If you have any questions about them, feel free to reach out to me with the links on the home page.</p>
 <h2 id="clangbuiltlinux">ClangBuiltLinux<a hidden class="anchor" aria-hidden="true" href="#clangbuiltlinux">#</a></h2>

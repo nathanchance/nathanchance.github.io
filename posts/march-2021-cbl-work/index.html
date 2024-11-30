@@ -14,7 +14,7 @@ Linux kernel patches
 powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/march-2021-cbl-work/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -59,24 +59,27 @@ powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched o
         }
 
     </style>
-</noscript><meta property="og:title" content="March 2021 ClangBuiltLinux Work" />
-<meta property="og:description" content="Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
-Linux kernel patches
-
-
-powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://nathanchance.dev/posts/march-2021-cbl-work/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-04-01T10:25:53-07:00" />
-<meta property="article:modified_time" content="2021-04-01T10:25:53-07:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="March 2021 ClangBuiltLinux Work"/>
+</noscript><meta property="og:url" content="https://nathanchance.dev/posts/march-2021-cbl-work/">
+  <meta property="og:site_name" content="Nathan Chancellor">
+  <meta property="og:title" content="March 2021 ClangBuiltLinux Work">
+  <meta property="og:description" content="Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
+Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2021-04-01T10:25:53-07:00">
+    <meta property="article:modified_time" content="2021-04-01T10:25:53-07:00">
+    <meta property="article:tag" content="Clangbuiltlinux">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Linuxfoundation">
+    <meta property="article:tag" content="Maintainer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="March 2021 ClangBuiltLinux Work">
 <meta name="twitter:description" content="Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
 Linux kernel patches
 
 
-powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught."/>
+powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught.">
 
 
 <script type="application/ld+json">
