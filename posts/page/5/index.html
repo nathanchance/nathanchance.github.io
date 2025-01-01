@@ -154,6 +154,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">January 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Stable patches: The stable trees are the trees that most users consume so keeping them building and as warning and issue free as reasonable is important.
+[PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.9 0/5] Fix booting arm64 big endian with QEMU 5.0.0&#43; (v1) [PATCH 4.4,4.9] power: reset: ltc2952: Fix use of floating point literals (v1) Patches for clang and CONFIG_WERROR (arm64/x86_64) -Wpointer-bool-conversion: This warning is usually harmless, as it is typically just a developer checking if an array in the middle of a structure is NULL, which is not possible if the structure is not NULL, which would likely cause issues further up a call chain. In this one case, the fix was just to remove the check.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-01-31 00:18:00 -0700 MST'>January 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to January 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/january-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">December 2021 ClangBuiltLinux Work
     </h2>
   </header>
@@ -276,20 +291,6 @@ Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe
   </div>
   <footer class="entry-footer"><span title='2021-06-01 08:29:00 -0700 MST'>June 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to May 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">April 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Another month down! Feels like I just wrote the March 2021 post… but I suppose that is what happens when your project moves super quickly :)
-Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen’s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-04-30 21:14:13 -0700 MST'>April 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to April 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2021-cbl-work/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
