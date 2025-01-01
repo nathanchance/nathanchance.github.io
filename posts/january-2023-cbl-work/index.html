@@ -255,7 +255,7 @@ Miscellaneous fixes: These are fixes and improvements that don&rsquo;t fit into 
 <li>
 <p>Downstream fixes: These are fixes and improvements that occur in a downstream Linux tree, such as Android or ChromeOS, which our continuous integration regularly tests.</p>
 <ul>
-<li><a href="https://android-review.googlesource.com/c/kernel/common/+/2395938"><code>ANDROID: fuse: Restore upstream type of bitfields in fuse_args</code></a></li>
+<li><a href="https://android-review.googlesource.com/c/kernel/common/&#43;/2395938"><code>ANDROID: fuse: Restore upstream type of bitfields in fuse_args</code></a></li>
 </ul>
 </li>
 <li>
@@ -276,7 +276,7 @@ Miscellaneous fixes: These are fixes and improvements that don&rsquo;t fit into 
 <p>Stable backports: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.</p>
 <ul>
 <li><code>drm/i915: Fix CFI violations in gt_sysfs</code> (<a href="https://lore.kernel.org/20230116033551.191731-1-nathan@kernel.org/"><code>v1</code></a>)</li>
-<li><code>offsetof() backports for clang-16+</code> (<a href="https://lore.kernel.org/Y8TWrJpb6Vn6E4+v@dev-arch.thelio-3990X/"><code>v1</code></a>)</li>
+<li><code>offsetof() backports for clang-16+</code> (<a href="https://lore.kernel.org/Y8TWrJpb6Vn6E4&#43;v@dev-arch.thelio-3990X/"><code>v1</code></a>)</li>
 </ul>
 </li>
 </ul>
@@ -291,7 +291,7 @@ Miscellaneous fixes: These are fixes and improvements that don&rsquo;t fit into 
 <li><a href="https://lore.kernel.org/Y7XSWdLZqwEXWXml@dev-arch.thelio-3990X/"><code>Re: [RFC PATCH tip] rseq: Fix: Increase AT_VECTOR_SIZE_BASE to match rseq auxvec entries</code></a></li>
 <li><a href="https://lore.kernel.org/Y7hHRYUk6NypdZxT@dev-arch.thelio-3990X/"><code>Re: [PATCH] crypto: hisilicon: Wipe entire pool on error</code></a></li>
 <li><a href="https://lore.kernel.org/Y7xKnFsDd5Vlqt4I@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] kbuild: rust: remove -v option of scripts/rust_is_available.sh</code></a></li>
-<li><a href="https://lore.kernel.org/Y7xPcBTZin7H+KFe@dev-arch.thelio-3990X/"><code>Re: [PATCH v3] kbuild: export top-level LDFLAGS_vmlinux only to scripts/Makefile.vmlinux</code></a></li>
+<li><a href="https://lore.kernel.org/Y7xPcBTZin7H&#43;KFe@dev-arch.thelio-3990X/"><code>Re: [PATCH v3] kbuild: export top-level LDFLAGS_vmlinux only to scripts/Makefile.vmlinux</code></a></li>
 <li><a href="https://lore.kernel.org/Y7xTf1SEPTXiCoPM@dev-arch.thelio-3990X/"><code>Re: [PATCH] efi: tpm: Avoid READ_ONCE() for accessing the event log</code></a></li>
 <li><a href="https://lore.kernel.org/Y7xT6zNmjtOlDKQX@dev-arch.thelio-3990X/"><code>Re: [PATCH] arm64: Fix build with CC=clang, CONFIG_FTRACE=y and CONFIG_STACK_TRACER=y</code></a></li>
 <li><a href="https://reviews.llvm.org/D139114#4053166"><code>[Clang][Sema] Enabled implicit conversion warning for CompoundAssignment operator.</code></a></li>
@@ -308,19 +308,19 @@ Miscellaneous fixes: These are fixes and improvements that don&rsquo;t fit into 
 <li><a href="https://lore.kernel.org/Y7Jal56f6UBh1abE@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] arch: fix broken BuildID for arm64 and riscv</code></a></li>
 <li><a href="https://lore.kernel.org/Y7XJKZhuU9VJZQ11@dev-arch.thelio-3990X/"><code>Re: [PATCH 02/30] rseq: Introduce feature size and alignment ELF auxiliary vector entries</code></a></li>
 <li><a href="https://lore.kernel.org/Y7cRJ8xh%2FLLT9kk0@dev-arch.thelio-3990X/"><code>Re: next: clang-15: s390x-linux-gnu-ld: BFD (GNU Binutils for Debian) 2.35.2 assertion fail ../../bfd/elf64-s390.c:3349</code></a></li>
-<li><a href="https://lore.kernel.org/Y7cWb2aP1+wAWR8N@dev-arch.thelio-3990X/"><code>Re: [PATCH 4/8] migrate_pages: split unmap_and_move() to _unmap() and _move()</code></a></li>
+<li><a href="https://lore.kernel.org/Y7cWb2aP1&#43;wAWR8N@dev-arch.thelio-3990X/"><code>Re: [PATCH 4/8] migrate_pages: split unmap_and_move() to _unmap() and _move()</code></a></li>
 <li><a href="https://github.com/ClangBuiltLinux/linux/issues/1780"><code>-Wattribute-warning in drivers/crypto/hisilicon/sgl.c</code></a></li>
 <li><a href="https://github.com/ClangBuiltLinux/linux/issues/1781"><code>-Wattribute-warning in drivers/net/ethernet/mellanox/mlxsw/spectrum_acl_bloom_filter.c</code></a></li>
 <li><a href="https://github.com/ClangBuiltLinux/linux/issues/1782"><code>&quot;Synchronous Exception at...&quot; when booting arm64 kernel built with CONFIG_LTO_CLANG_THIN=y</code></a></li>
-<li><a href="https://lore.kernel.org/Y7i8+EjwdnhHtlrr@dev-arch.thelio-3990X/"><code>nm vmlinux error in arch/arm reappears after upgrade to make 4.4</code></a></li>
-<li><a href="https://lore.kernel.org/Y73PAtm6FPuT+1cM@dev-arch.thelio-3990X/"><code>Re: [PATCH v3 2/2] arm64: efi: Account for the EFI runtime stack in stack unwinder</code></a></li>
+<li><a href="https://lore.kernel.org/Y7i8&#43;EjwdnhHtlrr@dev-arch.thelio-3990X/"><code>nm vmlinux error in arch/arm reappears after upgrade to make 4.4</code></a></li>
+<li><a href="https://lore.kernel.org/Y73PAtm6FPuT&#43;1cM@dev-arch.thelio-3990X/"><code>Re: [PATCH v3 2/2] arm64: efi: Account for the EFI runtime stack in stack unwinder</code></a></li>
 <li><a href="https://github.com/ClangBuiltLinux/linux/issues/1791"><code>error: cannot be defined in '__builtin_offsetof' (Kernel 6.1.5)</code></a></li>
 <li><a href="https://lore.kernel.org/Y8gccXXyE30sbPSg@dev-arch.thelio-3990X/"><code>Re: [PATCH 4.14 230/338] wifi: brcmfmac: Fix potential shift-out-of-bounds in brcmf_fw_alloc_request()</code></a></li>
 <li><a href="https://github.com/ClangBuiltLinux/linux/issues/1761"><code>clang 15 fails ppc64 BE kernel build - ld.lld: error: undefined symbol: .early_setup (kernel 6.1-rc5, powerpc64-gentoo-linux-musl)</code></a></li>
 <li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/issues/503"><code>Missing cfi_ignorelist.txt in tuxmake images</code></a></li>
 <li><a href="https://lore.kernel.org/Y88BmxzRqtnpAsWG@dev-arch.thelio-3990X/"><code>Re: [PATCH 5/6] hw/mips/gt64xxx_pci: Endian-swap using PCI_HOST_BRIDGE MemoryRegionOps</code></a></li>
 <li><a href="https://lore.kernel.org/Y9FZsBEu8hSVVIA8@dev-arch.thelio-3990X/"><code>Re: [PATCH v7 4/6] arm64: head: avoid cache invalidation when entering with the MMU on</code></a></li>
-<li><a href="https://lore.kernel.org/Y9lN+H3ModGwwKV6@dev-arch.thelio-3990X/"><code>Re: [PATCH v4 2/2] tools/resolve_btfids: Alter how HOSTCC is forced</code></a></li>
+<li><a href="https://lore.kernel.org/Y9lN&#43;H3ModGwwKV6@dev-arch.thelio-3990X/"><code>Re: [PATCH v4 2/2] tools/resolve_btfids: Alter how HOSTCC is forced</code></a></li>
 </ul>
 <h2 id="tooling-improvements">Tooling improvements<a hidden class="anchor" aria-hidden="true" href="#tooling-improvements">#</a></h2>
 <p>These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as <a href="https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/">AOSP&rsquo;s distribution of LLVM</a> and <a href="https://tuxmake.org">TuxMake</a>.</p>

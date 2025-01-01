@@ -4,7 +4,7 @@
     <title>Clangbuiltlinux on Nathan Chancellor</title>
     <link>https://nathanchance.dev/tags/clangbuiltlinux/</link>
     <description>Recent content in Clangbuiltlinux on Nathan Chancellor</description>
-    <generator>Hugo -- 0.139.3</generator>
+    <generator>Hugo -- 0.140.2</generator>
     <language>en</language>
     <lastBuildDate>Tue, 31 Dec 2024 17:30:00 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/tags/clangbuiltlinux/index.xml" rel="self" type="application/rss+xml" />
@@ -41,7 +41,7 @@
 &lt;li&gt;
 &lt;p&gt;Downstream fixes: These are fixes and improvements that occur in a downstream Linux tree, such as Android or ChromeOS, which our continuous integration regularly tests.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/+/3311875&#34;&gt;&lt;code&gt;ANDROID: GKI: Put vendor_data_pad behind CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/&amp;#43;/3311875&#34;&gt;&lt;code&gt;ANDROID: GKI: Put vendor_data_pad behind CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -305,7 +305,7 @@
 &lt;li&gt;
 &lt;p&gt;Downstream fixes: These are fixes and improvements that occur in a downstream Linux tree, such as Android or ChromeOS, which our continuous integration regularly tests.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/+/2395938&#34;&gt;&lt;code&gt;ANDROID: fuse: Restore upstream type of bitfields in fuse_args&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/&amp;#43;/2395938&#34;&gt;&lt;code&gt;ANDROID: fuse: Restore upstream type of bitfields in fuse_args&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -481,7 +481,7 @@
 &lt;li&gt;&lt;code&gt;[PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40&lt;/code&gt; (&lt;a href=&#34;https://lore.kernel.org/r/20220103192935.3438038-1-nathan@kernel.org/&#34;&gt;&lt;code&gt;v1&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;[PATCH RFC 4.9 0/5] Fix booting arm64 big endian with QEMU 5.0.0+&lt;/code&gt; (&lt;a href=&#34;https://lore.kernel.org/r/20220107194335.3090066-1-nathan@kernel.org/&#34;&gt;&lt;code&gt;v1&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;[PATCH 4.4,4.9] power: reset: ltc2952: Fix use of floating point literals&lt;/code&gt; (&lt;a href=&#34;https://lore.kernel.org/r/20220109185902.1097931-1-nathan@kernel.org/&#34;&gt;&lt;code&gt;v1&lt;/code&gt;&lt;/a&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://lore.kernel.org/r/YeCpzLnfA+g+u3Id@archlinux-ax161/&#34;&gt;&lt;code&gt;Patches for clang and CONFIG_WERROR (arm64/x86_64)&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://lore.kernel.org/r/YeCpzLnfA&amp;#43;g&amp;#43;u3Id@archlinux-ax161/&#34;&gt;&lt;code&gt;Patches for clang and CONFIG_WERROR (arm64/x86_64)&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -499,10 +499,10 @@
 &lt;p&gt;Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/+/1907758&#34;&gt;&lt;code&gt;Revert &amp;quot;ANDROID: disable INFINIBAND_QIB from allmodconfig build&amp;quot;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/&amp;#43;/1907758&#34;&gt;&lt;code&gt;Revert &amp;quot;ANDROID: disable INFINIBAND_QIB from allmodconfig build&amp;quot;&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/+/1907759&#34;&gt;&lt;code&gt;ANDROID: allmodconfig: Re-enable TEST_KMOD&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/&amp;#43;/1907759&#34;&gt;&lt;code&gt;ANDROID: allmodconfig: Re-enable TEST_KMOD&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>November 2021 ClangBuiltLinux Work</title>
@@ -576,7 +576,7 @@
       <description>&lt;h2 id=&#34;linux-kernel-patches&#34;&gt;Linux kernel patches&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/+/1725551&#34;&gt;&lt;code&gt;ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS&lt;/code&gt;&lt;/a&gt;: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://android-review.googlesource.com/c/kernel/common/&amp;#43;/1725551&#34;&gt;&lt;code&gt;ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS&lt;/code&gt;&lt;/a&gt;: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://lore.kernel.org/r/20210603165612.2088040-1-nathan@kernel.org/&#34;&gt;&lt;code&gt;[PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void&lt;/code&gt;&lt;/a&gt;: &lt;code&gt;clang&lt;/code&gt; implemented GCC&amp;rsquo;s &lt;code&gt;-Wunused-but-set-variable&lt;/code&gt; and this instance was found by Intel&amp;rsquo;s kernel test robot. Rather simple fix but it is important to fix warnings as they crop up so that the build stays as clean as possible so that the real issues are easily visible.&lt;/p&gt;</description>

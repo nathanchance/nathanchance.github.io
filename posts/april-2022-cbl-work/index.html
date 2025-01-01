@@ -248,13 +248,13 @@ Build failures: These are patches to fix various build errors that I found throu
 <li>
 <p>Downstream patches: Downstream consumers of our work are not always paying attention to the changes that we land every release so it is important to give them a little help. In this case, we had to disable <code>CONFIG_FORTIFY_SOURCE</code> for clang upstream since it was broken, which impacted Android. As this is an important security feature, it is important that it gets re-enabled once it is fixed, which is what the following change does.</p>
 <ul>
-<li><a href="https://android-review.googlesource.com/c/kernel/common/+/2063388"><code>Revert &quot;ANDROID: GKI: CONFIG_FORTIFY is broken in clang, so it has been disabled&quot;</code></a></li>
+<li><a href="https://android-review.googlesource.com/c/kernel/common/&#43;/2063388"><code>Revert &quot;ANDROID: GKI: CONFIG_FORTIFY is broken in clang, so it has been disabled&quot;</code></a></li>
 </ul>
 </li>
 <li>
 <p>Stable backports and patches: These are patches It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.</p>
 <ul>
-<li><code>Backport of 4013e26670c5 and 60210a3d86dc for 4.9 to 5.10</code> (<a href="https://lore.kernel.org/Ykytcg+xI%2FMRSLue@dev-arch.thelio-3990X/"><code>v1</code></a>)</li>
+<li><code>Backport of 4013e26670c5 and 60210a3d86dc for 4.9 to 5.10</code> (<a href="https://lore.kernel.org/Ykytcg&#43;xI%2FMRSLue@dev-arch.thelio-3990X/"><code>v1</code></a>)</li>
 <li><code>Fix two instances of -Wstrict-prototypes in drm/amd</code> (<a href="https://lore.kernel.org/20220411164308.2491139-1-nathan@kernel.org/"><code>v1</code></a>)</li>
 <li><a href="https://lore.kernel.org/YliEOSL8z3%2Fs7DGG@dev-arch.thelio-3990X/"><code>btrfs warning fixes for 5.15 and 5.17</code></a></li>
 <li><a href="https://lore.kernel.org/Yl8pNxSGUgeHZ1FT@dev-arch.thelio-3990X/"><code>Apply d799769188529abc6cbf035a10087a51f7832b6b to 5.17 and 5.15?</code></a></li>
@@ -286,7 +286,7 @@ Build failures: These are patches to fix various build errors that I found throu
 <p><a href="https://lore.kernel.org/Yk8nAnDcnPF5rC7N@dev-arch.thelio-3990X/"><code>Re: [PATCH] rtw89: ser: add a break statement</code></a></p>
 </li>
 <li>
-<p><a href="https://lore.kernel.org/Yk8nV1kBngon+o6N@dev-arch.thelio-3990X/"><code>Re: [PATCH] MAINTAINERS: add self as clang reviewer</code></a></p>
+<p><a href="https://lore.kernel.org/Yk8nV1kBngon&#43;o6N@dev-arch.thelio-3990X/"><code>Re: [PATCH] MAINTAINERS: add self as clang reviewer</code></a></p>
 </li>
 <li>
 <p><a href="https://lore.kernel.org/Yk90X7v8hIgmX5Q5@dev-arch.thelio-3990X/"><code>Re: [PATCH] drm/amd/display: fix 64 bit divide in freesync code</code></a></p>
@@ -298,7 +298,7 @@ Build failures: These are patches to fix various build errors that I found throu
 <p><a href="https://lore.kernel.org/YlRNmXucZwNasoFq@thelio-3990X/"><code>Re: [PATCH] ipc/sem: Remove redundant assignments</code></a></p>
 </li>
 <li>
-<p><a href="https://lore.kernel.org/YlXyM7e+Bkqa3HCZ@dev-arch.thelio-3990X/"><code>Re: [PATCH] usb: typec: tipd: improve handling of failures in interrupt handlers</code></a></p>
+<p><a href="https://lore.kernel.org/YlXyM7e&#43;Bkqa3HCZ@dev-arch.thelio-3990X/"><code>Re: [PATCH] usb: typec: tipd: improve handling of failures in interrupt handlers</code></a></p>
 </li>
 <li>
 <p><a href="https://lore.kernel.org/YlXztpgTxmn29KF3@dev-arch.thelio-3990X/"><code>Re: [PATCH] init/Kconfig: Remove USELIB syscall by default</code></a></p>
