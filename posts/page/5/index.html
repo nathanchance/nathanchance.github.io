@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - Nathan Chancellor">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d6fcd20a4fb86efa4dfac8ec95da60244cc8871042183da1ef28e3a762ad79c8.css" integrity="sha256-1vzSCk&#43;4bvpN&#43;sjsldpgJEzIhxBCGD2h7yjjp2Ktecg=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -154,6 +154,21 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">February 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Miscellaneous improvements: These are series or patches that do not really fit into any of the other categories I typically use with my reports.
+Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here). It is still good to get it corrected, as the enums might not stay in sync.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-02-28 00:17:30 -0700 MST'>February 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to February 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">January 2022 ClangBuiltLinux Work
     </h2>
   </header>
@@ -278,20 +293,6 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
   <footer class="entry-footer"><span title='2021-07-01 13:48:16 -0700 MST'>July 1, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to June 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/june-2021-cbl-work/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">May 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>This month felt longer than others but I feel like that was because I was a lot more spread out in the work that I was doing. Let’s dive in, shall we?
-Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe_unused&#39; in proc_fb_seq_ops: A common mistake people make is splitting “struct ” with an attribute, in this case “__maybe_unused”, which clang warns about while GCC does not. This causes a warning in all of our builds. Unfortunately, this patch did not actually make it into mainline because Linus fixed it himself.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-06-01 08:29:00 -0700 MST'>June 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to May 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2021-cbl-work/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://nathanchance.dev/posts/page/4/">
@@ -304,7 +305,7 @@ Linux kernel patches / backports [PATCH] fbmem: Correct position of &#39;__maybe
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span> · 
+        <span>&copy; 2025 <a href="https://nathanchance.dev/">Nathan Chancellor</a></span> · 
 
     <span>
         Powered by
