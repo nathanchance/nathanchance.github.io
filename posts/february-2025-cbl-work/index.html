@@ -5,18 +5,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>January 2025 ClangBuiltLinux Work | Nathan Chancellor</title>
+<title>February 2025 ClangBuiltLinux Work | Nathan Chancellor</title>
 <meta name="keywords" content="clangbuiltlinux, linux, linuxfoundation, maintainer">
 <meta name="description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches
 
 
-Miscellaneous fixes and improvements: These are fixes and improvements that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux.
-
-
-GCC 15 fixes: While it may seem like these are not important for a Clang project, the problem resolved by the changes could impact Clang should the developers decide to change the default C standard dialect to C23 like GCC did.">
+Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)">
 <meta name="author" content="Nathan Chancellor">
-<link rel="canonical" href="https://nathanchance.dev/posts/january-2025-cbl-work/">
+<link rel="canonical" href="https://nathanchance.dev/posts/february-2025-cbl-work/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
@@ -25,7 +22,7 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
 <link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://nathanchance.dev/posts/january-2025-cbl-work/">
+<link rel="alternate" hreflang="en" href="https://nathanchance.dev/posts/february-2025-cbl-work/">
 <noscript>
     <style>
         #theme-toggle,
@@ -62,31 +59,27 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
         }
 
     </style>
-</noscript><meta property="og:url" content="https://nathanchance.dev/posts/january-2025-cbl-work/">
+</noscript><meta property="og:url" content="https://nathanchance.dev/posts/february-2025-cbl-work/">
   <meta property="og:site_name" content="Nathan Chancellor">
-  <meta property="og:title" content="January 2025 ClangBuiltLinux Work">
+  <meta property="og:title" content="February 2025 ClangBuiltLinux Work">
   <meta property="og:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Miscellaneous fixes and improvements: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.
-GCC 15 fixes: While it may seem like these are not important for a Clang project, the problem resolved by the changes could impact Clang should the developers decide to change the default C standard dialect to C23 like GCC did.">
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-01-31T17:30:00-07:00">
-    <meta property="article:modified_time" content="2025-01-31T17:30:00-07:00">
+    <meta property="article:published_time" content="2025-02-28T17:30:00-07:00">
+    <meta property="article:modified_time" content="2025-02-28T17:30:00-07:00">
     <meta property="article:tag" content="Clangbuiltlinux">
     <meta property="article:tag" content="Linux">
     <meta property="article:tag" content="Linuxfoundation">
     <meta property="article:tag" content="Maintainer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="January 2025 ClangBuiltLinux Work">
+<meta name="twitter:title" content="February 2025 ClangBuiltLinux Work">
 <meta name="twitter:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
 Linux kernel patches
 
 
-Miscellaneous fixes and improvements: These are fixes and improvements that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux.
-
-
-GCC 15 fixes: While it may seem like these are not important for a Clang project, the problem resolved by the changes could impact Clang should the developers decide to change the default C standard dialect to C23 like GCC did.">
+Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)">
 
 
 <script type="application/ld+json">
@@ -103,8 +96,8 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "January 2025 ClangBuiltLinux Work",
-      "item": "https://nathanchance.dev/posts/january-2025-cbl-work/"
+      "name": "February 2025 ClangBuiltLinux Work",
+      "item": "https://nathanchance.dev/posts/february-2025-cbl-work/"
     }
   ]
 }
@@ -113,24 +106,24 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "January 2025 ClangBuiltLinux Work",
-  "name": "January 2025 ClangBuiltLinux Work",
-  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Miscellaneous fixes and improvements: These are fixes and improvements that don\u0026rsquo;t fit into a particular category but are important to ClangBuiltLinux.\nGCC 15 fixes: While it may seem like these are not important for a Clang project, the problem resolved by the changes could impact Clang should the developers decide to change the default C standard dialect to C23 like GCC did.\n",
+  "headline": "February 2025 ClangBuiltLinux Work",
+  "name": "February 2025 ClangBuiltLinux Work",
+  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)\n",
   "keywords": [
     "clangbuiltlinux", "linux", "linuxfoundation", "maintainer"
   ],
-  "articleBody": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Miscellaneous fixes and improvements: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.\nGCC 15 fixes: While it may seem like these are not important for a Clang project, the problem resolved by the changes could impact Clang should the developers decide to change the default C standard dialect to C23 like GCC did.\nA couple of build fixes for x86 when using GCC 15 (v1) s390: Add '-std=gnu11' to decompressor and purgatory CFLAGS (v1) Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures. Maybe these should be in the build failures section…\nspi: amd: Fix -Wuninitialized in amd_spi_exec_mem_op() (v1) x86/asm: Always inline serialize() (v1) tracing: Fix -Wundef around 'struct event_mod_load' (v1) f2fs: Fix format specifier in sanity_check_inode() (v1) apparmor: Fix checking address of an array in accum_label_info() (v1) apparmor: Remove unused variable 'sock' in __file_sock_perm() (v1) ALSA: hda: tas2781-spi: Fix -Wsometimes-uninitialized in tasdevice_spi_switch_book() (v1) arm64: Handle .ARM.attributes section in linker scripts (v1) drm/amd/display: Respect user's CONFIG_FRAME_WARN more for dml files (v1) scripts/Makefile.extrawarn: Do not show clang's non-kprintf warnings at W=1 (v1) Patch review and input For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.\nReviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.\nRe: [PATCH] x86/sev: Disable UBSAN on SEV code that may execute very early Re: [PATCH] kbuild: pacman-pkg: provide versioned linux-api-headers package Re: [PATCH v3 1/2] objtool: Add --Werror Re: [PATCH] drm/amd/display: mark static functions noinline_for_stack Re: [PATCH v1] selftests: Handle old glibc without execveat(2) Re: [PATCH] include/linux: Adjust headers for C23 Re: [PATCH] kbuild: Use -fzero-init-padding-bits=all Re: [PATCH v3 0/2] objtool: Add option to fail build on vmlinux warnings Re: [PATCH] kbuild: Use --strip-unneeded with INSTALL_MOD_STRIP Issue triage, input, and reporting The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.\nRe: \"Bad or missing .orc_unwind table. Disabling unwinder.\" Clang 19 problem? 6.12.8 problem? Re: [PATCH v23 7/8] samples/check-exec: Add an enlighten \"inc\" interpreter and 28 tests Re: [sysctl:sysctl-testing 8/16] mm/nommu.c:394:12: error: static declaration of 'sysctl_nr_trim_pages' follows non-static declaration [clang] Clang fails to recognize an integral constant expression accepted by GCC Re: [PATCH v6 0/4] Add Microchip IPC mailbox Re: [linux-next:master 9185/10024] drivers/pmdomain/mediatek/airoha-cpu-pmdomain.c:59:2: error: write to reserved register 'R7' Re: [morimoto:sound-cleanup-2025-01-16-2 7/23] sound/soc/generic/audio-graph-card2.c:1013:4: error: cannot jump from this goto statement to its label Re: [PATCH v3] acpi: Fix HED module initialization order when it is built-in [Clang][counted_by] Refactor __builtin_dynamic_object_size on FAMs Tooling improvements These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as AOSP’s distribution of LLVM and TuxMake.\nAdd a step to check if patches apply before invoking TuxSuite generator: Run 'apt-get update' before 'apt-get install' Update stable anchor to 6.13 and add 6.12 scripts/check-patches-apply.py: Fix strip value for refs with a slash Disable ARM configs with BPF enabled in -next with clang-13 patches: Remove stable (January 22, 2025) Apply .ARM.attributes patch to fix orphan section errors Update DEFAULT_KERNEL_FOR_PGO to 6.13.0 and bump known good revision ci.sh: Update to release/20.x Update LLVM_TOT_VERSION and corresponding clang-nightly files tc_build: llvm: Move compiler-rt to LLVM_ENABLE_RUNTIMES Behind the scenes Every day that there is a new linux-next release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 4, a Raspberry Pi 3, a SolidRun Honeycomb LX2, an Ampere Altra Developer Platform, two Intel-based desktops, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.\nI continue to upload prebuilt, fast versions of LLVM for kernel developers and our continuous integration to use.\n19.1.7 Special thanks Special thanks to Google and the Linux Foundation for sponsoring my work.\n",
-  "wordCount" : "857",
+  "articleBody": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)\nx86/build: Raise the minimum LLVM version to 15.0.0 (v1) Miscellaneous fixes and improvements: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.\nACPI: platform-profile: Fix CFI violation when accessing sysfs files (v3) Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures. Maybe these should be in the build failures section…\narm64: Handle .ARM.attributes section in linker scripts (v2, v3) Patch review and input For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.\nReviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.\nRe: [PATCH 1/1] alloc_tag: work around clang-14 issue with __builtin_object_size() Re: [PATCH] kbuild: remove EXTRA_*FLAGS support Re: [PATCH] gen_compile_commands.py: remove code for '\\#' replacement Re: [PATCH 1/2] clang-format: do not allow short enums on a single line Re: [PATCH 2/2] clang-format: align consecutive macros Re: [PATCH 1/2] kbuild: userprogs: fix bitsize and target detection on clang Re: [PATCH 2/2] kbuild: userprogs: use lld to link through clang Re: [PATCH] kbuild: move -fzero-init-padding-bits=all to the top-level Makefile Re: [PATCH v2] kbuild: userprogs: use correct lld when linking through clang Boot failure with ppc64_guest_defconfig after LLVM commit 7763119c6eb0976e4836f81c9876c49a36d46d73 Re: [PATCH] kbuild: hdrcheck: fix cross build with clang Re: [PATCH] [v2] kbuild: hdrcheck: fix cross build with clang Re: [for-next][PATCH 4/6] scripts/sorttable: Zero out weak functions in mcount_loc table Re: [PATCH] kbuild: deb-pkg: add debarch for ARCH=loongarch64 Issue triage, input, and reporting The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.\nRe: FAIL: Test report for for-kernelci (6.14.0-rc1, upstream-arm-next, 2014c95a) Re: [PATCH 3/5] lib/crc32: standardize on crc32c() name for Castagnoli CRC32 [PowerPC] Deprecate uses of ISD::ADDC/ISD::ADDE/ISD::SUBC/ISD::SUBE clang-19 built kernel fails several stackinit_kunit tests w. \"ASSERTION FAILED at lib/stackinit_kunit.c\" vs. same kernel built with gcc-14 passes tests (v6.14-rc3, x86_32) Boot failure with ppc64_guest_defconfig after LLVM commit 7763119c6eb0976e4836f81c9876c49a36d46d73 Re: [PATCH 4/5] btrfs: prepare extent_io.c for future larger folio support Tooling improvements These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as AOSP’s distribution of LLVM and TuxMake.\nUpdate patches (February 4, 2025) Move llvm_latest to 20 tc_build: llvm: Use runtimes build for LLVM 20 and newer Update patches for acceptance of arm64 .ARM.attributes linker script update patches: mainline: Remove ca0f4fe7cf7183bfbdc67ca2de56ae1fc3a8db2 patches: Drop arm64 due to 6.13-rc3 update Drop x86 builds with LLVM 13 and 14 on -next and tip Behind the scenes Every day that there is a new linux-next release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 4, a Raspberry Pi 3, a SolidRun Honeycomb LX2, an Ampere Altra Developer Platform, two Intel-based desktops, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.\nI continue to upload prebuilt, fast versions of LLVM for kernel developers and our continuous integration to use.\n20.1.0-rc1 20.1.0-rc2 20.1.0-rc3 I continue to work on triaging our current list of objtool warnings due to the upcoming CONFIG_OBJTOOL_WERROR. It is slow going because each warning requires individual analysis, even if they have the same text, and it requires understanding the source code and disassembly enough to try and figure out what optimization LLVM did to introduce the warning.\nSpecial thanks Special thanks to Google and the Linux Foundation for sponsoring my work.\n",
+  "wordCount" : "833",
   "inLanguage": "en",
-  "datePublished": "2025-01-31T17:30:00-07:00",
-  "dateModified": "2025-01-31T17:30:00-07:00",
+  "datePublished": "2025-02-28T17:30:00-07:00",
+  "dateModified": "2025-02-28T17:30:00-07:00",
   "author":{
     "@type": "Person",
     "name": "Nathan Chancellor"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://nathanchance.dev/posts/january-2025-cbl-work/"
+    "@id": "https://nathanchance.dev/posts/february-2025-cbl-work/"
   },
   "publisher": {
     "@type": "Organization",
@@ -213,9 +206,9 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      January 2025 ClangBuiltLinux Work
+      February 2025 ClangBuiltLinux Work
     </h1>
-    <div class="post-meta"><span title='2025-01-31 17:30:00 -0700 MST'>January 31, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor&nbsp;|&nbsp;<a href="https://github.com/nathanchance/hugo-files/blob/main/content/posts/january-2025-cbl-work.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2025-02-28 17:30:00 -0700 MST'>February 28, 2025</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Nathan Chancellor&nbsp;|&nbsp;<a href="https://github.com/nathanchance/hugo-files/blob/main/content/posts/february-2025-cbl-work.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
   </header> <div class="toc">
@@ -247,30 +240,21 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
 <h2 id="linux-kernel-patches">Linux kernel patches<a hidden class="anchor" aria-hidden="true" href="#linux-kernel-patches">#</a></h2>
 <ul>
 <li>
-<p>Miscellaneous fixes and improvements: These are fixes and improvements that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux.</p>
+<p>Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</p>
 <ul>
-<li>
-<p>GCC 15 fixes: While it may seem like these are not important for a Clang project, the problem resolved by the changes could impact Clang should the developers decide to change the default C standard dialect to C23 like GCC did.</p>
-<ul>
-<li><code>A couple of build fixes for x86 when using GCC 15</code> (<a href="https://lore.kernel.org/20250121-x86-use-std-consistently-gcc-15-v1-0-8ab0acf645cb@kernel.org/"><code>v1</code></a>)</li>
-<li><code>s390: Add '-std=gnu11' to decompressor and purgatory CFLAGS</code> (<a href="https://lore.kernel.org/20250122-s390-fix-std-for-gcc-15-v1-1-8b00cadee083@kernel.org/"><code>v1</code></a>)</li>
+<li><code>x86/build: Raise the minimum LLVM version to 15.0.0</code> (<a href="https://lore.kernel.org/20250220-x86-bump-min-llvm-for-stackp-v1-1-ecb3c906e790@kernel.org/"><code>v1</code></a>)</li>
 </ul>
 </li>
+<li>
+<p>Miscellaneous fixes and improvements: These are fixes and improvements that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux.</p>
+<ul>
+<li><code>ACPI: platform-profile: Fix CFI violation when accessing sysfs files</code> (<a href="https://lore.kernel.org/20250210-acpi-platform_profile-fix-cfi-violation-v3-1-ed9e9901c33a@kernel.org/"><code>v3</code></a>)</li>
 </ul>
 </li>
 <li>
 <p>Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as <a href="https://lore.kernel.org/r/CAHk-=wifoM9VOp-55OZCRcO9MnqQ109UTuCiXeZ-eyX_JcNVGg@mail.gmail.com/">all developers should be using <code>CONFIG_WERROR</code></a>, which will turn these all into failures. Maybe these should be in the build failures section&hellip;</p>
 <ul>
-<li><code>spi: amd: Fix -Wuninitialized in amd_spi_exec_mem_op()</code> (<a href="https://lore.kernel.org/20250111-spi-amd-fix-uninitialized-ret-v1-1-c66ab9f6a23d@kernel.org/"><code>v1</code></a>)</li>
-<li><code>x86/asm: Always inline serialize()</code> (<a href="https://lore.kernel.org/20250116-always-inline-serialize-for-noinstr-v1-1-b7a37b2af04b@kernel.org/"><code>v1</code></a>)</li>
-<li><code>tracing: Fix -Wundef around 'struct event_mod_load'</code> (<a href="https://lore.kernel.org/20250120-trace_events-fix-wundef-v1-1-61259cbbaa75@kernel.org/"><code>v1</code></a>)</li>
-<li><code>f2fs: Fix format specifier in sanity_check_inode()</code> (<a href="https://lore.kernel.org/20250120-f2fs-fix-wformat-min_inline_xattr_size-v1-1-508cac1474fe@kernel.org/"><code>v1</code></a>)</li>
-<li><code>apparmor: Fix checking address of an array in accum_label_info()</code> (<a href="https://lore.kernel.org/20250120-apparmor-pointer-bool-conversion-label-v1-1-5957d28ffde6@kernel.org/"><code>v1</code></a>)</li>
-<li><code>apparmor: Remove unused variable 'sock' in __file_sock_perm()</code> (<a href="https://lore.kernel.org/20250120-apparmor-fix-unused-sock-__file_sock_perm-v1-1-8d17bd672c6a@kernel.org/"><code>v1</code></a>)</li>
-<li><code>ALSA: hda: tas2781-spi: Fix -Wsometimes-uninitialized in tasdevice_spi_switch_book()</code> (<a href="https://lore.kernel.org/20250120-tas2781_hda_spi-fix-wsometimes-uninitialized-v1-1-d7fd104aa63e@kernel.org/"><code>v1</code></a>)</li>
-<li><code>arm64: Handle .ARM.attributes section in linker scripts</code> (<a href="https://lore.kernel.org/20250124-arm64-handle-arm-attributes-in-linker-script-v1-1-74135b6cf349@kernel.org/"><code>v1</code></a>)</li>
-<li><code>drm/amd/display: Respect user's CONFIG_FRAME_WARN more for dml files</code> (<a href="https://lore.kernel.org/20250131-amdgpu-respect-config_frame_warn-v1-1-68255384492b@kernel.org/"><code>v1</code></a>)</li>
-<li><code>scripts/Makefile.extrawarn: Do not show clang's non-kprintf warnings at W=1</code> (<a href="https://lore.kernel.org/20250131-makefile-extrawarn-fix-clang-format-non-kprintf-v1-1-6c6747ada0d4@kernel.org/"><code>v1</code></a>)</li>
+<li><code>arm64: Handle .ARM.attributes section in linker scripts</code> (<a href="https://lore.kernel.org/20250204-arm64-handle-arm-attributes-in-linker-script-v2-1-d684097f5554@kernel.org/"><code>v2</code></a>, <a href="https://lore.kernel.org/20250206-arm64-handle-arm-attributes-in-linker-script-v3-1-d53d169913eb@kernel.org/"><code>v3</code></a>)</li>
 </ul>
 </li>
 </ul>
@@ -278,43 +262,41 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
 <p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
 <p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
 <ul>
-<li><a href="https://lore.kernel.org/20250101223008.GA2803252@ax162/"><code>Re: [PATCH] x86/sev: Disable UBSAN on SEV code that may execute very early</code></a></li>
-<li><a href="https://lore.kernel.org/20250104050513.GA1889730@ax162/"><code>Re: [PATCH] kbuild: pacman-pkg: provide versioned linux-api-headers package</code></a></li>
-<li><a href="https://lore.kernel.org/20250114172429.GA246689@ax162/"><code>Re: [PATCH v3 1/2] objtool: Add --Werror</code></a></li>
-<li><a href="https://lore.kernel.org/20250116144049.GA1810277@ax162/"><code>Re: [PATCH] drm/amd/display: mark static functions noinline_for_stack</code></a></li>
-<li><a href="https://lore.kernel.org/20250119195706.GB1824045@ax162/"><code>Re: [PATCH v1] selftests: Handle old glibc without execveat(2)</code></a></li>
-<li><a href="https://lore.kernel.org/20250120182048.GA3244701@ax162/"><code>Re: [PATCH] include/linux: Adjust headers for C23</code></a></li>
-<li><a href="https://lore.kernel.org/20250121215122.GA1517789@ax162/"><code>Re: [PATCH] kbuild: Use -fzero-init-padding-bits=all</code></a></li>
-<li><a href="https://lore.kernel.org/20250130183042.GB3394637@ax162/"><code>Re: [PATCH v3 0/2] objtool: Add option to fail build on vmlinux warnings</code></a></li>
-<li><a href="https://lore.kernel.org/20250131035245.GA47826@ax162/"><code>Re: [PATCH] kbuild: Use --strip-unneeded with INSTALL_MOD_STRIP</code></a></li>
+<li><a href="https://lore.kernel.org/20250205195735.GA1444602@ax162/"><code>Re: [PATCH 1/1] alloc_tag: work around clang-14 issue with __builtin_object_size()</code></a></li>
+<li><a href="https://lore.kernel.org/20250205203817.GA2060120@ax162/"><code>Re: [PATCH] kbuild: remove EXTRA_*FLAGS support</code></a></li>
+<li><a href="https://lore.kernel.org/20250207213439.GA661404@ax162/"><code>Re: [PATCH] gen_compile_commands.py: remove code for '\#' replacement</code></a></li>
+<li><a href="https://lore.kernel.org/20250211181319.GA2995885@ax162/"><code>Re: [PATCH 1/2] clang-format: do not allow short enums on a single line</code></a></li>
+<li><a href="https://lore.kernel.org/20250211181442.GB2995885@ax162/"><code>Re: [PATCH 2/2] clang-format: align consecutive macros</code></a></li>
+<li><a href="https://lore.kernel.org/20250213175539.GB2756218@ax162/"><code>Re: [PATCH 1/2] kbuild: userprogs: fix bitsize and target detection on clang</code></a></li>
+<li><a href="https://lore.kernel.org/20250213175437.GA2756218@ax162/"><code>Re: [PATCH 2/2] kbuild: userprogs: use lld to link through clang</code></a></li>
+<li><a href="https://lore.kernel.org/20250215203733.GA2954129@ax162/"><code>Re: [PATCH] kbuild: move -fzero-init-padding-bits=all to the top-level Makefile</code></a></li>
+<li><a href="https://lore.kernel.org/20250217185456.GA435791@ax162/"><code>Re: [PATCH v2] kbuild: userprogs: use correct lld when linking through clang</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2072#issuecomment-2669475194"><code>Boot failure with ppc64_guest_defconfig after LLVM commit 7763119c6eb0976e4836f81c9876c49a36d46d73</code></a></li>
+<li><a href="https://lore.kernel.org/20250221212603.GA3561672@ax162/"><code>Re: [PATCH] kbuild: hdrcheck: fix cross build with clang</code></a></li>
+<li><a href="https://lore.kernel.org/20250224172456.GB585841@ax162/"><code>Re: [PATCH] [v2] kbuild: hdrcheck: fix cross build with clang</code></a></li>
+<li><a href="https://lore.kernel.org/20250225180044.GA3655100@ax162/"><code>Re: [for-next][PATCH 4/6] scripts/sorttable: Zero out weak functions in mcount_loc table</code></a></li>
+<li><a href="https://lore.kernel.org/20250301042551.GA3565873@ax162/"><code>Re: [PATCH] kbuild: deb-pkg: add debarch for ARCH=loongarch64</code></a></li>
 </ul>
 <h2 id="issue-triage-input-and-reporting">Issue triage, input, and reporting<a hidden class="anchor" aria-hidden="true" href="#issue-triage-input-and-reporting">#</a></h2>
 <p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
 <ul>
-<li><a href="https://lore.kernel.org/20250114171816.GA3416405@ax162/"><code>Re: &quot;Bad or missing .orc_unwind table. Disabling unwinder.&quot; Clang 19 problem? 6.12.8 problem?</code></a></li>
-<li><a href="https://lore.kernel.org/20250114205645.GA2825031@ax162/"><code>Re: [PATCH v23 7/8] samples/check-exec: Add an enlighten &quot;inc&quot; interpreter and 28 tests</code></a></li>
-<li><a href="https://lore.kernel.org/20250115142355.GA519100@ax162/"><code>Re: [sysctl:sysctl-testing 8/16] mm/nommu.c:394:12: error: static declaration of 'sysctl_nr_trim_pages' follows non-static declaration</code></a></li>
-<li><a href="https://github.com/llvm/llvm-project/issues/122056#issuecomment-2595720610"><code>[clang] Clang fails to recognize an integral constant expression accepted by GCC</code></a></li>
-<li><a href="https://lore.kernel.org/20250120121955.GA3525889@ax162/"><code>Re: [PATCH v6 0/4] Add Microchip IPC mailbox</code></a></li>
-<li><a href="https://lore.kernel.org/20250120172802.GA955657@ax162/"><code>Re: [linux-next:master 9185/10024] drivers/pmdomain/mediatek/airoha-cpu-pmdomain.c:59:2: error: write to reserved register 'R7'</code></a></li>
-<li><a href="https://lore.kernel.org/20250122012933.GA1058871@ax162/"><code>Re: [morimoto:sound-cleanup-2025-01-16-2 7/23] sound/soc/generic/audio-graph-card2.c:1013:4: error: cannot jump from this goto statement to its label</code></a></li>
-<li><a href="https://lore.kernel.org/20250129043329.GA2344109@ax162/"><code>Re: [PATCH v3] acpi: Fix HED module initialization order when it is built-in</code></a></li>
-<li><a href="https://github.com/llvm/llvm-project/pull/122198#issuecomment-2627868702"><code>[Clang][counted_by] Refactor __builtin_dynamic_object_size on FAMs</code></a></li>
+<li><a href="https://lore.kernel.org/20250204201019.GA3095838@ax162/"><code>Re: FAIL: Test report for for-kernelci (6.14.0-rc1, upstream-arm-next, 2014c95a)</code></a></li>
+<li><a href="https://lore.kernel.org/20250207224233.GA1261167@ax162/"><code>Re: [PATCH 3/5] lib/crc32: standardize on crc32c() name for Castagnoli CRC32</code></a></li>
+<li><a href="https://github.com/llvm/llvm-project/pull/116984#issuecomment-2661045466"><code>[PowerPC] Deprecate uses of ISD::ADDC/ISD::ADDE/ISD::SUBC/ISD::SUBE</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2071#issuecomment-2667097342"><code>clang-19 built kernel fails several stackinit_kunit tests w. &quot;ASSERTION FAILED at lib/stackinit_kunit.c&quot; vs. same kernel built with gcc-14 passes tests (v6.14-rc3, x86_32)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2072"><code>Boot failure with ppc64_guest_defconfig after LLVM commit 7763119c6eb0976e4836f81c9876c49a36d46d73</code></a></li>
+<li><a href="https://lore.kernel.org/20250225184136.GA1679809@ax162/"><code>Re: [PATCH 4/5] btrfs: prepare extent_io.c for future larger folio support</code></a></li>
 </ul>
 <h2 id="tooling-improvements">Tooling improvements<a hidden class="anchor" aria-hidden="true" href="#tooling-improvements">#</a></h2>
 <p>These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as <a href="https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/">AOSP&rsquo;s distribution of LLVM</a> and <a href="https://tuxmake.org">TuxMake</a>.</p>
 <ul>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/800"><code>Add a step to check if patches apply before invoking TuxSuite</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/803"><code>generator: Run 'apt-get update' before 'apt-get install'</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/804"><code>Update stable anchor to 6.13 and add 6.12</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/806"><code>scripts/check-patches-apply.py: Fix strip value for refs with a slash</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/807"><code>Disable ARM configs with BPF enabled in -next with clang-13</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/808"><code>patches: Remove stable (January 22, 2025)</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/809"><code>Apply .ARM.attributes patch to fix orphan section errors</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/287"><code>Update DEFAULT_KERNEL_FOR_PGO to 6.13.0 and bump known good revision</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/288"><code>ci.sh: Update to release/20.x</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/810"><code>Update LLVM_TOT_VERSION and corresponding clang-nightly files</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/289"><code>tc_build: llvm: Move compiler-rt to LLVM_ENABLE_RUNTIMES</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/813"><code>Update patches (February 4, 2025)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/814"><code>Move llvm_latest to 20</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/291"><code>tc_build: llvm: Use runtimes build for LLVM 20 and newer</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/815"><code>Update patches for acceptance of arm64 .ARM.attributes linker script update</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/816"><code>patches: mainline: Remove ca0f4fe7cf7183bfbdc67ca2de56ae1fc3a8db2</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/817"><code>patches: Drop arm64 due to 6.13-rc3 update</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/818"><code>Drop x86 builds with LLVM 13 and 14 on -next and tip</code></a></li>
 </ul>
 <h2 id="behind-the-scenes">Behind the scenes<a hidden class="anchor" aria-hidden="true" href="#behind-the-scenes">#</a></h2>
 <ul>
@@ -324,8 +306,13 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
 <li>
 <p>I continue to upload prebuilt, fast versions of LLVM for kernel developers and our continuous integration to use.</p>
 <ul>
-<li><a href="https://lore.kernel.org/20250114214100.GA331869@ax162/">19.1.7</a></li>
+<li><a href="https://lore.kernel.org/20250204180013.GA3940674@ax162/">20.1.0-rc1</a></li>
+<li><a href="https://lore.kernel.org/20250212172405.GA3066861@ax162/">20.1.0-rc2</a></li>
+<li><a href="https://lore.kernel.org/20250227025319.GA3607450@ax162/">20.1.0-rc3</a></li>
 </ul>
+</li>
+<li>
+<p>I continue to work on triaging our current list of <code>objtool</code> warnings due to the upcoming <code>CONFIG_OBJTOOL_WERROR</code>. It is slow going because each warning requires individual analysis, even if they have the same text, and it requires understanding the source code and disassembly enough to try and figure out what optimization LLVM did to introduce the warning.</p>
 </li>
 </ul>
 <h2 id="special-thanks">Special thanks<a hidden class="anchor" aria-hidden="true" href="#special-thanks">#</a></h2>
@@ -342,23 +329,18 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
       <li><a href="https://nathanchance.dev/tags/maintainer/">Maintainer</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://nathanchance.dev/posts/february-2025-cbl-work/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>February 2025 ClangBuiltLinux Work</span>
-  </a>
-  <a class="next" href="https://nathanchance.dev/posts/december-2024-cbl-work/">
+  <a class="next" href="https://nathanchance.dev/posts/january-2025-cbl-work/">
     <span class="title">Next »</span>
     <br>
-    <span>December 2024 ClangBuiltLinux Work</span>
+    <span>January 2025 ClangBuiltLinux Work</span>
   </a>
 </nav>
 
 
 <ul class="share-buttons">
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share January 2025 ClangBuiltLinux Work on x"
-            href="https://x.com/intent/tweet/?text=January%202025%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f&amp;hashtags=clangbuiltlinux%2clinux%2clinuxfoundation%2cmaintainer">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share February 2025 ClangBuiltLinux Work on x"
+            href="https://x.com/intent/tweet/?text=February%202025%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f&amp;hashtags=clangbuiltlinux%2clinux%2clinuxfoundation%2cmaintainer">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -366,8 +348,8 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share January 2025 ClangBuiltLinux Work on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f&amp;title=January%202025%20ClangBuiltLinux%20Work&amp;summary=January%202025%20ClangBuiltLinux%20Work&amp;source=https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share February 2025 ClangBuiltLinux Work on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f&amp;title=February%202025%20ClangBuiltLinux%20Work&amp;summary=February%202025%20ClangBuiltLinux%20Work&amp;source=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -375,8 +357,8 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share January 2025 ClangBuiltLinux Work on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f&title=January%202025%20ClangBuiltLinux%20Work">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share February 2025 ClangBuiltLinux Work on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f&title=February%202025%20ClangBuiltLinux%20Work">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -384,8 +366,8 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share January 2025 ClangBuiltLinux Work on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share February 2025 ClangBuiltLinux Work on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
@@ -393,8 +375,8 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share January 2025 ClangBuiltLinux Work on whatsapp"
-            href="https://api.whatsapp.com/send?text=January%202025%20ClangBuiltLinux%20Work%20-%20https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share February 2025 ClangBuiltLinux Work on whatsapp"
+            href="https://api.whatsapp.com/send?text=February%202025%20ClangBuiltLinux%20Work%20-%20https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -402,8 +384,8 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share January 2025 ClangBuiltLinux Work on telegram"
-            href="https://telegram.me/share/url?text=January%202025%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share February 2025 ClangBuiltLinux Work on telegram"
+            href="https://telegram.me/share/url?text=February%202025%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -411,8 +393,8 @@ GCC 15 fixes: While it may seem like these are not important for a Clang project
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share January 2025 ClangBuiltLinux Work on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=January%202025%20ClangBuiltLinux%20Work&u=https%3a%2f%2fnathanchance.dev%2fposts%2fjanuary-2025-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share February 2025 ClangBuiltLinux Work on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=February%202025%20ClangBuiltLinux%20Work&u=https%3a%2f%2fnathanchance.dev%2fposts%2ffebruary-2025-cbl-work%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path
