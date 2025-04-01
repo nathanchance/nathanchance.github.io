@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/tags/linuxfoundation/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -84,7 +84,7 @@
         <div class="logo">
             <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -136,6 +136,20 @@
     Linuxfoundation
   </h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">March 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Another month, another post about the work that I have done as a kernel/compiler developer! One of the highlights this month is that I got LLVM commit access so I can merge my own patches into LLVM, which I did twice so far.
+Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-04-01 10:25:53 -0700 MST'>April 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to March 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2021-cbl-work/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">

@@ -10,7 +10,7 @@
 <meta name="description" content="Posts - Nathan Chancellor">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -99,7 +99,7 @@
         <div class="logo">
             <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -151,6 +151,19 @@
     Posts
   </h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Package a standalone Linux kernel using the Arch Linux Build System
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution’s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively. However, for Arch Linux, my distribution of choice, that is not so simple. Furthermore, when doing certain types of development, such as bisecting an issue, it is more convenient to do all the building in an actual source tree, rather than one that is managed by the Arch Build System. The following process might not be the most efficient or optimal way to do this process (the Arch wiki has a whole article about doing a git bisect with a PKGBUILD) but it works for me :)
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-27 14:06:01 -0700 MST'>April 27, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to Package a standalone Linux kernel using the Arch Linux Build System" href="https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -279,19 +292,6 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
   </div>
   <footer class="entry-footer"><span title='2021-08-31 20:38:00 -0700 MST'>August 31, 2021</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to August 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/august-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">July 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Linux kernel patches [PATCH] Hexagon: Export raw I/O routines for modules: Hexagon is a digital signal processor architecture by Qualcomm, which is a little special in terms of the Linux kernel because it is the only architecture that does not have a GCC backend so LLVM has to be used to build it, meaning that it is important to keep it building. This patch fixes an issue with allmodconfig, which enables us to build a wide variety of code and verify the compiler is able to handle all of it.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-08-01 00:00:00 -0700 MST'>August 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to July 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2021-cbl-work/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -10,7 +10,7 @@
 <meta name="description" content="As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution&rsquo;s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively. However, for Arch Linux, my distribution of choice, that is not so simple. Furthermore, when doing certain types of development, such as bisecting an issue, it is more convenient to do all the building in an actual source tree, rather than one that is managed by the Arch Build System. The following process might not be the most efficient or optimal way to do this process (the Arch wiki has a whole article about doing a git bisect with a PKGBUILD) but it works for me :)">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -143,7 +143,7 @@
         <div class="logo">
             <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">

@@ -10,7 +10,7 @@
 <meta name="description" content="Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the &ldquo;negative&rdquo; version of it) to try and figure out the exact translation unit and function that causes the problem. I&rsquo;ll go over this process at a high level to help others who might encounter this same issue.">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -141,7 +141,7 @@
         <div class="logo">
             <a href="https://nathanchance.dev/" accesskey="h" title="Nathan Chancellor (Alt + H)">Nathan Chancellor</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
