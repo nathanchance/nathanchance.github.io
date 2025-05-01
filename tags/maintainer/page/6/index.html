@@ -139,6 +139,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">April 2021 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Another month down! Feels like I just wrote the March 2021 post… but I suppose that is what happens when your project moves super quickly :)
+Linux kernel patches [PATCH] ACPI / CPPC: Replace cppc_attr with kobj_attribute: I discovered this issue as part of my testing of Sami Tolvanen’s Control Flow Integrity series (more on that below). There are probably many more of these lurking because this pattern is hard to spot without runtime testing. As I have time amongst all of the other issues and such, I will be testing the x86 variant of CFI on several different servers, trying to flush out all of the different issues there.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2021-04-30 21:14:13 -0700 MST'>April 30, 2021</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to April 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2021-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">March 2021 ClangBuiltLinux Work
     </h2>
   </header>
@@ -147,7 +161,7 @@
 Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __init: LLVM 13 switched over to the New Pass Manager (NPM), which has impacted some inlining decisions, which in turn exposed some bugs in section annotations. The kernel places certain functions and variables into specific sections that are discarded and freed after init. If a non-init function calls an init function, that is technically a use-after-free so the kernel warns when this happens. In this particular case, identical_pvr_fixup() was not marked as __init and it was not getting inlined so the calls to identify_cpu() and of_get_flat_dt_prop() resulting in the modpost warnings. In practice, this is not an issue because identical_pvr_fixup() is only called from __init context but it is important to get these things right so that real warnings can easily be caught.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2021-04-01 10:25:53 -0700 -0700'>April 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2021-04-01 10:25:53 -0700 MST'>April 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to March 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2021-cbl-work/"></a>
 </article>
 
@@ -161,7 +175,7 @@ Linux kernel patches powerpc/fadump: Mark fadump_calculate_reserve_size as __ini
 Linux kernel patches First and foremost, I am a Linux kernel developer, meaning that I love sending kernel patches. Getting familiar with git send-email and the standard Linux kernel workflow can be difficult but now that I am used to it, I find other things cumbersome.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2021-02-28 00:01:20 -0700 -0700'>February 28, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2021-02-28 00:01:20 -0700 MST'>February 28, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to February 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2021-cbl-work/"></a>
 </article>
 <footer class="page-footer">

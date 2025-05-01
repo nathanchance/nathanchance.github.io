@@ -139,6 +139,21 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">December 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Miscellaneous fixes: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.
+Fix lack of section mismatch warnings with LTO (v2, v3) security: Restrict CONFIG_ZERO_CALL_USED_REGS to gcc or clang &gt; 15.0.6 (v1) Warning fixes: These are patches to fix various warnings that appear with LLVM (or in the case of the first one, with GCC as the result of a patch series for ClangBuiltLinux). I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures. Maybe these should be in the build failures section…
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-12-30 11:00:00 -0700 MST'>December 30, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to December 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/december-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">November 2022 ClangBuiltLinux Work
     </h2>
   </header>
@@ -147,7 +162,7 @@
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-11-30 16:30:00 -0700 -0700'>November 30, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-11-30 16:30:00 -0700 MST'>November 30, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to November 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/november-2022-cbl-work/"></a>
 </article>
 
@@ -161,7 +176,7 @@ Linux kernel patches Build errors: These are patches to fix various build errors
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-10-31 16:30:00 -0700 -0700'>October 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-10-31 16:30:00 -0700 MST'>October 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to October 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/october-2022-cbl-work/"></a>
 </article>
 
@@ -175,7 +190,7 @@ Linux kernel patches Build errors: These are patches to fix various build errors
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-09-29 15:55:00 -0700 -0700'>September 29, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-09-29 15:55:00 -0700 MST'>September 29, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to September 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/september-2022-cbl-work/"></a>
 </article>
 
@@ -190,7 +205,7 @@ Linux kernel patches Miscellaneous fixes and improvements: These are fixes and i
 scripts/Makefile.extrawarn: Do not disable clang&#39;s -Wformat-zero-length (v1) x86/build: Move &#39;-mindirect-branch-cs-prefix&#39; out of GCC-only block (v1) Stable backport requests: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-08-31 16:15:00 -0700 -0700'>August 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-08-31 16:15:00 -0700 MST'>August 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to August 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/august-2022-cbl-work/"></a>
 </article>
 
@@ -204,7 +219,7 @@ scripts/Makefile.extrawarn: Do not disable clang&#39;s -Wformat-zero-length (v1)
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-07-29 16:00:00 -0700 -0700'>July 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-07-29 16:00:00 -0700 MST'>July 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to July 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2022-cbl-work/"></a>
 </article>
 
@@ -218,7 +233,7 @@ Linux kernel patches Build errors: These are patches to fix various build errors
 Linux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-06-30 16:25:00 -0700 -0700'>June 30, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-06-30 16:25:00 -0700 MST'>June 30, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to June 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/june-2022-cbl-work/"></a>
 </article>
 
@@ -232,7 +247,7 @@ Linux kernel patches Android changes: Android is one of the largest downstream c
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-05-31 16:30:00 -0700 -0700'>May 31, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-05-31 16:30:00 -0700 MST'>May 31, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to May 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2022-cbl-work/"></a>
 </article>
 
@@ -246,7 +261,7 @@ Linux kernel patches Build errors: These are patches to fix various build errors
 Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 -0700'>April 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 MST'>April 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to April 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2022-cbl-work/"></a>
 </article>
 
@@ -259,22 +274,8 @@ Linux kernel patches Build failures: These are patches to fix various build erro
     <p>As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution’s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively. However, for Arch Linux, my distribution of choice, that is not so simple. Furthermore, when doing certain types of development, such as bisecting an issue, it is more convenient to do all the building in an actual source tree, rather than one that is managed by the Arch Build System. The following process might not be the most efficient or optimal way to do this process (the Arch wiki has a whole article about doing a git bisect with a PKGBUILD) but it works for me :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-04-27 14:06:01 -0700 -0700'>April 27, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-04-27 14:06:01 -0700 MST'>April 27, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to Package a standalone Linux kernel using the Arch Linux Build System" href="https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">March 2022 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2022-03-31 16:30:00 -0700 -0700'>March 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to March 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2022-cbl-work/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
