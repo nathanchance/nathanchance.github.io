@@ -5,20 +5,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>December 2023 ClangBuiltLinux Work | Nathan Chancellor</title>
+<title>May 2025 ClangBuiltLinux Work | Nathan Chancellor</title>
 <meta name="keywords" content="clangbuiltlinux, linux, linuxfoundation, maintainer">
 <meta name="description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches
 
 
-Miscellaneous fixes and improvements: These are fixes and improvements that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux.
-
-RISC-V: Disable DWARF5 with known broken LLVM versions (v2)
-
-
-
-Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.">
+Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)">
 <meta name="author" content="Nathan Chancellor">
-<link rel="canonical" href="https://nathanchance.dev/posts/december-2023-cbl-work/">
+<link rel="canonical" href="https://nathanchance.dev/posts/may-2025-cbl-work/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
@@ -27,7 +22,7 @@ Stable backports and fixes: It is important to make sure that the stable trees a
 <link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://nathanchance.dev/posts/december-2023-cbl-work/">
+<link rel="alternate" hreflang="en" href="https://nathanchance.dev/posts/may-2025-cbl-work/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,33 +59,27 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         }
 
     </style>
-</noscript><meta property="og:url" content="https://nathanchance.dev/posts/december-2023-cbl-work/">
+</noscript><meta property="og:url" content="https://nathanchance.dev/posts/may-2025-cbl-work/">
   <meta property="og:site_name" content="Nathan Chancellor">
-  <meta property="og:title" content="December 2023 ClangBuiltLinux Work">
+  <meta property="og:title" content="May 2025 ClangBuiltLinux Work">
   <meta property="og:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Miscellaneous fixes and improvements: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.
-RISC-V: Disable DWARF5 with known broken LLVM versions (v2) Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.">
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2023-12-28T11:30:00-07:00">
-    <meta property="article:modified_time" content="2023-12-28T11:30:00-07:00">
+    <meta property="article:published_time" content="2025-05-30T16:30:00-07:00">
+    <meta property="article:modified_time" content="2025-05-30T16:30:00-07:00">
     <meta property="article:tag" content="Clangbuiltlinux">
     <meta property="article:tag" content="Linux">
     <meta property="article:tag" content="Linuxfoundation">
     <meta property="article:tag" content="Maintainer">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="December 2023 ClangBuiltLinux Work">
+<meta name="twitter:title" content="May 2025 ClangBuiltLinux Work">
 <meta name="twitter:description" content="Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches
 
 
-Miscellaneous fixes and improvements: These are fixes and improvements that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux.
-
-RISC-V: Disable DWARF5 with known broken LLVM versions (v2)
-
-
-
-Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.">
+Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)">
 
 
 <script type="application/ld+json">
@@ -107,8 +96,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
     {
       "@type": "ListItem",
       "position":  2 ,
-      "name": "December 2023 ClangBuiltLinux Work",
-      "item": "https://nathanchance.dev/posts/december-2023-cbl-work/"
+      "name": "May 2025 ClangBuiltLinux Work",
+      "item": "https://nathanchance.dev/posts/may-2025-cbl-work/"
     }
   ]
 }
@@ -117,24 +106,24 @@ Stable backports and fixes: It is important to make sure that the stable trees a
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "December 2023 ClangBuiltLinux Work",
-  "name": "December 2023 ClangBuiltLinux Work",
-  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nMiscellaneous fixes and improvements: These are fixes and improvements that don\u0026rsquo;t fit into a particular category but are important to ClangBuiltLinux.\nRISC-V: Disable DWARF5 with known broken LLVM versions (v2) Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.\n",
+  "headline": "May 2025 ClangBuiltLinux Work",
+  "name": "May 2025 ClangBuiltLinux Work",
+  "description": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)\n",
   "keywords": [
     "clangbuiltlinux", "linux", "linuxfoundation", "maintainer"
   ],
-  "articleBody": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nMiscellaneous fixes and improvements: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.\nRISC-V: Disable DWARF5 with known broken LLVM versions (v2) Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.\nApply b8ec60e1186cdcfce41e7db4c827cb107e459002 to linux-6.6.y Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures. Maybe these should be in the build failures section…\nx86/tools: objdump_reformat.awk: Skip bad instructions from llvm-objdump (v1) A few fixes for transparent bridge support (v1) Enable -Wincompatible-function-pointer-types-strict under W=1 (v2) kasan: Mark unpoison_slab_object() as static (v1) dmaengine: xilinx: xdma: Fix two clang warnings (v1) platform/x86/intel/pmc: Fix recent instances of -Wmissing-prototypes (v1) Patch review and input For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.\nReviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.\nRe: [RFC] drm: enable W=1 warnings by default across the subsystem Re: [PATCH] x86/callthunks: Correct calculation of dest address in is_callthunk() Re: [PATCH] gen_compile_commands.py: fix path resolve with symlinks in it Re: [PATCH v2] gen_compile_commands.py: fix path resolve with symlinks in it Re: [PATCH v2] rpm-pkg: simplify installkernel %post Re: [PATCH] power: reset: at91: mark at91_wakeup_status non-__init Re: [PATCH] docs: rust: remove `CC=clang` mentions Re: [PATCH iwl-next] i40e: Avoid unnecessary use of comma operator [Clang] Generate the GEP instead of adding AST nodes Revert counted_by attribute feature Re: [PATCH v4] rpm-pkg: simplify installkernel %post Re: [PATCH] scripts/decode_stacktrace.sh: Support LLVM addr2line [LoongArch] Support R_LARCH_{ADD,SUB}_ULEB128 for .uleb128 and force relocs when sym is not in section CI Caching Issue triage, input, and reporting The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.\nRe: [PATCH -tip v2 2/3] x86/callthunks: Handle %rip-relative relocations in call thunk template Re: Patch \"arm64: Restrict CPU_BIG_ENDIAN to GNU as or LLVM IAS 15.x or newer\" has been added to the 4.19-stable tree Re: clang-nightly: vdso/compat_gettimeofday.h:152:15: error: instruction variant requires ARMv6 or later Error when building Linux with latest LLVM (and CLang) -Wframe-larger-than in fs/namespace.c Re: [PATCH 5.4 63/94] btrfs: add dmesg output for first mount and last unmount of a filesystem RISC-V boot failure after LLVM commit e87f33d9ce785668223c3bcc4e06956985cccda1 Re: [drm-xe:drm-xe-next 989/1016] drivers/gpu/drm/xe/xe_wait_user_fence.c:46:2: warning: variable 'passed' is used uninitialized whenever switch default is taken Re: [PATCH net-next 20/24] net: intel: Use nested-BH locking for XDP redirect. Re: [PATCH 15/50] kernel/numa.c: Move logging out of numa.h [LoongArch] Allow delayed decision for ADD/SUB relocations Re: [PATCH v5 37/40] netfs: Optimise away reads above the point at which there can be no data Re: [PATCH v5 15/40] netfs: Add support for DIO buffering Tooling improvements These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as AOSP’s distribution of LLVM and TuxMake.\nFix workflows with caching Install requirements.txt for check cache stage Revert #661 Behind the scenes Every day that there is a new linux-next release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 4, a Raspberry Pi 3, a SolidRun Honeycomb LX2, an Ampere Altra Developer Platform, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered. Special thanks Special thanks to Google and the Linux Foundation for sponsoring my work.\n",
-  "wordCount" : "829",
+  "articleBody": "Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.\nLinux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)\nnet: qede: Initialize qede_ll_ops with designated initializer (v1) Miscellaneous fixes and improvements: These are fixes and improvements that don’t fit into a particular category but are important to ClangBuiltLinux.\ngenirq: Ensure flags in lock guard is consistently initialized (v1) Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.\nSeries for -Wunterminated-string-initialization in 6.14 and 6.12 Backports of d0afcfeb9e3810ec89d1ffde1a0e36621bb75dca for 6.6 and older Backports of 2e43ae7dd71cd9bb0d1bce1d3306bf77523feb81 for 5.15 and older Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as all developers should be using CONFIG_WERROR, which will turn these all into failures. Maybe these should be in the build failures section…\nkbuild: Disable -Wdefault-const-init-unsafe (v1, v2) mfd: Remove node variables that are unused with CONFIG_OF=n (v1) platform: mellanox: nvsw-sn2200: Fix .items in nvsw_sn2201_busbar_hotplug (v1) cpufreq/amd-pstate: Avoid shadowing ret in amd_pstate_ut_check_driver() (v1) Patch review and input For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.\nReviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.\n[C] Allow __attribute__((nonstring)) on multidimensional arrays Re: [PATCH 2/3] randstruct: Force full rebuild when seed changes Re: [PATCH] arm64/cpufeature: annotate arm64_use_ng_mappings with ro_after_init to prevent wrong idmap generation Re: [PATCH] extrawarn: Use cc-disable-warning for shift-negative-value Re: [PATCH] Makefile.kcov: apply needed compiler option unconditionally in CFLAGS_KCOV Re: Patch \"x86/relocs: Handle R_X86_64_REX_GOTPCRELX relocations\" has been added to the 6.14-stable tree Re: [PATCH] scripts: add zboot support to extract-vmlinux Re: [PATCH] kbuild: replace deprecated T option with --thin for $(AR) Re: [PATCH] ubsan: integer-overflow: depend on BROKEN to keep this out of CI Re: [PATCH] arm64: Disable LLD linker ASSERT()s for the time being RISC-V boot warnings and crash after LLVM commit bb03cdcb441fd68da9d1ebb7d5f39f73667cd39c Issue triage, input, and reporting The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.\narm64 Linux kernel boot failure after b326cb6792b3951881d63d5a02ea163921da18d9 Re: error: arch/x86/include/asm/mshyperv.h:108:2: ran out of registers during register allocation in function 'hyperv_flush_guest_mapping' Re: [linux-next:master 3551/8679] arch/riscv/kernel/compat_signal.c:220:28: error: use of undeclared identifier 'compat__vdso_rt_sigreturn_offset' Re: [linux-next:master 5904/8679] :7:11: error: expected an immediate Re: [ardb:for-kernelci 15/18] arch/x86/boot/startup/sev-startup.c:141:15: error: '__section__' attribute only applies to functions, global variables, Objective-C methods, and Objective-C properties RISC-V boot warnings and crash after LLVM commit bb03cdcb441fd68da9d1ebb7d5f39f73667cd39c Assertion failed: \"start of copy chain MUST be COPY\" on RISC-V after using asm goto with outputs llvm-readelf \"invalid PT_DYNAMIC size\" for RISC-V after getrandom() vDSO implementation Failed assertion \"Cannot export BSS symbol\" with ld.lld Tooling improvements These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as AOSP’s distribution of LLVM and TuxMake.\nAdjust the base LLVM configuration Initial matrix reduction patches: Drop 5.15, 5.10, and 5.4 (May 2, 2025) Update patches (May 19, 2025) Workaround known failures (May 24, 2025) patches: android-mainline: Drop patches present in 6.15 final Address more build failures (May 28, 2025) Update stable anchor to 6.15 patches: mainline: Drop d8720235d5b5cad86c1f07f65117ef2a96f8bec7 Various fixes for PGO with older LLVM versions patches: 6.12: Drop -Wunterminated-string-initialization patches Update PGO kernel to 6.15 and bump known good revision Behind the scenes Every day that there is a new linux-next release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 4, a Raspberry Pi 3, a SolidRun Honeycomb LX2, an Ampere Altra Developer Platform, two Intel-based desktops, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.\nI continue to upload prebuilt, fast versions of LLVM for kernel developers and our continuous integration to use.\n20.1.5 20.1.6 Special thanks Special thanks to Google and the Linux Foundation for sponsoring my work.\n",
+  "wordCount" : "910",
   "inLanguage": "en",
-  "datePublished": "2023-12-28T11:30:00-07:00",
-  "dateModified": "2023-12-28T11:30:00-07:00",
+  "datePublished": "2025-05-30T16:30:00-07:00",
+  "dateModified": "2025-05-30T16:30:00-07:00",
   "author":{
     "@type": "Person",
     "name": "Nathan Chancellor"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://nathanchance.dev/posts/december-2023-cbl-work/"
+    "@id": "https://nathanchance.dev/posts/may-2025-cbl-work/"
   },
   "publisher": {
     "@type": "Organization",
@@ -217,9 +206,9 @@ Stable backports and fixes: It is important to make sure that the stable trees a
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      December 2023 ClangBuiltLinux Work
+      May 2025 ClangBuiltLinux Work
     </h1>
-    <div class="post-meta"><span title='2023-12-28 11:30:00 -0700 MST'>December 28, 2023</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Nathan Chancellor&nbsp;|&nbsp;<a href="https://github.com/nathanchance/hugo-files/blob/main/content/posts/december-2023-cbl-work.md" rel="noopener noreferrer edit" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2025-05-30 16:30:00 -0700 MST'>May 30, 2025</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor&nbsp;|&nbsp;<a href="https://github.com/nathanchance/hugo-files/blob/main/content/posts/may-2025-cbl-work.md" rel="noopener noreferrer edit" target="_blank">Suggest Changes</a>
 
 </div>
   </header> <div class="toc">
@@ -229,6 +218,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         </summary>
 
         <div class="inner"><ul>
+                <li>
+                    <a href="#linux-kernel-patches" aria-label="Linux kernel patches">Linux kernel patches</a></li>
                 <li>
                     <a href="#patch-review-and-input" aria-label="Patch review and input">Patch review and input</a></li>
                 <li>
@@ -246,28 +237,35 @@ Stable backports and fixes: It is important to make sure that the stable trees a
 </div>
 
   <div class="post-content"><p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on <a href="https://lore.kernel.org/all/?q=f:nathan@kernel.org">lore.kernel.org</a>.</p>
+<h2 id="linux-kernel-patches">Linux kernel patches<a hidden class="anchor" aria-hidden="true" href="#linux-kernel-patches">#</a></h2>
 <ul>
+<li>
+<p>Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)</p>
+<ul>
+<li><code>net: qede: Initialize qede_ll_ops with designated initializer</code> (<a href="https://lore.kernel.org/20250507-qede-fix-clang-randstruct-v1-1-5ccc15626fba@kernel.org/"><code>v1</code></a>)</li>
+</ul>
+</li>
 <li>
 <p>Miscellaneous fixes and improvements: These are fixes and improvements that don&rsquo;t fit into a particular category but are important to ClangBuiltLinux.</p>
 <ul>
-<li><code>RISC-V: Disable DWARF5 with known broken LLVM versions</code> (<a href="https://lore.kernel.org/20231205-riscv-restrict-dwarf5-llvm-v2-0-aedf00a382ac@kernel.org/"><code>v2</code></a>)</li>
+<li><code>genirq: Ensure flags in lock guard is consistently initialized</code> (<a href="https://lore.kernel.org/20250513-irq-guards-fix-flags-init-v1-1-1dca3f5992d6@kernel.org/"><code>v1</code></a>)</li>
 </ul>
 </li>
 <li>
 <p>Stable backports and fixes: It is important to make sure that the stable trees are as free from issues as possible, as those are the trees that devices and users use; for example, Android and Chrome OS regularly merge from stable, so if there is a problem that will impact those trees that we fixed in mainline, it should be backported.</p>
 <ul>
-<li><a href="https://lore.kernel.org/20231213000338.GA866722@dev-arch.thelio-3990X/"><code>Apply b8ec60e1186cdcfce41e7db4c827cb107e459002 to linux-6.6.y</code></a></li>
+<li><a href="https://lore.kernel.org/20250523205408.GA863786@ax162/"><code>Series for -Wunterminated-string-initialization in 6.14 and 6.12</code></a></li>
+<li><a href="https://lore.kernel.org/20250523211710.GA873401@ax162/"><code>Backports of d0afcfeb9e3810ec89d1ffde1a0e36621bb75dca for 6.6 and older</code></a></li>
+<li><a href="https://lore.kernel.org/20250527235023.GA2613123@ax162/"><code>Backports of 2e43ae7dd71cd9bb0d1bce1d3306bf77523feb81 for 5.15 and older</code></a></li>
 </ul>
 </li>
 <li>
 <p>Warning fixes: These are patches to fix various warnings that appear with LLVM. I used to go into detail about the different warnings and what they mean, but the important takeaway for this section is that the kernel should build warning free, as <a href="https://lore.kernel.org/r/CAHk-=wifoM9VOp-55OZCRcO9MnqQ109UTuCiXeZ-eyX_JcNVGg@mail.gmail.com/">all developers should be using <code>CONFIG_WERROR</code></a>, which will turn these all into failures. Maybe these should be in the build failures section&hellip;</p>
 <ul>
-<li><code>x86/tools: objdump_reformat.awk: Skip bad instructions from llvm-objdump</code> (<a href="https://lore.kernel.org/20231205-objdump_reformat-awk-handle-llvm-objdump-bad_expr-v1-1-b4a74f39396f@kernel.org/"><code>v1</code></a>)</li>
-<li><code>A few fixes for transparent bridge support</code> (<a href="https://lore.kernel.org/20231205-drm_aux_bridge-fixes-v1-0-d242a0ae9df4@kernel.org/"><code>v1</code></a>)</li>
-<li><code>Enable -Wincompatible-function-pointer-types-strict under W=1</code> (<a href="https://lore.kernel.org/20231206-enable-wincompatible-function-pointer-types-strict-w-1-v2-0-91311b4c37b0@kernel.org/"><code>v2</code></a>)</li>
-<li><code>kasan: Mark unpoison_slab_object() as static</code> (<a href="https://lore.kernel.org/20231221-mark-unpoison_slab_object-as-static-v1-1-bf24f0982edc@kernel.org/"><code>v1</code></a>)</li>
-<li><code>dmaengine: xilinx: xdma: Fix two clang warnings</code> (<a href="https://lore.kernel.org/20231222-dma-xilinx-xdma-clang-fixes-v1-0-84a18ff184d2@kernel.org/"><code>v1</code></a>)</li>
-<li><code>platform/x86/intel/pmc: Fix recent instances of -Wmissing-prototypes</code> (<a href="https://lore.kernel.org/20231222-intel-pmc-missing-prototypes-v1-0-3f0d47377d4c@kernel.org/"><code>v1</code></a>)</li>
+<li><code>kbuild: Disable -Wdefault-const-init-unsafe</code> (<a href="https://lore.kernel.org/20250501-default-const-init-clang-v1-0-3d2c6c185dbb@kernel.org/"><code>v1</code></a>, <a href="https://lore.kernel.org/20250506-default-const-init-clang-v2-1-fcfb69703264@kernel.org/"><code>v2</code></a>)</li>
+<li><code>mfd: Remove node variables that are unused with CONFIG_OF=n</code> (<a href="https://lore.kernel.org/20250508-mfd-fix-unused-node-variables-v1-1-df84d80cca55@kernel.org/"><code>v1</code></a>)</li>
+<li><code>platform: mellanox: nvsw-sn2200: Fix .items in nvsw_sn2201_busbar_hotplug</code> (<a href="https://lore.kernel.org/20250509-nvsw-sn2200-fix-items-busbar-hotplug-v1-1-8844fff38dc8@kernel.org/"><code>v1</code></a>)</li>
+<li><code>cpufreq/amd-pstate: Avoid shadowing ret in amd_pstate_ut_check_driver()</code> (<a href="https://lore.kernel.org/20250512-amd-pstate-ut-uninit-ret-v1-1-fcb4104f502e@kernel.org/"><code>v1</code></a>)</li>
 </ul>
 </li>
 </ul>
@@ -275,48 +273,59 @@ Stable backports and fixes: It is important to make sure that the stable trees a
 <p>For the next sections, I link directly to my first response in the thread when possible but there are times where the link is to the main post. My responses can be seen inline by going to the bottom of the thread and clicking on my name.</p>
 <p>Reviewing patches that are submitted is incredibly important, as it helps ensure good code quality due to catching mistakes before the patches get accepted and it can help get patches accepted faster, as some maintainers will blindly pick up patches that have been reviewed by someone that they trust.</p>
 <ul>
-<li><a href="https://lore.kernel.org/20231201175939.GA231094@dev-arch.thelio-3990X/"><code>Re: [RFC] drm: enable W=1 warnings by default across the subsystem</code></a></li>
-<li><a href="https://lore.kernel.org/20231201214405.GA1533860@dev-arch.thelio-3990X/"><code>Re: [PATCH] x86/callthunks: Correct calculation of dest address in is_callthunk()</code></a></li>
-<li><a href="https://lore.kernel.org/20231204165920.GA16980@dev-arch.thelio-3990X/"><code>Re: [PATCH] gen_compile_commands.py: fix path resolve with symlinks in it</code></a></li>
-<li><a href="https://lore.kernel.org/20231205165648.GA391810@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] gen_compile_commands.py: fix path resolve with symlinks in it</code></a></li>
-<li><a href="https://lore.kernel.org/20231212191918.GA2914380@dev-arch.thelio-3990X/"><code>Re: [PATCH v2] rpm-pkg: simplify installkernel %post</code></a></li>
-<li><a href="https://lore.kernel.org/20231212215002.GA3300655@dev-arch.thelio-3990X/"><code>Re: [PATCH] power: reset: at91: mark at91_wakeup_status non-__init</code></a></li>
-<li><a href="https://lore.kernel.org/20231218165552.GA601326@dev-arch.thelio-3990X/"><code>Re: [PATCH] docs: rust: remove `CC=clang` mentions</code></a></li>
-<li><a href="https://lore.kernel.org/20231218190055.GB2863043@dev-arch.thelio-3990X/"><code>Re: [PATCH iwl-next] i40e: Avoid unnecessary use of comma operator</code></a></li>
-<li><a href="https://github.com/llvm/llvm-project/pull/73730#issuecomment-1861411905"><code>[Clang] Generate the GEP instead of adding AST nodes</code></a></li>
-<li><a href="https://github.com/llvm/llvm-project/pull/75857#issuecomment-1861700246"><code>Revert counted_by attribute feature</code></a></li>
-<li><a href="https://lore.kernel.org/20231219201719.1967948-1-jtornosm@redhat.com/"><code>Re: [PATCH v4] rpm-pkg: simplify installkernel %post</code></a></li>
-<li><a href="https://lore.kernel.org/20231226163802.GA952423@dev-arch.thelio-3990X/"><code>Re: [PATCH] scripts/decode_stacktrace.sh: Support LLVM addr2line</code></a></li>
-<li><a href="https://github.com/llvm/llvm-project/pull/76433#issuecomment-1871382875"><code>[LoongArch] Support R_LARCH_{ADD,SUB}_ULEB128 for .uleb128 and force relocs when sym is not in section</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/664"><code>CI Caching</code></a></li>
+<li><a href="https://github.com/llvm/llvm-project/pull/138133#pullrequestreview-2810602000"><code>[C] Allow __attribute__((nonstring)) on multidimensional arrays</code></a></li>
+<li><a href="https://lore.kernel.org/20250502161209.GA2850065@ax162/"><code>Re: [PATCH 2/3] randstruct: Force full rebuild when seed changes</code></a></li>
+<li><a href="https://lore.kernel.org/20250502162540.GB2850065@ax162/"><code>Re: [PATCH] arm64/cpufeature: annotate arm64_use_ng_mappings with ro_after_init to prevent wrong idmap generation</code></a></li>
+<li><a href="https://lore.kernel.org/20250508163138.GA834338@ax162/"><code>Re: [PATCH] extrawarn: Use cc-disable-warning for shift-negative-value</code></a></li>
+<li><a href="https://lore.kernel.org/20250508164425.GD834338@ax162/"><code>Re: [PATCH] Makefile.kcov: apply needed compiler option unconditionally in CFLAGS_KCOV</code></a></li>
+<li><a href="https://lore.kernel.org/20250522230101.GA1911411@ax162/"><code>Re: Patch &quot;x86/relocs: Handle R_X86_64_REX_GOTPCRELX relocations&quot; has been added to the 6.14-stable tree</code></a></li>
+<li><a href="https://lore.kernel.org/20250522231009.GA2020750@ax162/"><code>Re: [PATCH] scripts: add zboot support to extract-vmlinux</code></a></li>
+<li><a href="https://lore.kernel.org/20250527221637.GA2566504@ax162/"><code>Re: [PATCH] kbuild: replace deprecated T option with --thin for $(AR)</code></a></li>
+<li><a href="https://lore.kernel.org/20250528213223.GA3885532@ax162/"><code>Re: [PATCH] ubsan: integer-overflow: depend on BROKEN to keep this out of CI</code></a></li>
+<li><a href="https://lore.kernel.org/20250530023048.GA1491122@ax162/"><code>Re: [PATCH] arm64: Disable LLD linker ASSERT()s for the time being</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2091#issuecomment-2919977203"><code>RISC-V boot warnings and crash after LLVM commit bb03cdcb441fd68da9d1ebb7d5f39f73667cd39c</code></a></li>
 </ul>
 <h2 id="issue-triage-input-and-reporting">Issue triage, input, and reporting<a hidden class="anchor" aria-hidden="true" href="#issue-triage-input-and-reporting">#</a></h2>
 <p>The unfortunate thing about working at the intersection of two projects is we will often find bugs that are not strictly related to the project, which require some triage and reporting back to the original author of the breakage so that they can be fixed and not impact our own testing. Some of these bugs fall into that category while others are issues strictly related to this project.</p>
 <ul>
-<li><a href="https://lore.kernel.org/20231201035457.GA321497@dev-arch.thelio-3990X/"><code>Re: [PATCH -tip v2 2/3] x86/callthunks: Handle %rip-relative relocations in call thunk template</code></a></li>
-<li><a href="https://lore.kernel.org/20231204162228.GA1007084@dev-arch.thelio-3990X/"><code>Re: Patch &quot;arm64: Restrict CPU_BIG_ENDIAN to GNU as or LLVM IAS 15.x or newer&quot; has been added to the 4.19-stable tree</code></a></li>
-<li><a href="https://lore.kernel.org/20231204181304.GA2043538@dev-arch.thelio-3990X/"><code>Re: clang-nightly: vdso/compat_gettimeofday.h:152:15: error: instruction variant requires ARMv6 or later</code></a></li>
-<li><a href="https://github.com/llvm/llvm-project/issues/72026"><code>Error when building Linux with latest LLVM (and CLang)</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1964"><code>-Wframe-larger-than in fs/namespace.c </code></a></li>
-<li><a href="https://lore.kernel.org/20231209172836.GA2154579@dev-arch.thelio-3990X/"><code>Re: [PATCH 5.4 63/94] btrfs: add dmesg output for first mount and last unmount of a filesystem</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/linux/issues/1965"><code>RISC-V boot failure after LLVM commit e87f33d9ce785668223c3bcc4e06956985cccda1</code></a></li>
-<li><a href="https://lore.kernel.org/20231218185722.GA2863043@dev-arch.thelio-3990X/"><code>Re: [drm-xe:drm-xe-next 989/1016] drivers/gpu/drm/xe/xe_wait_user_fence.c:46:2: warning: variable 'passed' is used uninitialized whenever switch default is taken</code></a></li>
-<li><a href="https://lore.kernel.org/20231219000116.GA3956476@dev-arch.thelio-3990X/"><code>Re: [PATCH net-next 20/24] net: intel: Use nested-BH locking for XDP redirect.</code></a></li>
-<li><a href="https://lore.kernel.org/20231219163644.GA345795@dev-arch.thelio-3990X/"><code>Re: [PATCH 15/50] kernel/numa.c: Move logging out of numa.h</code></a></li>
-<li><a href="https://github.com/llvm/llvm-project/pull/72960#issuecomment-1866844679"><code>[LoongArch] Allow delayed decision for ADD/SUB relocations</code></a></li>
-<li><a href="https://lore.kernel.org/20231221230153.GA1607352@dev-arch.thelio-3990X/"><code>Re: [PATCH v5 37/40] netfs: Optimise away reads above the point at which there can be no data</code></a></li>
-<li><a href="https://lore.kernel.org/20231226165442.GA1202197@dev-arch.thelio-3990X/"><code>Re: [PATCH v5 15/40] netfs: Add support for DIO buffering</code></a></li>
+<li><a href="https://github.com/llvm/llvm-project/issues/138019#issuecomment-2845510757"><code>arm64 Linux kernel boot failure after b326cb6792b3951881d63d5a02ea163921da18d9</code></a></li>
+<li><a href="https://lore.kernel.org/20250507022649.GA1984217@ax162/"><code>Re: error: arch/x86/include/asm/mshyperv.h:108:2: ran out of registers during register allocation in function 'hyperv_flush_guest_mapping'</code></a></li>
+<li><a href="https://lore.kernel.org/20250508163314.GB834338@ax162/"><code>Re: [linux-next:master 3551/8679] arch/riscv/kernel/compat_signal.c:220:28: error: use of undeclared identifier 'compat__vdso_rt_sigreturn_offset'</code></a></li>
+<li><a href="https://lore.kernel.org/20250508164308.GC834338@ax162/"><code>Re: [linux-next:master 5904/8679] &lt;instantiation&gt;:7:11: error: expected an immediate</code></a></li>
+<li><a href="https://lore.kernel.org/20250508165710.GA2787919@ax162/"><code>Re: [ardb:for-kernelci 15/18] arch/x86/boot/startup/sev-startup.c:141:15: error: '__section__' attribute only applies to functions, global variables, Objective-C methods, and Objective-C properties</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2091"><code>RISC-V boot warnings and crash after LLVM commit bb03cdcb441fd68da9d1ebb7d5f39f73667cd39c</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2092"><code>Assertion failed: &quot;start of copy chain MUST be COPY&quot; on RISC-V after using asm goto with outputs</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2093"><code>llvm-readelf &quot;invalid PT_DYNAMIC size&quot; for RISC-V after getrandom() vDSO implementation</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/linux/issues/2094"><code>Failed assertion &quot;Cannot export BSS symbol&quot; with ld.lld</code></a></li>
 </ul>
 <h2 id="tooling-improvements">Tooling improvements<a hidden class="anchor" aria-hidden="true" href="#tooling-improvements">#</a></h2>
 <p>These are changes to various tools that we use, such as our continuous integration setup, booting utilities, toolchain building scripts, or other closely related projects such as <a href="https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/">AOSP&rsquo;s distribution of LLVM</a> and <a href="https://tuxmake.org">TuxMake</a>.</p>
 <ul>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/669"><code>Fix workflows with caching</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/670"><code>Install requirements.txt for check cache stage</code></a></li>
-<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/672"><code>Revert #661</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/300"><code>Adjust the base LLVM configuration</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/831"><code>Initial matrix reduction</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/832"><code>patches: Drop 5.15, 5.10, and 5.4 (May 2, 2025)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/833"><code>Update patches (May 19, 2025)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/834"><code>Workaround known failures (May 24, 2025)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/835"><code>patches: android-mainline: Drop patches present in 6.15 final</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/836"><code>Address more build failures (May 28, 2025)</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/837"><code>Update stable anchor to 6.15</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/838"><code>patches: mainline: Drop d8720235d5b5cad86c1f07f65117ef2a96f8bec7</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/301"><code>Various fixes for PGO with older LLVM versions</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/continuous-integration2/pull/839"><code>patches: 6.12: Drop -Wunterminated-string-initialization patches</code></a></li>
+<li><a href="https://github.com/ClangBuiltLinux/tc-build/pull/302"><code>Update PGO kernel to 6.15 and bump known good revision</code></a></li>
 </ul>
 <h2 id="behind-the-scenes">Behind the scenes<a hidden class="anchor" aria-hidden="true" href="#behind-the-scenes">#</a></h2>
 <ul>
-<li>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 4, a Raspberry Pi 3, a SolidRun Honeycomb LX2, an Ampere Altra Developer Platform, an Intel-based desktop, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</li>
+<li>
+<p>Every day that there is a new <a href="https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/">linux-next</a> release, I rebase and build a few different kernel trees then boot and runtime test them on several different machines, including a Raspberry Pi 4, a Raspberry Pi 3, a SolidRun Honeycomb LX2, an Ampere Altra Developer Platform, two Intel-based desktops, an AMD-based desktop, and an Intel-based laptop. This is not always visible because I do not report anything unless there is something broken but it can take up to a few hours each day, depending on the amount of churn and issues uncovered.</p>
+</li>
+<li>
+<p>I continue to upload prebuilt, fast versions of LLVM for kernel developers and our continuous integration to use.</p>
+<ul>
+<li><a href="https://lore.kernel.org/20250519175752.GA1041767@ax162/">20.1.5</a></li>
+<li><a href="https://lore.kernel.org/20250529002509.GA161456@ax162/">20.1.6</a></li>
+</ul>
+</li>
 </ul>
 <h2 id="special-thanks">Special thanks<a hidden class="anchor" aria-hidden="true" href="#special-thanks">#</a></h2>
 <p>Special thanks to <a href="https://www.google.com/">Google</a> and <a href="https://www.linuxfoundation.org">the Linux Foundation</a> for <a href="https://www.linuxfoundation.org/press/press-release/google-funds-linux-kernel-developers-to-focus-exclusively-on-security">sponsoring my work</a>.</p>
@@ -332,23 +341,18 @@ Stable backports and fixes: It is important to make sure that the stable trees a
       <li><a href="https://nathanchance.dev/tags/maintainer/">Maintainer</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://nathanchance.dev/posts/2023-cbl-retrospective/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>2023 ClangBuiltLinux Retrospective</span>
-  </a>
-  <a class="next" href="https://nathanchance.dev/posts/november-2023-cbl-work/">
+  <a class="next" href="https://nathanchance.dev/posts/april-2025-cbl-work/">
     <span class="title">Next »</span>
     <br>
-    <span>November 2023 ClangBuiltLinux Work</span>
+    <span>April 2025 ClangBuiltLinux Work</span>
   </a>
 </nav>
 
 
 <ul class="share-buttons">
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share December 2023 ClangBuiltLinux Work on x"
-            href="https://x.com/intent/tweet/?text=December%202023%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f&amp;hashtags=clangbuiltlinux%2clinux%2clinuxfoundation%2cmaintainer">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share May 2025 ClangBuiltLinux Work on x"
+            href="https://x.com/intent/tweet/?text=May%202025%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f&amp;hashtags=clangbuiltlinux%2clinux%2clinuxfoundation%2cmaintainer">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
@@ -356,8 +360,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share December 2023 ClangBuiltLinux Work on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f&amp;title=December%202023%20ClangBuiltLinux%20Work&amp;summary=December%202023%20ClangBuiltLinux%20Work&amp;source=https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share May 2025 ClangBuiltLinux Work on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f&amp;title=May%202025%20ClangBuiltLinux%20Work&amp;summary=May%202025%20ClangBuiltLinux%20Work&amp;source=https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
@@ -365,8 +369,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share December 2023 ClangBuiltLinux Work on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f&title=December%202023%20ClangBuiltLinux%20Work">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share May 2025 ClangBuiltLinux Work on reddit"
+            href="https://reddit.com/submit?url=https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f&title=May%202025%20ClangBuiltLinux%20Work">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
@@ -374,8 +378,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share December 2023 ClangBuiltLinux Work on facebook"
-            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share May 2025 ClangBuiltLinux Work on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
@@ -383,8 +387,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share December 2023 ClangBuiltLinux Work on whatsapp"
-            href="https://api.whatsapp.com/send?text=December%202023%20ClangBuiltLinux%20Work%20-%20https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share May 2025 ClangBuiltLinux Work on whatsapp"
+            href="https://api.whatsapp.com/send?text=May%202025%20ClangBuiltLinux%20Work%20-%20https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f">
             <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
@@ -392,8 +396,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share December 2023 ClangBuiltLinux Work on telegram"
-            href="https://telegram.me/share/url?text=December%202023%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share May 2025 ClangBuiltLinux Work on telegram"
+            href="https://telegram.me/share/url?text=May%202025%20ClangBuiltLinux%20Work&amp;url=https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f">
             <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
                 <path
                     d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
@@ -401,8 +405,8 @@ Stable backports and fixes: It is important to make sure that the stable trees a
         </a>
     </li>
     <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share December 2023 ClangBuiltLinux Work on ycombinator"
-            href="https://news.ycombinator.com/submitlink?t=December%202023%20ClangBuiltLinux%20Work&u=https%3a%2f%2fnathanchance.dev%2fposts%2fdecember-2023-cbl-work%2f">
+        <a target="_blank" rel="noopener noreferrer" aria-label="share May 2025 ClangBuiltLinux Work on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=May%202025%20ClangBuiltLinux%20Work&u=https%3a%2f%2fnathanchance.dev%2fposts%2fmay-2025-cbl-work%2f">
             <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
                 xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
                 <path
