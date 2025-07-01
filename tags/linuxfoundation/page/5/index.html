@@ -139,6 +139,20 @@
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">April 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 MST'>April 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <a class="entry-link" aria-label="post link to April 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">March 2022 ClangBuiltLinux Work
     </h2>
   </header>
@@ -264,20 +278,6 @@ ptp: ocp: Avoid operator precedence warning in ptp_ocp_summary_show() (v1, v2): 
   </div>
   <footer class="entry-footer"><span title='2021-08-01 00:00:00 -0700 MST'>August 1, 2021</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
   <a class="entry-link" aria-label="post link to July 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2021-cbl-work/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">June 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Linux kernel patches ANDROID: sched: Gate sched_stat tracepoint exports on CONFIG_SCHEDSTATS: One of those instances where a tangential change in the Android trees broke our continuous integration. Our CI tests some 32-bit ARM configurations because certain Android OEMs care about them but these configs are not tested by the actual Android team, meaning we find breakage that they do not.
-[PATCH net-next] net: ks8851: Make ks8851_read_selftest() return void: clang implemented GCC’s -Wunused-but-set-variable and this instance was found by Intel’s kernel test robot. Rather simple fix but it is important to fix warnings as they crop up so that the build stays as clean as possible so that the real issues are easily visible.
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-07-01 13:48:16 -0700 MST'>July 1, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to June 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/june-2021-cbl-work/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
