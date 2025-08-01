@@ -4,10 +4,21 @@
     <title>Nathan Chancellor</title>
     <link>https://nathanchance.dev/</link>
     <description>Recent content on Nathan Chancellor</description>
-    <generator>Hugo -- 0.147.9</generator>
+    <generator>Hugo -- 0.148.2</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 30 Jun 2025 16:30:00 -0700</lastBuildDate>
+    <lastBuildDate>Thu, 31 Jul 2025 16:30:00 -0700</lastBuildDate>
     <atom:link href="https://nathanchance.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>July 2025 ClangBuiltLinux Work</title>
+      <link>https://nathanchance.dev/posts/july-2025-cbl-work/</link>
+      <pubDate>Thu, 31 Jul 2025 16:30:00 -0700</pubDate>
+      <guid>https://nathanchance.dev/posts/july-2025-cbl-work/</guid>
+      <description>&lt;p&gt;Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on &lt;a href=&#34;https://lore.kernel.org/all/?q=f:nathan@kernel.org&#34;&gt;lore.kernel.org&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;linux-kernel-patches&#34;&gt;Linux kernel patches&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)&lt;/p&gt;</description>
+    </item>
     <item>
       <title>June 2025 ClangBuiltLinux Work</title>
       <link>https://nathanchance.dev/posts/june-2025-cbl-work/</link>
