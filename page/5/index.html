@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.149.0"><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.150.1"><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -11,7 +11,7 @@
 <meta name="description" content="">
 <meta name="author" content="Nathan Chancellor">
 <link rel="canonical" href="https://nathanchance.dev/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.8fe10233a706bc87f2e08b3cf97b8bd4c0a80f10675a143675d59212121037c0.css" integrity="sha256-j&#43;ECM6cGvIfy4Is8&#43;XuL1MCoDxBnWhQ2ddWSEhIQN8A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.a090830a421002426baafbd314e38f149d77b4c48a12ee9312700d770b27fb26.css" integrity="sha256-oJCDCkIQAkJrqvvTFOOPFJ13tMSKEu6TEnANdwsn&#43;yY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://nathanchance.dev/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://nathanchance.dev/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://nathanchance.dev/favicon-32x32.png">
@@ -19,8 +19,8 @@
 <link rel="mask-icon" href="https://nathanchance.dev/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://nathanchance.dev/index.xml">
-<link rel="alternate" type="application/json" href="https://nathanchance.dev/index.json">
+<link rel="alternate" type="application/rss+xml" href="https://nathanchance.dev/index.xml" title="rss">
+<link rel="alternate" type="application/json" href="https://nathanchance.dev/index.json" title="json">
 <link rel="alternate" hreflang="en" href="https://nathanchance.dev/">
 <noscript>
     <style>
@@ -149,6 +149,20 @@
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2 class="entry-hint-parent">July 2022 ClangBuiltLinux Work
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
+Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2022-07-29 16:00:00 -0700 MST'>July 29, 2022</span>&nbsp;·&nbsp;<span>6 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
+  <a class="entry-link" aria-label="post link to July 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/july-2022-cbl-work/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2 class="entry-hint-parent">June 2022 ClangBuiltLinux Work
     </h2>
   </header>
@@ -157,7 +171,7 @@
 Linux kernel patches Android changes: Android is one of the largest downstream consumers of our work. Our continuous integeration tests the Android trees with newer versions of LLVM to help catch any issues that will impact Android once they upgrade their version of LLVM, which can lag behind at times.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-06-30 16:25:00 -0700 MST'>June 30, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-06-30 16:25:00 -0700 MST'>June 30, 2022</span>&nbsp;·&nbsp;<span>6 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to June 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/june-2022-cbl-work/"></a>
 </article>
 
@@ -171,7 +185,7 @@ Linux kernel patches Android changes: Android is one of the largest downstream c
 Linux kernel patches Build errors: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-05-31 16:30:00 -0700 MST'>May 31, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-05-31 16:30:00 -0700 MST'>May 31, 2022</span>&nbsp;·&nbsp;<span>7 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to May 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/may-2022-cbl-work/"></a>
 </article>
 
@@ -184,7 +198,7 @@ Linux kernel patches Build errors: These are patches to fix various build errors
     <p>Recently, I started exploring setting up a self-hosted GitHub Actions runner for the work-in-progress LLVM builds that ClangBuiltLinux is looking to distribute on kernel.org, as GitHub Actions hosted runners are pretty underwhelming in terms of performance and we want to soup these builds up with Profile Guided Optimization. Additionallly, GitHub Actions does not have a hosted arm64 Linux option, which is becoming increasingly important with chips such as Apple’s M1 getting strong mainline Linux support.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-05-27 09:21:35 -0700 MST'>May 27, 2022</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-05-27 09:21:35 -0700 MST'>May 27, 2022</span>&nbsp;·&nbsp;<span>11 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to Setting up a self-hosted GitHub Actions runner in a Fedora virtual machine using libvirt" href="https://nathanchance.dev/posts/github-actions-fedora-libvirt/"></a>
 </article>
 
@@ -198,7 +212,7 @@ Linux kernel patches Build errors: These are patches to fix various build errors
 Linux kernel patches Build failures: These are patches to fix various build errors that I found through testing different configurations with LLVM or were exposed by our continuous integration setup. The kernel needs to build in order to be run :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 MST'>April 29, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-04-29 16:30:00 -0700 MST'>April 29, 2022</span>&nbsp;·&nbsp;<span>6 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to April 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/april-2022-cbl-work/"></a>
 </article>
 
@@ -211,7 +225,7 @@ Linux kernel patches Build failures: These are patches to fix various build erro
     <p>Occasionally, compiling the Linux kernel with a new compiler flag will result in a boot failure. If you are lucky, there will be some output to the serial console but that may not happen if the issue happens in early boot code before the serial driver has loaded. When this happens, it usually requires building part of the kernel without the compiler flag (or the “negative” version of it) to try and figure out the exact translation unit and function that causes the problem. I’ll go over this process at a high level to help others who might encounter this same issue.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-04-28 14:21:18 -0700 MST'>April 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-04-28 14:21:18 -0700 MST'>April 28, 2022</span>&nbsp;·&nbsp;<span>7 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to Bisecting a Linux Kernel boot failure due to changed compiler flags" href="https://nathanchance.dev/posts/bisect-compiler-flag-problem-linux-kernel/"></a>
 </article>
 
@@ -224,7 +238,7 @@ Linux kernel patches Build failures: These are patches to fix various build erro
     <p>As a Linux kernel developer, I will often need to build and boot new kernels to hunt down issues or test new functionality for regressions. While it is possible to manually install these kernels on machines, it is easiest to use the distribution’s package manager, as the kernel does not need to be built on the machine it is being installed on. With .deb and .rpm-based systems, it is easy to build a kernel package within the kernel source itself, using the bindeb-pkg and binrpm-pkg targets respectively. However, for Arch Linux, my distribution of choice, that is not so simple. Furthermore, when doing certain types of development, such as bisecting an issue, it is more convenient to do all the building in an actual source tree, rather than one that is managed by the Arch Build System. The following process might not be the most efficient or optimal way to do this process (the Arch wiki has a whole article about doing a git bisect with a PKGBUILD) but it works for me :)
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-04-27 14:06:01 -0700 MST'>April 27, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-04-27 14:06:01 -0700 MST'>April 27, 2022</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to Package a standalone Linux kernel using the Arch Linux Build System" href="https://nathanchance.dev/posts/package-standalone-linux-kernel-with-abs/"></a>
 </article>
 
@@ -238,7 +252,7 @@ Linux kernel patches Build failures: These are patches to fix various build erro
 Linux kernel patches Boot fixes: These patches fix boot failures that we have seen in testing. In this case, it is a User Mode Linux fix, which we are looking to enable in our continuous integration setup, as it is useful for quick testing.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-03-31 16:30:00 -0700 MST'>March 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-03-31 16:30:00 -0700 MST'>March 31, 2022</span>&nbsp;·&nbsp;<span>6 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to March 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/march-2022-cbl-work/"></a>
 </article>
 
@@ -253,7 +267,7 @@ Linux kernel patches Miscellaneous improvements: These are series or patches tha
 Allow CONFIG_DEBUG_INFO_DWARF5=y &#43; CONFIG_DEBUG_INFO_BTF=y (v1) tools/resolve_btfids: Do not print any commands when building silently (v1) -Wenum-conversion: This warning occurs when one enumerated type is implicitly converted to another enumerated type, which is typically a bug, although it might not actually be a problem in practice if the used enum has the same value as the intended enum (which is the case here). It is still good to get it corrected, as the enums might not stay in sync.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-02-28 00:17:30 -0700 MST'>February 28, 2022</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-02-28 00:17:30 -0700 MST'>February 28, 2022</span>&nbsp;·&nbsp;<span>7 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to February 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/february-2022-cbl-work/"></a>
 </article>
 
@@ -268,24 +282,8 @@ Linux kernel patches Stable patches: The stable trees are the trees that most us
 [PATCH 5.4] Input: touchscreen - Fix backport of a02dcde595f7cbd240ccd64de96034ad91cffc40 (v1) [PATCH RFC 4.9 0/5] Fix booting arm64 big endian with QEMU 5.0.0&#43; (v1) [PATCH 4.4,4.9] power: reset: ltc2952: Fix use of floating point literals (v1) Patches for clang and CONFIG_WERROR (arm64/x86_64) -Wpointer-bool-conversion: This warning is usually harmless, as it is typically just a developer checking if an array in the middle of a structure is NULL, which is not possible if the structure is not NULL, which would likely cause issues further up a call chain. In this one case, the fix was just to remove the check.
 ...</p>
   </div>
-  <footer class="entry-footer"><span title='2022-01-31 00:18:00 -0700 MST'>January 31, 2022</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;Nathan Chancellor</footer>
+  <footer class="entry-footer"><span title='2022-01-31 00:18:00 -0700 MST'>January 31, 2022</span>&nbsp;·&nbsp;<span>6 min</span>&nbsp;·&nbsp;<span>Nathan Chancellor</span></footer>
   <a class="entry-link" aria-label="post link to January 2022 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/january-2022-cbl-work/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">December 2021 ClangBuiltLinux Work
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>Occasionally, I will forget to link something from the mailing list in this post. To see my full mailing list activity (patches, reviews, and reports), you can view it on lore.kernel.org.
-Linux kernel patches Android patches: Android is one of the biggest downstream consumers of our work. Making sure that it stays working is incredibly important so that it can reach real users.
-Revert &#34;ANDROID: disable INFINIBAND_QIB from allmodconfig build&#34;
-ANDROID: allmodconfig: Re-enable TEST_KMOD
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2021-12-31 12:00:00 -0700 MST'>December 31, 2021</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Nathan Chancellor</footer>
-  <a class="entry-link" aria-label="post link to December 2021 ClangBuiltLinux Work" href="https://nathanchance.dev/posts/december-2021-cbl-work/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
